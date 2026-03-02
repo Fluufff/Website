@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/vscode/devcontainers/base:bookworm
+FROM mcr.microsoft.com/vscode/devcontainers/typescript-node:16
 
 ENV DENO_INSTALL=/deno
 RUN mkdir /dino && \
