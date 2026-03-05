@@ -6,10 +6,10 @@ import Icons from 'unplugin-icons/vite'
 
 import brix from './utils/brix-icon-loader.ts'
 
-import tailwindcss from '@tailwindcss/vite';
+import tailwindcss from '@tailwindcss/vite'
 
 // deno-lint-ignore no-process-global
-const getenv = (name: string) => typeof Deno !== "undefined" ? Deno.env.get(name) : process.env[name];
+const getenv = (name: string) => (typeof Deno !== 'undefined' ? Deno.env.get(name) : process.env[name])
 
 // https://astro.build/config
 export default defineConfig({
