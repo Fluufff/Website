@@ -2,6 +2,8 @@
 @use './charter';
 
 * {
+  margin: 0;
+  padding: 0;
   leading-trim: both;
   text-edge: cap;
   font-feature-settings:

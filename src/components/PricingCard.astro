@@ -5,12 +5,13 @@ import ChecklistItem from './ChecklistItem.astro'
 
 interface Props {
   image?: ImageMetadata | Promise<{ default: ImageMetadata }>
+  imageContain?: boolean
   title: string
   price: string
   pricePer?: string
   description?: string
   checklist?: string[]
-  extra?: string
+  extra?: string | string[]
   color?: 'primary' | 'dark'
 }
 
@@ -20,7 +21,15 @@ const image = Astro.props.image
 <div class="pricing-card" class:list={[Astro.props.color]}>
   {
     image && (
-      <Picture src={image} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" height={148} widths={[300, 600]} />
+      <Picture
+        src={image}
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        alt=""
+        height={148}
+        widths={[300, 600]}
+        class:list={{ contain: Astro.props.imageContain }}
+      />
     )
   }
   <h3>{Astro.props.title}</h3>
@@ -32,6 +41,14 @@ const image = Astro.props.image
   </div>
   {Astro.props.description && <p class="description">{Astro.props.description}</p>}
   {
+    Astro.slots.has('default') && (
+      <div class="description">
+        <slot />
+      </div>
+    )
+  }
+  {(Astro.props.checklist || Astro.props.extra) && <hr />}
+  {
     Astro.props.checklist && (
       <Checklist>
         {Astro.props.checklist.map((item) => (
@@ -40,7 +57,13 @@ const image = Astro.props.image
       </Checklist>
     )
   }
-  {Astro.props.extra && <p class="pricing-card__extra">{Astro.props.extra}</p>}
+  {
+    Astro.props.extra && Array.isArray(Astro.props.extra) ? (
+      Astro.props.extra.map((d) => <p class="pricing-card__extra">{d}</p>)
+    ) : (
+      <p class="pricing-card__extra">{Astro.props.extra}</p>
+    )
+  }
 </div>
 
 <style lang="scss" is:global>
@@ -58,15 +81,23 @@ const image = Astro.props.image
     gap: 24px;
     box-shadow: 0 1px 4px 0 rgba(25, 33, 61, 0.08);
 
-    &.primary > h3 {
-      color: charter.$primary500;
+    &.primary {
+      > h3 {
+        color: charter.$primary500;
+      }
+
+      > *,
+      .vat,
+      > .pricing-card__price .per {
+        color: charter.$primary800;
+      }
     }
 
     &.dark {
       background: charter.$primary800;
       border-color: transparent;
 
-      p.description {
+      .description {
         color: charter.$primary50;
       }
 
@@ -81,9 +112,11 @@ const image = Astro.props.image
         }
       }
 
-      .checklist {
+      hr {
         border-top-color: charter.$primary200;
+      }
 
+      .checklist {
         svg path[fill='#fff'] {
           fill: charter.$primary800;
         }
@@ -124,6 +157,10 @@ const image = Astro.props.image
     > .pricing-card__extra {
       @include text-styles.display2SemiBold;
       color: charter.$primary500;
+
+      & + .pricing-card__extra {
+        margin-top: -24px;
+      }
     }
 
     > .description {
@@ -131,16 +168,30 @@ const image = Astro.props.image
       color: charter.$primary800;
     }
 
+    > div.description {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    hr {
+      border: 0;
+      border-top: solid 1px charter.$primary100;
+    }
+
     picture img {
       object-fit: cover;
       height: 148px !important;
       object-position: center;
       width: 100%;
+
+      &.contain {
+        object-fit: contain;
+      }
     }
 
     .checklist {
       margin: 0;
-      border-top: solid 1px charter.$primary100;
       padding-top: 24px;
     }
   }

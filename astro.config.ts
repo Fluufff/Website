@@ -6,8 +6,6 @@ import Icons from 'unplugin-icons/vite'
 
 import brix, { brixFilled } from './utils/brix-icon-loader.ts'
 
-import tailwindcss from '@tailwindcss/vite'
-
 // deno-lint-ignore no-process-global
 const getenv = (name: string) => (typeof Deno !== 'undefined' ? Deno.env.get(name) : process.env[name])
 
@@ -28,7 +26,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [Icons({ compiler: 'vue3', customCollections: { brix, brixFilled } }), tailwindcss()]
+    plugins: [Icons({ compiler: 'vue3', customCollections: { brix, brixFilled } })]
   },
 
   experimental: {

@@ -12,160 +12,203 @@ import FaqItem from '../content/FaqItem.astro'
 
 <Base>
   <Hero headline="Prepare your quest">
-    <p>Discover ticket options, accomodation packages, and ways to support Flüüff.</p>
+    <p>Discover ticket options, accommodation packages, and ways to support Flüüfff.</p>
   </Hero>
-  <Content headline="Residential tickets" bg="primary" wider class="pricing_content">
-    <p>Full convention access + hotel stay (Wednesday through Sunday, 4 nights)</p>
-    <Checklist columns primary>
-      <ChecklistItem>Full access to all convention events, programming</ChecklistItem>
-      <ChecklistItem>Hotel stay for the duration of the convention</ChecklistItem>
+  <Content headline="Accommodation" bg="primary" wider class="pricing_content">
+    <p>
+      Choose where you’ll respawn: stay at the convention venue from Wednesday to Sunday. Convention ticket required
+      separately.
+    </p>
+    <Checklist row primary>
       <ChecklistItem>Personal badge with lanyard</ChecklistItem>
+      <ChecklistItem>Hotel stay for the duration of the convention</ChecklistItem>
       <ChecklistItem>Access to general amenities</ChecklistItem>
     </Checklist>
     <div class="pricing">
       <PricingCard
         image={import('../assets/images/venue/bedroom_single.jpg')}
-        title="Single"
-        price="001"
+        title="Classic Double / Twin"
+        price="575"
         pricePer="per room"
-        description="Your own private room with a single bed"
-        checklist={['Price includes convention fee (€00) and full-room 4 nights stay (€000)']}
-        extra="Extra night: €00 incl. VAT"
-      />
+        extra={['Early Arrival: + €144 incl. VAT', 'Late Departure: + €144 incl. VAT']}
+      >
+        <p>2 pers. max - 28 m² / 308 sq ft</p>
+        <p>Shared classic room for two people, with either a double bed, or separate beds.</p>
+      </PricingCard>
       <PricingCard
         image={import('../assets/images/venue/bedroom_twin.jpg')}
-        title="Twin"
-        price="002"
+        title="Superior Double"
+        price="615"
         pricePer="per room"
-        description="Shared room with two single beds"
-        checklist={['Price includes convention fee (€00) and full-room 4 nights stay (€000)']}
-        extra="Extra night: €00 incl. VAT"
-      />
+        extra={['Early Arrival: + €154 incl. VAT', 'Late Departure: + €154 incl. VAT']}
+      >
+        <p>2 pers. max - 28 m² / 308 sq ft</p>
+        <p>Shared room with a kingsize bed.</p>
+      </PricingCard>
       <PricingCard
         image={import('../assets/images/venue/bedroom_double.jpg')}
-        title="Double"
-        price="003"
+        title="Privilege Room with a View (3p)"
+        price="825"
         pricePer="per room"
-        description="Shared room with a kingsize double bed"
-        checklist={['Price includes convention fee (€00) and full-room 4 nights stay (€000)']}
-        extra="Extra night: €00 incl. VAT"
-      />
+        extra={['Early Arrival: + €206 incl. VAT', 'Late Departure: + €206 incl. VAT']}
+      >
+        <p>3 pers. max - 36 m² / 387 sq ft</p>
+        <p>Spacious shared room with a kingsize bed and a pull-out sofa with Parkview</p>
+      </PricingCard>
       <PricingCard
         image={import('../assets/images/venue/bedroom_triple.jpg')}
-        title="Triple"
-        price="004"
+        title="Superior Studio (3p)"
+        price="915"
         pricePer="per room"
-        description="Shared room with a double bed and pull-out sofa"
-        checklist={['Price includes convention fee (€00) and full-room 4 nights stay (€000)']}
-        extra="Extra night: €00 incl. VAT"
-      />
+        extra={['Early Arrival: + €229 incl. VAT', 'Late Departure: + €229 incl. VAT']}
+      >
+        <p>3 pers. max - 36 m² / 387 sq ft'</p>
+        <p>Spacious, comfortable studio with kingsize bed, sofa bed, lounge and kitchen.</p>
+      </PricingCard>
     </div>
     <p class="pricing_details">
-      Room price covers the full room. One person books and pays the total amount and arranges roommates independently.<br
-      />
-      <a>Check out this page for more information on the venue.</a>
+      Room price covers the full room. One person books and pays the total amount and arranges roommates independently.
+      Con fee not included in prices.<br />
+      <!--<a href="/venue">Check out this page for more information on the venue.</a>-->
     </p>
   </Content>
-  <Content headline="Day tickets" class="pricing_content">
-    <p>Lorem ipsum dolor sit amet consectetur adipiscing eli mattis sit phasellus mollis sit aliquam sit nullam.</p>
+  <Content headline="Convention Tickets" class="pricing_content" wider>
+    <p>Choose your play mode: join for a day, the weekend, or the full convention.</p>
     <div class="pricing">
       <PricingCard
         color="primary"
         title="Day ticket"
-        price="01"
-        pricePer="per person"
+        price="40-50"
+        pricePer="per person*"
         checklist={[
-          'Full access to all convention events, programming, and general amenities',
+          'Full access for a day to all convention events, programming, and general amenities',
           'Personal badge with lanyard'
         ]}
       />
       <PricingCard
         color="primary"
         title="Weekend ticket"
-        price="02"
+        price="70"
         pricePer="per person"
         checklist={[
-          'Full access to all convention events, programming, and general amenities',
+          'Full access to all convention events, programming, and general amenities from Saturday until Sunday',
           'Personal badge with lanyard'
         ]}
       />
       <PricingCard
         color="dark"
-        title="All-days pass"
-        price="03"
+        title="All-Days Pass"
+        price="175"
         pricePer="per person"
         checklist={[
-          'Full access to all convention events, programming, and general amenities',
+          'Full access to all convention events, programming, and general amenities from Wednesday until Sunday',
           'Personal badge with lanyard'
         ]}
       />
     </div>
     <p class="pricing_details">
-      At-door pricing is €85, and daily passes are available for €35.<br />
-      Accommodation not included in these prices. <br />
-      Note: There will be no refunds for registration fees.
+      *Day tickets vary by day: Wednesday €40, Thursday–Saturday €50. Sunday is only available with an all-day pass or
+      Weekend ticket. Accommodation is not included in these prices. Note: There will be no refunds for registration
+      fees.
     </p>
   </Content>
   <Content headline="Sponsorships" class="pricing_content" bg="primary-dark" wider>
-    <p>Contribute to the growth of Flüüfff and be recognised as a valued supporter of our community.</p>
+    <p>Contribute to the growth of Flüüfff and get recognized as a valued supporter of our community.</p>
     <div class="pricing">
       <PricingCard
-        color="dark"
-        title="Supporter"
-        price="01"
-        description="Show your support for Flüüfff and contribute to making this year’s convention possible."
-        checklist={['Your name listed on the website as a sponsor', 'Mention in the conbook', 'Our eternal gratitude']}
-      />
-      <PricingCard
-        color="dark"
+        image={import('../assets/images/illustrations/sponsors/builder.png')}
+        imageContain
+        color="primary"
         title="Builder"
-        price="02"
+        price="45"
         description="Provide support that helps us cover the essential building blocks of the convention."
         checklist={[
-          'Your name listed on the website as a sponsor',
+          'Your own convention T-shirt',
           'Mention in the conbook',
-          'Our eternal gratitude',
-          'Special sponsor badge marking'
+          'Special Builder badge',
+          'Our eternal gratitude'
         ]}
       />
       <PricingCard
-        color="dark"
+        image={import('../assets/images/illustrations/sponsors/architect.png')}
+        imageContain
+        color="primary"
         title="Architect"
-        price="03"
+        price="90"
         description="Contribute at a higher level and help shape the experience for our community."
         checklist={[
-          'Your name listed on the website as a sponsor',
+          'Your own convention T-shirt',
           'Mention in the conbook',
+          'Special Architect badge',
           'Our eternal gratitude',
-          'Special sponsor badge marking',
-          'Personal thank-you gesture'
+          'Exclusive goodies',
+          'Your name listed on the closing ceremony slides'
         ]}
       />
       <PricingCard
+        image={import('../assets/images/illustrations/sponsors/patron.png')}
+        imageContain
         color="dark"
         title="Patron"
-        price="04"
-        description="Offer significant support and play a key role in sustaining and growing Flüüfff."
+        price="200"
         checklist={[
-          'Your name listed on the website as a sponsor',
+          'Your own convention T-shirt',
           'Mention in the conbook',
+          'Special Patron badge',
           'Our eternal gratitude',
-          'Special sponsor badge marking',
-          'Personal thank-you gesture',
-          'One of a kind, personal thank you letter from the Chairdragon'
+          'Exclusive goodies',
+          'Your name listed on the closing ceremony slides',
+          'A special mention on our website',
+          "An exclusive, personalised, SFW art piece in this year's theme by Ni3ls",
+          'A personal, handwritten, thank-you note from the Chairdragon'
         ]}
-      />
+      >
+        <p>Offer significant support and play a key role in sustaining and growing Flüüfff.</p>
+        <p><strong>Limited to 10 Patrons</strong></p>
+      </PricingCard>
     </div>
   </Content>
   <Socials />
   <Faq>
-    <FaqItem question="Can I pay in installments?">
-      Installment payment is not officially offered. Tickets must be paid in full at registration unless a specific
-      arrangement has been made.
+    <FaqItem question="Do I need a ticket to attend Flüüfff?">
+      Yes. All attendees need a valid ticket to access the convention. You can choose between day tickets, a weekend
+      ticket, an all-days pass.
     </FaqItem>
-    <FaqItem question="Which payment methods do you accept?">
-      Payments for registration are handled online and are via bank transfer only. For hotel or food purchases, local
-      card and cash payments are accepted at the venue.
+    <FaqItem question="What is the difference between Accommodation and Convention tickets?">
+      <p>Convention tickets (day, weekend, or all-days) give you access to the event.</p>
+      <p>
+        Accommodation covers your stay at the hotel from Wednesday to Sunday and does not include access to the
+        convention.
+      </p>
+      <p>
+        If you would like to both attend the event and stay at the venue, you will need to book both a convention ticket
+        and accommodation.
+      </p>
+    </FaqItem>
+    <FaqItem question="How do residential room bookings work?">
+      Residential rooms are booked per room, not per person. One attendee books and pays for the room, and roommates can
+      arrange payment among themselves. This allows groups of friends to easily share a room together during the
+      convention.
+    </FaqItem>
+    <FaqItem question="Can I share a room with friends?">
+      Yes! Residential rooms are meant to be shared depending on the room type you choose. The person who books the room
+      can decide who stays in the room with them.
+    </FaqItem>
+    <FaqItem question="Can I upgrade or change my ticket later?">
+      In many cases upgrades may be possible depending on availability. If you would like to upgrade your ticket or
+      sponsorship level, please contact our support team and we’ll be happy to assist you.
+    </FaqItem>
+    <FaqItem question="Can I get a refund if I can’t attend?">
+      Registration fees are non-refundable. If you can no longer attend, please contact our support team and we will try
+      to help you find the best possible solution.
+    </FaqItem>
+    <FaqItem question="Do I need to be a gamer or have a fursuit to join?">
+      Not at all! Flüüfff welcomes everyone who enjoys creativity, community, and the furry fandom. Whether you come in
+      full fursuit, casual cosplay, or just as yourself, you are welcome.
+    </FaqItem>
+    <FaqItem question="How do I stay updated about Flüüfff?">
+      The best way to stay up to date is by following our social media channels and joining our Telegram community.
+      Important announcements will also always be posted on the website.
     </FaqItem>
   </Faq>
 </Base>

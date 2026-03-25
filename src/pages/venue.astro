@@ -1,0 +1,73 @@
+---
+import Base from '../layouts/Base.astro'
+import Content from '../components/sections/Content.astro'
+import Socials from '../content/socials.astro'
+import Faq from '../content/Faq.astro'
+import FaqItem from '../content/FaqItem.astro'
+import Button from '../components/Button.astro'
+
+import heroImage from '../assets/images/venue/venue.png'
+---
+
+<Base>
+  <Content headline="The venue: Mercure hotel Antwerp" sideImage={heroImage} bg="secondary">
+    <p>
+      This year's hotel is the wonderful Bedford Hotel in Brussels — a cozy base just steps away from the city centre,
+      the train station, countless eateries, and the vibrant nightlife.
+    </p>
+    <Fragment slot="actions">
+      <Button label="Contact us" outline go to="/contact" />
+      <Button label="Learn more" outline to="/about" />
+    </Fragment>
+  </Content>
+  <Content headline="Room types and comforts" sideImage={heroImage} right>
+    <p>
+      Decorated with warm colours and soft textures, all spacious rooms at Mercure Antwerp City South are fitted with
+      king-size bedding. They all include a flat-screen TV while some include access to the Executive Lounge.
+    </p>
+  </Content>
+  <Socials />
+  <Faq>
+    <FaqItem question="Can I pay in installments?">
+      Installment payment is not officially offered. Tickets must be paid in full at registration unless a specific
+      arrangement has been made.
+    </FaqItem>
+    <FaqItem question="Which payment methods do you accept?">
+      Payments for registration are handled online and are via bank transfer only. For hotel or food purchases, local
+      card and cash payments are accepted at the venue.
+    </FaqItem>
+  </Faq>
+</Base>
+
+<style lang="scss" is:global>
+  .content .pricing {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 22px;
+    margin: 48px 0;
+
+    @media (max-width: 1200px) and (min-width: 601px) {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      flex-direction: column;
+      align-items: center;
+
+      > :nth-child(odd) {
+        justify-self: end;
+      }
+    }
+
+    @media (max-width: 600px) {
+      flex-direction: column;
+
+      .pricing-card {
+        width: 100%;
+      }
+    }
+  }
+
+  .content .pricing_details {
+    max-width: 480px;
+  }
+</style>
