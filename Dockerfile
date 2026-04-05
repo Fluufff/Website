@@ -1,7 +1,7 @@
 FROM dhi.io/deno:2.7.11-dev AS builder
 
 ARG SITE=https://www.next.fluufff.org
-ARG SITE_BASE_URL=/ARG
+ARG SITE_BASE_URL=/
 ARG NODE_ENV=development
 
 WORKDIR /app
