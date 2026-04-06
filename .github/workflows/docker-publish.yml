@@ -101,7 +101,6 @@ jobs:
 
       - name: Deploy
         run: |
-          set -x
           mkdir -p ~/.kube
           cat <<EOF > ~/.kube/config
           apiVersion: v1
@@ -123,6 +122,5 @@ jobs:
               token: ${{ secrets.KUBE_TOKEN }}
           EOF
 
-          cat "$HOME/.kube/config"
-          kubectl --kubeconfig="$HOME/.kube/config" -n website-next set image deployment/website-next website-next=ghcr.io/${{ github.repository }}:sha-${GITHUB_SHA::7}
-          kubectl --kubeconfig="$HOME/.kube/config" -n website-next rollout status deployment/website-next
+          kubectl -n website-next set image deployment/website-next website-next=ghcr.io/${{ github.repository }}:sha-${GITHUB_SHA::7}
+          kubectl -n website-next rollout status deployment/website-next
