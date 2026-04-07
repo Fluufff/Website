@@ -23,7 +23,7 @@ function ariaCurrent(routePattern: string) {
   <Countdown targetDate="2026-11-11T08:00:00Z" client:load />
 </div> -->
 <div class="registration_banner">
-  <div class="registration_banner_text">Registration starts in…</div>
+  <div class="registration_banner_text">Registration opens in…</div>
   <Countdown targetDate="2026-04-19T12:00:00Z" client:load />
 </div>
 <style is:global lang="scss">
@@ -32,6 +32,7 @@ function ariaCurrent(routePattern: string) {
 
   .registration_banner {
     display: flex;
+    flex-wrap: wrap;
     padding: 32px;
     flex-direction: row;
     justify-content: center;
