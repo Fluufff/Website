@@ -5,6 +5,8 @@
   "//": "This package.json is here only so that astro-icon can figure out which icon sets we're using",
   "dependencies": {
     "@astrojs/vue": "^5.1.1",
+    "@iconify-json/lucide": "^1.2.101",
+    "@tailwindcss/vite": "^4.2.2",
     "@vueuse/core": "^13.9.0",
     "@vueuse/components": "^13.9.0",
     "@primevue/icons": "^4.4.1",
@@ -16,6 +18,7 @@
     "@iconify/utils": "^3.0.2",
     "@types/luxon": "^3.7.1",
     "luxon": "^3.7.2",
+    "tailwindcss": "^4.2.2",
     "unplugin-icons": "^22.5.0",
     "primevue": "^4.4.1",
     "qs": "^6.15.0",
