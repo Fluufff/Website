@@ -35,6 +35,8 @@ import LucideBusFront from '~icons/lucide/bus-front'
 import LucidePlane from '~icons/lucide/plane'
 import LucideStar from '~icons/lucide/star'
 import Walker from '../components/walker.astro'
+import Timed from '../components/Timed.astro'
+import { start_registration } from '../data/reg/dates.json'
 
 const restaurants = [
   {
@@ -147,7 +149,9 @@ const nearby = [
         >, the train station, countless eateries, and the vibrant nightlife.
       </p>
       <div class="flex gap-4">
-        <Button label="Register" to="https://registration.fluufff.org" />
+        <Timed start={start_registration}>
+          <Button label="Register" to="https://registration.fluufff.org" />
+        </Timed>
         <Button label="Contact us" outline go to="/contact" />
       </div>
     </div>
@@ -349,7 +353,7 @@ const nearby = [
       <p>
         When getting off at <span class="font-bold">Antwerpen Centraal</span>, you can take the following connections:<br
         />
-        Go to the underground tram stop named Astrid Metro And take either <span class="font-bold">Tram 2</span> towards
+        Go to the underground tram stop named Diamant Metro And take either <span class="font-bold">Tram 2</span> towards
         <span class="font-bold">Zwaantjes</span> or <span class="font-bold">Tram 6</span> to <span class="font-bold"
           >P+R Olympiade</span
         >. The tram stop nearest to the hotel is DeSingel and is located right around the corner. Both trams take the

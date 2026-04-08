@@ -1,0 +1,55 @@
+---
+interface Props {
+  start: string
+}
+
+const { start } = Astro.props;
+const id = Math.random().toString(36).slice(2, 11);
+---
+
+{
+  Astro.slots.has('else') ? (
+    <div data-id={id}>
+      <div class="hidden"><slot /></div>
+      <div class="hidden"><slot name="else" /></div>
+    </div>
+  ) : (
+    <div data-id={id} class="hidden"><slot /></div>
+  )
+}
+
+<script define:vars={{id, start}}>
+  let divs = document.querySelectorAll(`div[data-id="${id}"] > div`);
+  if  (divs.length == 0) {
+    divs = document.querySelectorAll(`div[data-id="${id}"]`);
+  }
+  const main = divs[0];
+  const other = divs[1];
+
+  const enableMain = () => {
+    main.classList.remove('hidden');
+    if (other) {
+      other.classList.add('hidden');
+    }
+  }
+  const enableOther = () => {
+    main.classList.add('hidden');
+    if (other) {
+      other.classList.remove('hidden');
+    }
+  }
+  
+  const diff = new Date(start).getTime() - new Date().getTime();
+
+  if (diff > 0) {
+    enableOther();
+    // https://developer.mozilla.org/en-US/docs/Web/API/Window/setTimeout#maximum_delay_value
+    if (diff < 2147483647) {
+      setTimeout(() => {
+        enableMain();
+      }, diff);
+    }
+  } else {
+    enableMain();
+  }
+</script>

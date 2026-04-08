@@ -1,6 +1,9 @@
 ---
 import Logo from '../../assets/logo.svg'
 import Countdown from '../countdown.vue'
+import { start_registration, start_con } from '../../data/reg/dates.json'
+import Timed from '../Timed.astro'
+import Button from '../Button.astro'
 
 function ariaCurrent(routePattern: string) {
   return Astro.routePattern === routePattern ? 'page' : undefined
@@ -16,16 +19,21 @@ function ariaCurrent(routePattern: string) {
     <a href="/about" aria-current={ariaCurrent('/about')}>About</a>
     <a href="/staff-volunteering" aria-current={ariaCurrent('/staff-volunteering')}>Staff & Volunteering</a>
     <a href="/contact" aria-current={ariaCurrent('/contact')}>Contact</a>
+    <Timed start={start_registration}>
+      <Button label="Register" to="https://registration.fluufff.org" />
+    </Timed>
   </nav>
 </nav>
-<!-- <div class="registration_banner">
-  <div class="registration_banner_text">Flüüfff starts in…</div>
-  <Countdown targetDate="2026-11-11T08:00:00Z" client:load />
-</div> -->
-<div class="registration_banner">
-  <div class="registration_banner_text">Registration opens in…</div>
-  <Countdown targetDate="2026-04-19T12:00:00Z" client:load />
-</div>
+<Timed start={start_registration}>
+  <div slot="else" class="registration_banner">
+    <div class="registration_banner_text">Registration opens in…</div>
+    <Countdown targetDate={start_registration} client:load />
+  </div>
+  <div class="registration_banner">
+    <div class="registration_banner_text">Flüüfff starts in…</div>
+    <Countdown targetDate={start_con} client:load />
+  </div>
+</Timed>
 <style is:global lang="scss">
   @use '../../styles/charter';
   @use '../../styles/text-styles';
