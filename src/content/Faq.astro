@@ -43,7 +43,7 @@ import Content from '../components/sections/Content.astro'
 
       &:before {
         counter-increment: question_number;
-        content: '0' counter(question_number);
+        content: counter(question_number, decimal-leading-zero);
         margin-top: -2px;
 
         @include text-styles.display4SemiBold;
