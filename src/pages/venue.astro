@@ -7,6 +7,7 @@ import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
 import Button from '../components/Button.astro'
+import Accordion from '../components/Accordion.astro'
 
 import heroImage from '../assets/images/venue/venue.png'
 import delijnImage from '../assets/images/venue/delijn.png'
@@ -34,6 +35,8 @@ import LucideFerrisWheel from '~icons/lucide/ferris-wheel'
 import LucideBusFront from '~icons/lucide/bus-front'
 import LucidePlane from '~icons/lucide/plane'
 import LucideStar from '~icons/lucide/star'
+import LucideFootprints from '~icons/lucide/footprints'
+import LucideChevronRight from '~icons/lucide/chevron-right'
 import Walker from '../components/walker.astro'
 import Timed from '../components/Timed.astro'
 import { start_registration } from '../data/reg/dates.json'
@@ -113,6 +116,19 @@ const restaurants = [
   }
 ]
 
+const publicTransport = [
+  {
+    method: 'train',
+    name: 'Station Antwerpen-Zuid',
+    travel: { time: '6 min', distance: '1.5 km' }
+  },
+  {
+    method: 'train',
+    name: 'Station Antwerpen-Berchem',
+    travel: { time: '7 min', distance: '2.3 km' }
+  }
+]
+
 const attractions = [
   { url: 'https://middelheimmuseum.be/en/content/startpagina', name: 'Middelheim Museum ', travel: '2.2 km' },
   { url: 'https://kmska.be/en/homepage', name: 'Royal Museum of Fine Arts', travel: '2.4 km' },
@@ -120,6 +136,16 @@ const attractions = [
   { url: 'https://www.rubenshuis.be/en', name: 'Rubenshuis', travel: '3 km' },
   { url: 'https://www.zooantwerpen.be/en/', name: 'Antwerpen Zoo', travel: '3 km' },
   { url: 'https://mas.be/en/content/welcome', name: 'MAS Museum', travel: '3 km' }
+]
+
+const airports = [
+  {
+    name: 'Antwerp International Airport',
+    travel: '4.1 km'
+  },
+  { name: 'Brussels Airport Zaventem', travel: '38 km' },
+  { name: 'Eindhoven Airport', travel: '84km' },
+  { name: 'Brussels South Airport Charleroi', travel: '89 km' }
 ]
 
 const nearby = [
@@ -142,17 +168,19 @@ const nearby = [
       widths={[400, 800, 1200]}
     />
     <div class="flex flex-col gap-4 justify-center">
-      <h2 class="font-atari text-3xl">The venue:<br />Mercure Hotel Antwerp City South</h2>
+      <h2 class="font-atari text-2xl md:text-3xl text-center md:text-left">
+        The venue:<br />Mercure Hotel Antwerp City South
+      </h2>
       <p>
         This year's hotel is the wonderful Bedford Hotel in Brussels — <span class="font-bold"
           >a cozy base just steps away from the city centre</span
         >, the train station, countless eateries, and the vibrant nightlife.
       </p>
-      <div class="flex gap-4">
+      <div class="grid grid-col-1 md:grid-col-2 gap-4">
         <Timed start={start_registration}>
           <Button label="Register" to="https://registration.fluufff.org" />
         </Timed>
-        <Button label="Contact us" outline go to="/contact" />
+        <Button label="Contact us" outline to="/contact" />
       </div>
     </div>
   </Section>
@@ -169,7 +197,7 @@ const nearby = [
       />
     </div>
     <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
-      <h2 class="font-atari text-3xl">Room types and comforts</h2>
+      <h2 class="font-atari text-2xl md:text-3xl">Room types and comforts</h2>
       <p>
         Decorated with warm colours and soft textures, all spacious rooms at Mercure Antwerp City South are fitted with
         king-size bedding. They all include a flat-screen TV while some include access to the Executive Lounge.
@@ -208,17 +236,42 @@ const nearby = [
     }
   </Section>
 
-  <Section grid="grid-cols-1 xl:grid-cols-2" gap="gap-4 xl:gap-[92px]">
+  <Section grid="grid-cols-1 xl:grid-cols-2" gap="md:gap-4 xl:gap-[92px]">
     <div class="col-span-full text-center">
-      <h2 class="font-atari text-3xl mb-4">Hotel Surroundings</h2>
+      <h2 class="font-atari text-2xl md:text-3xl mb-4">Hotel Surroundings</h2>
       <p>
         That rumble isn't part of the soundtrack; it's your hunger bar dropping.<br />
         If you need to refuel during Flüüfff, here are some nearby options.
       </p>
     </div>
 
-    <div class="flex flex-col gap-10">
-      <section class="flex flex-col gap-2">
+    <div class="flex flex-col md:gap-10">
+      <Accordion class="md:hidden" buttonClass="text-xl text-secondary-500 font-bold uppercase flex-1 gap-2 my-8">
+        <LucideUtensils slot="button" />
+        <h3 slot="button">Restaurants & cafes</h3>
+        <div class="flex flex-col gap-4">
+          {
+            restaurants.map((r) => (
+              <a
+                href={r.maps}
+                class="grid grid-cols-[1fr_auto] no-underline border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm"
+              >
+                <div class="flex flex-col gap-1">
+                  <p class="font-bold text-secondary-500 mb-1">{r.name}</p>
+                  <p>{r.address}</p>
+                  <p class="flex gap-2">
+                    <LucideFootprints />
+                    <span>{r.travel.time}</span>
+                    <span>{r.travel.distance}</span>
+                  </p>
+                </div>
+                <LucideChevronRight class="text-secondary-500" />
+              </a>
+            ))
+          }
+        </div>
+      </Accordion>
+      <section class="hidden md:flex flex-col gap-2">
         <h3 class="text-xl font-bold uppercase flex gap-2 mb-2"><LucideUtensils />Restaurants & cafes</h3>
         {
           restaurants.map((r) => (
@@ -234,25 +287,74 @@ const nearby = [
         }
       </section>
 
-      <section class="flex flex-col gap-2">
+      <Accordion
+        class="md:hidden border-t-1 border-secondary-100"
+        buttonClass="text-xl text-secondary-500 font-bold uppercase flex-1 gap-2 my-8"
+      >
+        <LucideBusFront slot="button" />
+        <h3 slot="button">Public Transport</h3>
+        <div class="flex flex-col gap-4">
+          {
+            publicTransport.map((t) => (
+              <div class="flex flex-col gap-1 border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm">
+                <p class="font-bold text-secondary-500 mb-1">
+                  {t.method} / {t.name}
+                </p>
+                <p class="flex gap-2">
+                  <LucideFootprints />
+                  <span>{t.travel.time}</span>
+                  <span>{t.travel.distance}</span>
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </Accordion>
+      <section class="hidden md:flex flex-col gap-2">
         <h3 class="text-xl font-bold uppercase flex gap-2 mb-2"><LucideBusFront />Public Transport</h3>
-        <div class="grid grid-cols-[1fr_auto_auto_auto] gap-2">
-          <p>Train / Station Antwerpen-Zuid</p>
-          <Walker />
-          <p>6min</p>
-          <p>1.5km</p>
-        </div>
-        <div class="grid grid-cols-[1fr_auto_auto_auto] gap-2">
-          <p>Train / Station Antwerpen-Berchem</p>
-          <Walker />
-          <p>7min</p>
-          <p>2.3km</p>
-        </div>
+        {
+          publicTransport.map((t) => (
+            <div class="grid grid-cols-[1fr_auto_auto_auto] gap-2">
+              <p>
+                {t.method} / {t.name}
+              </p>
+              <Walker />
+              <p>{t.travel.time}</p>
+              <p>{t.travel.distance}</p>
+            </div>
+          ))
+        }
       </section>
     </div>
 
-    <div class="flex flex-col gap-10">
-      <section class="flex flex-col gap-2">
+    <div class="flex flex-col md:gap-10">
+      <Accordion
+        class="md:hidden border-t-1 border-secondary-100"
+        buttonClass="text-xl text-secondary-500 font-bold uppercase flex-1 gap-2 my-8"
+      >
+        <LucideFerrisWheel slot="button" />
+        <h3 slot="button">Top Attractions</h3>
+        <div class="flex flex-col gap-4">
+          {
+            attractions.map((a) => (
+              <a
+                href={a.url}
+                class="grid grid-cols-[1fr_auto] no-underline border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm"
+              >
+                <div class="flex flex-col gap-1">
+                  <p class="font-bold text-secondary-500 mb-1">{a.name}</p>
+                  <p class="flex gap-2">
+                    <LucideFootprints />
+                    <span>{a.travel}</span>
+                  </p>
+                </div>
+                <LucideChevronRight class="text-secondary-500" />
+              </a>
+            ))
+          }
+        </div>
+      </Accordion>
+      <section class="hidden md:flex flex-col gap-2">
         <h3 class="text-xl font-bold uppercase flex gap-2 mb-2"><LucideFerrisWheel />Top Attractions</h3>
         {
           attractions.map((a) => (
@@ -264,23 +366,62 @@ const nearby = [
         }
       </section>
 
-      <section class="flex flex-col gap-2">
+      <Accordion
+        class="md:hidden border-t-1 border-secondary-100"
+        buttonClass="text-xl text-secondary-500 font-bold uppercase flex-1 gap-2 my-8"
+      >
+        <LucidePlane slot="button" />
+        <h3 slot="button">Closest Airports</h3>
+        <div class="flex flex-col gap-4">
+          {
+            airports.map((a) => (
+              <div class="flex flex-col gap-1 border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm">
+                <p class="font-bold text-secondary-500 mb-1">{a.name}</p>
+                <p>{a.travel}</p>
+              </div>
+            ))
+          }
+        </div>
+      </Accordion>
+      <section class="hidden md:flex flex-col gap-2">
         <h3 class="text-xl font-bold uppercase flex gap-2 mb-2"><LucidePlane />Closest Airports</h3>
-        <div class="grid grid-cols-[1fr_auto] gap-2">
-          <p>Antwerp International Airport</p>
-          <p>4.1km</p>
-        </div>
-        <div class="grid grid-cols-[1fr_auto] gap-2">
-          <p>Brussels Airport</p>
-          <p>38km</p>
-        </div>
-        <div class="grid grid-cols-[1fr_auto] gap-2">
-          <p>Eindhoven Airport</p>
-          <p>84km</p>
-        </div>
+        {
+          airports.map((a) => (
+            <div class="grid grid-cols-[1fr_auto] gap-2">
+              <p>{a.name}</p>
+              <p>{a.travel}</p>
+            </div>
+          ))
+        }
       </section>
 
-      <section class="flex flex-col gap-2">
+      <Accordion
+        class="md:hidden border-t-1 border-secondary-100"
+        buttonClass="text-xl text-secondary-500 font-bold uppercase flex-1 gap-2 my-8"
+      >
+        <LucideStar slot="button" />
+        <h3 slot="button">What's nearby</h3>
+        <div class="flex flex-col gap-4">
+          {
+            nearby.map((n) => (
+              <a
+                href={n.url}
+                class="grid grid-cols-[1fr_auto] no-underline border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm"
+              >
+                <div class="flex flex-col gap-1">
+                  <p class="font-bold text-secondary-500 mb-1">{n.name}</p>
+                  <p class="flex gap-2">
+                    <LucideFootprints />
+                    <span>{n.travel}</span>
+                  </p>
+                </div>
+                <LucideChevronRight class="text-secondary-500" />
+              </a>
+            ))
+          }
+        </div>
+      </Accordion>
+      <section class="hidden md:flex flex-col gap-2">
         <h3 class="text-xl font-bold uppercase flex gap-2 mb-2"><LucideStar />What's nearby</h3>
         {
           nearby.map((n) => (
@@ -296,7 +437,7 @@ const nearby = [
 
   <Section grid="grid-cols-1 xl:grid-cols-2" gap="gap-10 md:gap-[92px]" outerClass="bg-secondary-50">
     <div class="col-span-full text-center">
-      <h2 class="font-atari text-3xl mb-4">Getting to the venue</h2>
+      <h2 class="font-atari text-2xl md:text-3xl mb-4">Getting to the venue</h2>
       <p>
         There are many ways to get to the venue by train, bus and/or tram! Here's a quick guide to prepare for your
         trip.
@@ -304,7 +445,7 @@ const nearby = [
     </div>
 
     <div class="flex flex-col gap-2">
-      <h2 class="font-atari text-2xl">By train</h2>
+      <h2 class="font-atari text-2xl mb-4">By train</h2>
       <p>
         The biggest station of Antwerp is <span class="font-bold">Antwerpen Centraal</span>. This station acts as a
         terminus for most national trains. It also gets international traffic. If you come from abroad, you can take
@@ -349,7 +490,7 @@ const nearby = [
     </div>
 
     <div class="flex flex-col gap-2">
-      <h2 class="font-atari text-2xl">By tram</h2>
+      <h2 class="font-atari text-2xl mb-4">By tram</h2>
       <p>
         When getting off at <span class="font-bold">Antwerpen Centraal</span>, you can take the following connections:<br
         />

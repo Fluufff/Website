@@ -28,5 +28,8 @@
     .text-#{$name}-#{$size} {
       color: map.get($swatch, $size);
     }
+    .border-#{$name}-#{$size} {
+      color: map.get($swatch, $size);
+    }
   }
 }

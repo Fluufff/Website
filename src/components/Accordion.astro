@@ -1,0 +1,39 @@
+---
+import LucideChevronUp from '~icons/lucide/chevron-up'
+import LucideChevronDown from '~icons/lucide/chevron-down'
+
+const id = Math.random().toString(36).slice(2, 11)
+const { class: className, buttonClass } = Astro.props
+---
+
+<div data-id={id} class={className}>
+  <button class:list={['w-full flex justify-between items-center', buttonClass]}>
+    <slot name="button" />
+    <span class="flex-1"></span>
+    <div data-id="is-open" class="hidden"><slot name="button-when-open"><LucideChevronUp /></slot></div>
+    <div data-id="is-closed"><slot name="button-when-closed"><LucideChevronDown /></slot></div>
+  </button>
+  <div class="max-h-0 overflow-hidden transition-[max-height] duration-300 ease-in-out">
+    <slot />
+  </div>
+</div>
+
+<script define:vars={{ id }}>
+  const divs = document.querySelectorAll(`div[data-id="${id}"] > *`)
+  const btn = divs[0]
+  const content = divs[1]
+  const iOpen = btn.querySelector('[data-id="is-open"]')
+  const iClosed = btn.querySelector('[data-id="is-closed"]')
+
+  btn.addEventListener('click', () => {
+    if (content.style.maxHeight) {
+      content.style.maxHeight = ''
+      iOpen.classList.add('hidden')
+      iClosed.classList.remove('hidden')
+    } else {
+      content.style.maxHeight = content.scrollHeight + 'px'
+      iOpen.classList.remove('hidden')
+      iClosed.classList.add('hidden')
+    }
+  })
+</script>
