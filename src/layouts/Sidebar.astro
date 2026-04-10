@@ -1,0 +1,173 @@
+---
+import loadBrixIcon from '../../utils/brix-icon-loader'
+
+type Props = {
+  style: "dealers-den" | "terms";
+}
+const { style }: Props = Astro.props;
+
+type SidebarLink = {
+	icon: string;
+	label: string;
+	href: string;
+}
+const dealersDenLinks: SidebarLink[] = [
+	{ icon: "calendar", label: "TIMELINE & SETUP", href: "/dealers-den/timeline" },
+	{ icon: "badge", label: "APPLY & REGISTER", href: "/dealers-den/apply" },
+	{ icon: "book", label: "RULES & GUIDELINES", href: "/dealers-den/rules" },
+	{ icon: "heart", label: "ARTIST ALLEY & ARTSHOW", href: "/dealers-den/artistalley" },
+	{ icon: "list", label: "GLOSSARY & TERMS", href: "/dealers-den/glossary" },
+	{ icon: "question-mark", label: "FAQ", href: "/dealers-den/faq" }
+];
+const termsLinks: SidebarLink[] = [
+  { icon: "file", label: "TERMS & CONDITIONS", href: "terms" },
+	{ icon: "shield", label: "CODE OF CONDUCT", href: "conduct" },
+	{ icon: "lock", label: "PRIVACY POLICY", href: "privacy" },
+];
+
+const sidebarVariantClass = style === "dealers-den" ? "sidebar_primary" : "sidebar_secondary";
+const sidebarTitle = style === "dealers-den"
+  ? "Welcome to the Dealers Info Hub"
+  : "Welcome to the legal nitty gritty";
+const sidebarDescription = style === "dealers-den"
+  ? "If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all sections carefully to make sure your dealership runs smoothly."
+  : "If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all sections carefully to make sure your dealership runs smoothly.";
+const sidebarLinks = style === "dealers-den"
+  ? dealersDenLinks
+  : termsLinks;
+
+function getIconSvg(name: string) {
+	return loadBrixIcon(name) ?? loadBrixIcon("question-mark")
+}
+
+function isActive(href: string) {
+	return Astro.url.pathname.includes(href)
+}
+---
+
+<div class={`sidebar-container ${sidebarVariantClass}`}>
+	<aside class="sidebar">
+		<div class="sidebar-top">
+			<h4>{sidebarTitle}</h4>
+			<p>{sidebarDescription}</p>
+		</div>
+
+    {!Astro.slots.has("header") && (
+      <div class="sidebar-bottom">
+        {sidebarLinks.map((link) => (
+          <a href={link.href} class={isActive(link.href) ? "active" : ""}>
+            <span class="sidebar-icon" set:html={getIconSvg(link.icon)} />
+            <span>{link.label}</span>
+          </a>
+        ))}
+      </div>
+    )}
+	</aside>
+
+	<main>
+    {Astro.slots.has("header") && (<slot name="header" />)}
+		{!Astro.slots.has("header") && (<slot />)}
+  </main>
+</div>
+
+{Astro.slots.has("header") && (
+	<div class={`sidebar-container ${sidebarVariantClass}`}>
+    <aside class="sidebar">
+      <div class="sidebar-bottom">
+        {dealersDenLinks.map((link) => (
+          <a href={link.href} class={isActive(link.href) ? "active" : ""}>
+            <span class="sidebar-icon" set:html={getIconSvg(link.icon)} />
+            <span>{link.label}</span>
+          </a>
+        ))}
+      </div>
+    </aside>
+  
+    <main>
+      <slot />
+    </main>
+  </div>
+)}
+
+<style scoped lang="scss">
+	@use "../styles/charter.scss";
+	@use "../styles/text-styles.scss";
+
+	.sidebar-container {
+		display: flex;
+
+		&.sidebar_primary {
+			--sidebar-color-100: #{charter.$primary100};
+			--sidebar-color-500: #{charter.$primary500};
+			--sidebar-color-900: #{charter.$primary900};
+		}
+
+		&.sidebar_secondary {
+			--sidebar-color-100: #{charter.$secondary100};
+			--sidebar-color-500: #{charter.$secondary500};
+			--sidebar-color-900: #{charter.$secondary900};
+		}
+    
+    main {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+    }
+	}
+
+	.sidebar {
+		min-width: 360px;
+		max-width: 360px;
+		background-color: var(--sidebar-color-100);
+
+
+		@media (max-width: 900px) {
+			display: none;
+		}
+	}
+
+	.sidebar-top {
+		padding: 16px;
+		margin-bottom: 32px;
+    
+
+		h4 {
+			@include text-styles.heading4;
+			color: var(--sidebar-color-900);
+			margin-bottom: 16px;
+		}
+		p {
+			@include text-styles.paragraphDefaultRegular;
+			color: var(--sidebar-color-900);
+		}
+	}
+
+	.sidebar-bottom {
+		display: flex;
+		flex-direction: column;
+
+		a {
+			@include text-styles.display3SemiBold;
+
+			padding: 12px 16px;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+
+			.sidebar-icon {
+				display: inline-flex;
+				font-size: 20px;
+				line-height: 1;
+				color: var(--sidebar-color-500);
+			}
+
+			span {
+				color: var(--sidebar-color-900);
+			}
+
+			&.active {
+				background-color: #fff;
+			}
+		}
+	}
+</style>
