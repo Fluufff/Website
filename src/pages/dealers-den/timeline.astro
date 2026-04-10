@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro'
+import Sidebar from '../../layouts/Sidebar.astro'
+import DealersDenHeader from '../../content/DealersDenHeader.astro'
+---
+
+<Base>
+	<Sidebar style="dealers-den">
+		<DealersDenHeader slot="header" />
+
+		<main>
+			<section>
+				<h3>WELCOME TO THE DEALERS DEN INFO HUB</h3>
+				<p>
+					Whether you're a first-time vendor or a returning Flüüfff regular, this page contains everything you need to
+					know about becoming a dealer at Flüüfff. From application steps and setup times to rules on what you can sell,
+					you'll find it all here — clearly explained and easy to navigate.
+				</p>
+				<p>
+					If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all
+					sections carefully to make sure your dealership runs smoothly.
+				</p>
+			</section>
+
+			<section>
+				<h3>THE SHORT VERSION</h3>
+
+				<p>
+					Sales in the Dealers Den are only allowed by registered dealers in authorized dealerships within designated
+					spaces. Sharing space at a dealership with unauthorized dealers is not allowed.
+				</p>
+
+				<p>
+					In order for your registration as a dealer for the Flüüfff Dealers' Den to be taken into consideration, a
+					valid registration for the Flüüfff event via the Flüüfff Registration System itself is mandatory. After
+					registering for the event a dealership application can be submitted in the General Registration System.
+				</p>
+
+				<p>
+					Electricity is available for dealerships. We offer electricity for low-power consumption devices only.
+					Dealerships are available in different (table) sizes. During Dealers' Den registration, the desired size and
+					table configuration can be applied for. Dealership space is limited, and the Dealers' Den Team will try to
+					accommodate as many artists and dealers as possible without cutting down or denying requested space upon
+					availability. During placement, we will also try to consider requests in regard to location and dealership
+					neighbors.
+				</p>
+				<p>
+					Dealership applications will be queued into a curated system; the application will be reviewed by the Dealers'
+					Den Team, approved or declined, then placed. Placement in the room commences thereafter. Sign up for a spot
+					can be done up to 4 weeks prior to the con, but the initial roomsketch will be made 6 weeks after Registration
+					opening.
+				</p>
+				<p>
+					Any dealerships not initially accepted will be placed on a waiting list. If a dealership space becomes
+					re-available due to cancellation of another dealer, the next best match based on curation from the waiting
+					list will be contacted. There might be last-minute repurposing of last minute cancellations on site.
+				</p>
+				<p>
+					The Dealers' Den team aims to complete the curation process within 4-6 weeks after initial Registration opens.
+					Every applicant will receive a definite response: whether their application has been accepted, placed on the
+					waiting list, or, if necessary, declined due to not meeting the selection criteria.
+				</p>
+				<p>
+					Dealership packages cannot be canceled. However, transfers of dealership packages are possible but can only be
+					initiated and approved by the Dealers' Den Team. Dealers cannot select or nominate individuals from the
+					waiting list for a transfer to bypass the curation process. If a transfer is desired, please contact the
+					Dealers' Den Team with your suggestion. All transfer requests will be considered by the management team, who
+					will have the final say in the approval of the new dealer.
+				</p>
+				<p>
+					Set up times will be announced later, via email and the Dealers Den telegram group. A convention badge is
+					required for Dealers' Den Set up; for all dealers and their assistants.
+				</p>
+				<p>
+					Items and services in violation of applicable rules or laws must not be offered. Adult material is only
+					permissible on public display with a NSFW sticker, or in a binder with a very clear notification of the source
+					of the material. Dealership build-ups must not reach into other dealerships or walkways. Lights, music or
+					sound, and strong smells or fumes must be kept to a minimum.
+				</p>
+				<p>
+					The sale or offering of items that imitate third-party copyrighted material is prohibited. For further
+					information, please refer to the full details down below.
+				</p>
+				<p>
+					Teardown begins on Saturday after Den closing. All dealerships must be cleared out, no later than 21:00. Each
+					dealer is responsible for cleaning up their dealership area.
+				</p>
+          <p>Dealers' Den Staff have a say on all matters. The Dealers' Den Team's decisions are final. Any person
+          requesting a dealership at Flüüfff is required to agree to and accept the “Dealers' Den Rules” set in this
+          document.
+        </p>
+        <p>If you have any questions after reading the Dealers' Den Rules & Information and the FAQ, please feel free
+        to email us at <a href="mailto:dealers.den@fluufff.org">dealers.den@fluufff.org</a>.</p>
+			</section>
+		</main>
+	</Sidebar>
+</Base>
+
+<style scoped lang="scss">
+	@use '../../styles/charter.scss';
+	@use '../../styles/text-styles.scss';
+
+	main {
+		padding: 30px 60px;
+		color: charter.$primary800;
+
+		section {
+			margin-bottom: 60px;
+		}
+
+		h3 {
+			@include text-styles.display3SemiBold;
+			font-weight: bold;
+		}
+
+		h3,
+		p {
+			margin-bottom: 16px;
+		}
+	}
+</style>

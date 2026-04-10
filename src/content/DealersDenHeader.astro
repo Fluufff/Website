@@ -1,0 +1,52 @@
+---
+import Button from '../components/Button.astro'
+
+---
+<div class="header">
+  <div class="header-left">
+    <h1>Everything you need to know to join the Fluufff Dealers Den</h1>
+    <p>Rules, timelines, registration and tips to get you prepped for the con</p>
+  </div>
+  <div class="header-right">
+    <Button to="/" label="Register for Fluufff" go />
+    <Button to="/" label="Apply for Dealers Den" outline go />
+    <Button to="/" label="Email Dealers Den team" outline go />
+  </div>
+</div>
+
+<style scoped lang="scss">
+  @use "../styles/charter.scss";
+	@use "../styles/text-styles.scss";
+
+  .header {
+    flex: 1;
+    display: flex;
+    margin: 80px 60px 0 60px;
+    padding-bottom: 60px;
+    gap: 16px;
+
+    border-bottom: 1px solid charter.$neutrals300;
+
+    @media (max-width: 1300px) {
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  .header-left {
+    flex: 5;
+    color: charter.$primary800;
+    
+    h1 {
+      @include text-styles.heading2;
+      padding-bottom: 16px;
+    }
+  }
+
+  .header-right {
+    flex: 2;
+
+    display: grid;
+    gap: 16px;
+  }
+</style>
