@@ -9,7 +9,6 @@ import Button from '../components/Button.astro'
   </div>
   <div class="header-right">
     <Button to="/" label="Register for Fluufff" go />
-    <Button to="/" label="Apply for Dealers Den" outline go />
     <Button to="/" label="Email Dealers Den team" outline go />
   </div>
 </div>
@@ -41,12 +40,14 @@ import Button from '../components/Button.astro'
       @include text-styles.heading2;
       padding-bottom: 16px;
     }
+
   }
 
   .header-right {
     flex: 2;
-
-    display: grid;
+    display: flex;
     gap: 16px;
+    flex-direction: column;
+    justify-content: center;
   }
 </style>
