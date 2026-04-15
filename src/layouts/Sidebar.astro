@@ -2,171 +2,401 @@
 import loadBrixIcon from '../../utils/brix-icon-loader'
 
 type Props = {
-  style: 'dealers-den' | 'terms'
+	style: 'dealers-den' | 'terms'
 }
 const { style }: Props = Astro.props
 
 type SidebarLink = {
-  icon: string
-  label: string
-  href: string
+	icon: string
+	label: string
+	href: string
+	hashes?: { hash: string; label: string }[]
 }
 const dealersDenLinks: SidebarLink[] = [
-  { icon: 'calendar', label: 'TIMELINE & SETUP', href: '/dealers-den/timeline' },
-  { icon: 'badge', label: 'APPLY & REGISTER', href: '/dealers-den/apply' },
-  { icon: 'book', label: 'RULES & GUIDELINES', href: '/dealers-den/rules' },
-  { icon: 'heart', label: 'ARTIST ALLEY & ARTSHOW', href: '/dealers-den/artistalley' },
-  { icon: 'list', label: 'GLOSSARY & TERMS', href: '/dealers-den/glossary' },
-  { icon: 'question-mark', label: 'FAQ', href: '/dealers-den/faq' }
+	{ icon: 'calendar', label: 'THE SHORT VERSION', href: '/dealers-den' },
+	{
+		icon: 'calendar',
+		label: 'TIMELINE & SETUP',
+		href: '/dealers-den/timeline',
+		hashes: [
+			{ hash: 'hours', label: "Dealers' Den Hours" },
+			{ hash: 'before', label: "Before the Dealers' Den Opens" },
+			{ hash: 'setup', label: "Dealers' Den Setup" },
+			{ hash: 'open', label: "The Dealers' Den is Open!" },
+			{ hash: 'teardown', label: "Dealers' Den Teardown" }
+		]
+	},
+	{
+		icon: 'badge',
+		label: 'OBTAINING A DEALERSHIP',
+		href: '/dealers-den/dealership',
+		hashes: [
+			{ hash: 'application', label: 'Step I: Application' },
+			{ hash: 'approval', label: 'Step II: Approval' },
+			{ hash: 'payment', label: 'Step III: Payment' },
+			{ hash: 'placement', label: 'Step IV: Placement' },
+			{ hash: 'waitinglist', label: 'Waiting List' },
+			{ hash: 'cancellations', label: 'Cancellations' }
+		]
+	},
+	{
+		icon: 'badge',
+		label: 'RULES & GUIDELINES',
+		href: '/dealers-den/rules',
+		hashes: [
+			{ hash: 'merchandise', label: 'Guidelines on Merchandise' },
+			{ hash: 'sales', label: 'Guidelines on Sales' },
+			{ hash: 'activities', label: 'Guidelines on Activities' },
+			{ hash: 'copyrights', label: 'Copyrights Clause' },
+			{ hash: 'gambling', label: 'Games of Chance (Gambling)' }
+		]
+	},
+	{
+		icon: 'badge',
+		label: 'ARTIST ALLEY & ARTSHOW',
+		href: '/dealers-den/alley-artshow',
+		hashes: [
+			{ hash: 'artistalley', label: 'Artist Alley' },
+			{ hash: 'artshow', label: 'Art Show' }
+		]
+	},
+	{
+		icon: 'badge',
+		label: 'GLOSSARY & INFO',
+		href: '/dealers-den/glossary',
+		hashes: [
+			{ hash: 'glossary', label: 'Glossary' },
+			{ hash: 'administrativedetails', label: 'Administrative Details' }
+		]
+	}
 ]
 const termsLinks: SidebarLink[] = [
-  { icon: 'file', label: 'TERMS & CONDITIONS', href: 'terms' },
-  { icon: 'shield', label: 'CODE OF CONDUCT', href: 'conduct' },
-  { icon: 'lock', label: 'PRIVACY POLICY', href: 'privacy' }
+	{ icon: 'file', label: 'TERMS & CONDITIONS', href: 'terms' },
+	{ icon: 'shield', label: 'CODE OF CONDUCT', href: 'conduct' },
+	{ icon: 'lock', label: 'PRIVACY POLICY', href: 'privacy' }
 ]
 
 const sidebarVariantClass = style === 'dealers-den' ? 'sidebar_primary' : 'sidebar_secondary'
 const sidebarTitle = style === 'dealers-den' ? 'Welcome to the Dealers Info Hub' : 'Welcome to the legal nitty gritty'
 const sidebarDescription =
-  style === 'dealers-den'
-    ? "If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all sections carefully to make sure your dealership runs smoothly."
-    : "If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all sections carefully to make sure your dealership runs smoothly."
+	style === 'dealers-den'
+		? "If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all sections carefully to make sure your dealership runs smoothly."
+		: "If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all sections carefully to make sure your dealership runs smoothly."
 const sidebarLinks = style === 'dealers-den' ? dealersDenLinks : termsLinks
 
 function getIconSvg(name: string) {
-  return loadBrixIcon(name) ?? loadBrixIcon('question-mark')
+	return loadBrixIcon(name) ?? loadBrixIcon('question-mark')
 }
 
 function isActive(href: string) {
-  return Astro.url.pathname.includes(href)
+	const currentLastSection = Astro.url.pathname.split('/').filter(Boolean).at(-1) ?? ''
+	const hrefPath = href.split(/[?#]/)[0] ?? ''
+	const hrefLastSection = hrefPath.split('/').filter(Boolean).at(-1) ?? ''
+
+	if (!currentLastSection && !hrefLastSection) {
+		return true
+	}
+
+	return currentLastSection !== '' && currentLastSection === hrefLastSection
+}
+
+function hashIsActive(hash: string) {
+	return Astro.url.hash.includes(hash)
 }
 ---
 
 <div class={`sidebar-container ${sidebarVariantClass}`}>
-  <aside class="sidebar">
-    <div class="sidebar-top">
-      <h4>{sidebarTitle}</h4>
-      <p>{sidebarDescription}</p>
-    </div>
+	<aside class="sidebar">
+		<div class="sidebar-top">
+			<h4>{sidebarTitle}</h4>
+			<p>{sidebarDescription}</p>
+		</div>
 
-    {
-      !Astro.slots.has('header') && (
-        <div class="sidebar-bottom">
-          {sidebarLinks.map((link) => (
-            <a href={link.href} class={isActive(link.href) ? 'active' : ''}>
-              <span class="sidebar-icon" set:html={getIconSvg(link.icon)} />
-              <span>{link.label}</span>
-            </a>
-          ))}
-        </div>
-      )
-    }
-  </aside>
+		{
+			!Astro.slots.has('header') && (
+				<div class="sidebar-bottom">
+					{sidebarLinks.map((link) => (
+						<div class="sidebar-item">
+							<a href={link.href} class={`sidebar-trigger ${isActive(link.href) ? 'active' : ''}`}>
+								<span class="sidebar-icon" set:html={getIconSvg(link.icon)} />
+								<span class="sidebar-link">{link.label}</span>
+								{link.hashes && (
+									<>
+										<span
+											class="sidebar-icon sidebar-toggle-icon sidebar-toggle-icon-plus"
+											set:html={getIconSvg('plus')}
+										/>
+										<span
+											class="sidebar-icon sidebar-toggle-icon sidebar-toggle-icon-minus"
+											set:html={getIconSvg('minus')}
+										/>
+									</>
+								)}
+							</a>
 
-  <main>
-    {Astro.slots.has('header') && <slot name="header" />}
-    {!Astro.slots.has('header') && <slot />}
-  </main>
+							{link.hashes && (
+								<div class="sidebar-hashes">
+									{link.hashes.map((hash) => (
+										<a href={link.href + '#' + hash.hash} class={`sidebar-hash ${hashIsActive(hash.hash) && 'active'}`}>
+											<span>{hash.label}</span>
+										</a>
+									))}
+								</div>
+							)}
+						</div>
+					))}
+				</div>
+			)
+		}
+	</aside>
+
+	<main>
+		{Astro.slots.has('header') && <slot name="header" />}
+		{!Astro.slots.has('header') && <slot />}
+	</main>
 </div>
 
 {
-  Astro.slots.has('header') && (
-    <div class={`sidebar-container ${sidebarVariantClass}`}>
-      <aside class="sidebar">
-        <div class="sidebar-bottom">
-          {dealersDenLinks.map((link) => (
-            <a href={link.href} class={isActive(link.href) ? 'active' : ''}>
-              <span class="sidebar-icon" set:html={getIconSvg(link.icon)} />
-              <span>{link.label}</span>
-            </a>
-          ))}
-        </div>
-      </aside>
+	Astro.slots.has('header') && (
+		<div class={`sidebar-container ${sidebarVariantClass}`}>
+			<aside class="sidebar">
+				<div class="sidebar-bottom">
+					{sidebarLinks.map((link) => (
+						<div class="sidebar-item">
+							<a href={link.href} class={`sidebar-trigger ${isActive(link.href) ? 'active' : ''}`}>
+								<span class="sidebar-icon" set:html={getIconSvg(link.icon)} />
+								<span class="sidebar-link">{link.label}</span>
+								{link.hashes && (
+									<>
+										<span
+											class="sidebar-icon sidebar-toggle-icon sidebar-toggle-icon-plus"
+											set:html={getIconSvg('plus')}
+										/>
+										<span
+											class="sidebar-icon sidebar-toggle-icon sidebar-toggle-icon-minus"
+											set:html={getIconSvg('minus')}
+										/>
+									</>
+								)}
+							</a>
 
-      <main>
-        <slot />
-      </main>
-    </div>
-  )
+							{link.hashes && (
+								<div class="sidebar-hashes">
+									{link.hashes.map((hash) => (
+										<a href={link.href + '#' + hash.hash} class={`sidebar-hash ${hashIsActive(hash.hash) && 'active'}`}>
+											<span>{hash.label}</span>
+										</a>
+									))}
+								</div>
+							)}
+						</div>
+					))}
+				</div>
+			</aside>
+
+			<main>
+				<slot />
+			</main>
+		</div>
+	)
 }
 
+<script>
+	const accordions = document.querySelectorAll('.sidebar-bottom')
+
+	const closeItem = (item: Element) => {
+		const hashes = item.querySelector('.sidebar-hashes') as HTMLElement | null
+		item.classList.remove('is-open')
+		if (hashes) {
+			hashes.style.maxHeight = '0px'
+		}
+	}
+
+	const openItem = (item: Element) => {
+		const hashes = item.querySelector('.sidebar-hashes') as HTMLElement | null
+		item.classList.add('is-open')
+		if (hashes) {
+			hashes.style.maxHeight = `${hashes.scrollHeight}px`
+		}
+	}
+
+	accordions.forEach((accordion) => {
+		const items = Array.from(accordion.querySelectorAll('.sidebar-item'))
+
+		items.forEach((item) => {
+			const trigger = item.querySelector('.sidebar-trigger') as HTMLAnchorElement | null
+			const hashes = item.querySelector('.sidebar-hashes') as HTMLElement | null
+
+			if (!trigger || !hashes) {
+				return
+			}
+
+			closeItem(item)
+
+			trigger.addEventListener('click', (event) => {
+				const target = event.target as Element | null
+				const clickedToggleIcon = !!target?.closest('.sidebar-toggle-icon')
+
+				if (!clickedToggleIcon && trigger.pathname !== window.location.pathname) {
+					return
+				}
+
+				event.preventDefault()
+
+				if (clickedToggleIcon) {
+					event.stopPropagation()
+				}
+
+				const shouldOpen = !item.classList.contains('is-open')
+
+				items.forEach((otherItem) => {
+					if (otherItem !== item) {
+						closeItem(otherItem)
+					}
+				})
+
+				if (shouldOpen) {
+					openItem(item)
+					return
+				}
+
+				closeItem(item)
+			})
+		})
+
+		const activeHash = accordion.querySelector('.sidebar-hash.active')
+		const activeItem = activeHash?.closest('.sidebar-item')
+		if (activeItem) {
+			openItem(activeItem)
+		}
+	})
+
+	window.addEventListener('resize', () => {
+		document.querySelectorAll('.sidebar-item.is-open .sidebar-hashes').forEach((hashes) => {
+			const hashesElement = hashes as HTMLElement
+			hashesElement.style.maxHeight = `${hashesElement.scrollHeight}px`
+		})
+	})
+</script>
+
 <style scoped lang="scss">
-  @use '../styles/charter.scss';
-  @use '../styles/text-styles.scss';
+	@use '../styles/charter.scss';
+	@use '../styles/text-styles.scss';
 
-  .sidebar-container {
-    display: flex;
+	.sidebar-container {
+		display: flex;
 
-    &.sidebar_primary {
-      --sidebar-color-100: #{charter.$primary100};
-      --sidebar-color-500: #{charter.$primary500};
-      --sidebar-color-900: #{charter.$primary900};
-    }
+		&.sidebar_primary {
+			--sidebar-color-100: #{charter.$primary100};
+			--sidebar-color-500: #{charter.$primary500};
+			--sidebar-color-900: #{charter.$primary900};
+		}
 
-    &.sidebar_secondary {
-      --sidebar-color-100: #{charter.$secondary100};
-      --sidebar-color-500: #{charter.$secondary500};
-      --sidebar-color-900: #{charter.$secondary900};
-    }
+		&.sidebar_secondary {
+			--sidebar-color-100: #{charter.$secondary100};
+			--sidebar-color-500: #{charter.$secondary500};
+			--sidebar-color-900: #{charter.$secondary900};
+		}
 
-    main {
-      flex: 1;
-      display: flex;
-      justify-content: center;
-    }
-  }
+		main {
+			flex: 1;
+			display: flex;
+			justify-content: center;
+		}
+	}
 
-  .sidebar {
-    min-width: 360px;
-    max-width: 360px;
-    background-color: var(--sidebar-color-100);
+	.sidebar {
+		min-width: 360px;
+		max-width: 360px;
+		background-color: var(--sidebar-color-100);
 
-    @media (max-width: 900px) {
-      display: none;
-    }
-  }
+		@media (max-width: 900px) {
+			display: none;
+		}
+	}
 
-  .sidebar-top {
-    padding: 16px;
-    margin-bottom: 32px;
+	.sidebar-top {
+		padding: 16px;
+		margin-bottom: 32px;
 
-    h4 {
-      @include text-styles.heading4;
-      color: var(--sidebar-color-900);
-      margin-bottom: 16px;
-    }
-    p {
-      @include text-styles.paragraphDefaultRegular;
-      color: var(--sidebar-color-900);
-    }
-  }
+		h4 {
+			@include text-styles.heading4;
+			color: var(--sidebar-color-900);
+			margin-bottom: 16px;
+		}
+		p {
+			@include text-styles.paragraphDefaultRegular;
+			color: var(--sidebar-color-900);
+		}
+	}
 
-  .sidebar-bottom {
-    display: flex;
-    flex-direction: column;
+	.sidebar-bottom {
+		display: flex;
+		flex-direction: column;
 
-    a {
-      @include text-styles.display3SemiBold;
+		.sidebar-item {
+			display: flex;
+			flex-direction: column;
 
-      padding: 12px 16px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
+			.sidebar-toggle-icon-minus {
+				display: none;
+			}
 
-      .sidebar-icon {
-        display: inline-flex;
-        font-size: 20px;
-        line-height: 1;
-        color: var(--sidebar-color-500);
+			&.is-open {
+				.sidebar-toggle-icon-plus {
+					display: none;
+				}
+
+				.sidebar-toggle-icon-minus {
+					display: inline-flex;
+				}
+			}
+		}
+
+		.sidebar-hashes {
+			display: flex;
+			flex-direction: column;
+			max-height: 0;
+			overflow: hidden;
+			transition: max-height 0.2s ease;
+
+      .sidebar-hash {
+        @include text-styles.display3Regular;
+
+        padding-left: 50px;
       }
+		}
 
-      span {
-        color: var(--sidebar-color-900);
-      }
+		a {
+			@include text-styles.display3SemiBold;
 
-      &.active {
-        background-color: #fff;
-      }
-    }
-  }
+			padding: 16px 16px;
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			text-decoration: none;
+
+			.sidebar-icon {
+				display: inline-flex;
+				font-size: 22px;
+				color: var(--sidebar-color-500);
+			}
+
+			span {
+				color: var(--sidebar-color-500);
+
+				&.sidebar-link {
+					flex: 1;
+				}
+			}
+
+			&.active, &.active ~ .sidebar-hashes > .sidebar-hash {
+				background-color: #fff;
+
+				&:not(.sidebar-hash) span {
+					color: var(--sidebar-color-900);
+				}
+			}
+		}
+	}
 </style>
