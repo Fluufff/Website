@@ -17,20 +17,20 @@ function getIconSvg(name: string) {
 <div class="bottom-bar-container">
   <div class="bottom-bar">
     {
-      backHref && backLabel ? (
+      backHref && backLabel && (
         <a class="bottom-bar-link left" href={backHref}>
           <span class="bottom-bar-icon" set:html={getIconSvg('arrow-left')} />
           <span>{backLabel}</span>
         </a>
-      ) : (<></>)
+      )
     }
     {
-      nextHref && nextLabel ? (
+      nextHref && nextLabel && (
         <a class="bottom-bar-link right" href={nextHref}>
           <span>{nextLabel}</span>
           <span class="bottom-bar-icon" set:html={getIconSvg('arrow-rigth')} />
         </a>
-      ) : (<></>)
+      )
     }
   </div>
 </div>
