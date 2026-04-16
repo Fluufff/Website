@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Sidebar from '../layouts/Sidebar.astro'
 import Socials from '../content/socials.astro'
+import MobileBottomNavbar from '../components/MobileBottomNavbar.astro'
 ---
 
 <Base>
@@ -191,6 +192,10 @@ import Socials from '../content/socials.astro'
         </p>
         <p>Thank you for being part of Flüüfff. We look forward to welcoming you!</p>
       </div>
+      <MobileBottomNavbar
+        nextHref='/conduct'
+        nextLabel='Code of Conduct'
+      />
     </section>
   </Sidebar>
   <Socials />
