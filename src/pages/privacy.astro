@@ -2,11 +2,12 @@
 import Base from '../layouts/Base.astro'
 import Sidebar from '../layouts/Sidebar.astro'
 import Socials from '../content/socials.astro'
+import MobileBottomNavbar from '../components/MobileBottomNavbar.astro'
 ---
 
 <Base>
   <Sidebar style="terms">
-    <main>
+    <section>
       <div class="content">
         <h1>Privacy Policy</h1>
         <p>Last updated: 27/05/2025</p>
@@ -153,7 +154,11 @@ import Socials from '../content/socials.astro'
           the <a href="/contact">Contact</a> page.
         </p>
       </div>
-    </main>
+      <MobileBottomNavbar
+        backHref='/conduct'
+        backLabel='Code of Conduct'
+      />
+    </section>
   </Sidebar>
 
   <Socials />
@@ -162,7 +167,7 @@ import Socials from '../content/socials.astro'
   @use '../styles/text-styles';
   @use '../styles/charter';
 
-  main {
+  section {
     display: flex;
     flex-direction: column;
     align-items: center;

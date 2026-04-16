@@ -2,6 +2,7 @@
 import Base from '../layouts/Base.astro'
 import Sidebar from '../layouts/Sidebar.astro'
 import Socials from '../content/socials.astro'
+import MobileBottomNavbar from '../components/MobileBottomNavbar.astro'
 ---
 
 <Base>
@@ -142,6 +143,12 @@ import Socials from '../content/socials.astro'
           </li>
         </ul>
       </div>
+      <MobileBottomNavbar
+        backHref='/terms'
+        backLabel='Terms and Conditions'
+        nextHref='/privacy'
+        nextLabel='Privacy Policy'
+      />
     </section>
   </Sidebar>
   <Socials />
