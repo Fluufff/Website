@@ -1,0 +1,93 @@
+---
+import loadBrixIcon from '../../utils/brix-icon-loader'
+
+type Props = {
+  backHref?: string
+  backLabel?: string
+  nextHref?: string
+  nextLabel?: string
+}
+const { backHref, backLabel, nextHref, nextLabel } = Astro.props
+
+function getIconSvg(name: string) {
+  return loadBrixIcon(name) ?? loadBrixIcon('question-mark')
+}
+---
+
+<div class="bottom-bar-container">
+  <div class="bottom-bar">
+    {
+      backHref && backLabel ? (
+        <a class="bottom-bar-link left" href={backHref}>
+          <span class="bottom-bar-icon" set:html={getIconSvg('arrow-left')} />
+          <span>{backLabel}</span>
+        </a>
+      ) : (
+        <span class="bottom-bar-link" />
+      )
+    }
+    {
+      nextHref && nextLabel ? (
+        <a class="bottom-bar-link right" href={nextHref}>
+          <span>{nextLabel}</span>
+          <span class="bottom-bar-icon" set:html={getIconSvg('arrow-rigth')} />
+        </a>
+      ) : (
+        <span class="bottom-bar-link" />
+      )
+    }
+  </div>
+</div>
+
+<style scoped lang="scss">
+  @use '../styles/text-styles';
+  @use '../styles/charter';
+
+  .bottom-bar-container {
+    display: none;
+    padding: 32px;
+
+    @media (max-width: 900px) {
+      display: block;
+      width: 100%;
+    }
+
+    .bottom-bar {
+      border-top: 1px solid charter.$primary200;
+      display: flex;
+      padding-top: 16px;
+      gap: 16px;
+
+      @media (max-width: 600px) {
+        flex-direction: column;
+      }
+    }
+
+    .bottom-bar-icon {
+      display: inline-flex;
+      font-size: 22px;
+      color: var(charter.$primary500);
+    }
+
+    .bottom-bar-link {
+      @include text-styles.display3Regular;
+      color: charter.$primary500;
+      flex: 1;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+
+      span:not(.bottom-bar-icon) {
+        flex: 1;
+      }
+
+      &.left span {
+        text-align: left;
+      }
+
+      &.right span {
+        text-align: right;
+      }
+    }
+  }
+</style>
