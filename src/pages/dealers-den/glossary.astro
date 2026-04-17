@@ -4,6 +4,41 @@ import Sidebar from '../../layouts/Sidebar.astro'
 import DealersDenHeader from '../../content/DealersDenHeader.astro'
 import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
 import Socials from '../../content/socials.astro'
+
+type DealersDenTable = {
+  sizes: string
+  alley: string
+  s: string
+  m: string
+  l: string
+  xl: string
+}
+const dealersDenTable: DealersDenTable[] = [
+  {
+    sizes: "Dimensions of Table",
+    alley: "45 x 90cm",
+    s: "90 x 90cm",
+    m: "90 x 180cm",
+    l: "90 x 270cm",
+    xl: "90 x 360cm"
+  },
+  {
+    sizes: "Prices per Day",
+    alley: "10,- (per slot)",
+    s: "25,-",
+    m: "50,-",
+    l: "75,-",
+    xl: "100,-"
+  },
+  {
+    sizes: "Price for the full duration",
+    alley: "-",
+    s: "50,-",
+    m: "100,-",
+    l: "150,-",
+    xl: "200,-"
+  },
+]
 ---
 
 <Base>
@@ -31,7 +66,72 @@ import Socials from '../../content/socials.astro'
           A dealership consists of one or more tables under the exclusive control of a single dealer, supported by
           dealer assistants, to display, give away, advertise, offer or sell items, merchandise or services.
         </p>
-        <p>--- INSERT TABLE ---</p>
+        <div class="desktop">
+          <table>
+            <tr>
+              <td>Dealership Sizes</td>
+              <td>Artist Alley / After Dark Event</td>
+              <td>Dealers' Den S</td>
+              <td>Dealers' Den M</td>
+              <td>Dealers' Den L</td>
+              <td>Dealers' Den XL</td>
+            </tr>
+            {
+              dealersDenTable.map((entry) => {
+                return (
+                  <tr>
+                    <td>{entry.sizes}</td>
+                    <td>{entry.alley}</td>
+                    <td>{entry.s}</td>
+                    <td>{entry.m}</td>
+                    <td>{entry.l}</td>
+                    <td>{entry.xl}</td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </div>
+        <div class="mobile">
+          <table>
+            {
+              dealersDenTable.map((entry) => {
+                return (
+                  <tr>
+                    <td>
+                      <div class="row-list">
+                        <div class="row-list-item">
+                          <span>Dealership Sizes</span>
+                          <span>{entry.sizes}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Artist Alley / After Dark Event</span>
+                          <span>{entry.alley}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den S</span>
+                          <span>{entry.s}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den M</span>
+                          <span>{entry.m}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den L</span>
+                          <span>{entry.l}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den XL</span>
+                          <span>{entry.xl}</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </div>
         <p>
           Currently we only provide Dealer spots for the full duration of the Dealers Den, so 2 days. If you want to
           deal for one day only and want to share your table like this, we ask you to communicate this to the Dealers
@@ -130,6 +230,47 @@ import Socials from '../../content/socials.astro'
       padding: 20px;
     }
 
+    .mobile {
+      display: none;
+
+      td {
+        text-align: left;
+
+        .light {
+          padding-bottom: 12px;
+        }
+
+        .row-icon {
+          font-size: 18px;
+        }
+
+        .row-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .row-list-item {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+
+          &:not(:last-child) {
+            margin-bottom: 4px;
+          }
+        }
+      }
+
+      @media (max-width: 1200px) {
+        display: block;
+      }
+    }
+
+    .desktop {
+      @media (max-width: 1200px) {
+        display: none;
+      }
+    }
+
     h1 {
       @include text-styles.heading1;
       margin-bottom: 16px;
@@ -161,7 +302,8 @@ import Socials from '../../content/socials.astro'
     }
 
     p:not(:last-child),
-    ul:not(:last-child) {
+    ul:not(:last-child),
+    div:not(:last-child) {
       margin-bottom: 16px;
     }
 
@@ -174,7 +316,57 @@ import Socials from '../../content/socials.astro'
 
       > ul {
         list-style-type: circle;
+        margin-bottom: 0;
       }
+    }
+
+    tr:last-child td {
+      border-bottom: 1px solid charter.$primary200;
+    }
+
+    td {
+      border-top: 1px solid charter.$primary200;
+      padding: 12px 18px;
+
+      &:has(.row-icon) {
+        text-align: center;
+      }
+
+      .row-mobile {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .row-icon {
+        display: inline-flex;
+        font-size: 24px;
+
+        &.icon-yes {
+          color: green;
+        }
+
+        &.icon-no {
+          color: red;
+          transform: rotate(45deg);
+        }
+
+        &.icon-warning {
+          color: goldenrod;
+        }
+      }
+
+        strong {
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .light {
+          display: block;
+          font-size: 12px;
+          line-height: 1.5;
+        }
+      
     }
   }
 </style>
+
