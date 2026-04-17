@@ -374,7 +374,57 @@ function getIconClass(value: IsAllowed) {
           </table>
         </div>
         <div class="mobile">
-          <p>--- INSERT TABLE ---</p>
+          <table>
+            {
+              gambleTableEntries.map((entry) => {
+                return (
+                  <tr>
+                    <td>
+                      <strong>{entry.label}</strong>
+                      <span class="light">{entry.reason}</span>
+                      <div class="row-list">
+                        <div class="row-list-item">
+                          <span>Random outcome</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.randomOutcome)]}
+                            set:html={getTableIcon(entry.randomOutcome)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Something of value is at stake</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.valueAtStake)]}
+                            set:html={getTableIcon(entry.valueAtStake)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Chance to win a prize</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.chancePrize)]}
+                            set:html={getTableIcon(entry.chancePrize)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Skill or knowledge have no influence</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.skillNoInfluence)]}
+                            set:html={getTableIcon(entry.skillNoInfluence)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Allowed?</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.allowed)]}
+                            set:html={getTableIcon(entry.allowed)}
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </table>
         </div>
         <p>
           * Risky: Even without a total loss, games where outcomes are unequally valuable can still qualify as gambling
@@ -433,6 +483,32 @@ function getIconClass(value: IsAllowed) {
 
     .mobile {
       display: none;
+
+      td {
+        text-align: left;
+
+        .light {
+          padding-bottom: 12px;
+        }
+
+        .row-icon {
+          font-size: 18px;
+        }
+
+        .row-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .row-list-item {
+          display: flex;
+          justify-content: space-between;
+
+          &:not(:last-child) {
+            margin-bottom: 4px;
+          }
+        }
+      }
 
       @media (max-width: 1200px) {
         display: block;
@@ -506,6 +582,15 @@ function getIconClass(value: IsAllowed) {
         text-align: center;
       }
 
+      &:has(.row-mobile) {
+        
+      }
+
+      .row-mobile {
+        display: flex;
+        justify-content: space-between;
+      }
+
       .row-icon {
         display: inline-flex;
         font-size: 24px;
@@ -524,7 +609,6 @@ function getIconClass(value: IsAllowed) {
         }
       }
 
-      &.row-start {
         strong {
           display: block;
           margin-bottom: 8px;
@@ -535,7 +619,7 @@ function getIconClass(value: IsAllowed) {
           font-size: 12px;
           line-height: 1.5;
         }
-      }
+      
     }
   }
 </style>
