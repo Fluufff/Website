@@ -200,7 +200,7 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
       border-radius: 3px;
       padding: 12px 10px;
       background: charter.$secondary500;
-      color: charter.$neutrals100;
+      color: charter.$neutrals50;
       @include text-styles.display3SemiBold;
       text-align: center;
       align-self: center;

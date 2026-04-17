@@ -92,7 +92,7 @@ function pad(num: number): string {
     border-radius: 3px;
     padding: 12px 10px;
     background: charter.$secondary700;
-    color: charter.$neutrals100;
+    color: charter.$neutrals50;
     @include text-styles.display3SemiBold;
     text-align: center;
     align-self: center;

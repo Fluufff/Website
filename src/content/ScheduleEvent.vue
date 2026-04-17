@@ -109,7 +109,7 @@ function parseTimes(time: OpenTime): [DateTime, DateTime] {
   padding: 32px 24px;
   border-radius: 8px;
   border: solid 1px charter.$primary200;
-  background: charter.$neutrals100;
+  background: charter.$neutrals50;
   box-shadow: 0 1px 4px 0 rgba(25, 33, 61, 0.08);
 
   h3 {

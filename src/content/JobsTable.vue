@@ -189,7 +189,7 @@ const jsEnabled = useMounted()
       th {
         padding: 24px 22px;
         text-align: left;
-        color: charter.$neutrals100;
+        color: charter.$neutrals50;
 
         &:nth-child(2) {
           width: 250px;
@@ -209,7 +209,7 @@ const jsEnabled = useMounted()
       tr {
         position: relative;
 
-        background: charter.$neutrals100;
+        background: charter.$neutrals50;
         transition: 0.2s ease-out background-color;
 
         &:hover {
@@ -237,7 +237,7 @@ const jsEnabled = useMounted()
         &.empty {
           text-align: center;
           color: charter.$neutrals600;
-          background: charter.$neutrals100;
+          background: charter.$neutrals50;
         }
       }
     }
@@ -370,7 +370,7 @@ const jsEnabled = useMounted()
 
 [data-pc-section='list'] {
   list-style: none;
-  background: charter.$neutrals100;
+  background: charter.$neutrals50;
   box-shadow:
     0 4px 8px 0 rgba(0, 0, 0, 0.14),
     0 0 2px 0 rgba(0, 0, 0, 0.12);
