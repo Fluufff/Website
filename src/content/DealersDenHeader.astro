@@ -28,9 +28,12 @@ import Button from '../components/Button.astro'
     gap: 16px;
     border-bottom: 1px solid charter.$neutrals300;
 
+    @media (max-width: 900px) {
+      flex-direction: column;
+    }
+
     @media (max-width: 600px) {
       margin: 20px;
-      flex-direction: column;
     }
   }
 

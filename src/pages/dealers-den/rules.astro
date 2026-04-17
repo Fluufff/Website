@@ -4,6 +4,108 @@ import Sidebar from '../../layouts/Sidebar.astro'
 import DealersDenHeader from '../../content/DealersDenHeader.astro'
 import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
 import Socials from '../../content/socials.astro'
+import loadBrixIcon from '../../../utils/brix-icon-loader'
+
+type IsAllowed = 'Yes' | 'No' | 'Risky'
+type GamblingTableEntry = {
+  label: string
+  randomOutcome: IsAllowed
+  valueAtStake: IsAllowed
+  chancePrize: IsAllowed
+  skillNoInfluence: IsAllowed
+  allowed: IsAllowed
+  reason: string
+}
+const gambleTableEntries: GamblingTableEntry[] = [
+  {
+    label: 'Mystery Bags',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'No',
+    skillNoInfluence: 'No',
+    allowed: 'Yes',
+    reason: 'Sale of a product with no gameplay involved - not a game of chance'
+  },
+  {
+    label: '"Get 15 random stickers for 10€"',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'No',
+    skillNoInfluence: 'No',
+    allowed: 'Yes',
+    reason: 'Buyer always gets something of value; randomness in product content is allowed'
+  },
+  {
+    label: 'Raffle entry automatically included with any purchase',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No extra cost; the raffle is a free promotional add-on'
+  },
+  {
+    label: 'Claw machine - every play wins',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No risk of loss; randomness is fine if there is always a guaranteed outcome'
+  },
+  {
+    label: 'Free prize draw without payment',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No stake involved - promotional giveaways are legal'
+  },
+  {
+    label: 'Raffle/prize draw for Telegram handle or e-mail + ad consent',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No payment or valuable consideration required; participation is voluntary'
+  },
+  {
+    label: 'Pay 5€, spin a wheel to win either a mug or a towel*',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Risky',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Risky',
+    reason:
+      'Even without losing, if the outcome is unequally desirable, this may qualify as gambling due to value disparity and chance-based outcome'
+  },
+  {
+    label: 'Pay 1€ to draw from a box for a chance to get the gold ticket and win a prize',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'No',
+    reason: 'Payment + chance + win/loss outcome = gambling under German law'
+  },
+  {
+    label: 'Game where players can lose or win nothing despite playing',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'No',
+    reason: 'Clearly gambling - chance, financial risk, and possibility of loss'
+  }
+]
+function getTableIcon(value: IsAllowed) {
+  return value === 'Yes' ? loadBrixIcon('checkmark') : value === 'No' ? loadBrixIcon('plus') : loadBrixIcon('warning')
+}
+function getIconClass(value: IsAllowed) {
+  return value === 'Yes' ? 'icon-yes' : value === 'No' ? 'icon-no' : 'icon-warning'
+}
 ---
 
 <Base>
@@ -217,14 +319,70 @@ import Socials from '../../content/socials.astro'
           law.
         </p>
         <p>Examples:</p>
-        <p>--- INSERT TABLE ---</p>
+        <div class="desktop">
+          <table>
+            <tr>
+              <td></td>
+              <td>Random outcome</td>
+              <td>Something of value is at stake</td>
+              <td>Chance to win a prize</td>
+              <td>Skill or knowledge have no influence</td>
+              <td>Allowed?</td>
+            </tr>
+            {
+              gambleTableEntries.map((entry) => {
+                return (
+                  <tr>
+                    <td class="row-start">
+                      <strong>{entry.label}</strong>
+                      <span class="light">{entry.reason}</span>
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.randomOutcome)]}
+                        set:html={getTableIcon(entry.randomOutcome)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.valueAtStake)]}
+                        set:html={getTableIcon(entry.valueAtStake)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.chancePrize)]}
+                        set:html={getTableIcon(entry.chancePrize)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.skillNoInfluence)]}
+                        set:html={getTableIcon(entry.skillNoInfluence)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.allowed)]}
+                        set:html={getTableIcon(entry.allowed)}
+                      />
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </div>
+        <div class="mobile">
+          <p>--- INSERT TABLE ---</p>
+        </div>
         <p>
           * Risky: Even without a total loss, games where outcomes are unequally valuable can still qualify as gambling
           if the higher reward is seen as an incentive and the outcome is left to chance.
         </p>
         <p>
           If you intend to offer any kind of game, draw, or contest at your table, it must clearly fall outside the
-          definition of gambling. When in doubt, consult the dealers den team beforehand to avoid issues.
+          definition of gambling. When in doubt, consult the Dealers' Den team beforehand to avoid issues.
         </p>
       </div>
       <MobileBottomNavbar
@@ -273,6 +431,20 @@ import Socials from '../../content/socials.astro'
       padding: 20px;
     }
 
+    .mobile {
+      display: none;
+
+      @media (max-width: 1200px) {
+        display: block;
+      }
+    }
+
+    .desktop {
+      @media (max-width: 1200px) {
+        display: none;
+      }
+    }
+
     h1 {
       @include text-styles.heading1;
       margin-bottom: 16px;
@@ -304,7 +476,8 @@ import Socials from '../../content/socials.astro'
     }
 
     p:not(:last-child),
-    ul:not(:last-child) {
+    ul:not(:last-child),
+    div:not(:last-child) {
       margin-bottom: 16px;
     }
 
@@ -318,6 +491,50 @@ import Socials from '../../content/socials.astro'
       > ul {
         list-style-type: circle;
         margin-bottom: 0;
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: 1px solid charter.$primary200;
+    }
+
+    td {
+      border-top: 1px solid charter.$primary200;
+      padding: 12px 18px;
+
+      &:has(.row-icon) {
+        text-align: center;
+      }
+
+      .row-icon {
+        display: inline-flex;
+        font-size: 24px;
+
+        &.icon-yes {
+          color: green;
+        }
+
+        &.icon-no {
+          color: red;
+          transform: rotate(45deg);
+        }
+
+        &.icon-warning {
+          color: goldenrod;
+        }
+      }
+
+      &.row-start {
+        strong {
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .light {
+          display: block;
+          font-size: 12px;
+          line-height: 1.5;
+        }
       }
     }
   }
