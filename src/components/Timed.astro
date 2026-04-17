@@ -1,15 +1,16 @@
 ---
 interface Props {
   start: string
+  class?: string
 }
 
-const { start } = Astro.props
+const { start, class: classpath = '' } = Astro.props
 const id = Math.random().toString(36).slice(2, 11)
 ---
 
 {
   Astro.slots.has('else') ? (
-    <div data-id={id}>
+    <div data-id={id} class={classpath}>
       <div class="hidden">
         <slot />
       </div>
@@ -18,13 +19,13 @@ const id = Math.random().toString(36).slice(2, 11)
       </div>
     </div>
   ) : (
-    <div data-id={id} class="hidden">
+    <div data-id={id} class:list={['hidden', classpath]} class="hidden">
       <slot />
     </div>
   )
 }
 
-<script define:vars={{ id, start }}>
+<script is:inline define:vars={{ id, start }}>
   let divs = document.querySelectorAll(`div[data-id="${id}"] > div`)
   if (divs.length == 0) {
     divs = document.querySelectorAll(`div[data-id="${id}"]`)

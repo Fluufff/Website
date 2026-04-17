@@ -18,7 +18,7 @@ const { class: className, buttonClass } = Astro.props
   </div>
 </div>
 
-<script define:vars={{ id }}>
+<script is:inline define:vars={{ id }}>
   const divs = document.querySelectorAll(`div[data-id="${id}"] > *`)
   const btn = divs[0]
   const content = divs[1]

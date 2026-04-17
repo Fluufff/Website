@@ -1,0 +1,28 @@
+---
+const blocksize = 14
+const pacmansize = 70
+
+const pm2 = pacmansize / 2
+const p6c = pm2 * Math.cos(Math.PI / 6)
+const p6s = pm2 * Math.sin(Math.PI / 6)
+// prettier-ignore
+const pacmanpath = [
+  'M', pm2 + p6c, pm2 - p6s,
+  'A', pm2, pm2, 0, 1, 0, pm2 + p6c, pm2 + p6s,
+  'L', pm2, pm2]
+  .join(' ')
+
+const { class: classpath } = Astro.props
+---
+
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height={pacmansize} class={classpath}>
+  <defs>
+    <pattern id="block" patternUnits="userSpaceOnUse" width={blocksize * 2} height={blocksize}>
+      <rect class="bg-accent1-100" width={blocksize} height={blocksize}></rect>
+    </pattern>
+  </defs>
+  <!-- <rect width={pacmansize} height={pacmansize} fill="black" /> -->
+  <path d={pacmanpath} fill="#FED766" width={pacmansize} height={pacmansize}></path>
+  <rect width="100%" x={pacmansize + blocksize} y={(pacmansize - blocksize) / 2} height={blocksize} fill="url(#block)"
+  ></rect>
+</svg>

@@ -10,10 +10,11 @@ interface Props {
   id?: string | undefined
   bg?: 'primary' | 'secondary' | 'primary-dark' | undefined
   class?: string | undefined
+  pictureclass?: string | undefined
   alignContent?: 'start' | 'end' | undefined
 }
 
-const { headline, markdown, bg, sideImage, right, id, wider, alignContent } = Astro.props
+const { headline, markdown, bg, sideImage, right, id, wider, alignContent, pictureclass = '' } = Astro.props
 ---
 
 <section
@@ -37,7 +38,14 @@ const { headline, markdown, bg, sideImage, right, id, wider, alignContent } = As
   {
     !!sideImage && (
       <>
-        <Picture src={sideImage} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800, 1200]} />
+        <Picture
+          src={sideImage}
+          class:list={[pictureclass]}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          alt=""
+          widths={[400, 800, 1200]}
+        />
         <div class="content__side_container">
           {headline && <h2>{headline}</h2>}
           <slot />

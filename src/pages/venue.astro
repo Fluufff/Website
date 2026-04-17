@@ -97,7 +97,7 @@ const restaurants = [
     travel: { time: '10 min', distance: '750 m' }
   },
   {
-    address: 'Gerard le Grellelaan 1, 2020 Antwerpen',
+    address: 'Gerard le Grellelaan 1',
     maps: 'https://maps.app.goo.gl/zvCzUTop9boLzMUCA',
     name: 'Brasserie Woods',
     travel: { time: '15 min', distance: '1 km' }
@@ -125,7 +125,7 @@ const publicTransport = [
   {
     method: 'train',
     name: 'Station Antwerpen-Berchem',
-    travel: { time: '7 min', distance: '2.3 km' }
+    travel: { time: '34 min', distance: '2.5 km' }
   }
 ]
 
@@ -254,6 +254,7 @@ const nearby = [
             restaurants.map((r) => (
               <a
                 href={r.maps}
+                target="_blank"
                 class="grid grid-cols-[1fr_auto] no-underline border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm"
               >
                 <div class="flex flex-col gap-1">
@@ -276,7 +277,7 @@ const nearby = [
         {
           restaurants.map((r) => (
             <div class="grid grid-cols-[1fr_auto_auto_auto] gap-2">
-              <a href={r.maps}>
+              <a href={r.maps} target="_blank">
                 {r.name} / {r.address}
               </a>
               <Walker />
@@ -293,18 +294,16 @@ const nearby = [
       >
         <LucideBusFront slot="button" />
         <h3 slot="button">Public Transport</h3>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 mb-4">
           {
             publicTransport.map((t) => (
-              <div class="flex flex-col gap-1 border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm">
-                <p class="font-bold text-secondary-500 mb-1">
+              <div class="grid grid-cols-[1fr_auto_auto_auto] gap-2">
+                <p>
                   {t.method} / {t.name}
                 </p>
-                <p class="flex gap-2">
-                  <LucideFootprints />
-                  <span>{t.travel.time}</span>
-                  <span>{t.travel.distance}</span>
-                </p>
+                <Walker />
+                <p>{t.travel.time}</p>
+                <p>{t.travel.distance}</p>
               </div>
             ))
           }
@@ -339,6 +338,7 @@ const nearby = [
             attractions.map((a) => (
               <a
                 href={a.url}
+                target="_blank"
                 class="grid grid-cols-[1fr_auto] no-underline border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm"
               >
                 <div class="flex flex-col gap-1">
@@ -359,7 +359,9 @@ const nearby = [
         {
           attractions.map((a) => (
             <div class="grid grid-cols-[1fr_auto] gap-2">
-              <a href={a.url}>{a.name}</a>
+              <a href={a.url} target="_blank">
+                {a.name}
+              </a>
               <p>{a.travel}</p>
             </div>
           ))
@@ -369,14 +371,15 @@ const nearby = [
       <Accordion
         class="md:hidden border-t-1 border-secondary-100"
         buttonClass="text-xl text-secondary-500 font-bold uppercase flex-1 gap-2 py-8"
+        innerClass="mb-4"
       >
         <LucidePlane slot="button" />
         <h3 slot="button">Closest Airports</h3>
-        <div class="flex flex-col gap-4">
+        <div class="flex flex-col gap-4 mb-4">
           {
             airports.map((a) => (
-              <div class="flex flex-col gap-1 border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm">
-                <p class="font-bold text-secondary-500 mb-1">{a.name}</p>
+              <div class="grid grid-cols-[1fr_auto] gap-2">
+                <p>{a.name}</p>
                 <p>{a.travel}</p>
               </div>
             ))
@@ -406,6 +409,7 @@ const nearby = [
             nearby.map((n) => (
               <a
                 href={n.url}
+                target="_blank"
                 class="grid grid-cols-[1fr_auto] no-underline border border-neutral-200 p-4 text-primary-800 rounded-md shadow-sm"
               >
                 <div class="flex flex-col gap-1">
@@ -426,7 +430,9 @@ const nearby = [
         {
           nearby.map((n) => (
             <div class="grid grid-cols-[1fr_auto] gap-2">
-              <a href={n.url}>{n.name}</a>
+              <a href={n.url} target="_blank">
+                {n.name}
+              </a>
               <p>{n.travel}</p>
             </div>
           ))
@@ -455,23 +461,25 @@ const nearby = [
         <li>
           <span class="font-bold">European Sleeper</span>: Night train between Brussels and Prague.<br />
           Also stops in Berlin. 3 trains weekly.<br />
-          Book tickets here: <a href="https://europeansleeper.eu">europeansleeper.eu</a>
+          Book tickets here: <a href="https://europeansleeper.eu" target="_blank">europeansleeper.eu</a>
         </li>
         <li>
           <span class="font-bold">Eurostar</span>: A high speed train between Paris and Amsterdam.<br />
-          Book tickets here: <a href="https://eurostar.com">eurostar.com</a>
+          Book tickets here: <a href="https://eurostar.com" target="_blank">eurostar.com</a>
         </li>
         <li>
           <span class="font-bold">EuroCity Direct</span>: A high speed train going through Lelystad, Amsterdam and
           Brussels. 16 trains daily.<br />
-          Book tickets here: <a href="https://nsinternational.com/en/out-and-about/eurocity-direct"
+          Book tickets here: <a href="https://nsinternational.com/en/out-and-about/eurocity-direct" target="_blank"
             >nsinternational.com/en/out-and-about/eurocity-direct</a
           >
         </li>
         <li>
           <span class="font-bold">EuroCity</span>: The slower, but cheaper Belgian version of the EuroCity Direct.<br />
           Starts from Rotterdam and ends in Brussels. 16 trains daily.<br />
-          Book tickets here: <a href="https://b-europe.com/EN/Trains/EuroCity">b-europe.com/EN/Trains/EuroCity</a>
+          Book tickets here: <a href="https://b-europe.com/EN/Trains/EuroCity" target="_blank"
+            >b-europe.com/EN/Trains/EuroCity</a
+          >
         </li>
         <li>If you come from Roosendaal, the local train <span class="font-bold">S32</span> takes you to Antwerp.</li>
         <li><span class="font-bold">ICE</span>: A high speed train connecting Köln with Antwerp. 2 trains daily.</li>
@@ -490,8 +498,9 @@ const nearby = [
         IC Oostende - Antwerpen Centraal.
       </p>
       <p>
-        Plan your trip and book tickets on the Belgian rail network using <a href="https://belgiantrain.be"
-          >belgiantrain.be</a
+        Plan your trip and book tickets on the Belgian rail network using <a
+          href="https://belgiantrain.be"
+          target="_blank">belgiantrain.be</a
         >
       </p>
     </div>
@@ -506,7 +515,8 @@ const nearby = [
           >P+R Olympiade</span
         >. The tram stop nearest to the hotel is DeSingel and is located right around the corner. Both trams take the
         same route, giving you a tram every 5 minutes. Antwerp has a vast network of buses and trams, please check <a
-          href="https://delijn.be/en/">delijn.be</a
+          href="https://delijn.be/en/"
+          target="_blank">delijn.be</a
         > for more info and tickets.
       </p>
       <Picture

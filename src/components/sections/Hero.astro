@@ -6,19 +6,20 @@ import Content from './Content.astro'
 interface Props {
   headline: string
   image?: ImageMetadata
-  alignImage?: 'left' | 'right' | undefined
+  alignImage?: 'left' | 'right'
   id?: string
-  alignContent?: 'start' | 'end' | undefined
+  pictureclass?: string
+  alignContent?: 'start' | 'end'
 }
 
-const { headline, image, alignImage, id } = Astro.props
+const { headline, image, alignImage, id, pictureclass = '', alignContent = 'start' } = Astro.props
 ---
 
 {
   image ? (
     <div id={id} class="hero">
       <Picture
-        class:list={alignImage ? `align-${alignImage}` : ''}
+        class:list={[alignImage ? `align-${alignImage}` : '', pictureclass]}
         src={image}
         formats={['avif', 'webp']}
         fallbackFormat="jpg"
@@ -26,13 +27,13 @@ const { headline, image, alignImage, id } = Astro.props
         height={612}
         widths={[400, 800, 1200, 1600]}
       />
-      <Content headline={headline} alignContent={Astro.props.alignContent || 'start'}>
+      <Content headline={headline} {alignContent}>
         <slot />
         {Astro.slots.has('actions') && <slot name="actions" slot={Astro.slots.has('actions') ? 'actions' : ''} />}
       </Content>
     </div>
   ) : (
-    <Content headline={headline} id={id} class="hero" alignContent={Astro.props.alignContent}>
+    <Content headline={headline} id={id || ''} class="hero" {alignContent}>
       <slot />
       {Astro.slots.has('actions') && <slot name="actions" slot={Astro.slots.has('actions') ? 'actions' : ''} />}
     </Content>
