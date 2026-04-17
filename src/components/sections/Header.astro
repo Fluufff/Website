@@ -4,26 +4,68 @@ import Countdown from '../countdown.vue'
 import { start_registration, start_con } from '../../data/reg/dates.json'
 import Timed from '../Timed.astro'
 import Button from '../Button.astro'
+// import LucideChevronUp from '~icons/lucide/chevron-up'
+import LucideChevronDown from '~icons/lucide/chevron-down'
 
-function ariaCurrent(routePattern: string) {
-  return Astro.routePattern === routePattern ? 'page' : undefined
+function isCurrent(...routePattern: string[]) {
+  return routePattern.find((p) => p === Astro.routePattern)
 }
 ---
 
-<nav id="header">
-  <a id="header_logo" href="/"><Logo height={48} width="" /></a>
-  <nav id="header_links">
-    <a href="/" aria-current={ariaCurrent('/')}>Home</a>
-    <a href="/attend" aria-current={ariaCurrent('/attend')}>Attend</a>
-    <a href="/venue" aria-current={ariaCurrent('/venue')}>Venue</a>
-    <a href="/about" aria-current={ariaCurrent('/about')}>About</a>
-    <a href="/staff-volunteering" aria-current={ariaCurrent('/staff-volunteering')}>Staff & Volunteering</a>
-    <a href="/contact" aria-current={ariaCurrent('/contact')}>Contact</a>
+<header
+  class="z-10 flex flex-col md:flex-row flex-wrap px-8 py-6 text-primary-600 bg-primary-100 gap-4 justify-center items-center"
+>
+  <a id="header_logo" href="/"><Logo height={48} width="" class="fill-primary-700" /></a>
+  <nav class="flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline">
+    <a href="/" class:list={['my-4', isCurrent('/') && 'font-bold']}>Home</a>
+    <div>
+      <p class:list={['my-4 flex items-center gap-1', isCurrent('/schedule', '/venue', '/pricing') && 'font-bold']}>
+        Attend <LucideChevronDown />
+      </p>
+      <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
+        <!-- <li class="hover:bg-primary-50">
+          <a class="p-4" href="/schedule" class:list={[isCurrent('/schedule') && 'font-bold']}>Program & Events</a>
+        </li> -->
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/venue" class:list={[isCurrent('/venue') && 'font-bold']}>Venue & Location</a>
+        </li>
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/pricing" class:list={[isCurrent('/pricing') && 'font-bold']}>Tickets & Pricing</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <p
+        class:list={[
+          'my-4 flex items-center gap-1',
+          isCurrent('/events', '/staff-volunteering', '/dealers-den') && 'font-bold'
+        ]}
+      >
+        Get involved <LucideChevronDown />
+      </p>
+      <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/events" class:list={[isCurrent('/events') && 'font-bold']}>Activities & Events</a>
+        </li>
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/staff-volunteering" class:list={[isCurrent('/staff-volunteering') && 'font-bold']}
+            >Staff & Volunteering</a
+          >
+        </li>
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/dealers-den" class:list={[isCurrent('/dealers-den') && 'font-bold']}
+            >Join the dealer's den</a
+          >
+        </li>
+      </ul>
+    </div>
+    <a href="/about" class:list={['my-4', isCurrent('/about') && 'font-bold']}>About</a>
+    <a href="/contact" class:list={['my-4', isCurrent('/contact') && 'font-bold']}>Contact</a>
     <Timed start={start_registration}>
       <Button label="Register" to="https://registration.fluufff.org" />
     </Timed>
   </nav>
-</nav>
+</header>
 <Timed start={start_registration}>
   <div slot="else" class="registration_banner">
     <div class="registration_banner_text">Registration opens in…</div>
@@ -34,6 +76,37 @@ function ariaCurrent(routePattern: string) {
     <Countdown targetDate={start_con} client:load />
   </div>
 </Timed>
+<style lang="scss">
+  @use '../../styles/charter';
+
+  header {
+    a {
+      text-decoration: none;
+    }
+    & > nav {
+      & > div {
+        position: relative;
+        & > ul {
+          position: absolute;
+          left: -9001px;
+        }
+        &:hover > ul {
+          left: 0;
+        }
+
+        & > ul > li {
+          border-bottom: 1px solid charter.$neutrals100;
+          &:last-child {
+            border-bottom: none;
+          }
+          & > a {
+            display: block;
+          }
+        }
+      }
+    }
+  }
+</style>
 <style is:global lang="scss">
   @use '../../styles/charter';
   @use '../../styles/text-styles';
