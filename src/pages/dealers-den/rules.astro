@@ -1,0 +1,623 @@
+---
+import Base from '../../layouts/Base.astro'
+import Sidebar from '../../layouts/Sidebar.astro'
+import DealersDenHeader from '../../content/DealersDenHeader.astro'
+import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Socials from '../../content/socials.astro'
+import loadBrixIcon from '../../../utils/brix-icon-loader'
+
+type IsAllowed = 'Yes' | 'No' | 'Risky'
+type GamblingTableEntry = {
+  label: string
+  randomOutcome: IsAllowed
+  valueAtStake: IsAllowed
+  chancePrize: IsAllowed
+  skillNoInfluence: IsAllowed
+  allowed: IsAllowed
+  reason: string
+}
+const gambleTableEntries: GamblingTableEntry[] = [
+  {
+    label: 'Mystery Bags',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'No',
+    skillNoInfluence: 'No',
+    allowed: 'Yes',
+    reason: 'Sale of a product with no gameplay involved - not a game of chance'
+  },
+  {
+    label: '"Get 15 random stickers for 10€"',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'No',
+    skillNoInfluence: 'No',
+    allowed: 'Yes',
+    reason: 'Buyer always gets something of value; randomness in product content is allowed'
+  },
+  {
+    label: 'Raffle entry automatically included with any purchase',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No extra cost; the raffle is a free promotional add-on'
+  },
+  {
+    label: 'Claw machine - every play wins',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No risk of loss; randomness is fine if there is always a guaranteed outcome'
+  },
+  {
+    label: 'Free prize draw without payment',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No stake involved - promotional giveaways are legal'
+  },
+  {
+    label: 'Raffle/prize draw for Telegram handle or e-mail + ad consent',
+    randomOutcome: 'Yes',
+    valueAtStake: 'No',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Yes',
+    reason: 'No payment or valuable consideration required; participation is voluntary'
+  },
+  {
+    label: 'Pay 5€, spin a wheel to win either a mug or a towel*',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Risky',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'Risky',
+    reason:
+      'Even without losing, if the outcome is unequally desirable, this may qualify as gambling due to value disparity and chance-based outcome'
+  },
+  {
+    label: 'Pay 1€ to draw from a box for a chance to get the gold ticket and win a prize',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'No',
+    reason: 'Payment + chance + win/loss outcome = gambling under German law'
+  },
+  {
+    label: 'Game where players can lose or win nothing despite playing',
+    randomOutcome: 'Yes',
+    valueAtStake: 'Yes',
+    chancePrize: 'Yes',
+    skillNoInfluence: 'Yes',
+    allowed: 'No',
+    reason: 'Clearly gambling - chance, financial risk, and possibility of loss'
+  }
+]
+function getTableIcon(value: IsAllowed) {
+  return value === 'Yes' ? loadBrixIcon('checkmark') : value === 'No' ? loadBrixIcon('plus') : loadBrixIcon('warning')
+}
+function getIconClass(value: IsAllowed) {
+  return value === 'Yes' ? 'icon-yes' : value === 'No' ? 'icon-no' : 'icon-warning'
+}
+---
+
+<Base>
+  <Sidebar style="dealers-den">
+    <DealersDenHeader slot="header" />
+    <section>
+      <div class="content">
+        <h3>Rules & Guidelines</h3>
+        <h4 id="merchandise">Guidelines on Merchandise</h4>
+        <ul>
+          <li>
+            Items offered for sale in the Flüüfff Dealers' Den should be related to the anthropomorphic theme of the
+            convention or should have a broad appeal to furries and others in attendance of Flüüfff.
+          </li>
+          <ul>
+            <li>
+              Typical items for sale include (but are not limited to) commissions (e.g. badges or sketchbooks), original
+              furry artwork featuring characters with two, four, or any number of limbs or body configurations, as well
+              as prints, digital media, furry-themed jewelry, fursuit materials, and plushies made of faux fur.
+            </li>
+          </ul>
+          <li>
+            Any item that is prohibited for sale is also not permitted for display, giveaway, advertisement or delivery.
+            Items generally prohibited for sale include, but are not limited to:
+          </li>
+          <ul>
+            <li>weapons and weapon look-alikes,</li>
+            <li>
+              items and symbols of forbidden organizations according to §19 Belgian Constitution (Nazi symbols and
+              others),
+            </li>
+            <li>items with symbols relating to groups associated with the "alt furry" movement,</li>
+            <li>
+              items with variations or modifications similar enough to be mistaken for a symbol mentioned above or
+              intentionally obscured renderings of those symbols,
+            </li>
+            <li>any kind of drugs and medications,</li>
+            <li>items depicting pedophilia or zoophilia,</li>
+            <li>items depicting any kind of excessive violence, cruelty or rape.</li>
+          </ul>
+          <li>
+            Items made of real fur or animal body parts, including taxidermy, clothing or accessories are prohibited.
+            Items made from leather are accepted.
+          </li>
+          <li>
+            The sale of food and beverages for direct consumption is not allowed anywhere in, including the Dealers'
+            Den. Consumable items in closed containers can be permitted for sale with explicit (written) permission of
+            the Dealers' Den Team in individual cases.
+          </li>
+          <li>
+            The sale or offering of items that reproduce or otherwise directly imitate third parties' copyrighted
+            material without explicit, written permission from the copyright holder is strictly forbidden. The
+            responsibility to ensure proper permission for use of copyrighted material rests solely with the Dealer. It
+            is the Dealer's responsibility to ensure that the written permission is available to Dealers' Den Team in
+            either English, Dutch or French. Other languages require a certified written translation.
+          </li>
+        </ul>
+        <p>
+          If an item or service requires a specific permit or a license for offering or selling the item or service, the
+          Dealer is required to present the permit or license upon request at any time.
+        </p>
+        <p>
+          Any item that violates this policy may be banned from display or sale on the sole discretion of the Dealers'
+          Den Team. Copyrighted items prohibited for sale include, but are not limited to, unlicensed depictions of any
+          characters appearing in any media or counterfeit merchandise of any kind.
+        </p>
+        <ul>
+          <li>
+            Items that were created using any kind of AI based generators are excluded from sale, display, trade or
+            giveaway. This also applies to works (e.g. stories, audio, backgrounds), that are derived from such items.
+          </li>
+          <li>
+            No items shall be produced, displayed, given away, advertised, delivered or sold that bear the official
+            "Flüüfff" logo or CI without explicit, written permission of the Board of Directors.
+          </li>
+        </ul>
+        <p>
+          If the Flüüfff team receives a credible complaint or identifies a potential infringement, we reserve the right
+          to:
+        </p>
+        <ul>
+          <li>Request clarification or proof of rights from the seller</li>
+          <li>Ask that specific items be removed from sale</li>
+          <li>Remove the seller's table or access to the venue without refund, if necessary</li>
+        </ul>
+        <p>
+          Flüüfff is not liable for disputes between artists, sellers, or third parties regarding intellectual property.
+          However, we will always act in good faith to maintain a respectful, legal, and community-focused environment.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="sales">Guidelines on Sales</h4>
+        <p>
+          The Flüüfff Dealers' Den is not separated into a general area which is rated PG-13 (natural nudity without
+          sexual focus) and an "After Dark" section which is considered "Rated R".
+        </p>
+        <ul>
+          <li>
+            In the general area artwork containing adult material shall either be shielded by sticky notes, stickers, or
+            a similar covering, or ideally should be kept in a clearly-marked binder which shall be kept closed by the
+            Dealer when it is not being viewed by a customer. Binders or portfolios containing uncensored artwork shall
+            be separate from other binders. A tag or divider between material rated PG-13 and material rated "R" is not
+            sufficient. Any censoring of artwork (pixelation, blurring, censorship bars) must be done to the
+            satisfaction of Dealers' Den Staff. In the "After Dark" area censoring is not needed.
+          </li>
+          <li>
+            Artwork or other items rated "R" shall be kept from public view and therefore handed to the customer in an
+            nontransparent packaging that obscures the item completely, such as a bag, envelope, or folder. The customer
+            can use their own packaging.
+          </li>
+          <li>
+            Five Senses Rule - The dealership's display and merchandise shall not cause discomfort to Attendees or other
+            Dealers in regard to sight, sound, smell, taste, or touch. This specifically concerns bright flashing
+            lights, loudspeakers, and strong scents. Audio needs to be kept at such a volume that it does not disturb
+            Attendees or other Dealers; headphones are recommended if audio is a primary selling point of the
+            dealership. Any presentation that is deemed inappropriate may be interdicted on the sole discretion of the
+            Dealers' Den Team or their deputies.
+          </li>
+        </ul>
+      </div>
+      <div class="content">
+        <h4 id="activities">Guidelines on Activities</h4>
+        <ul>
+          <li>
+            In no event shall Flüüfff be liable for damages, injuries, breakage, or loss incurred to or caused by any
+            Dealer or Attendee.
+          </li>
+          <li>
+            Any action or behavior that causes significant interference with Dealers' Den operations, excessive
+            discomfort to attendees, sta or other dealers or otherwise endangers people or property is strictly
+            forbidden and may result in permanent suspension of dealer status.
+          </li>
+          <li>
+            Time spent at their respective dealership during Dealers' Den opening hours is on the discretion of the
+            dealer themselves. However, a substantial presence is appreciated.
+          </li>
+          <li>
+            Covering the dealership with a tablecloth or similar to protect goods from dirt or dust is recommended
+            outside the official opening hours of the Dealers' Den. Doing so is entirely at the discretion of the
+            dealer.
+          </li>
+          <li>
+            Any tablecloth, fabric or other materials used for covering or decoration purposes must comply with EN
+            13501-1 B - s1 d0 standards. To prove meeting this class, they must have a certificate, usually printed on
+            the label. Please note that applying a flame-retardant spray to otherwise uncertified materials does not
+            make them certified. The treated material (e.g., tablecloth) would need to undergo a full certification
+            process, including all necessary tests, to verify its flame-retardant properties and receive such a
+            certification.
+          </li>
+          <li>
+            Dealers are responsible for providing proof of certification of any tablecloth, fabric or other materials
+            used for covering or decoration purposes. Proof can be provided in printed or digital form. If a dealer
+            cannot provide sufficient proof of the flame-retardant certification for any material upon request, the
+            material or item has to be removed. The responsibility to ensure proper certification for use of all objects
+            and materials that need to follow EN 13501-1 B - s1 d0 standards rests solely with the Dealer. It is the
+            dealer's responsibility to ensure that the certificate is available to Dealer's Den management in either
+            English, Dutch or French. Other languages require a certified written translation.
+          </li>
+          <li>Tablecloths and/or similar are not provided by Flüüfff.</li>
+          <li>Activities that cause dirt or contamination are not allowed.</li>
+          <li>
+            Electricity is provided with the sole intent for usage by the Dealer with their own equipment and personal
+            devices. The responsibility to ensure functional and electrical safety of own equipment and devices rests
+            solely with the Dealer. Air compressors, laminators or any other high-power consumption devices, must
+            explicitly be allowed by the Dealers' Den Management during Setup.
+          </li>
+          <li>There is a strict no smoking policy in the whole hotel. This also includes vaping.</li>
+          <li>Any equipment that produces an open flame or excessive heat is not allowed.</li>
+        </ul>
+        <p>
+          Arising issues about Dealers' Den operations should be directly addressed with the Dealers' Den team on site.
+          Urgent matters of any kind can be addressed to any member of Flüüfff Staff.
+        </p>
+        <p>
+          Members of the press, usually accompanied by a member of the Flüüfff Press Team and Dealers' Den Management to
+          answer their questions may be present in the Dealers' Den during opening hours.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="copyrights">Copyrights Clause</h4>
+        <p>
+          The Dealer guarantees that its activities in the context of the Trade Fair, among which, but not limited to,
+          the Objects Exhibited and all its advertising, do not in any way infringe the rights of third parties, such as
+          intellectual property rights (including but not limited to copyright, trade mark rights, patent rights, design
+          rights) or are in any way unlawful or illegal. Furthermore, the Dealer guarantees that all the information it
+          supplies the Organiser with within the context of the Trade Fair in relation to its activities, for instance
+          for publication in the trade fair guide, the catalogue or on the Trade Fair website is complete and accurate
+          and does not in any way infringe the rights of third parties or is otherwise unlawful or illegal.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="gambling">Games of Chance (Gambling)</h4>
+        <p>
+          Games of chance (gambling) are illegal in Belgium without a state-issued permit. Therefore, games of chance or
+          gambling are not permitted in the Dealers' Den.
+        </p>
+        <p>
+          A game of chance (gambling) is defined as a game in which the outcome is predominantly or entirely determined
+          by chance, rather than by a player's skill, ability, or decisions. Typically, participants risk something of
+          value (usually money) for the chance of winning a reward, with uncertain outcomes.
+        </p>
+        <p>Common characteristics of gambling include:</p>
+        <ul>
+          <li>The outcome is determined primarily by chance</li>
+          <li>Something of value (typically money) is at stake</li>
+          <li>There is a possibility to win or lose</li>
+          <li>The player's skill or knowledge has minimal or no influence</li>
+        </ul>
+        <p>
+          In general, if any one of these criteria is missing, the activity is not considered gambling under Belgian
+          law.
+        </p>
+        <p>Examples:</p>
+        <div class="desktop">
+          <table>
+            <tr>
+              <td></td>
+              <td>Random outcome</td>
+              <td>Something of value is at stake</td>
+              <td>Chance to win a prize</td>
+              <td>Skill or knowledge have no influence</td>
+              <td>Allowed?</td>
+            </tr>
+            {
+              gambleTableEntries.map((entry) => {
+                return (
+                  <tr>
+                    <td class="row-start">
+                      <strong>{entry.label}</strong>
+                      <span class="light">{entry.reason}</span>
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.randomOutcome)]}
+                        set:html={getTableIcon(entry.randomOutcome)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.valueAtStake)]}
+                        set:html={getTableIcon(entry.valueAtStake)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.chancePrize)]}
+                        set:html={getTableIcon(entry.chancePrize)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.skillNoInfluence)]}
+                        set:html={getTableIcon(entry.skillNoInfluence)}
+                      />
+                    </td>
+                    <td>
+                      <span
+                        class:list={['row-icon', getIconClass(entry.allowed)]}
+                        set:html={getTableIcon(entry.allowed)}
+                      />
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </div>
+        <div class="mobile">
+          <table>
+            {
+              gambleTableEntries.map((entry) => {
+                return (
+                  <tr>
+                    <td>
+                      <strong>{entry.label}</strong>
+                      <span class="light">{entry.reason}</span>
+                      <div class="row-list">
+                        <div class="row-list-item">
+                          <span>Random outcome</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.randomOutcome)]}
+                            set:html={getTableIcon(entry.randomOutcome)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Something of value is at stake</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.valueAtStake)]}
+                            set:html={getTableIcon(entry.valueAtStake)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Chance to win a prize</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.chancePrize)]}
+                            set:html={getTableIcon(entry.chancePrize)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Skill or knowledge have no influence</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.skillNoInfluence)]}
+                            set:html={getTableIcon(entry.skillNoInfluence)}
+                          />
+                        </div>
+                        <div class="row-list-item">
+                          <span>Allowed?</span>
+                          <span
+                            class:list={['row-icon', getIconClass(entry.allowed)]}
+                            set:html={getTableIcon(entry.allowed)}
+                          />
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </div>
+        <p>
+          * Risky: Even without a total loss, games where outcomes are unequally valuable can still qualify as gambling
+          if the higher reward is seen as an incentive and the outcome is left to chance.
+        </p>
+        <p>
+          If you intend to offer any kind of game, draw, or contest at your table, it must clearly fall outside the
+          definition of gambling. When in doubt, consult the Dealers' Den team beforehand to avoid issues.
+        </p>
+      </div>
+      <MobileBottomNavbar
+        backHref="/dealers-den/dealership"
+        backLabel="Obtaining a Dealership"
+        nextHref="/dealers-den/alley-artshow"
+        nextLabel="Artist Alley & Artshow"
+      />
+    </section>
+  </Sidebar>
+  <Socials />
+</Base>
+
+<style scoped lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 360px);
+    margin: 0 auto;
+
+    &:last-child {
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 900px) {
+      width: 100vw;
+
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .content {
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: charter.$primary800;
+
+    @media (max-width: 600px) {
+      padding: 20px;
+    }
+
+    .mobile {
+      display: none;
+
+      td {
+        text-align: left;
+
+        .light {
+          padding-bottom: 12px;
+        }
+
+        .row-icon {
+          font-size: 18px;
+        }
+
+        .row-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .row-list-item {
+          display: flex;
+          justify-content: space-between;
+
+          &:not(:last-child) {
+            margin-bottom: 4px;
+          }
+        }
+      }
+
+      @media (max-width: 1200px) {
+        display: block;
+      }
+    }
+
+    .desktop {
+      @media (max-width: 1200px) {
+        display: none;
+      }
+    }
+
+    h1 {
+      @include text-styles.heading1;
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        @include text-styles.heading3;
+      }
+    }
+
+    h2 {
+      @include text-styles.heading3;
+
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    }
+
+    h3 {
+      @include text-styles.heading4;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      @include text-styles.display4SemiBold;
+      margin-bottom: 16px;
+    }
+
+    p:not(:last-child),
+    ul:not(:last-child),
+    div:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: charter.$primary500;
+    }
+
+    ul {
+      list-style-type: disc;
+
+      > ul {
+        list-style-type: circle;
+        margin-bottom: 0;
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: 1px solid charter.$primary200;
+    }
+
+    td {
+      border-top: 1px solid charter.$primary200;
+      padding: 12px 18px;
+
+      &:has(.row-icon) {
+        text-align: center;
+      }
+
+      &:has(.row-mobile) {
+      }
+
+      .row-mobile {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .row-icon {
+        display: inline-flex;
+        font-size: 24px;
+
+        &.icon-yes {
+          color: green;
+        }
+
+        &.icon-no {
+          color: red;
+          transform: rotate(45deg);
+        }
+
+        &.icon-warning {
+          color: goldenrod;
+        }
+      }
+
+      strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .light {
+        display: block;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    }
+  }
+</style>

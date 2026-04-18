@@ -1,0 +1,231 @@
+---
+import Base from '../../layouts/Base.astro'
+import Sidebar from '../../layouts/Sidebar.astro'
+import DealersDenHeader from '../../content/DealersDenHeader.astro'
+import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Socials from '../../content/socials.astro'
+---
+
+<Base>
+  <Sidebar style="dealers-den">
+    <DealersDenHeader slot="header" />
+    <section>
+      <div class="content">
+        <h3>Timeline & Setup</h3>
+        <h4 id="hours">Dealers' Den Hours</h4>
+        <p><strong>Friday 13.11.2026</strong></p>
+        <div>
+          <table>
+            <tr>
+              <td>08:00 - 11:00</td>
+              <td>Dealers' Den setup<br />Art Show Art admission</td>
+            </tr>
+            <tr>
+              <td>11:00 - 14:00</td>
+              <td>Slot 1</td>
+            </tr>
+            <tr>
+              <td>14:00 - 15:00</td>
+              <td>Break - Please leave the room.<br />Artist Alley switch</td>
+            </tr>
+            <tr>
+              <td>15:00 - 18:00</td>
+              <td>Slot 2</td>
+            </tr>
+            <tr>
+              <td>18:00 - 19:00</td>
+              <td>Artist Alley teardown + Den closing*</td>
+            </tr>
+          </table>
+        </div>
+        <p><strong>Saturday 14.11.2025</strong></p>
+        <div>
+          <table>
+            <tr>
+              <td>10:00 - 11:00</td>
+              <td>Room open for Dealers and their helpers<br />Artist Alley setup</td>
+            </tr>
+            <tr>
+              <td>11:00 - 14:00</td>
+              <td>Slot 3</td>
+            </tr>
+            <tr>
+              <td>14:00 - 15:00</td>
+              <td>Break - Please leave the room.<br />Artist Alley switch</td>
+            </tr>
+            <tr>
+              <td>15:00 - 18:00</td>
+              <td>Slot 4</td>
+            </tr>
+            <tr>
+              <td>18:00 - 21:00</td>
+              <td>Dealers' Den teardown*</td>
+            </tr>
+          </table>
+        </div>
+        <p>* subject to Dealers' Den Team discretion. The room will be completely secured during this time.</p>
+      </div>
+      <div class="content">
+        <h4 id="before">Before the Dealers' Den Opens</h4>
+        <p>
+          Dealers' Den for 2026 will be located in the room called Edourard, located on the Ground floor. Entering the
+          Dealers' Den without registration will not be possible.
+        </p>
+        <p>
+          Each dealer and their assistant(s) must personally present their official Flüüfff attendee badge. Any dealer
+          that fails to show up without informing the Dealers Den Team may have this affect their curation priority for
+          future events.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="setup">Dealers' Den Setup</h4>
+        <ul>
+          <li>
+            Setup for dealers will be possible during the times scheduled. Dealers may use a non-motorized cart to carry
+            in their goods during this time only. Please contact Dealers' Den Team in advance if this might pose an
+            issue for you.
+          </li>
+          <li>
+            It is not possible to have any items sent to or stored at the hotel in advance of Flüüfff taking place.
+          </li>
+          <li>
+            The maximum overall height of a dealership is the 'reachable height' of 230 cm. This applies to freestanding
+            exhibition stands, standees, flags and other buildups. They must be securely fashioned in a way that
+            prevents them from tipping or falling.
+          </li>
+          <li>
+            Any constructions on tables must not exceed a total height of 200 cm when measured from the floor. They must
+            be securely fashioned and/or attached in a way that prevents them from tipping or falling, they must be
+            lightweight enough to preserve the table's overall stability, and they must not cause any damage to the
+            table itself.
+          </li>
+          <li>Build-ups must not reach into other dealerships or walkways.</li>
+        </ul>
+        <p>
+          Dealerships and build-ups will constantly be checked by Dealers' Den team members to ensure a safe environment
+          for everyone.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="open">The Dealers' Den is Open!</h4>
+        <p>Dealers' Den will open to attendees at the time scheduled in the ConBook.</p>
+      </div>
+      <div class="content">
+        <h4 id="teardown">Dealers' Den Teardown</h4>
+        <ul>
+          <li>
+            Dealers' Den closes on Saturday at 18:00. After that time only dealers and their assistants are permitted
+            entry to and presence in the Dealers' Den.
+          </li>
+          <li>
+            Teardown begins immediately after closing. Dealers are expected to dismount their displays, pack up their
+            belongings and clear the room before 21:00.
+          </li>
+          <li>Trash containers will be provided during Teardown by Flüüfff. Please leave your spot as you found it.</li>
+          <li>
+            Do not leave and pack up before this time, unless discussed with the Den team. If you do, this will have
+            consequences for your curation process in the future.
+          </li>
+        </ul>
+      </div>
+      <MobileBottomNavbar
+        backHref="/dealers-den"
+        backLabel="The Short Version"
+        nextHref="/dealers-den/dealership"
+        nextLabel="Obtaining a Dealership"
+      />
+    </section>
+  </Sidebar>
+  <Socials />
+</Base>
+
+<style scoped lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 360px);
+    margin: 0 auto;
+
+    &:last-child {
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 900px) {
+      width: 100vw;
+
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .content {
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: charter.$primary800;
+
+    @media (max-width: 600px) {
+      padding: 20px;
+    }
+
+    h1 {
+      @include text-styles.heading1;
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        @include text-styles.heading3;
+      }
+    }
+
+    h2 {
+      @include text-styles.heading3;
+
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    }
+
+    h3 {
+      @include text-styles.heading4;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      @include text-styles.display4SemiBold;
+      margin-bottom: 16px;
+    }
+
+    p:not(:last-child),
+    ul:not(:last-child),
+    div:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: charter.$primary500;
+    }
+
+    ul {
+      list-style-type: disc;
+
+      > ul {
+        list-style-type: circle;
+      }
+    }
+
+    td {
+      border-top: 1px solid charter.$primary200;
+      border-bottom: 1px solid charter.$primary200;
+      padding: 4px 8px;
+    }
+  }
+</style>

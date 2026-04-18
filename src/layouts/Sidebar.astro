@@ -13,9 +13,9 @@ type SidebarLink = {
   hashes?: { hash: string; label: string }[]
 }
 const dealersDenLinks: SidebarLink[] = [
-  { icon: 'calendar', label: 'THE SHORT VERSION', href: '/dealers-den' },
+  { icon: 'file', label: 'THE SHORT VERSION', href: '/dealers-den' },
   {
-    icon: 'calendar',
+    icon: 'clock',
     label: 'TIMELINE & SETUP',
     href: '/dealers-den/timeline',
     hashes: [
@@ -27,7 +27,7 @@ const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: 'badge',
+    icon: 'briefcase',
     label: 'OBTAINING A DEALERSHIP',
     href: '/dealers-den/dealership',
     hashes: [
@@ -40,7 +40,7 @@ const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: 'badge',
+    icon: 'clipboard',
     label: 'RULES & GUIDELINES',
     href: '/dealers-den/rules',
     hashes: [
@@ -52,7 +52,7 @@ const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: 'badge',
+    icon: 'pencil',
     label: 'ARTIST ALLEY & ARTSHOW',
     href: '/dealers-den/alley-artshow',
     hashes: [
@@ -61,7 +61,7 @@ const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: 'badge',
+    icon: 'book',
     label: 'GLOSSARY & INFO',
     href: '/dealers-den/glossary',
     hashes: [
@@ -71,9 +71,9 @@ const dealersDenLinks: SidebarLink[] = [
   }
 ]
 const termsLinks: SidebarLink[] = [
-  { icon: 'file', label: 'TERMS & CONDITIONS', href: 'terms' },
-  { icon: 'shield', label: 'CODE OF CONDUCT', href: 'conduct' },
-  { icon: 'lock', label: 'PRIVACY POLICY', href: 'privacy' }
+  { icon: 'file', label: 'TERMS & CONDITIONS', href: '/terms' },
+  { icon: 'shield', label: 'CODE OF CONDUCT', href: '/conduct' },
+  { icon: 'lock', label: 'PRIVACY POLICY', href: '/privacy' }
 ]
 
 const sidebarVariantClass = style === 'dealers-den' ? 'sidebar_primary' : 'sidebar_secondary'
@@ -114,9 +114,9 @@ function hashIsActive(hash: string) {
 
     {
       !Astro.slots.has('header') && (
-        <div class="sidebar-bottom">
+        <div class="sidebar-bottom sidebar-sticky">
           {sidebarLinks.map((link) => (
-            <div class="sidebar-item">
+            <div class="sidebar-item ">
               <a href={link.href} class={`sidebar-trigger ${isActive(link.href) ? 'active' : ''}`}>
                 <span class="sidebar-icon" set:html={getIconSvg(link.icon)} />
                 <span class="sidebar-link">{link.label}</span>
@@ -160,7 +160,7 @@ function hashIsActive(hash: string) {
   Astro.slots.has('header') && (
     <div class={`sidebar-container ${sidebarVariantClass}`}>
       <aside class="sidebar">
-        <div class="sidebar-bottom">
+        <div class="sidebar-bottom sidebar-sticky">
           {sidebarLinks.map((link) => (
             <div class="sidebar-item">
               <a href={link.href} class={`sidebar-trigger ${isActive(link.href) ? 'active' : ''}`}>
@@ -333,6 +333,11 @@ function hashIsActive(hash: string) {
   .sidebar-bottom {
     display: flex;
     flex-direction: column;
+
+    &.sidebar-sticky {
+      position: sticky;
+      top: 0;
+    }
 
     .sidebar-item {
       display: flex;

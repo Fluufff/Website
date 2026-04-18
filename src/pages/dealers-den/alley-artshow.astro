@@ -1,0 +1,142 @@
+---
+import Base from '../../layouts/Base.astro'
+import Sidebar from '../../layouts/Sidebar.astro'
+import DealersDenHeader from '../../content/DealersDenHeader.astro'
+import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Socials from '../../content/socials.astro'
+---
+
+<Base>
+  <Sidebar style="dealers-den">
+    <DealersDenHeader slot="header" />
+    <section>
+      <div class="content">
+        <h3>Artist Alley & Art Show</h3>
+        <h4 id="artistalley">Artist Alley</h4>
+        <p>
+          For the people with a lack of merchandise, need a space to offer on the spot commissions or just want to try
+          out dealing, the Artist Alley is for you. At Flüüfff there is no 'first come, first serve' Artist Alley, but
+          one with designated spots.
+        </p>
+        <p>
+          <strong>Set up</strong>
+        </p>
+        <p>See <a href="/dealers-den/timeline#hours">Dealers' Den Hours</a> for the times.</p>
+        <p><strong>Table</strong></p>
+        <p>
+          The tables come with a size of 45x90cm, a table cloth, an A5 plexiglass standee for your price list and a 3
+          Wire Cube tower, to present your items. We would like to stress to use said provided table cloth and not
+          rebuild the table too much; Your spot is for 3 hours, and your set up time is limited.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="artshow">Art Show</h4>
+        <p>
+          Registration is via the registration system. Once we know how much space we have available, we will reach out
+          to all the interested artists with a small google form with the information needed when it comes to your
+          artwork, dimensions, and themes.
+        </p>
+        <p>
+          Once we have gone through the filled out forms, we will start assigning spaces. Please note that filling out
+          the Google Form does not guarantee a spot, as availability depends on the amount of applications received.
+        </p>
+        <p>
+          We will supply you with hooks to hang your items in case of a panel, but do note we cannot supply you with
+          frames or bases for e.g. fursuit items, you will need to bring your own.
+        </p>
+        <p>We do strive to send out the final confirmation emails within 6 weeks after the initial questionnaire.</p>
+      </div>
+      <MobileBottomNavbar
+        backHref="/dealers-den/rules"
+        backLabel="Rules & Guidelines"
+        nextHref="/dealers-den/glossary"
+        nextLabel="Glossary & Info"
+      />
+    </section>
+  </Sidebar>
+  <Socials />
+</Base>
+
+<style scoped lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 360px);
+    margin: 0 auto;
+
+    &:last-child {
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 900px) {
+      width: 100vw;
+
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .content {
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: charter.$primary800;
+
+    @media (max-width: 600px) {
+      padding: 20px;
+    }
+
+    h1 {
+      @include text-styles.heading1;
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        @include text-styles.heading3;
+      }
+    }
+
+    h2 {
+      @include text-styles.heading3;
+
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    }
+
+    h3 {
+      @include text-styles.heading4;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      @include text-styles.display4SemiBold;
+      margin-bottom: 16px;
+    }
+
+    p:not(:last-child),
+    ul:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: charter.$primary500;
+    }
+
+    ul {
+      list-style-type: disc;
+
+      > ul {
+        list-style-type: circle;
+      }
+    }
+  }
+</style>

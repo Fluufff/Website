@@ -2,14 +2,15 @@
 import Base from '../../layouts/Base.astro'
 import Sidebar from '../../layouts/Sidebar.astro'
 import DealersDenHeader from '../../content/DealersDenHeader.astro'
+import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Socials from '../../content/socials.astro'
 ---
 
 <Base>
   <Sidebar style="dealers-den">
     <DealersDenHeader slot="header" />
-
-    <main>
-      <section>
+    <section>
+      <div class="content">
         <h3>WELCOME TO THE DEALERS DEN INFO HUB</h3>
         <p>
           Whether you're a first-time vendor or a returning Flüüfff regular, this page contains everything you need to
@@ -20,24 +21,23 @@ import DealersDenHeader from '../../content/DealersDenHeader.astro'
           If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all
           sections carefully to make sure your dealership runs smoothly.
         </p>
-      </section>
-
-      <section>
-        <h3>THE SHORT VERSION</h3>
-
+      </div>
+      <div class="content">
+        <h3>The Short Version</h3>
         <p>
-          Sales in the Dealers Den are only allowed by registered dealers in authorized dealerships within designated
+          Sales in the Dealers' Den are only allowed by registered dealers in authorized dealerships within designated
           spaces. Sharing space at a dealership with unauthorized dealers is not allowed.
         </p>
-
         <p>
           In order for your registration as a dealer for the Flüüfff Dealers' Den to be taken into consideration, a
           valid registration for the Flüüfff event via the Flüüfff Registration System itself is mandatory. After
-          registering for the event a dealership application can be submitted in the General Registration System.
+          registering for the event a dealership application can be submitted in the <a
+            target="_blank"
+            href="https://registration.fluufff.org/register">General Registration System</a
+          >.
         </p>
-
+        <p>Electricity is available for dealerships. We offer electricity for low-power consumption devices only.</p>
         <p>
-          Electricity is available for dealerships. We offer electricity for low-power consumption devices only.
           Dealerships are available in different (table) sizes. During Dealers' Den registration, the desired size and
           table configuration can be applied for. Dealership space is limited, and the Dealers' Den Team will try to
           accommodate as many artists and dealers as possible without cutting down or denying requested space upon
@@ -46,14 +46,13 @@ import DealersDenHeader from '../../content/DealersDenHeader.astro'
         </p>
         <p>
           Dealership applications will be queued into a curated system; the application will be reviewed by the Dealers'
-          Den Team, approved or declined, then placed. Placement in the room commences thereafter. Sign up for a spot
-          can be done up to 4 weeks prior to the con, but the initial roomsketch will be made 6 weeks after Registration
-          opening.
+          Den Team, approved or declined, then placed. Sign up for a spot can be done up to 4 weeks prior to the con,
+          but the initial roomsketch will be made 6 weeks after Registration opening.
         </p>
         <p>
           Any dealerships not initially accepted will be placed on a waiting list. If a dealership space becomes
           re-available due to cancellation of another dealer, the next best match based on curation from the waiting
-          list will be contacted. There might be last-minute repurposing of last minute cancellations on site.
+          list will be contacted.
         </p>
         <p>
           The Dealers' Den team aims to complete the curation process within 4-6 weeks after initial Registration opens.
@@ -61,64 +60,118 @@ import DealersDenHeader from '../../content/DealersDenHeader.astro'
           waiting list, or, if necessary, declined due to not meeting the selection criteria.
         </p>
         <p>
-          Dealership packages cannot be canceled. However, transfers of dealership packages are possible but can only be
-          initiated and approved by the Dealers' Den Team. Dealers cannot select or nominate individuals from the
-          waiting list for a transfer to bypass the curation process. If a transfer is desired, please contact the
-          Dealers' Den Team with your suggestion. All transfer requests will be considered by the management team, who
-          will have the final say in the approval of the new dealer.
+          Dealership packages cannot be canceled. However, the Dealers' Den team is able to transfer the package to the
+          next curated dealer on the list.
         </p>
         <p>
-          Set up times will be announced later, via email and the Dealers Den telegram group. A convention badge is
+          Set up times will be announced later, via email and the Dealers' Den telegram group. A convention badge is
           required for Dealers' Den Set up; for all dealers and their assistants.
         </p>
         <p>
-          Items and services in violation of applicable rules or laws must not be offered. Adult material is only
-          permissible on public display with a NSFW sticker, or in a binder with a very clear notification of the source
-          of the material. Dealership build-ups must not reach into other dealerships or walkways. Lights, music or
-          sound, and strong smells or fumes must be kept to a minimum.
+          Items and services in violation of applicable rules or laws cannot be sold. Adult material is only permissible
+          on public display with a NSFW sticker, or in a binder with a very clear notification of the source of the
+          material, unless notified differently (Special events).
+        </p>
+        <p>
+          Dealership build-ups must not reach into other dealerships or walkways. Lights, music or sound, and strong
+          smells or fumes must be kept to a minimum.
         </p>
         <p>
           The sale or offering of items that imitate third-party copyrighted material is prohibited. For further
           information, please refer to the full details down below.
         </p>
         <p>
-          Teardown begins on Saturday after Den closing. All dealerships must be cleared out, no later than 21:00. Each
+          Teardown begins on Saturday after Den closes. All dealerships must be cleared out, no later than 21:00. Each
           dealer is responsible for cleaning up their dealership area.
         </p>
+        <p>Dealers' Den Staff have a say on all matters. The Dealers' Den Team's decisions are final.</p>
         <p>
-          Dealers' Den Staff have a say on all matters. The Dealers' Den Team's decisions are final. Any person
-          requesting a dealership at Flüüfff is required to agree to and accept the “Dealers' Den Rules” set in this
-          document.
+          Any person requesting a dealership at Flüüfff is required to agree to and accept the "Dealers' Den Rules" set
+          in this document.
         </p>
         <p>
           If you have any questions after reading the Dealers' Den Rules & Information and the FAQ, please feel free to
           email us at <a href="mailto:dealers.den@fluufff.org">dealers.den@fluufff.org</a>.
         </p>
-      </section>
-    </main>
+      </div>
+      <MobileBottomNavbar nextHref="/dealers-den/timeline" nextLabel="Timeline & Setup" />
+    </section>
   </Sidebar>
+  <Socials />
 </Base>
 
 <style scoped lang="scss">
-  @use '../../styles/charter.scss';
-  @use '../../styles/text-styles.scss';
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
 
-  main {
-    padding: 30px 60px;
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 360px);
+    margin: 0 auto;
+
+    @media (max-width: 900px) {
+      width: 100vw;
+    }
+  }
+
+  .content {
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     color: charter.$primary800;
 
-    section {
-      margin-bottom: 60px;
+    @media (max-width: 600px) {
+      padding: 20px;
+    }
+
+    h1 {
+      @include text-styles.heading1;
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        @include text-styles.heading3;
+      }
+    }
+
+    h2 {
+      @include text-styles.heading3;
+
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+        line-height: 1.5;
+      }
     }
 
     h3 {
-      @include text-styles.display3SemiBold;
-      font-weight: bold;
+      @include text-styles.heading4;
+      margin-bottom: 16px;
     }
 
-    h3,
-    p {
+    h4 {
+      @include text-styles.display4SemiBold;
       margin-bottom: 16px;
+    }
+
+    p:not(:last-child),
+    ul:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: charter.$primary500;
+    }
+
+    ul {
+      list-style-type: disc;
+
+      > ul {
+        list-style-type: circle;
+      }
     }
   }
 </style>

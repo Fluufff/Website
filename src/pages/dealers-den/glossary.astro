@@ -1,0 +1,370 @@
+---
+import Base from '../../layouts/Base.astro'
+import Sidebar from '../../layouts/Sidebar.astro'
+import DealersDenHeader from '../../content/DealersDenHeader.astro'
+import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Socials from '../../content/socials.astro'
+
+type DealersDenTable = {
+  sizes: string
+  alley: string
+  s: string
+  m: string
+  l: string
+  xl: string
+}
+const dealersDenTable: DealersDenTable[] = [
+  {
+    sizes: 'Dimensions of Table',
+    alley: '45 x 90cm',
+    s: '90 x 90cm',
+    m: '90 x 180cm',
+    l: '90 x 270cm',
+    xl: '90 x 360cm'
+  },
+  {
+    sizes: 'Prices per Day',
+    alley: '10,- (per slot)',
+    s: '25,-',
+    m: '50,-',
+    l: '75,-',
+    xl: '100,-'
+  },
+  {
+    sizes: 'Price for the full duration',
+    alley: '-',
+    s: '50,-',
+    m: '100,-',
+    l: '150,-',
+    xl: '200,-'
+  }
+]
+---
+
+<Base>
+  <Sidebar style="dealers-den">
+    <DealersDenHeader slot="header" />
+    <section>
+      <div class="content">
+        <h3>Glossary & Info</h3>
+        <h4 id="glossary">Glossary</h4>
+        <p><strong>Dealer</strong></p>
+        <p>
+          The dealer is the single person ultimately responsible for the dealership and the authority for questions from
+          sta. A dealer can only run one dealership. A dealer needs a valid Flüüfff event registration to purchase a
+          dealership package and for the on-site Dealers' Den Check-In.
+        </p>
+        <p><strong>Dealer Helper</strong></p>
+        <p>
+          Any person working in a dealership needs to be registered as a dealer assistant. A dealer assistant is
+          supporting the dealer, while holding the same access and sales privileges as the respective dealer themself.
+          Dealer assistant status is particularly important during setup and teardown, as only dealers and dealer
+          assistants are granted access into the Dealers' Den during those times.
+        </p>
+        <p><strong>Dealership</strong></p>
+        <p>
+          A dealership consists of one or more tables under the exclusive control of a single dealer, supported by
+          dealer assistants, to display, give away, advertise, offer or sell items, merchandise or services.
+        </p>
+        <div class="desktop">
+          <table>
+            <tr>
+              <td>Dealership Sizes</td>
+              <td>Artist Alley / After Dark Event</td>
+              <td>Dealers' Den S</td>
+              <td>Dealers' Den M</td>
+              <td>Dealers' Den L</td>
+              <td>Dealers' Den XL</td>
+            </tr>
+            {
+              dealersDenTable.map((entry) => {
+                return (
+                  <tr>
+                    <td>{entry.sizes}</td>
+                    <td>{entry.alley}</td>
+                    <td>{entry.s}</td>
+                    <td>{entry.m}</td>
+                    <td>{entry.l}</td>
+                    <td>{entry.xl}</td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </div>
+        <div class="mobile">
+          <table>
+            {
+              dealersDenTable.map((entry) => {
+                return (
+                  <tr>
+                    <td>
+                      <div class="row-list">
+                        <div class="row-list-item">
+                          <span>Dealership Sizes</span>
+                          <span>{entry.sizes}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Artist Alley / After Dark Event</span>
+                          <span>{entry.alley}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den S</span>
+                          <span>{entry.s}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den M</span>
+                          <span>{entry.m}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den L</span>
+                          <span>{entry.l}</span>
+                        </div>
+                        <div class="row-list-item">
+                          <span>Dealers' Den XL</span>
+                          <span>{entry.xl}</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                )
+              })
+            }
+          </table>
+        </div>
+        <p>
+          Currently we only provide Dealer spots for the full duration of the Dealers Den, so 2 days. If you want to
+          deal for one day only and want to share your table like this, we ask you to communicate this to the Dealers
+          Den Team. This so we can see how we arrange this. Only one invoice will be written to the original owner of
+          the table.
+        </p>
+        <p>
+          If you want to use the space without tables (for instance if you want to bring shelves and create a walk-in
+          dealership) this is possible, but this has to be stated and described during the sign up.
+        </p>
+        <p><strong>Joint Dealership</strong></p>
+        <p>
+          A joint dealership is a venture of a dealer registered for a dealership above the type "Half", sharing their
+          dealership space with an authorized dealer without dealership space.
+        </p>
+        <p><strong>Dealers' Den Registration</strong></p>
+        <p>
+          The dealer registration and application for a dealership made in the Registration System available at <a
+            href="https://registration.fluufff.org/register"
+            target="_blank">https://registration.fluufff.org/register</a
+          >.
+        </p>
+        <p><strong>Flüüff Registration</strong></p>
+        <p>
+          The attendee registration for the Flüüfff event available at <a
+            href="https://registration.fluufff.org/register"
+            target="_blank">https://registration.fluufff.org/register</a
+          >.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="administrativedetails">Administrative Details</h4>
+        <ul>
+          <li>
+            Issues about Dealers' Den operations, arising prior to or after the convention, should be addressed with the
+            Dealers' Den Team via email.
+          </li>
+          <li>
+            All decisions made by Dealers' Den Team in regard to any issues concerning Dealers' Den operations are
+            final. When in doubt about any of the rules above, please don't be afraid to ask - we will gladly answer all
+            your questions. However, please understand that we
+          </li>
+          <li>
+            The Dealers' Den Management reserves the right to revoke dealer status, dealer assistant status,
+            dealerships, access to the Dealers' Den, or any other granted privileges at any time for any reason, without
+            refund.
+          </li>
+        </ul>
+        <p>
+          Any person requesting a dealership at Flüüfff is required to agree to and accept the "Dealers' Den Rules" set
+          in this document.
+        </p>
+        <p>
+          Please note that all details provided on this website are subject to change until the official registration
+          starts. We recommend checking for updates regularly.
+        </p>
+      </div>
+      <MobileBottomNavbar backHref="/dealers-den/alley-artshow" backLabel="Artist Alley & Artshow" />
+    </section>
+  </Sidebar>
+  <Socials />
+</Base>
+
+<style scoped lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 360px);
+    margin: 0 auto;
+
+    &:last-child {
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 900px) {
+      width: 100vw;
+
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .content {
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: charter.$primary800;
+
+    @media (max-width: 600px) {
+      padding: 20px;
+    }
+
+    .mobile {
+      display: none;
+
+      td {
+        text-align: left;
+
+        .light {
+          padding-bottom: 12px;
+        }
+
+        .row-icon {
+          font-size: 18px;
+        }
+
+        .row-list {
+          display: flex;
+          flex-direction: column;
+        }
+
+        .row-list-item {
+          display: flex;
+          justify-content: space-between;
+          gap: 12px;
+
+          &:not(:last-child) {
+            margin-bottom: 4px;
+          }
+        }
+      }
+
+      @media (max-width: 1200px) {
+        display: block;
+      }
+    }
+
+    .desktop {
+      @media (max-width: 1200px) {
+        display: none;
+      }
+    }
+
+    h1 {
+      @include text-styles.heading1;
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        @include text-styles.heading3;
+      }
+    }
+
+    h2 {
+      @include text-styles.heading3;
+
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    }
+
+    h3 {
+      @include text-styles.heading4;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      @include text-styles.display4SemiBold;
+      margin-bottom: 16px;
+    }
+
+    p:not(:last-child),
+    ul:not(:last-child),
+    div:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: charter.$primary500;
+    }
+
+    ul {
+      list-style-type: disc;
+
+      > ul {
+        list-style-type: circle;
+        margin-bottom: 0;
+      }
+    }
+
+    tr:last-child td {
+      border-bottom: 1px solid charter.$primary200;
+    }
+
+    td {
+      border-top: 1px solid charter.$primary200;
+      padding: 12px 18px;
+
+      &:has(.row-icon) {
+        text-align: center;
+      }
+
+      .row-mobile {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .row-icon {
+        display: inline-flex;
+        font-size: 24px;
+
+        &.icon-yes {
+          color: green;
+        }
+
+        &.icon-no {
+          color: red;
+          transform: rotate(45deg);
+        }
+
+        &.icon-warning {
+          color: goldenrod;
+        }
+      }
+
+      strong {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      .light {
+        display: block;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+    }
+  }
+</style>

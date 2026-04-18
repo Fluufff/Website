@@ -1,0 +1,230 @@
+---
+import Base from '../../layouts/Base.astro'
+import Sidebar from '../../layouts/Sidebar.astro'
+import DealersDenHeader from '../../content/DealersDenHeader.astro'
+import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Socials from '../../content/socials.astro'
+---
+
+<Base>
+  <Sidebar style="dealers-den">
+    <DealersDenHeader slot="header" />
+    <section>
+      <div class="content">
+        <h3>Obtaining a Dealership</h3>
+        <h4 id="application">Step I: Application</h4>
+        <p>
+          The application period for dealers will open on 19th of April 2026 and will be accessible up to and including
+          22nd of October 2026.
+        </p>
+        <p>
+          In order for your registration as a dealer for the Flüüfff Dealers' Den to be taken into consideration, a
+          valid registration for the Flüüfff event via the Flüüfff Registration System itself is mandatory. After
+          registering for the event a dealership application can be submitted in the <a
+            target="_blank"
+            href="https://registration.fluufff.org/register">Registration System</a
+          >. During Dealers' Den registration, the desired size and table configuration for the dealership can be
+          applied for.
+        </p>
+        <p>Dealership applications without valid previous event registration will be canceled.</p>
+        <p>
+          The Dealers' Den Team will review submissions after the registration period has ended. Status emails about
+          approval, denial, or being put on the waiting list will be sent after the review.
+        </p>
+        <p>
+          Please note that any and all additional obligations like trade fair and exhibition visa, sales tax or income
+          tax declarations have to be fulfilled by the dealership. Flüüfff expects all dealerships to be fully aware of
+          their responsibilities in accordance with applicable law in Belgium as well as their country of origin and
+          will neither assist nor advise on these matters. Please set up an appointment with your nearest Belgian
+          embassy or consulate regarding questions about the application process for a trade fair and exhibition visa /
+          Schengen visa.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="approval">Step II: Approval</h4>
+        <p>Dealerships at Flüüfff will be approved on a curated basis.</p>
+        <p>
+          Curation will be performed by Dealers' Den Management. Dealerships will be assigned based on a variety of
+          factors, including, but not limited to:
+        </p>
+        <ul>
+          <li><strong>Quality</strong>: We want to offer the best to our attendees, so this is important for us.</li>
+          <li>
+            <strong>Variety</strong>: We want to offer a large selection of products made for and within the furry
+            community.
+          </li>
+          <li>
+            <strong>Quantity</strong>: The weekend has an attendee rate of about 300-400 guests. We strive for a Dealers
+            Den that has a full look.
+          </li>
+          <li>
+            <strong>Origin</strong>: We are a Belgian convention, and we want to try to have a certain % of local
+            vendors every year.
+          </li>
+        </ul>
+        <p>
+          4 weeks after the initial registration opening the curation process will start. The Dealers' Den team aims to
+          complete the curation process within 2 weeks. Every applicant will receive a definite response: whether their
+          application has been accepted, placed on the waiting list, or, if necessary, declined due to not meeting the
+          selection criteria.
+        </p>
+        <p>
+          The Dealers' Den team at Flüüfff is dedicated to supporting emerging talent from the furry community. We
+          reserve some tables exclusively for new dealers, providing them with an opportunity to gain exposure and build
+          an audience. Your 'popularity' - however that's measured - is not a factor in the curation process. This
+          includes follower counts on social media, image-sharing platforms, or recognition in furry communities. Our
+          aim is to showcase fresh and diverse talent, and we encourage new, emerging, and lesser-known artists to apply
+          to the Dealers' Den.
+        </p>
+        <p>Dealers may be offered an alternative dealership size depending on availability.</p>
+        <p>
+          Dealership applications must be completed in full to be considered. The responsibility for completing an
+          incomplete application solely rests with the respective dealer. Dealers' Den staff is not responsible to
+          complete any application nor prompted to ascertain any missing information.
+        </p>
+        <p>
+          The date of registration neither influences the amount of dealership space nor the chance of any dealership
+          space being allocated to a dealer at all.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="payment">Step III: Payment</h4>
+        <p>
+          Invoices will be sent for the table fees at the start of September, with a payment condition of 14 days. This
+          was decided upon to lower the unexpected financial burden on our dealers.
+        </p>
+        <p>
+          When payment isn't received, even after one reminder, the spot will be moved to another dealership and the
+          initial dealership will not be allowed to sell during this edition of Flüüffffcon.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="placement">Step IV: Placement</h4>
+        <p>
+          Upon completion of payment, Dealers' Den Management will commence dealership placement, based on requests and
+          space availability. Although dealership placements are not final until the start of the event, an email
+          containing the preliminary dealership placement will be sent to each dealer for information. Dealers' Den
+          management is open for any suggestions any dealer may offer about alternative placement.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="waitinglist">Waiting List</h4>
+        <p>
+          Any dealerships not initially accepted in Step II will be placed on a waiting list curated under the same
+          factors. Changes to the original application (including requests for different dealership sizes) via email
+          reply to the waiting list information might lead to a re-evaluation of the application on the waiting list.
+        </p>
+        <p>
+          If a dealership space becomes re-available due to cancellation of another dealer, the next best match based on
+          curation from the waiting list will be contacted. There will be limited time to respond, only a week.
+        </p>
+      </div>
+      <div class="content">
+        <h4 id="cancellations">Cancellations</h4>
+        <p>
+          If a dealer can no longer make use of their dealership, they are asked to contact Dealers' Den Team via email
+          in a timely manner. Not doing so is considered unfair to dealers who are on the waiting list and will lead to
+          a lower priority during curation on future events for the dealer.
+        </p>
+        <p>
+          Dealership cannot be canceled. However, transfers of dealership packages are possible but can only be
+          initiated and approved by the Dealers' Den Management. Dealers cannot select or nominate individuals from the
+          waiting list for a transfer to bypass the curation process. If a transfer is desired, please contact the
+          Dealers' Den Management with your suggestion. All transfer requests will be considered by the management team,
+          who will have the final say in the approval of the new dealer.
+        </p>
+      </div>
+      <MobileBottomNavbar
+        backHref="/dealers-den/timeline"
+        backLabel="Timeline & Setup"
+        nextHref="/dealers-den/rules"
+        nextLabel="Rules & Guidelines"
+      />
+    </section>
+  </Sidebar>
+  <Socials />
+</Base>
+
+<style scoped lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(100vw - 360px);
+    margin: 0 auto;
+
+    &:last-child {
+      margin-bottom: 80px;
+    }
+
+    @media (max-width: 900px) {
+      width: 100vw;
+
+      &:last-child {
+        margin-bottom: 40px;
+      }
+    }
+  }
+
+  .content {
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: charter.$primary800;
+
+    @media (max-width: 600px) {
+      padding: 20px;
+    }
+
+    h1 {
+      @include text-styles.heading1;
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        @include text-styles.heading3;
+      }
+    }
+
+    h2 {
+      @include text-styles.heading3;
+
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        font-size: 18px;
+        line-height: 1.5;
+      }
+    }
+
+    h3 {
+      @include text-styles.heading4;
+      margin-bottom: 16px;
+    }
+
+    h4 {
+      @include text-styles.display4SemiBold;
+      margin-bottom: 16px;
+    }
+
+    p:not(:last-child),
+    ul:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: charter.$primary500;
+    }
+
+    ul {
+      list-style-type: disc;
+
+      > ul {
+        list-style-type: circle;
+      }
+    }
+  }
+</style>
