@@ -10,7 +10,6 @@ import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
 import Timed from '../components/Timed.astro'
 import Button from '../components/Button.astro'
-import Pacman from '../components/Pacman.astro'
 import { start_registration } from '../data/reg/dates.json'
 ---
 
@@ -20,7 +19,6 @@ import { start_registration } from '../data/reg/dates.json'
     <Timed start={start_registration} class="mt-4">
       <Button label="Register" to="https://registration.fluufff.org" />
     </Timed>
-    <Pacman class="mt-8 hidden md:block" />
   </Hero>
   <Content headline="Accommodation" bg="primary" wider class="pricing_content">
     <p>Choose where you’ll respawn: stay at the convention venue from Wednesday to Sunday.</p>
