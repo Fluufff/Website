@@ -23,14 +23,14 @@
 </template>
 
 <style lang="scss">
-  div {
-    position: relative;
+div {
+  position: relative;
 
-    .label {
-      position: absolute;
-      bottom: -12px;
-    }
+  .label {
+    position: absolute;
+    bottom: -12px;
   }
+}
 </style>
 
 <script setup lang="ts">
