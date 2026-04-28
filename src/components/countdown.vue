@@ -22,6 +22,17 @@
   </div>
 </template>
 
+<style lang="scss">
+  div {
+    position: relative;
+
+    .label {
+      position: absolute;
+      bottom: -12px;
+    }
+  }
+</style>
+
 <script setup lang="ts">
 import { onBeforeUnmount, onMounted, ref } from 'vue'
 
