@@ -1,5 +1,5 @@
 <template>
-  <div id="registration_banner_countdown">
+  <div class="registration_banner_countdown">
     <div>
       <span class="time">{{ String(days).padStart(2, '0') }}</span>
       <span class="label">Days</span>
