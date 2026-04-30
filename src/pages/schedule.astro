@@ -91,7 +91,8 @@ export type EventLabel = {
   hidden?: boolean
 }
 
-export const event_labels: EventLabel[] = [ // note: alphabetical
+export const event_labels: EventLabel[] = [
+  // note: alphabetical
   {
     name: 'charity',
     icon: LucideHeartHandshake,
@@ -141,7 +142,7 @@ export const event_labels: EventLabel[] = [ // note: alphabetical
     icon: LucideToolCase,
     color: '#5ABBD8', // Fluufff 26/Accent 1/400
     description: 'Requires active participation.'
-  },
+  }
 ]
 
 export const event_labels_map = new Map(event_labels.map((event_label) => [event_label.name, event_label]))
