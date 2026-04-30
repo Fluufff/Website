@@ -62,7 +62,11 @@ import { Icon } from 'astro-icon/components'
       display: flex;
       flex-direction: row;
       row-gap: 16px;
-      column-gap: clamp(0px, 35px, 2vw);
+      column-gap: 35px;
+
+      @media (max-width: 480px) {
+        column-gap: 5vw;
+      }
 
       a {
         display: flex;
