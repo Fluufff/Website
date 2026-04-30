@@ -82,6 +82,70 @@ import FaqItem from '../content/FaqItem.astro'
     </p>
     <p>Most furry conventions and several furry groups also raise funds and organize panels for various charities.</p>
   </Content>
+  <Content headline="Our Patrons" bg="primary-dark">
+    <table id="our-patrons" class="mt-8">
+      <thead>
+        <tr>
+          <th>Rank</th>
+          <th>Name</th>
+          <th>Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1st</td>
+          <td>Treble</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>2nd</td>
+          <td>Shiro</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>3rd</td>
+          <td>Luca</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>4th</td>
+          <td>Artorias</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>5th</td>
+          <td>Nimdo</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>6th</td>
+          <td>Vladdy the Olfgal</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>7th</td>
+          <td>Nicks</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>8th</td>
+          <td>Kimura</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>9th</td>
+          <td>Nyushki</td>
+          <td>999,999,999</td>
+        </tr>
+        <tr>
+          <td>10th</td>
+          <td>Slushy</td>
+          <td>999,999,999</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="pt-16">E  P  a  n  I  C  K</p>
+  </Content>
   <Content headline="Meet the Dream Team" bg="primary" id="dreamteam">
     <p>
       Flüüfff wouldn't happen without the amazing crew working behind the scenes.<br />
@@ -161,6 +225,22 @@ import FaqItem from '../content/FaqItem.astro'
       align-items: stretch;
       flex-direction: column;
       gap: 32px;
+    }
+  }
+
+  #our-patrons {
+    font-family: monospace;
+    text-transform: uppercase;
+    font-size: 25px;
+    line-height: 30px;
+
+    th {
+      text-align: left;
+    }
+
+    th:first-child, td:first-child {
+      padding-right: 30px;
+      text-align: right;
     }
   }
 </style>
