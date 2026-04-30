@@ -4,6 +4,16 @@ import LucideClock from '~icons/lucide/clock'
 import LucideMapPin from '~icons/lucide/map-pin'
 import LucideUserRound from '~icons/lucide/user-round'
 
+// event label icons
+import LucideBrain from '~icons/lucide/brain'
+import LucidePawPrint from '~icons/lucide/paw-print'
+import LucideToolCase from '~icons/lucide/tool-case'
+import LucideOctagonMinus from '~icons/lucide/octagon-minus'
+import LucideSiren from '~icons/lucide/siren'
+import LucideDumbbell from '~icons/lucide/dumbbell'
+import LucideHeartHandshake from '~icons/lucide/heart-handshake'
+import LucideDoorOpen from '~icons/lucide/door-open'
+
 import { getCollection } from 'astro:content'
 import { DateTime } from 'luxon'
 import Section from '../components/Section.astro'
@@ -70,6 +80,66 @@ days.sort((a, b) => (a.date as any) - (b.date as any))
 const first_date = days[0]?.date
 const buttonid = Math.random().toString(36).slice(2, 11)
 const eventsid = Math.random().toString(36).slice(2, 11)
+
+export type EventLabel = {
+  name: string
+  icon: any
+  color: string
+  description: string,
+  hidden?: boolean
+}
+
+export const event_labels: EventLabel[] = [
+  {
+    name: 'educational',
+    icon: LucideBrain,
+    color: '#1D4EAF', // Fluufff 26/Secondary/600
+    description: 'Hosted by a (semi-)professional or the result of deep research. Focused on informing and teaching.',
+  },
+  {
+    name: 'fursuit-friendly',
+    icon: LucidePawPrint,
+    color: '#631BB1', // Fluufff 26/Primary/600
+    description: 'Includes amenities for fursuiters (fans, water stations) or adjusted pacing/materials.',
+  },
+  {
+    name: 'workshop',
+    icon: LucideToolCase,
+    color: '#5ABBD8', // Fluufff 26/Accent 1/400
+    description: 'Requires active participation.',
+  },
+  {
+    name: 'nsfw',
+    icon: LucideOctagonMinus,
+    color: '#D6455D', // Fluufff 26/Functional/Error
+    description: 'Elements or themes related to fetishes or related topics. However, this event is strictly non-sexual so no nudity is shown.',
+  },
+  {
+    name: 'flashing lights',
+    icon: LucideSiren,
+    color: '#E6C255', // Fluufff 26/Functional/Warning
+    description: 'This event will feature flashing lights.',
+  },
+  {
+    name: 'sporty',
+    icon: LucideDumbbell,
+    color: '#963693', // Fluufff 26/Accent 2/600
+    description: 'Requires a certain level of movement. Bring comfy clothes, water, and a towel.',
+  },
+  {
+    name: 'charity',
+    icon: LucideHeartHandshake,
+    color: '#C969C6', // Fluufff 26/Accent 2/400
+    description: 'Event is organized in cooperation with our chosen charity.',
+    hidden: true,
+  },
+  {
+    name: 'open door event',
+    icon: LucideDoorOpen,
+    color: '#2FBF9F', // Fluufff 26/Functional/Success
+    description: 'Can be joined and left at any point during its duration.',
+  },
+]
 ---
 
 <style lang="scss">
@@ -156,40 +226,14 @@ const eventsid = Math.random().toString(36).slice(2, 11)
       Look out for these icons during the convention. They help you find events that match your vibe.
     </p>
     <div class="grid grid-cols-[auto_1fr] gap-6 items-center mt-4">
-      <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">
-        educational
-      </p>
-      <p>Hosted by a (semi-)professional or the result of deep research. Focused on informing and teaching.</p>
-
-      <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">
-        Fursuit-friendly
-      </p>
-      <p>Includes amenities for fursuiters (fans, water stations) or adjusted pacing/materials.</p>
-
-      <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">Workshop</p>
-      <p>Requires active participation.</p>
-
-      <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">NSFW</p>
-      <p>
-        Elements or themes related to fetishes or related topics. However, this event is strictly non-sexual so no
-        nudity is shown.
-      </p>
-
-      <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">
-        Flashing lights
-      </p>
-      <p>This event will feature flashing lights.</p>
-
-      <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">Sporty</p>
-      <p>Requires a certain level of movement. Bring comfy clothes, water, and a towel.</p>
-
-      <!-- <p class="uppercase">Charity</p>
-            <p>Event is organized in cooperation with our chosen charity.</p> -->
-
-      <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">
-        Open door event
-      </p>
-      <p>Can be joined and left at any point during its duration.</p>
+      {
+        event_labels.filter(event_label => !event_label.hidden).map((event_label) => (
+          <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">
+            <event_label.icon style={`color: ${event_label.color}`} /> {event_label.name}
+          </p>
+          <p>{event_label.description}</p>
+        ))
+      }
     </div>
   </Section>
 </Base>
