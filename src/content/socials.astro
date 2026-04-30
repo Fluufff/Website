@@ -63,7 +63,10 @@ import { Icon } from 'astro-icon/components'
       flex-direction: row;
       row-gap: 16px;
       column-gap: 35px;
-      justify-content: flex-end;
+
+      @media (max-width: 480px) {
+        column-gap: 5vw;
+      }
 
       a {
         display: flex;
@@ -92,13 +95,6 @@ import { Icon } from 'astro-icon/components'
       .socials__list {
         justify-content: center;
       }
-    }
-  }
-
-  @media (max-width: 450px) {
-    .socials__list {
-      max-width: 250px;
-      flex-wrap: wrap;
     }
   }
 </style>
