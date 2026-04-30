@@ -1,6 +1,7 @@
 // deno run --allow-net="api.figma.com" --allow-write="charter.scss" utils/figma-colors.ts
 
 // deno-lint-ignore-file no-explicit-any
+/* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { assert } from 'node:console'
 
