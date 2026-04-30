@@ -62,8 +62,7 @@ import { Icon } from 'astro-icon/components'
       display: flex;
       flex-direction: row;
       row-gap: 16px;
-      column-gap: 35px;
-      justify-content: flex-end;
+      column-gap: clamp(0px, 35px, 2vw);
 
       a {
         display: flex;
@@ -77,16 +76,6 @@ import { Icon } from 'astro-icon/components'
         [data-icon] {
           font-size: 24px;
           color: charter.$accent1-500;
-        }
-
-        @media (max-width: 480px) {
-          height: 24px;
-          width: 24px;
-
-          [data-icon] {
-            font-size: 12px;
-            color: charter.$accent1-500;
-          }
         }
       }
     }
