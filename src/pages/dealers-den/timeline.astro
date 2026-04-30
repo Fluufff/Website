@@ -228,10 +228,18 @@ import Socials from '../../content/socials.astro'
       }
     }
 
-    td {
-      border-top: 1px solid charter.$primary200;
-      border-bottom: 1px solid charter.$primary200;
-      padding: 4px 8px;
+    table {
+      width: 100%;
+
+      td {
+        border-top: 1px solid charter.$primary200;
+        border-bottom: 1px solid charter.$primary200;
+        padding: 4px 8px;
+
+        &:first-child {
+          width: 125px; // prevents the start & end time column from growing too wide
+        }
+      }
     }
   }
 </style>
