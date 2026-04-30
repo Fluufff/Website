@@ -1,6 +1,5 @@
 ---
 import Base from '../layouts/Base.astro'
-import Hero from '../components/sections/Hero.astro'
 import Content from '../components/sections/Content.astro'
 import Checklist from '../components/Checklist.astro'
 import ChecklistItem from '../components/ChecklistItem.astro'
@@ -10,20 +9,20 @@ import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
 import Timed from '../components/Timed.astro'
 import Button from '../components/Button.astro'
-import Pacman from '../components/Pacman.astro'
 import { start_registration } from '../data/reg/dates.json'
+import Section from '../components/Section.astro'
 ---
 
 <Base>
-  <Hero headline="Prepare your quest">
-    <p>Discover ticket options, accommodation packages, and ways to support Flüüfff.</p>
-    <Timed start={start_registration} class="mt-4">
-      <Button label="Register" to="https://registration.fluufff.org" />
+  <Section grid="grid-cols-1" gap="gap-4" innerClass="text-center justify-items-center">
+    <h2 class="font-atari text-2xl md:text-5xl">Prepare your quest</h2>
+    <p class="pricing_details">Discover ticket options, accommodation packages, and ways to support Flüüfff.</p>
+    <Timed start={start_registration} class="mt-4" class="flex justify-center">
+      <Button label="Register" to="https://registration.fluufff.org" go />
     </Timed>
-    <Pacman class="mt-8 hidden md:block" />
-  </Hero>
+  </Section>
   <Content headline="Accommodation" bg="primary" wider class="pricing_content">
-    <p>Choose where you’ll respawn: stay at the convention venue from Wednesday to Sunday.</p>
+    <p class="pricing_details">Choose where you’ll respawn: stay at the convention venue from Wednesday to Sunday.</p>
     <p>
       <strong>The room prices listed below are for the full room and do not include the Convention Ticket.</strong>
     </p>
@@ -153,13 +152,16 @@ import { start_registration } from '../data/reg/dates.json'
           'Exclusive goodie bag',
           'Your name listed on the closing ceremony slides'
         ]}
-      />
+      >
+        <p><strong>Limited to 100 patrons</strong></p>
+      </PricingCard>
       <PricingCard
         image={import('../assets/images/illustrations/sponsors/patron.png')}
         imageContain
         color="dark"
         title="Patron"
         price="200"
+        description="Offer significant support and play a key role in sustaining and growing Flüüfff."
         checklist={[
           'An exclusive Sponsor T-shirt',
           'Mention in the conbook',
@@ -172,8 +174,7 @@ import { start_registration } from '../data/reg/dates.json'
           'A personal, handwritten, thank-you note from the Chairdragon'
         ]}
       >
-        <p>Offer significant support and play a key role in sustaining and growing Flüüfff.</p>
-        <p><strong>Limited to 10 Patrons</strong></p>
+        <p><strong>Sold out!</strong></p>
       </PricingCard>
     </div>
   </Content>
@@ -253,7 +254,7 @@ import { start_registration } from '../data/reg/dates.json'
     }
   }
 
-  .content .pricing_details {
-    max-width: 480px;
+  .pricing_details {
+    max-width: 480px !important; // I hate this
   }
 </style>

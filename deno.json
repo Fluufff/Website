@@ -6,6 +6,7 @@
     "preview": "astro preview",
     "check": "MODE=typecheck astro check",
     "format:check": "prettier . --check",
+    "format:diff": "deno run --allow-run ./.github/actions/prettier-diff.ts",
     "format": "prettier . --write",
     "lint": "eslint .",
     "sync": "astro sync"

@@ -23,7 +23,7 @@ function isCurrent(...routePattern: string[]) {
       </p>
       <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
         <li class="hover:bg-primary-50">
-          <a class="p-4" href="/schedule" class:list={[isCurrent('/schedule') && 'font-bold']}>Program & Events</a>
+          <a class="p-4" href="/schedule" class:list={[isCurrent('/schedule') && 'font-bold']}>Schedule</a>
         </li>
         <li class="hover:bg-primary-50">
           <a class="p-4" href="/venue" class:list={[isCurrent('/venue') && 'font-bold']}>Venue & Location</a>
@@ -44,7 +44,7 @@ function isCurrent(...routePattern: string[]) {
       </p>
       <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
         <li class="hover:bg-primary-50">
-          <a class="p-4" href="/events" class:list={[isCurrent('/events') && 'font-bold']}>Activities & Events</a>
+          <a class="p-4" href="/events" class:list={[isCurrent('/events') && 'font-bold']}>Panels & Events</a>
         </li>
         <li class="hover:bg-primary-50">
           <a class="p-4" href="/staff-volunteering" class:list={[isCurrent('/staff-volunteering') && 'font-bold']}
@@ -61,7 +61,7 @@ function isCurrent(...routePattern: string[]) {
     <a href="/about" class:list={['my-4', isCurrent('/about') && 'font-bold']}>About</a>
     <a href="/contact" class:list={['my-4', isCurrent('/contact') && 'font-bold']}>Contact</a>
     <Timed start={start_registration}>
-      <Button label="Register" to="https://registration.fluufff.org" />
+      <Button label="Register" primary go to="https://registration.fluufff.org" />
       <Button slot="else" label="Create an account" to="https://registration.fluufff.org" />
     </Timed>
   </nav>

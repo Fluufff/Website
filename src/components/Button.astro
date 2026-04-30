@@ -4,17 +4,18 @@ import { Icon } from 'astro-icon/components'
 interface Props {
   label: string
   to?: string
+  primary?: boolean
   outline?: boolean
   go?: boolean
   newTab?: boolean
 }
 
-const { label, to, outline = false, go = false, newTab = false } = Astro.props
+const { label, to, primary = false, outline = false, go = false, newTab = false } = Astro.props
 
 const Element = to ? 'a' : 'button'
 ---
 
-<Element href={to} class="button" class:list={{ outline }} target={newTab ? '_blank' : undefined}
+<Element href={to} class="button" class:list={{ primary, outline }} target={newTab ? '_blank' : undefined}
   >{label}{!!go && <Icon name="mdi:arrow-right" />}</Element
 >
 
@@ -44,6 +45,17 @@ const Element = to ? 'a' : 'button'
     &.outline {
       color: charter.$secondary500;
       background: charter.$neutrals50;
+    }
+
+    &.primary {
+      color: charter.$neutrals50;
+      background: charter.$primary500;
+      border-color: charter.$primary500;
+
+      &.outline {
+        background: charter.$neutrals50;
+        color: charter.$primary500;
+      }
     }
 
     > [data-icon] {

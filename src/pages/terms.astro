@@ -1,12 +1,18 @@
 ---
 import Base from '../layouts/Base.astro'
-import Sidebar from '../layouts/Sidebar.astro'
+import Sidebar, { termsLinks } from '../layouts/Sidebar.astro'
 import Socials from '../content/socials.astro'
 import MobileBottomNavbar from '../components/MobileBottomNavbar.astro'
 ---
 
 <Base>
-  <Sidebar style="terms">
+  <Sidebar
+    links={termsLinks}
+    iconClass="text-secondary-500"
+    sidebarClass="bg-secondary-50"
+    title="Welcome to the legal nitty gritty"
+    description=""
+  >
     <section>
       <div class="content">
         <h1>Terms and Conditions</h1>

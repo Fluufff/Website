@@ -1,6 +1,6 @@
 ---
 import Base from '../../layouts/Base.astro'
-import Sidebar from '../../layouts/Sidebar.astro'
+import Sidebar, { dealersDenLinks } from '../../layouts/Sidebar.astro'
 import DealersDenHeader from '../../content/DealersDenHeader.astro'
 import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
 import Socials from '../../content/socials.astro'
@@ -109,7 +109,13 @@ function getIconClass(value: IsAllowed) {
 ---
 
 <Base>
-  <Sidebar style="dealers-den">
+  <Sidebar
+    links={dealersDenLinks}
+    iconClass="text-primary-500"
+    sidebarClass="bg-primary-50"
+    title="Welcome to the Dealers Info Hub"
+    description="If you're in a hurry, start with The Short Version below. If you're planning to apply, please read all sections carefully to make sure your dealership runs smoothly."
+  >
     <DealersDenHeader slot="header" />
     <section>
       <div class="content">

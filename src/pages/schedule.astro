@@ -67,7 +67,7 @@ const days = all_events.reduce(
 // eslint-disable-next-line  @typescript-eslint/no-explicit-any
 days.sort((a, b) => (a.date as any) - (b.date as any))
 
-const first_date = days[0]!.date
+const first_date = days[0]?.date
 const buttonid = Math.random().toString(36).slice(2, 11)
 const eventsid = Math.random().toString(36).slice(2, 11)
 ---
@@ -108,7 +108,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
               </p>
             </div>
             <p>{e.description}</p>
-            <hr />
+            {e.tags.length != 0 ? <hr /> : ''}
             <div class="flex flex-wrap">
               {e.tags
                 .filter((t) => t)
