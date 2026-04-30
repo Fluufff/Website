@@ -69,7 +69,7 @@ for (const [style_id, node] of Object.entries(json2['nodes']) as [string, any]) 
 // stage 3, convert to scss
 
 let current_group = '';
-let current_group_bits: any = [];
+const current_group_bits: any = [];
 
 const output_lines = [];
 
