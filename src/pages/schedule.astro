@@ -167,6 +167,18 @@ export const event_labels: EventLabel[] = [
         background-color: #d6455d1a;
       }
     }
+
+    &__labels {
+      &--label {
+        font-family: var(--font-inter), sans-serif;
+
+        border-bottom: 1px solid #5abbd8;
+
+        &:first-child {
+          border-top: 1px solid #5abbd8;
+        }
+      }
+    }
   }
 </style>
 
@@ -226,14 +238,18 @@ export const event_labels: EventLabel[] = [
     <p class="text-center">
       Look out for these icons during the convention. They help you find events that match your vibe.
     </p>
-    <div class="grid grid-cols-[auto_1fr] gap-6 items-center mt-4">
+    <div class="grid items-center mt-4 event__labels">
       {
-        event_labels.filter(event_label => !event_label.hidden).map((event_label) => (
-          <p class="p-2 flex items-center gap-2 uppercase bg-accent1-50 border rounded-sm border-accent1-200">
-            <event_label.icon style={`color: ${event_label.color}`} /> {event_label.name}
-          </p>
-          <p>{event_label.description}</p>
-        ))
+        event_labels
+          .filter((event_label) => !event_label.hidden)
+          .map((event_label) => (
+            <div class="p-4 event__labels--label">
+              <span class="flex items-center gap-2 mb-2 uppercase font-bold">
+                <event_label.icon style={`color: ${event_label.color}`} /> {event_label.name}
+              </span>
+              <span class="flex">{event_label.description}</span>
+            </div>
+          ))
       }
     </div>
   </Section>
