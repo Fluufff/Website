@@ -1,5 +1,7 @@
 // deno run --allow-net="api.figma.com" --allow-write="charter.scss" utils/figma-colors.ts
 
+// deno-lint-ignore-file no-explicit-any
+
 import { assert } from 'node:console'
 
 const FIGMA_TOKEN = "figd_";
@@ -58,7 +60,7 @@ const style_id_to_hex = new Map();
 
 for (const [style_id, node] of Object.entries(json2['nodes']) as [string, any]) {
   const color = node.document.fills[0].color
-  const bytes: any = new Uint8Array([color.r * 255, color.g * 255, color.b * 255]);
+  const bytes = new Uint8Array([color.r * 255, color.g * 255, color.b * 255]);
   const hex = '#' + bytes.toHex();
 
   style_id_to_hex.set(style_id, hex);
