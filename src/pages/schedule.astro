@@ -91,7 +91,14 @@ export type EventLabel = {
   hidden?: boolean
 }
 
-export const event_labels: EventLabel[] = [
+export const event_labels: EventLabel[] = [ // note: alphabetical
+  {
+    name: 'charity',
+    icon: LucideHeartHandshake,
+    color: '#C969C6', // Fluufff 26/Accent 2/400
+    description: 'Event is organized in cooperation with our chosen charity.',
+    hidden: true
+  },
   {
     name: 'educational',
     icon: LucideBrain,
@@ -99,16 +106,16 @@ export const event_labels: EventLabel[] = [
     description: 'Hosted by a (semi-)professional or the result of deep research. Focused on informing and teaching.'
   },
   {
+    name: 'flashing lights',
+    icon: LucideSiren,
+    color: '#E6C255', // Fluufff 26/Functional/Warning
+    description: 'This event will feature flashing lights.'
+  },
+  {
     name: 'fursuit-friendly',
     icon: LucidePawPrint,
     color: '#631BB1', // Fluufff 26/Primary/600
     description: 'Includes amenities for fursuiters (fans, water stations) or adjusted pacing/materials.'
-  },
-  {
-    name: 'workshop',
-    icon: LucideToolCase,
-    color: '#5ABBD8', // Fluufff 26/Accent 1/400
-    description: 'Requires active participation.'
   },
   {
     name: 'nsfw',
@@ -118,10 +125,10 @@ export const event_labels: EventLabel[] = [
       'Elements or themes related to fetishes or related topics. However, this event is strictly non-sexual so no nudity is shown.'
   },
   {
-    name: 'flashing lights',
-    icon: LucideSiren,
-    color: '#E6C255', // Fluufff 26/Functional/Warning
-    description: 'This event will feature flashing lights.'
+    name: 'open door event',
+    icon: LucideDoorOpen,
+    color: '#2FBF9F', // Fluufff 26/Functional/Success
+    description: 'Can be joined and left at any point during its duration.'
   },
   {
     name: 'sporty',
@@ -130,18 +137,11 @@ export const event_labels: EventLabel[] = [
     description: 'Requires a certain level of movement. Bring comfy clothes, water, and a towel.'
   },
   {
-    name: 'charity',
-    icon: LucideHeartHandshake,
-    color: '#C969C6', // Fluufff 26/Accent 2/400
-    description: 'Event is organized in cooperation with our chosen charity.',
-    hidden: true
+    name: 'workshop',
+    icon: LucideToolCase,
+    color: '#5ABBD8', // Fluufff 26/Accent 1/400
+    description: 'Requires active participation.'
   },
-  {
-    name: 'open door event',
-    icon: LucideDoorOpen,
-    color: '#2FBF9F', // Fluufff 26/Functional/Success
-    description: 'Can be joined and left at any point during its duration.'
-  }
 ]
 
 export const event_labels_map = new Map(event_labels.map((event_label) => [event_label.name, event_label]))
