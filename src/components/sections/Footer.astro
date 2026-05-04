@@ -19,9 +19,24 @@ import { Icon } from 'astro-icon/components'
     </div>
   </div>
   <div class="footer__links">
+    <h4>Attend</h4>
+    <a href="/schedule">Schedule</a>
+    <a href="/venue">Venue & Location</a>
+    <a href="/pricing">Ticket & Pricing</a>
+  </div>
+  <div class="footer__links">
+    <h4>Get involved</h4>
+    <a href="/events">Panels & Events</a>
+    <a href="/staff-volunteering">Staff & Volunteering</a>
+    <a href="/dealers-den">Join the Dealers Den</a>
+  </div>
+  <div class="footer__links">
     <h4><a href="/about">About us</a></h4>
-    <a href="/about#mission">Mission</a>
-    <a href="/about#dreamteam">Dream Team</a>
+    <a href="/about#what-is-fluufff">What is Flüüfff?</a>
+    <a href="/about#our-mission">Our mission</a>
+    <a href="/about#what-is-the-furry-fandom">What is the furry fandom?</a>
+    <a href="/about#our-patrons">Our Patrons</a>
+    <a href="/about#meet-the-dream-team">Meet the Dream Team</a>
   </div>
   <div class="footer__links">
     <h4><a href="/contact">Contact us</a></h4>
@@ -84,6 +99,10 @@ import { Icon } from 'astro-icon/components'
       flex-direction: column;
       gap: 8px;
 
+      h4 {
+        color: charter.$primary800;
+      }
+
       h4,
       h4 a {
         @include text-styles.display3SemiBold;
@@ -93,6 +112,7 @@ import { Icon } from 'astro-icon/components'
       a {
         @include text-styles.display3Regular;
         color: charter.$primary500;
+        text-decoration: none;
         padding: 4px 0;
 
         &:hover {
@@ -148,7 +168,7 @@ import { Icon } from 'astro-icon/components'
     }
   }
 
-  @media (max-width: 500px) {
+  @media (max-width: 600px) {
     footer {
       display: grid;
       grid-template-columns: auto auto;
