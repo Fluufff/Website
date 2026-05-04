@@ -33,7 +33,7 @@ const image: ImageMetadata = icon ? (await allImages[`/src/assets/images/peeps/$
     flex-direction: column;
     align-items: center;
     text-align: center;
-    width: 230px;
+    width: 250px;
 
     &.placeholder {
       picture {
@@ -58,6 +58,20 @@ const image: ImageMetadata = icon ? (await allImages[`/src/assets/images/peeps/$
         object-fit: cover;
         object-position: top center;
         border-radius: 100%;
+      }
+    }
+
+    @media (max-width: 700px) {
+      width: 125px;
+
+      > picture {
+        height: 100px;
+        width: 100px;
+
+        > img {
+          height: 100px;
+          width: 100px;
+        }
       }
     }
 
