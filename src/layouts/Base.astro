@@ -4,6 +4,17 @@ import '../styles/tailwind.css'
 import Fonts from '../assets/fonts.astro'
 import Header from '../components/sections/Header.astro'
 import Footer from '../components/sections/Footer.astro'
+
+const updated_at = new Date().toString().split(' (')[0]
+const console_greeting = `
+  __ _              __  __  __ 
+ / _| |_   _ _   _ / _|/ _|/ _|
+| |_| | | | | | | | |_| |_| |_ 
+|  _| | |_| | |_| |  _|  _|  _|
+|_| |_|\\__,_|\\__,_|_| |_| |_|
+${updated_at}
+https://github.com/Fluufff/Website
+`.replace(/^\n/, '')
 ---
 
 <html lang="en-US">
@@ -27,7 +38,8 @@ import Footer from '../components/sections/Footer.astro'
   }
 </style>
 
-<script>
+<script define:vars={{ console_greeting }}>
+  console.log(console_greeting)
   const magicword = [
     'ArrowUp',
     'ArrowUp',
