@@ -94,51 +94,51 @@ export type EventLabel = {
 export const event_labels: EventLabel[] = [
   // note: alphabetical
   {
-    name: 'charity',
+    name: 'Charity',
     icon: LucideHeartHandshake,
     color: '#C969C6', // Fluufff 26/Accent 2/400
     description: 'Event is organized in cooperation with our chosen charity.',
     hidden: true
   },
   {
-    name: 'educational',
+    name: 'Educational',
     icon: LucideBrain,
     color: '#1D4EAF', // Fluufff 26/Secondary/600
     description: 'Hosted by a (semi-)professional or the result of deep research. Focused on informing and teaching.'
   },
   {
-    name: 'flashing lights',
+    name: 'Flashing lights',
     icon: LucideSiren,
     color: '#E6C255', // Fluufff 26/Functional/Warning
     description: 'This event will feature flashing lights.'
   },
   {
-    name: 'fursuit-friendly',
+    name: 'Fursuit-Friendly',
     icon: LucidePawPrint,
     color: '#631BB1', // Fluufff 26/Primary/600
     description: 'Includes amenities for fursuiters (fans, water stations) or adjusted pacing/materials.'
   },
   {
-    name: 'nsfw',
+    name: 'NSFW',
     icon: LucideOctagonMinus,
     color: '#D6455D', // Fluufff 26/Functional/Error
     description:
       'Elements or themes related to fetishes or related topics. However, this event is strictly non-sexual so no nudity is shown.'
   },
   {
-    name: 'open door event',
+    name: 'Open door event',
     icon: LucideDoorOpen,
     color: '#2FBF9F', // Fluufff 26/Functional/Success
     description: 'Can be joined and left at any point during its duration.'
   },
   {
-    name: 'sporty',
+    name: 'Sporty',
     icon: LucideDumbbell,
     color: '#963693', // Fluufff 26/Accent 2/600
     description: 'Requires a certain level of movement. Bring comfy clothes, water, and a towel.'
   },
   {
-    name: 'workshop',
+    name: 'Workshop',
     icon: LucideToolCase,
     color: '#5ABBD8', // Fluufff 26/Accent 1/400
     description: 'Requires active participation.'
@@ -239,7 +239,7 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
               {e.tags
                 .filter((t) => t)
                 .map((t) => {
-                  var event_label = event_labels_map.get(t!.name.toLowerCase()) // todo: match event_label.name's case with that from strapi
+                  var event_label = event_labels_map.get(t!.name)
                   return (
                     <p class="p-2 flex gap-2 items-center uppercase bg-accent1-50 border rounded-sm border-accent1-200 font-bold">
                       {event_label ? <event_label.icon style={`color: ${event_label.color}`} /> : ''}
