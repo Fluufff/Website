@@ -83,6 +83,7 @@ function clicked(q: Element, a: Element) {
     grid-template-rows: 0fr;
     opacity: 0;
     visibility: hidden;
+    height: 0px;
     transition:
       grid-template-rows 0.3s ease-out,
       visibility 0.3s ease-out,
@@ -92,6 +93,7 @@ function clicked(q: Element, a: Element) {
       grid-template-rows: 1fr;
       opacity: 1;
       visibility: visible;
+      height: auto;
     }
   }
 }
