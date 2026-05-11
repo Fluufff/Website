@@ -83,7 +83,7 @@ const build_info = {
   }
   const ago = (ms) => {
     const now_ms = new Date().getTime()
-    let seconds = (now_ms - ms) / 1000
+    let seconds = Math.floor((now_ms - ms) / 1000)
 
     let minutes = Math.floor(seconds / 60)
     seconds %= 60
