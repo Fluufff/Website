@@ -108,8 +108,23 @@ const build_info = {
     return pieces.join(', ') + ' ago'
   }
 
-  const banner = banners[Math.floor(Math.random() * banners.length)]
-  rainbowConsole(banner)
+  {
+    // Our seed is YYYY-MM-DD for a stable daily banner selection
+    const date = new Date().toISOString().slice(0, 10)
+
+    // https://stackoverflow.com/a/7616484
+    const generateHash = (string) => {
+      let hash = 0
+      for (const char of string) {
+        hash = (hash << 5) - hash + char.charCodeAt(0)
+        hash |= 0 // Constrain to 32bit integer
+      }
+      return hash
+    }
+
+    const banner = banners[generateHash(date) % banners.length]
+    rainbowConsole(banner)
+  }
   const logBold = 'font-weight: bold;'
   console.log('source: %c%s', logBold, build_info.git.remote)
   console.log('branch: %c%s', logBold, build_info.git.branch)
