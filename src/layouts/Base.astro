@@ -136,7 +136,7 @@ const build_info = {
     commit_info.push('dirty')
   }
   console.log('commit: %c%s %c%s', logBold, build_info.git.commit, '', commit_info.map((s) => `(${s})`).join(' '))
-  console.log('built using %c%s %s', logBold, build_info.build.astro, ago(build_info.build.date))
+  console.log('built using %c%s %c(%s)', logBold, build_info.build.astro, '', ago(build_info.build.date))
 
   const magicword = [
     'ArrowUp',
