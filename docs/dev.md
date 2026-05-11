@@ -13,7 +13,9 @@ $ deno task devhost
 ## Docker
 
 ```shell
-docker run -it --mount=type=bind,src=$(pwd),target=/mnt --workdir=/mnt -p4321:4321 denoland/deno:2.7.1 task devhost
+(cd .devcontainer; docker compose up --build)
+docker run -it --mount=type=bind,src=$(pwd),target=/mnt --workdir=/mnt -p4321:4321 denoland/deno:2.7.1 task format
+docker run -it --mount=type=bind,src=$(pwd),target=/mnt --workdir=/mnt -p4321:4321 denoland/deno:2.7.1 task lint
 ```
 
 ## Other
