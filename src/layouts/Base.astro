@@ -1,20 +1,43 @@
 ---
+import childProcess from 'child_process'
 import '../styles/global.scss'
 import '../styles/tailwind.css'
 import Fonts from '../assets/fonts.astro'
 import Header from '../components/sections/Header.astro'
 import Footer from '../components/sections/Footer.astro'
 
-const updated_at = new Date().toString().split(' (')[0]
-const console_greeting = `
-  __ _              __  __  __ 
- / _| |_   _ _   _ / _|/ _|/ _|
-| |_| | | | | | | | |_| |_| |_ 
-|  _| | |_| | |_| |  _|  _|  _|
-|_| |_|\\__,_|\\__,_|_| |_| |_|
-${updated_at}
-https://github.com/Fluufff/Website
-`.replace(/^\n/, '')
+let banner_imports = import.meta.glob('./../data/banners/*', {
+  query: '?raw',
+  import: 'default',
+  eager: true
+})
+const banners = []
+for (const key in banner_imports) {
+  banners.push(banner_imports[key])
+}
+
+let remote = childProcess.execSync('git remote get-url origin').toString().trim()
+if (remote.startsWith('git@')) {
+  remote = remote.replace(':', '/').replace('git@', 'https://').replace('.git', '').toLowerCase()
+}
+
+const build_info = {
+  git: {
+    remote,
+    branch: childProcess.execSync('git branch --show-current').toString().trim(),
+    commit: childProcess.execSync('git rev-parse --short HEAD').toString().trim(),
+    commit_date: childProcess.execSync('git show --no-patch --format=%cd --date=human HEAD').toString().trim(),
+    clean: childProcess.execSync('git diff-index HEAD --').toString().trim() == '',
+    cicd: !!process.env.CI
+  },
+  build: {
+    date: new Date().getTime(),
+    astro: Astro.generator
+    // deno: Deno.version.deno,
+    // typescript: Deno.version.typescript,
+    // v8: Deno.version.v8,
+  }
+}
 ---
 
 <html lang="en-US">
@@ -38,8 +61,68 @@ https://github.com/Fluufff/Website
   }
 </style>
 
-<script define:vars={{ console_greeting }}>
-  console.log(console_greeting)
+<script is:inline define:vars={{ build_info, banners }}>
+  // Inspired by lolcat.
+  const rainbowConsole = (text, hue_step = 6) => {
+    const styles = []
+    let output = ''
+
+    for (let i = 0; i < text.length; i++) {
+      const hue = (i * hue_step) % 360
+
+      output += `%c${text[i]}`
+
+      styles.push(`
+        color: hsl(${hue}, 100%, 60%);
+        font-weight: bold;
+        font-family: monospace;
+      `)
+    }
+
+    console.log(output, ...styles)
+  }
+  const ago = (ms) => {
+    const now_ms = new Date().getTime()
+    let seconds = (now_ms - ms) / 1000
+
+    let minutes = Math.floor(seconds / 60)
+    seconds %= 60
+
+    let hours = Math.floor(minutes / 60)
+    minutes %= 60
+
+    const days = Math.floor(hours / 24)
+    hours %= 24
+
+    const pieces = []
+    if (days) {
+      pieces.push(`${days} days`)
+    }
+    if (hours) {
+      pieces.push(`${hours} hours`)
+    }
+    if (minutes) {
+      pieces.push(`${minutes} minutes`)
+    }
+    pieces.push(`${seconds} seconds`)
+    return pieces.join(', ') + ' ago'
+  }
+
+  const banner = banners[Math.floor(Math.random() * banners.length)]
+  rainbowConsole(banner)
+  const logBold = 'font-weight: bold;'
+  console.log('source: %c%s', logBold, build_info.git.remote)
+  console.log('branch: %c%s', logBold, build_info.git.branch)
+  const commit_info = [build_info.git.commit_date]
+  if (!build_info.git.cicd) {
+    commit_info.push('local')
+  }
+  if (!build_info.git.clean) {
+    commit_info.push('dirty')
+  }
+  console.log('commit: %c%s %c%s', logBold, build_info.git.commit, '', commit_info.map((s) => `(${s})`).join(' '))
+  console.log('built using %c%s %s', logBold, build_info.build.astro, ago(build_info.build.date))
+
   const magicword = [
     'ArrowUp',
     'ArrowUp',
