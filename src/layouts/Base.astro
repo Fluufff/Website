@@ -84,6 +84,9 @@ const build_info = {
   const ago = (ms) => {
     const now_ms = new Date().getTime()
     let seconds = Math.floor((now_ms - ms) / 1000)
+    if (seconds < 10) {
+      return 'just now'
+    }
 
     let minutes = Math.floor(seconds / 60)
     seconds %= 60
