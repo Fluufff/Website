@@ -6,7 +6,7 @@ ARG SITE_BASE_URL=/
 
 RUN apt-get update && \
     apt-get upgrade -y && \
-    apt-get install -y git
+    apt-get install -y --no-install-recommends git
 
 WORKDIR /app
 COPY . .
