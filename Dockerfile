@@ -13,4 +13,7 @@ RUN --mount=type=secret,id=STRAPI_TOKEN,env=STRAPI_TOKEN \
 
 FROM nginx:1.29.4
 
+RUN apt-get update && \
+    apt-get install -y git
+
 COPY --from=builder /app/dist /usr/share/nginx/html
