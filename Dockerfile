@@ -5,7 +5,6 @@ ARG STRAPI_URI=https://cms.fluufff.org/api/
 ARG SITE_BASE_URL=/
 
 RUN apt-get update && \
-    apt-get upgrade -y && \
     apt-get install -y --no-install-recommends git
 
 WORKDIR /app
