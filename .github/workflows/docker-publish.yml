@@ -2,7 +2,7 @@ name: Build container
 
 on:
   push:
-    branches: ['main', 'next', 'docker-git']
+    branches: ['main', 'next']
     tags: ['*']
 
 env:
