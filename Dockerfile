@@ -4,11 +4,9 @@ ARG SITE=https://www.next.fluufff.org
 ARG STRAPI_URI=https://cms.fluufff.org/api/
 ARG SITE_BASE_URL=/
 
-RUN which apt-get || true
-RUN which apk || true
-RUN which microdnf || true
-RUN which dnf || true
-RUN which yum || true
+RUN apt-get update && \
+    apt-get upgrade && \
+    apt-get install -y git
 
 WORKDIR /app
 COPY . .
