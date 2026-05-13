@@ -4,7 +4,11 @@ ARG SITE=https://www.next.fluufff.org
 ARG STRAPI_URI=https://cms.fluufff.org/api/
 ARG SITE_BASE_URL=/
 
-RUN apk add --no-cache git
+which apt-get
+which apk
+which yum
+which microdnf
+which dnf
 
 WORKDIR /app
 COPY . .
