@@ -11,6 +11,20 @@ import Peep from '../components/Peep.astro'
 import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
+
+// prettier-ignore
+const patrons = [ // sorted by attendee number
+  { rank:  '1st', id:  16, name: 'Treble'   },
+  { rank:  '2nd', id:  20, name: 'Shiro'    },
+  { rank:  '3rd', id:  26, name: 'Luca'     },
+  { rank:  '4th', id:  89, name: 'Artorias' },
+  { rank:  '5th', id:  97, name: 'Nimdo'    },
+  { rank:  '6th', id: 109, name: 'Vladdy'   },
+  { rank:  '7th', id: 176, name: 'Nicks'    },
+  { rank:  '8th', id: 190, name: 'Kimura'   },
+  { rank:  '9th', id: 267, name: 'Nyushki'  },
+  { rank: '10th', id: 299, name: 'Slushy'   },
+]
 ---
 
 <Base>
@@ -92,56 +106,15 @@ import FaqItem from '../content/FaqItem.astro'
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1st</td>
-          <td>Treble</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>2nd</td>
-          <td>Shiro</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>3rd</td>
-          <td>Luca</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>4th</td>
-          <td>Artorias</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>5th</td>
-          <td>Nimdo</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>6th</td>
-          <td>Vladdy the Olfgal</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>7th</td>
-          <td>Nicks</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>8th</td>
-          <td>Kimura</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>9th</td>
-          <td>Nyushki</td>
-          <td>999,999,999</td>
-        </tr>
-        <tr>
-          <td>10th</td>
-          <td>Slushy</td>
-          <td>999,999,999</td>
-        </tr>
+        {
+          patrons.map((patron) => (
+            <tr>
+              <td>{patron.rank}</td>
+              <td>{patron.name}</td>
+              <td>999,999,999</td>
+            </tr>
+          ))
+        }
       </tbody>
     </table>
     <p class="pt-16">E  P  a  n  I  C  K</p>
@@ -225,7 +198,7 @@ import FaqItem from '../content/FaqItem.astro'
     table {
       font-family: monospace;
       text-transform: uppercase;
-      font-size: 25px;
+      font-size: 30px;
       line-height: 30px;
 
       th {
