@@ -14,16 +14,16 @@ import FaqItem from '../content/FaqItem.astro'
 
 // prettier-ignore
 const patrons = [ // sorted by attendee number
-  { rank:  '1st', id:  16, name: 'Treble'   },
-  { rank:  '2nd', id:  20, name: 'Shiro'    },
-  { rank:  '3rd', id:  26, name: 'Luca'     },
-  { rank:  '4th', id:  89, name: 'Artorias' },
-  { rank:  '5th', id:  97, name: 'Nimdo'    },
-  { rank:  '6th', id: 109, name: 'Vladdy'   },
-  { rank:  '7th', id: 176, name: 'Nicks'    },
-  { rank:  '8th', id: 190, name: 'Kimura'   },
-  { rank:  '9th', id: 267, name: 'Nyushki'  },
-  { rank: '10th', id: 299, name: 'Slushy'   },
+  { rank:  '1st', id:  16, name: 'treble'   },
+  { rank:  '2nd', id:  20, name: 'shiro'    },
+  { rank:  '3rd', id:  26, name: 'luca'     },
+  { rank:  '4th', id:  89, name: 'artorias' },
+  { rank:  '5th', id:  97, name: 'nimdo'    },
+  { rank:  '6th', id: 109, name: 'vladdy'   },
+  { rank:  '7th', id: 176, name: 'nicks'    },
+  { rank:  '8th', id: 190, name: 'kimura'   },
+  { rank:  '9th', id: 267, name: 'nyushki'  },
+  { rank: '10th', id: 299, name: 'slushy'   },
 ]
 ---
 
@@ -96,13 +96,13 @@ const patrons = [ // sorted by attendee number
     </p>
     <p>Most furry conventions and several furry groups also raise funds and organize panels for various charities.</p>
   </Content>
-  <Content headline="Our Patrons" bg="primary-dark" id="our-patrons">
+  <Content headline="Our Patrons" bg="primary-darker" id="our-patrons">
     <table class="mt-8">
       <thead>
         <tr>
-          <th>Rank</th>
-          <th>Name</th>
-          <th>Score</th>
+          <th>rank</th>
+          <th>name</th>
+          <th>score</th>
         </tr>
       </thead>
       <tbody>
@@ -117,7 +117,7 @@ const patrons = [ // sorted by attendee number
         }
       </tbody>
     </table>
-    <p class="pt-16">E P a n I C K</p>
+    <p class="pt-16">E P A N I C K</p>
   </Content>
   <Content headline="Meet the Dream Team" bg="primary" id="meet-the-dream-team">
     <p>
@@ -181,6 +181,8 @@ const patrons = [ // sorted by attendee number
 </Base>
 
 <style is:global lang="scss">
+  @use '../styles/charter';
+
   #dream_team_peeps {
     display: flex;
     flex-direction: row;
@@ -195,21 +197,30 @@ const patrons = [ // sorted by attendee number
   }
 
   #our-patrons {
+
+    table, p {
+      font-family: var(--font-video-game), monospace;
+    }
+
     table {
-      font-family: monospace;
-      text-transform: uppercase;
-      font-size: 30px;
-      line-height: 30px;
+      font-size: 32px;
+      line-height: 40px;
 
       th {
         text-align: left;
+        color: charter.$primary300;
       }
 
       th:first-child,
       td:first-child {
-        padding-right: 30px;
+        padding-right: 42px;
         text-align: right;
       }
+    }
+
+    p {
+      font-size: 30px;
+      word-spacing: 20px;
     }
   }
 </style>

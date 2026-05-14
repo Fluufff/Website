@@ -70,6 +70,21 @@ export default defineConfig({
             ]
           }
         ]
+      },
+      {
+        name: 'Video Game',
+        provider: 'local',
+        cssVariable: '--font-video-game',
+        variants: [
+          {
+            weight: 400,
+            style: 'normal',
+            src: [
+              './src/assets/fonts/video_game/VideoGame.woff2',
+              './src/assets/fonts/video_game/VideoGame.woff'
+            ]
+          }
+        ]
       }
     ]
   }
