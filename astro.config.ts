@@ -79,10 +79,7 @@ export default defineConfig({
           {
             weight: 400,
             style: 'normal',
-            src: [
-              './src/assets/fonts/video_game/VideoGame.woff2',
-              './src/assets/fonts/video_game/VideoGame.woff'
-            ]
+            src: ['./src/assets/fonts/video_game/VideoGame.woff2', './src/assets/fonts/video_game/VideoGame.woff']
           }
         ]
       }
