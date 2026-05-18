@@ -27,11 +27,14 @@ const spreadsheet_meta_json = await spreadsheet_meta_response.json()
 const sheet_title = spreadsheet_meta_json['sheets'][0]['properties']['title']
 
 // get the contents of the first sheet
-const speadsheet_values_response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${PEEPS_SPREADSHEET_ID}/values:batchGet?ranges=${encodeURI(sheet_title)}`, {
-  headers: {
-    Authorization: `Bearer ${access_token}`
+const speadsheet_values_response = await fetch(
+  `https://sheets.googleapis.com/v4/spreadsheets/${PEEPS_SPREADSHEET_ID}/values:batchGet?ranges=${encodeURI(sheet_title)}`,
+  {
+    headers: {
+      Authorization: `Bearer ${access_token}`
+    }
   }
-})
+)
 const spreadsheet_values_json = await speadsheet_values_response.json()
 const spreadsheat_values_rows = spreadsheet_values_json['valueRanges'][0]['values']
 
@@ -64,7 +67,7 @@ peeps.forEach((peep: string[]) => {
     volunteer_name_to_peep_map.set(volunteers[0][0], peep)
 
     for (const role of peep[1]) {
-      if (role == "Chairman") continue;
+      if (role == 'Chairman') continue
       const volunteer = volunteers.find((volunteer: string[]) => {
         return role == `${volunteer[2]} of ${volunteer[1]}`
       })
