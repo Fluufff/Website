@@ -1,14 +1,42 @@
 // checks the peeps against staff & volunteers speadsheet.
 
-// deno run --allow-read utils/peeps-checker.ts
+// deno run --allow-env --env-file=.env.local --allow-net --allow-read utils/peeps-checker.ts
 
-// head to said spreadsheet and replace /edit in the url with /preview, then copy paste this command into the browser console:
-// JSON.stringify(Array.from(document.querySelectorAll('tr')).slice(3).map(row => Array.from(row.children).slice(1, 4).map(cell => cell.innerText)).filter(row => row[1].length > 1))
-// then copy paste the output in here and run the script:
+const { PEEPS_CLIENT_ID, PEEPS_CLIENT_SECRET, PEEPS_REFRESH_TOKEN, PEEPS_SPREADSHEET_ID } = Deno.env.toObject()
 
-const json = ``
+// get access token from refresh token
+const access_token_response = await fetch('https://oauth2.googleapis.com/token', {
+  method: 'POST',
+  body: new URLSearchParams({
+    client_id: PEEPS_CLIENT_ID,
+    client_secret: PEEPS_CLIENT_SECRET,
+    grant_type: 'refresh_token',
+    refresh_token: PEEPS_REFRESH_TOKEN
+  })
+})
+const access_token_json = await access_token_response.json()
+const access_token = access_token_json['access_token']
 
-let all_volunteers = JSON.parse(json)
+// find the name of the first sheet
+const spreadsheet_meta_response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${PEEPS_SPREADSHEET_ID}`, {
+  headers: {
+    Authorization: `Bearer ${access_token}`
+  }
+})
+const spreadsheet_meta_json = await spreadsheet_meta_response.json()
+const sheet_title = spreadsheet_meta_json['sheets'][0]['properties']['title']
+
+// get the contents of the first sheet
+const speadsheet_values_response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${PEEPS_SPREADSHEET_ID}/values:batchGet?ranges=${encodeURI(sheet_title)}`, {
+  headers: {
+    Authorization: `Bearer ${access_token}`
+  }
+})
+const spreadsheet_values_json = await speadsheet_values_response.json()
+const spreadsheat_values_rows = spreadsheet_values_json['valueRanges'][0]['values']
+
+// resume legacy code
+let all_volunteers = spreadsheat_values_rows
 all_volunteers = all_volunteers.filter((row: string[]) => ['Head', 'Deputy'].includes(row[2])) // role filter
 
 const about = Deno.readTextFileSync('./src/pages/about.astro')
