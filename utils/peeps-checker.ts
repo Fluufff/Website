@@ -98,18 +98,29 @@ all_volunteers.forEach((volunteer) => {
   }
 })
 
-// gives a title and moves them up front
-function hoist(id: string, title: string) {
+// gives them an additional role
+function crown(id: string, title: string) {
   const i = peeps.findIndex((peep) => peep.id == id)
   if (i !== -1) {
     const peep = peeps[i]
+
     peep.titles.unshift(title)
+  }
+}
+
+// puts them at the front
+function hoist(id: string) {
+  const i = peeps.findIndex((peep) => peep.id == id)
+  if (i !== -1) {
+    const peep = peeps[i]
 
     peeps.splice(i, 1)
     peeps.unshift(peep)
   }
 }
 
-hoist('jawbreaker', 'Chairman')
+hoist('faelan')
+hoist('jawbreaker')
+crown('jawbreaker', 'Chairman')
 
 Deno.writeTextFileSync('./src/data/hr/peeps.json', JSON.stringify(peeps, null, 2) + '\n')
