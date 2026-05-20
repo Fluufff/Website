@@ -49,11 +49,11 @@ const spreadsheet_json = await spreadsheet_response.json()
 const spreadsheet_rows = spreadsheet_json['sheets'][0]['data'][0]['rowData']
 
 // this script operates under the assumption that the first sheet contains these columns
-const spreadsheet_header = spreadsheet_rows
-  .shift()
-  ['values'].map((row: Record<string, string>) => row['formattedValue'])
+const spreadsheet_header_row = spreadsheet_rows.shift()
+const spreadsheet_header = spreadsheet_header_row['values'].map((row: Record<string, string>) => row['formattedValue'])
 assert.equal(spreadsheet_header.join(', '), 'Team member, Department, Role, Notes')
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // deno-lint-ignore no-explicit-any
 let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) => {
   return {
@@ -63,6 +63,7 @@ let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) =>
     role: (spreadsheet_row['values'][2]?.['formattedValue'] ?? '').trim() // `Ress` is `Deputy ` of `HR`
   }
 })
+/* eslint-enable @typescript-eslint/no-explicit-any */
 
 // console.log(all_volunteers)
 all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role))
