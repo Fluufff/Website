@@ -1,6 +1,6 @@
 // checks the peeps against staff & volunteers speadsheet.
 
-// deno run --allow-env --env-file=.env.local --allow-net --allow-read utils/peeps-checker.ts
+// deno run --allow-env --env-file=.env.local --allow-net --allow-read --allow-write utils/peeps-checker.ts
 
 import assert from 'node:assert'
 
@@ -55,60 +55,41 @@ let all_volunteers: Record<string, string>[] = spreadsheet_rows.map((spreadsheet
 all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role)) // role filter
 // console.log(all_volunteers)
 
-const about = Deno.readTextFileSync('./src/pages/about.astro')
-const peeps = Array.from(about.matchAll(/Peep name="(.*)" title=["{](.*?)[}"]/g)).map((result) => [
-  result[1],
-  result[2]
-]) // ["name", "roles"]
-peeps.forEach((peep) => (peep[1] = peep[1].charAt(0) == '[' ? JSON.parse(peep[1].replaceAll("'", '"')) : [peep[1]])) // ["name", ["role"]]
-peeps.forEach((peep) => {
-  // fix discrepencies between peep & speadsheet department names
-  peep[1] = peep[1].map((role: string) => {
-    role = role.replace('Registration', 'Reg')
-    role = role.replace('IT', 'IT & Web')
-    return role
-  })
-})
+let peeps: { id: string; name: string; titles: string[]; }[] = JSON.parse(Deno.readTextFileSync('./src/data/hr/peeps.json'))
 
-const peeps_json = peeps.map(peep => {
-  return {
-    email: peep[0].toLowerCase().replaceAll(' ', '-') + '@fluufff.org',
-    name: peep[0],
-    roles: peep[1],
-  }
-})
-Deno.writeTextFileSync("./src/data/hr/peeps.json", JSON.stringify(peeps_json, null, 2))
-Deno.exit()
-
-const volunteer_name_to_peep_map = new Map()
-
-peeps.forEach((peep: string[]) => {
-  const volunteers = all_volunteers.filter((volunteer) => volunteer['name'].includes(peep[0]))
-  if (volunteers.length == 0) {
-    console.log(`peep "${peep[0]}" (${peep[1]}) seems to be a regular volunteer.`)
-  } else {
-    volunteer_name_to_peep_map.set(volunteers[0]['name'], peep)
-
-    for (const role of peep[1]) {
-      if (role == 'Chairman') continue
-      const volunteer = volunteers.find((volunteer) => {
-        return role == `${volunteer['role']} of ${volunteer['department']}`
-      })
-      if (!volunteer) {
-        console.log(`peep "${peep[0]}" seems to no longer hold the "${role}" role.`)
-      }
-    }
-  }
-})
+function get_department_name_to_display(string: string) {
+  string = string.replace('Reg', 'Registration')
+  string = string.replace('IT & Web', 'IT')
+  return string
+}
 
 all_volunteers.forEach((volunteer) => {
-  const peep = volunteer_name_to_peep_map.get(volunteer['name'])
-  const role = `${volunteer['role']} of ${volunteer['department']}`
-  if (peep == undefined) {
-    console.log(`volunteer "${volunteer['name']}" lacks a peep for their "${role}" role.`)
-  } else {
-    if (!peep[1].includes(role)) {
-      console.log(`volunteer "${volunteer['name']}" lacks a mention of their "${role}" role.`)
-    }
+  const peep = peeps.find(peep => peep.id == volunteer.id)
+  const title = `${volunteer.role} of ${get_department_name_to_display(volunteer.department)}`
+
+  if (! peep) {
+    return peeps.push({
+      id: volunteer.id,
+      name: volunteer.name,
+      titles: [title]
+    })
+  }
+  
+  if (! peep.titles.includes(title)) {
+    peep.titles.push(title)
   }
 })
+
+peeps = peeps.filter((peep) => {
+  const volunteers = all_volunteers.filter(volunteer => volunteer.id == peep.id)
+
+  peep.titles = peep.titles.filter(title => {
+    return title == "Chairman" || volunteers.find(volunteer => {
+      return `${volunteer.role} of ${get_department_name_to_display(volunteer.department)}` == title
+    })
+  })
+
+  return peep.titles.length > 0;
+})
+
+Deno.writeTextFileSync("./src/data/hr/peeps.json", JSON.stringify(peeps, null, 2) + "\n")
