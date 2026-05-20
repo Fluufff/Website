@@ -1,7 +1,7 @@
 {
   "extends": ["astro/tsconfigs/strictest", "@vue/tsconfig/tsconfig.json"],
   "include": [".astro/types.d.ts", ".astro/content.d.ts", "**/*"],
-  "exclude": ["dist", "util"],
+  "exclude": ["dist"],
   "compilerOptions": {
     "target": "ES2017",
     "esModuleInterop": true,
