@@ -89,31 +89,6 @@ function get_name(volunteer: Volunteer) {
     return match[1]
   }
 
-  // if a volunteer has a space in the name then pick the word matching their username
-  if (volunteer.name.includes(' ')) {
-    const words = volunteer.name.split(' ')
-
-    const without_same_case = words.filter(word => {
-      return ! (word.toLowerCase() == word || word.toUpperCase() == word)
-    }).join(' ')
-
-    if (volunteer.name != without_same_case) {
-      return without_same_case
-    }
-
-    // if the last word 
-    // if (/[A-Z]/.test(words.at(-1)?.charAt(0)!)) {
-    //   return volunteer.name
-    // }
-
-    // const candidate = words.find((word) => word.toLowerCase() == volunteer.id)
-    // if (candidate) {
-    //   return candidate
-    // }
-
-    return words.join(' ')
-  }
-
   return volunteer.name
 }
 
