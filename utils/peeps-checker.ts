@@ -82,7 +82,6 @@ function get_title(volunteer: Volunteer) {
 }
 
 function get_name(volunteer: Volunteer) {
-
   // has a google nickname inside 2 parentheses
   const match = /\((.*)\)/.exec(volunteer.name)
   if (match) {
@@ -98,9 +97,11 @@ function get_name(volunteer: Volunteer) {
   // drop words deemed lesser
   if (volunteer.name.includes(' ')) {
     const words = volunteer.name.split(' ')
-    const words_filtered = words.filter(word => {
-      return ! (word.toLowerCase() == word || word.toUpperCase() == word || word.includes("'"))
-    }).join(' ')
+    const words_filtered = words
+      .filter((word) => {
+        return !(word.toLowerCase() == word || word.toUpperCase() == word || word.includes("'"))
+      })
+      .join(' ')
     if (volunteer.name != words_filtered) {
       return words_filtered
     }
