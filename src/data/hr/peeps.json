@@ -2,7 +2,7 @@
   {
     "email": "jawbreaker@fluufff.org",
     "name": "Jawbreaker",
-    "roles": [
+    "titles": [
       "Chairman",
       "Head of HR",
       "Head of Logistics"
@@ -11,14 +11,14 @@
   {
     "email": "faelan@fluufff.org",
     "name": "Faelan",
-    "roles": [
+    "titles": [
       "Head of Reg & Venue"
     ]
   },
   {
     "email": "vrydi@fluufff.org",
     "name": "Vrydi",
-    "roles": [
+    "titles": [
       "Head of Accounting",
       "Deputy of Theming"
     ]
@@ -26,56 +26,56 @@
   {
     "email": "niki@fluufff.org",
     "name": "Niki",
-    "roles": [
+    "titles": [
       "Head of Bar"
     ]
   },
   {
     "email": "amaroq@fluufff.org",
     "name": "Amaroq",
-    "roles": [
+    "titles": [
       "Deputy of Bar"
     ]
   },
   {
     "email": "dd@fluufff.org",
     "name": "DD",
-    "roles": [
+    "titles": [
       "Deputy of Bar"
     ]
   },
   {
     "email": "azana@fluufff.org",
     "name": "Azana",
-    "roles": [
+    "titles": [
       "Head of Dealer's Den"
     ]
   },
   {
     "email": "alex-dax@fluufff.org",
     "name": "Alex Dax",
-    "roles": [
+    "titles": [
       "Deputy of Dealer's Den"
     ]
   },
   {
     "email": "nimalen@fluufff.org",
     "name": "Nimalen",
-    "roles": [
+    "titles": [
       "Head of Entertainment"
     ]
   },
   {
     "email": "dacia@fluufff.org",
     "name": "Dacia",
-    "roles": [
+    "titles": [
       "Head of Entertainment"
     ]
   },
   {
     "email": "bleats@fluufff.org",
     "name": "Bleats",
-    "roles": [
+    "titles": [
       "Head of Feedback",
       "Deputy of Stewards & Safety"
     ]
@@ -83,77 +83,77 @@
   {
     "email": "jenky@fluufff.org",
     "name": "Jenky",
-    "roles": [
+    "titles": [
       "Head of Fursuit Affairs"
     ]
   },
   {
     "email": "lilyheart@fluufff.org",
     "name": "Lilyheart Panda",
-    "roles": [
+    "titles": [
       "Deputy of HR"
     ]
   },
   {
     "email": "juravenator@fluufff.org",
     "name": "Juravenator",
-    "roles": [
+    "titles": [
       "Head of IT & Web"
     ]
   },
   {
     "email": "proko@fluufff.org",
     "name": "Proko",
-    "roles": [
+    "titles": [
       "Deputy of IT & Web"
     ]
   },
   {
     "email": "cyber@fluufff.org",
     "name": "Cyber",
-    "roles": [
+    "titles": [
       "Head of PR"
     ]
   },
   {
     "email": "akylian@fluufff.org",
     "name": "Akylian",
-    "roles": [
+    "titles": [
       "Deputy of Reg & Venue"
     ]
   },
   {
     "email": "kanso@fluufff.org",
     "name": "Kanso",
-    "roles": [
+    "titles": [
       "Head of Stage"
     ]
   },
   {
     "email": "thinder@fluufff.org",
     "name": "Thinder",
-    "roles": [
+    "titles": [
       "Deputy of Stage"
     ]
   },
   {
     "email": "narf@fluufff.org",
     "name": "Narf",
-    "roles": [
+    "titles": [
       "Head of Stewards & Safety"
     ]
   },
   {
     "email": "milo@fluufff.org",
     "name": "Milo",
-    "roles": [
+    "titles": [
       "Deputy of Stewards & Safety"
     ]
   },
   {
     "email": "goomuin@fluufff.org",
     "name": "Goomuin",
-    "roles": [
+    "titles": [
       "Head of Theming"
     ]
   }

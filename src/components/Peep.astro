@@ -6,10 +6,10 @@ import { Picture } from 'astro:assets'
 interface Props {
   email: string
   name: string
-  roles: string[]
+  titles: string[]
 }
 
-const { email, name, roles } = Astro.props
+const { email, name, titles } = Astro.props
 
 const all_images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/peeps/*.{jpg,jpeg,png}')
 const icon = Object.entries(all_images).find(([key]) => {
@@ -25,8 +25,8 @@ const image = icon ? (await icon[1]()).default : placeholder
 <div class="peep" class:list={{ placeholder: !icon }}>
   <Picture src={image} formats={['avif', 'webp']} fallbackFormat={image.format} alt="" widths={[200, 400]} />
   <div class="peep__name">{name}</div>
-  <div class="peep__roles">
-    {roles.map((t) => <div>{t}</div>)}
+  <div class="peep__titles">
+    {titles.map((t) => <div>{t}</div>)}
   </div>
 </div>
 
@@ -72,7 +72,7 @@ const image = icon ? (await icon[1]()).default : placeholder
       @include text-styles.display4SemiBold;
     }
 
-    &__roles {
+    &__titles {
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -98,7 +98,7 @@ const image = icon ? (await icon[1]()).default : placeholder
         }
 
         .peep__name,
-        .peep__roles {
+        .peep__titles {
           grid-column: 1;
           align-self: flex-end;
           text-align: right;
@@ -122,12 +122,12 @@ const image = icon ? (await icon[1]()).default : placeholder
         margin-bottom: 16px;
       }
 
-      &__roles {
+      &__titles {
         grid-row: 2 / 3;
       }
 
       &__name,
-      &__roles {
+      &__titles {
         align-self: flex-start;
         grid-column: 2;
         font-size: 14px;
