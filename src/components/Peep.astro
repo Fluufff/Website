@@ -13,9 +13,9 @@ const { email, name, roles } = Astro.props
 
 const all_images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/peeps/*.{jpg,jpeg,png}')
 const icon = Object.entries(all_images).find(([key]) => {
-  const filename = key.split('/').at(-1)?.split('.')[0] as string
-  const username = email.split('@')[0] as string
-  return filename.toLowerCase() == username.toLowerCase()
+  const filename = key.split('/').at(-1)?.split('.')[0]
+  const username = email.split('@')[0]
+  return filename == username
 })
 
 const image = icon ? (await icon[1]()).default : placeholder
