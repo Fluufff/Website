@@ -91,9 +91,7 @@ import FaqItem from '../content/FaqItem.astro'
     </p>
     <p>They’re the ones making sure the con feels like home — year after year.</p>
     <div id="dream_team_peeps">
-      {peeps.map(peep => (
-        <Peep id={peep.id} name={peep.name} titles={peep.titles} />
-      ))}
+      {peeps.map((peep) => <Peep id={peep.id} name={peep.name} titles={peep.titles} />)}
     </div>
   </Content>
   <Socials />

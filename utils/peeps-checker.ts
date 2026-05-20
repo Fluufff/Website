@@ -1,6 +1,6 @@
 // checks the peeps against staff & volunteers speadsheet.
 
-// deno run --allow-env --env-file=.env.local --allow-net --allow-read --allow-write utils/peeps-checker.ts
+// deno run --allow-env --env-file=.env.local --allow-net --allow-write utils/peeps-checker.ts
 
 import assert from 'node:assert'
 
@@ -60,12 +60,12 @@ let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) =>
     id: spreadsheet_row['values'][0]['chipRuns'][0]['chip']['personProperties']['email'].split('@')[0],
     name: spreadsheet_row['values'][0]['formattedValue'],
     department: spreadsheet_row['values'][1]['formattedValue'],
-    role: (spreadsheet_row['values'][2]?.['formattedValue'] ?? '').trim()
+    role: (spreadsheet_row['values'][2]?.['formattedValue'] ?? '').trim() // `Ress` is `Deputy ` of `HR`
   }
 })
 
 // console.log(all_volunteers)
-all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role)) // role filter
+all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role))
 // console.log(all_volunteers)
 
 const peeps: Peep[] = []
@@ -81,29 +81,34 @@ function get_title(volunteer: Volunteer) {
 }
 
 all_volunteers.forEach((volunteer) => {
-  const peep = peeps.find(peep => peep.id == volunteer.id)
+  const peep = peeps.find((peep) => peep.id == volunteer.id)
   const title = get_title(volunteer)
 
-  if (! peep) {
+  if (!peep) {
     return peeps.push({
       id: volunteer.id,
       name: volunteer.name,
       titles: [title]
     })
   }
-  
-  if (! peep.titles.includes(title)) {
+
+  if (!peep.titles.includes(title)) {
     peep.titles.push(title)
   }
 })
 
-const chairman_i = peeps.findIndex(peep => peep.id == "jawbreaker")
-if (chairman_i !== -1) {
-  const chairman = peeps[chairman_i]
-  chairman.titles.unshift("Chairman")
+// gives a title and moves them up front
+function hoist(id: string, title: string) {
+  const i = peeps.findIndex((peep) => peep.id == id)
+  if (i !== -1) {
+    const peep = peeps[i]
+    peep.titles.unshift(title)
 
-  peeps.splice(chairman_i, 1)
-  peeps.unshift(chairman)
+    peeps.splice(i, 1)
+    peeps.unshift(peep)
+  }
 }
 
-Deno.writeTextFileSync("./src/data/hr/peeps.json", JSON.stringify(peeps, null, 2) + "\n")
+hoist('jawbreaker', 'Chairman')
+
+Deno.writeTextFileSync('./src/data/hr/peeps.json', JSON.stringify(peeps, null, 2) + '\n')

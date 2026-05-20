@@ -18,7 +18,6 @@ const icon = Object.entries(all_images).find(([key]) => {
 })
 
 const image = icon ? (await icon[1]()).default : placeholder
-
 ---
 
 <div class="peep" class:list={{ placeholder: !icon }}>
