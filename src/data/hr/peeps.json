@@ -9,6 +9,13 @@
     ]
   },
   {
+    "id": "faelan",
+    "name": "Faelan",
+    "titles": [
+      "Head of Registration & Venue"
+    ]
+  },
+  {
     "id": "vrydi",
     "name": "Vrydi",
     "titles": [
@@ -17,7 +24,7 @@
   },
   {
     "id": "jaffacake",
-    "name": "Jaffa Cake",
+    "name": "JaffaCake",
     "titles": [
       "Deputy of Accounting"
     ]
@@ -95,30 +102,16 @@
   },
   {
     "id": "cyber",
-    "name": "PD Cyber",
+    "name": "Cyber",
     "titles": [
       "Head of PR"
     ]
   },
   {
     "id": "ress",
-    "name": "Ress theraptor",
+    "name": "Ress",
     "titles": [
       "Deputy of PR"
-    ]
-  },
-  {
-    "id": "hojo",
-    "name": "Hojo",
-    "titles": [
-      "Deputy of PR"
-    ]
-  },
-  {
-    "id": "faelan",
-    "name": "Faelan",
-    "titles": [
-      "Head of Registration & Venue"
     ]
   },
   {
@@ -151,7 +144,7 @@
   },
   {
     "id": "milo",
-    "name": "Milo 'Clock",
+    "name": "Milo",
     "titles": [
       "Deputy of Stewards & Safety"
     ]
