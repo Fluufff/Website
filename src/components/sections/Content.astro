@@ -8,7 +8,7 @@ interface Props {
   markdown?: boolean | undefined
   wider?: boolean | undefined
   id?: string | undefined
-  bg?: 'primary' | 'secondary' | 'primary-dark' | undefined
+  bg?: 'primary' | 'secondary' | 'primary-dark' | 'primary-darker' | undefined
   class?: string | undefined
   pictureclass?: string | undefined
   alignContent?: 'start' | 'end' | undefined
@@ -219,6 +219,15 @@ const { headline, markdown, bg, sideImage, right, id, wider, alignContent, pictu
 
     &.primary-dark {
       background: charter.$primary600;
+      color: charter.$primary50;
+
+      > p {
+        color: charter.$primary50;
+      }
+    }
+
+    &.primary-darker {
+      background: charter.$primary800;
       color: charter.$primary50;
 
       > p {
