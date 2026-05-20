@@ -82,11 +82,11 @@ function get_title(volunteer: Volunteer) {
 }
 
 function get_name(volunteer: Volunteer) {
-  // has a google nickname inside 2 parentheses
-  const match = /\((.*)\)/.exec(volunteer.name)
-  if (match) {
-    return match[1]
-  }
+  // // has a google nickname inside 2 parentheses
+  // const match = /\((.*)\)/.exec(volunteer.name)
+  // if (match) {
+  //   return match[1]
+  // }
 
   // check if the name without spaces matches the username
   const glued_together = volunteer.name.replaceAll(' ', '')
@@ -97,13 +97,13 @@ function get_name(volunteer: Volunteer) {
   // drop words deemed lesser
   if (volunteer.name.includes(' ')) {
     const words = volunteer.name.split(' ')
-    const words_filtered = words
+    const shortened_name = words
       .filter((word) => {
         return !(word.toLowerCase() == word || word.toUpperCase() == word || word.includes("'"))
       })
       .join(' ')
-    if (volunteer.name != words_filtered) {
-      return words_filtered
+    if (volunteer.name != shortened_name) {
+      return shortened_name
     }
   }
 
