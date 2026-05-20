@@ -4,6 +4,19 @@
 
 import assert from 'node:assert'
 
+interface Volunteer {
+  id: string
+  name: string
+  department: string
+  role: string
+}
+
+interface Peep {
+  id: string
+  name: string
+  titles: string[]
+}
+
 const { PEEPS_CLIENT_ID, PEEPS_CLIENT_SECRET, PEEPS_REFRESH_TOKEN, PEEPS_SPREADSHEET_ID } = Deno.env.toObject()
 
 // get access token from refresh token
@@ -42,12 +55,12 @@ const spreadsheet_header = spreadsheet_rows
 assert.equal(spreadsheet_header.join(', '), 'Team member, Department, Role, Notes')
 
 // deno-lint-ignore no-explicit-any
-let all_volunteers: Record<string, string>[] = spreadsheet_rows.map((spreadsheet_row: any) => {
+let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) => {
   return {
     id: spreadsheet_row['values'][0]['chipRuns'][0]['chip']['personProperties']['email'],
     name: spreadsheet_row['values'][0]['formattedValue'],
     department: spreadsheet_row['values'][1]['formattedValue'],
-    role: spreadsheet_row['values'][2]?.['formattedValue']
+    role: (spreadsheet_row['values'][2]?.['formattedValue'] ?? '').trim()
   }
 })
 
@@ -55,20 +68,53 @@ let all_volunteers: Record<string, string>[] = spreadsheet_rows.map((spreadsheet
 all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role)) // role filter
 // console.log(all_volunteers)
 
-let peeps: { id: string; name: string; titles: string[]; }[] = JSON.parse(Deno.readTextFileSync('./src/data/hr/peeps.json'))
+let peeps: Peep[] = JSON.parse(Deno.readTextFileSync('./src/data/hr/peeps.json'))
 
-function get_department_name_to_display(string: string) {
+function get_department(string: string) {
   string = string.replace('Reg', 'Registration')
   string = string.replace('IT & Web', 'IT')
   return string
 }
 
+function get_title(volunteer: Volunteer) {
+  return `${volunteer.role} of ${get_department(volunteer.department)}`
+}
+
+// if someone is not yet on the list then we find them a logical place,
+// if they are already on the list then that position is simply reused.
+function get_index_for_new_peep(volunteer: Volunteer) {
+  const title = get_title(volunteer)
+
+  console.log(volunteer)
+
+  let department_i
+  // let role_i
+
+  for (const [i, peep] of peeps.entries()) {
+
+    // check if the peep is from the same department
+    if (peep.titles.find(title => {
+      return title.endsWith(get_department(volunteer.department))
+    })) {
+      department_i = i
+    }
+
+    // if the next peep has a different department then we insert here
+    if (department_i && department_i != i) {
+      return i;
+    }
+  }
+
+  // fall back to end
+  return peeps.length
+}
+
 all_volunteers.forEach((volunteer) => {
   const peep = peeps.find(peep => peep.id == volunteer.id)
-  const title = `${volunteer.role} of ${get_department_name_to_display(volunteer.department)}`
+  const title = get_title(volunteer)
 
   if (! peep) {
-    return peeps.push({
+    return peeps.splice(get_index_for_new_peep(volunteer), 0, {
       id: volunteer.id,
       name: volunteer.name,
       titles: [title]
@@ -85,7 +131,7 @@ peeps = peeps.filter((peep) => {
 
   peep.titles = peep.titles.filter(title => {
     return title == "Chairman" || volunteers.find(volunteer => {
-      return `${volunteer.role} of ${get_department_name_to_display(volunteer.department)}` == title
+      return get_title(volunteer) == title
     })
   })
 
