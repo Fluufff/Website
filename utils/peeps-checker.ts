@@ -51,7 +51,9 @@ let all_volunteers: Record<string, string>[] = spreadsheet_rows.map((spreadsheet
   }
 })
 
+// console.log(all_volunteers)
 all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role)) // role filter
+// console.log(all_volunteers)
 
 const about = Deno.readTextFileSync('./src/pages/about.astro')
 const peeps = Array.from(about.matchAll(/Peep name="(.*)" title=["{](.*?)[}"]/g)).map((result) => [
@@ -67,6 +69,16 @@ peeps.forEach((peep) => {
     return role
   })
 })
+
+const peeps_json = peeps.map(peep => {
+  return {
+    email: peep[0].toLowerCase().replaceAll(' ', '-') + '@fluufff.org',
+    name: peep[0],
+    roles: peep[1],
+  }
+})
+Deno.writeTextFileSync("./src/data/hr/peeps.json", JSON.stringify(peeps_json, null, 2))
+Deno.exit()
 
 const volunteer_name_to_peep_map = new Map()
 

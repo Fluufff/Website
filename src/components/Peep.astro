@@ -4,23 +4,29 @@ import type { ImageMetadata } from 'astro'
 import { Picture } from 'astro:assets'
 
 interface Props {
-  icon?: string
+  email: string
   name: string
-  title: string | string[]
+  roles: string[]
 }
 
-const { icon, name, title } = Astro.props
+const { email, name, roles } = Astro.props
 
-const allImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/peeps/*.{jpg,jpeg,png}')
+const all_images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/peeps/*.{jpg,jpeg,png}')
+const icon = Object.entries(all_images).find(([key]) => {
+  const filename = key.split('/').at(-1)?.split('.')[0] as string
+  const username = email.split('@')[0] as string
+  return filename.toLowerCase() == username.toLowerCase()
+})
 
-const image: ImageMetadata = icon ? (await allImages[`/src/assets/images/peeps/${icon}`]!()).default : placeholder
+const image = icon ? (await icon[1]()).default : placeholder
+
 ---
 
 <div class="peep" class:list={{ placeholder: !icon }}>
   <Picture src={image} formats={['avif', 'webp']} fallbackFormat={image.format} alt="" widths={[200, 400]} />
   <div class="peep__name">{name}</div>
-  <div class="peep__title">
-    {Array.isArray(title) ? title.map((t) => <div>{t}</div>) : title}
+  <div class="peep__roles">
+    {roles.map((t) => <div>{t}</div>)}
   </div>
 </div>
 
@@ -66,7 +72,7 @@ const image: ImageMetadata = icon ? (await allImages[`/src/assets/images/peeps/$
       @include text-styles.display4SemiBold;
     }
 
-    &__title {
+    &__roles {
       display: flex;
       flex-direction: column;
       gap: 2px;
@@ -92,7 +98,7 @@ const image: ImageMetadata = icon ? (await allImages[`/src/assets/images/peeps/$
         }
 
         .peep__name,
-        .peep__title {
+        .peep__roles {
           grid-column: 1;
           align-self: flex-end;
           text-align: right;
@@ -116,12 +122,12 @@ const image: ImageMetadata = icon ? (await allImages[`/src/assets/images/peeps/$
         margin-bottom: 16px;
       }
 
-      &__title {
+      &__roles {
         grid-row: 2 / 3;
       }
 
       &__name,
-      &__title {
+      &__roles {
         align-self: flex-start;
         grid-column: 2;
         font-size: 14px;

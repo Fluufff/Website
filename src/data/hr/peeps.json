@@ -1,0 +1,160 @@
+[
+  {
+    "email": "jawbreaker@fluufff.org",
+    "name": "Jawbreaker",
+    "roles": [
+      "Chairman",
+      "Head of HR",
+      "Head of Logistics"
+    ]
+  },
+  {
+    "email": "faelan@fluufff.org",
+    "name": "Faelan",
+    "roles": [
+      "Head of Reg & Venue"
+    ]
+  },
+  {
+    "email": "vrydi@fluufff.org",
+    "name": "Vrydi",
+    "roles": [
+      "Head of Accounting",
+      "Deputy of Theming"
+    ]
+  },
+  {
+    "email": "niki@fluufff.org",
+    "name": "Niki",
+    "roles": [
+      "Head of Bar"
+    ]
+  },
+  {
+    "email": "amaroq@fluufff.org",
+    "name": "Amaroq",
+    "roles": [
+      "Deputy of Bar"
+    ]
+  },
+  {
+    "email": "dd@fluufff.org",
+    "name": "DD",
+    "roles": [
+      "Deputy of Bar"
+    ]
+  },
+  {
+    "email": "azana@fluufff.org",
+    "name": "Azana",
+    "roles": [
+      "Head of Dealer's Den"
+    ]
+  },
+  {
+    "email": "alex-dax@fluufff.org",
+    "name": "Alex Dax",
+    "roles": [
+      "Deputy of Dealer's Den"
+    ]
+  },
+  {
+    "email": "nimalen@fluufff.org",
+    "name": "Nimalen",
+    "roles": [
+      "Head of Entertainment"
+    ]
+  },
+  {
+    "email": "dacia@fluufff.org",
+    "name": "Dacia",
+    "roles": [
+      "Head of Entertainment"
+    ]
+  },
+  {
+    "email": "bleats@fluufff.org",
+    "name": "Bleats",
+    "roles": [
+      "Head of Feedback",
+      "Deputy of Stewards & Safety"
+    ]
+  },
+  {
+    "email": "jenky@fluufff.org",
+    "name": "Jenky",
+    "roles": [
+      "Head of Fursuit Affairs"
+    ]
+  },
+  {
+    "email": "lilyheart-panda@fluufff.org",
+    "name": "Lilyheart Panda",
+    "roles": [
+      "Deputy of HR"
+    ]
+  },
+  {
+    "email": "juravenator@fluufff.org",
+    "name": "Juravenator",
+    "roles": [
+      "Head of IT & Web"
+    ]
+  },
+  {
+    "email": "proko@fluufff.org",
+    "name": "Proko",
+    "roles": [
+      "Deputy of IT & Web"
+    ]
+  },
+  {
+    "email": "cyber@fluufff.org",
+    "name": "Cyber",
+    "roles": [
+      "Head of PR"
+    ]
+  },
+  {
+    "email": "akylian@fluufff.org",
+    "name": "Akylian",
+    "roles": [
+      "Deputy of Reg & Venue"
+    ]
+  },
+  {
+    "email": "kanso@fluufff.org",
+    "name": "Kanso",
+    "roles": [
+      "Head of Stage"
+    ]
+  },
+  {
+    "email": "thinder@fluufff.org",
+    "name": "Thinder",
+    "roles": [
+      "Deputy of Stage"
+    ]
+  },
+  {
+    "email": "narf@fluufff.org",
+    "name": "Narf",
+    "roles": [
+      "Head of Stewards & Safety"
+    ]
+  },
+  {
+    "email": "milo@fluufff.org",
+    "name": "Milo",
+    "roles": [
+      "Deputy of Stewards & Safety"
+    ]
+  },
+  {
+    "email": "goomuin@fluufff.org",
+    "name": "Goomuin",
+    "roles": [
+      "Head of Theming"
+    ]
+  }
+]
