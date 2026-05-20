@@ -57,7 +57,7 @@ assert.equal(spreadsheet_header.join(', '), 'Team member, Department, Role, Note
 // deno-lint-ignore no-explicit-any
 let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) => {
   return {
-    id: spreadsheet_row['values'][0]['chipRuns'][0]['chip']['personProperties']['email'],
+    id: spreadsheet_row['values'][0]['chipRuns'][0]['chip']['personProperties']['email'].split('@')[0],
     name: spreadsheet_row['values'][0]['formattedValue'],
     department: spreadsheet_row['values'][1]['formattedValue'],
     role: (spreadsheet_row['values'][2]?.['formattedValue'] ?? '').trim()
@@ -68,7 +68,7 @@ let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) =>
 all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role)) // role filter
 // console.log(all_volunteers)
 
-let peeps: Peep[] = JSON.parse(Deno.readTextFileSync('./src/data/hr/peeps.json'))
+const peeps: Peep[] = []
 
 function get_department(string: string) {
   string = string.replace('Reg', 'Registration')
@@ -80,41 +80,12 @@ function get_title(volunteer: Volunteer) {
   return `${volunteer.role} of ${get_department(volunteer.department)}`
 }
 
-// if someone is not yet on the list then we find them a logical place,
-// if they are already on the list then that position is simply reused.
-function get_index_for_new_peep(volunteer: Volunteer) {
-  const title = get_title(volunteer)
-
-  console.log(volunteer)
-
-  let department_i
-  // let role_i
-
-  for (const [i, peep] of peeps.entries()) {
-
-    // check if the peep is from the same department
-    if (peep.titles.find(title => {
-      return title.endsWith(get_department(volunteer.department))
-    })) {
-      department_i = i
-    }
-
-    // if the next peep has a different department then we insert here
-    if (department_i && department_i != i) {
-      return i;
-    }
-  }
-
-  // fall back to end
-  return peeps.length
-}
-
 all_volunteers.forEach((volunteer) => {
   const peep = peeps.find(peep => peep.id == volunteer.id)
   const title = get_title(volunteer)
 
   if (! peep) {
-    return peeps.splice(get_index_for_new_peep(volunteer), 0, {
+    return peeps.push({
       id: volunteer.id,
       name: volunteer.name,
       titles: [title]
@@ -126,16 +97,13 @@ all_volunteers.forEach((volunteer) => {
   }
 })
 
-peeps = peeps.filter((peep) => {
-  const volunteers = all_volunteers.filter(volunteer => volunteer.id == peep.id)
+const chairman_i = peeps.findIndex(peep => peep.id == "jawbreaker")
+if (chairman_i !== -1) {
+  const chairman = peeps[chairman_i]
+  chairman.titles.unshift("Chairman")
 
-  peep.titles = peep.titles.filter(title => {
-    return title == "Chairman" || volunteers.find(volunteer => {
-      return get_title(volunteer) == title
-    })
-  })
-
-  return peep.titles.length > 0;
-})
+  peeps.splice(chairman_i, 1)
+  peeps.unshift(chairman)
+}
 
 Deno.writeTextFileSync("./src/data/hr/peeps.json", JSON.stringify(peeps, null, 2) + "\n")

@@ -1,6 +1,6 @@
 [
   {
-    "id": "jawbreaker@fluufff.org",
+    "id": "jawbreaker",
     "name": "Jawbreaker",
     "titles": [
       "Chairman",
@@ -9,71 +9,63 @@
     ]
   },
   {
-    "id": "faelan@fluufff.org",
-    "name": "Faelan",
-    "titles": [
-      "Head of Reg & Venue"
-    ]
-  },
-  {
-    "id": "vrydi@fluufff.org",
+    "id": "vrydi",
     "name": "Vrydi",
     "titles": [
-      "Head of Accounting",
-      "Deputy of Theming"
+      "Head of Accounting"
     ]
   },
   {
-    "id": "niki@fluufff.org",
-    "name": "Niki",
+    "id": "jaffacake",
+    "name": "Jaffa Cake",
+    "titles": [
+      "Deputy of Accounting"
+    ]
+  },
+  {
+    "id": "dd",
+    "name": "DD",
     "titles": [
       "Head of Bar"
     ]
   },
   {
-    "id": "amaroq@fluufff.org",
+    "id": "amaroq",
     "name": "Amaroq",
     "titles": [
       "Deputy of Bar"
     ]
   },
   {
-    "id": "dd@fluufff.org",
-    "name": "DD",
-    "titles": [
-      "Deputy of Bar"
-    ]
-  },
-  {
-    "id": "azana@fluufff.org",
+    "id": "azana",
     "name": "Azana",
     "titles": [
       "Head of Dealer's Den"
     ]
   },
   {
-    "id": "alex-dax@fluufff.org",
+    "id": "alex-dax",
     "name": "Alex Dax",
     "titles": [
       "Deputy of Dealer's Den"
     ]
   },
   {
-    "id": "nimalen@fluufff.org",
+    "id": "nimalen",
     "name": "Nimalen",
     "titles": [
       "Head of Entertainment"
     ]
   },
   {
-    "id": "dacia@fluufff.org",
+    "id": "dacia",
     "name": "Dacia",
     "titles": [
       "Head of Entertainment"
     ]
   },
   {
-    "id": "bleats@fluufff.org",
+    "id": "bleats",
     "name": "Bleats",
     "titles": [
       "Head of Feedback",
@@ -81,77 +73,91 @@
     ]
   },
   {
-    "id": "jenky@fluufff.org",
+    "id": "jenky",
     "name": "Jenky",
     "titles": [
       "Head of Fursuit Affairs"
     ]
   },
   {
-    "id": "lilyheart@fluufff.org",
+    "id": "lilyheart",
     "name": "Lilyheart Panda",
     "titles": [
       "Deputy of HR"
     ]
   },
   {
-    "id": "juravenator@fluufff.org",
+    "id": "juravenator",
     "name": "Juravenator",
     "titles": [
-      "Head of IT & Web"
+      "Head of IT"
     ]
   },
   {
-    "id": "proko@fluufff.org",
-    "name": "Proko",
-    "titles": [
-      "Deputy of IT & Web"
-    ]
-  },
-  {
-    "id": "cyber@fluufff.org",
-    "name": "Cyber",
+    "id": "cyber",
+    "name": "PD Cyber",
     "titles": [
       "Head of PR"
     ]
   },
   {
-    "id": "akylian@fluufff.org",
-    "name": "Akylian",
+    "id": "ress",
+    "name": "Ress theraptor",
     "titles": [
-      "Deputy of Reg & Venue"
+      "Deputy of PR"
     ]
   },
   {
-    "id": "kanso@fluufff.org",
+    "id": "hojo",
+    "name": "Hojo",
+    "titles": [
+      "Deputy of PR"
+    ]
+  },
+  {
+    "id": "faelan",
+    "name": "Faelan",
+    "titles": [
+      "Head of Registration & Venue"
+    ]
+  },
+  {
+    "id": "akylian",
+    "name": "Akylian",
+    "titles": [
+      "Deputy of Registration & Venue"
+    ]
+  },
+  {
+    "id": "kanso",
     "name": "Kanso",
     "titles": [
       "Head of Stage"
     ]
   },
   {
-    "id": "thinder@fluufff.org",
+    "id": "thinder",
     "name": "Thinder",
     "titles": [
       "Deputy of Stage"
     ]
   },
   {
-    "id": "narf@fluufff.org",
+    "id": "narf",
     "name": "Narf",
     "titles": [
       "Head of Stewards & Safety"
     ]
   },
   {
-    "id": "milo@fluufff.org",
-    "name": "Milo",
+    "id": "milo",
+    "name": "Milo 'Clock",
     "titles": [
       "Deputy of Stewards & Safety"
     ]
   },
   {
-    "id": "goomuin@fluufff.org",
+    "id": "goomuin",
     "name": "Goomuin",
     "titles": [
       "Head of Theming"
