@@ -37,6 +37,7 @@ const image = icon ? (await icon[1]()).default : placeholder
     flex-direction: column;
     align-items: center;
     text-align: center;
+    width: 250px;
 
     &.placeholder {
       picture {
@@ -64,6 +65,20 @@ const image = icon ? (await icon[1]()).default : placeholder
       }
     }
 
+    @media (max-width: 700px) {
+      width: 125px;
+
+      > picture {
+        height: 100px;
+        width: 100px;
+
+        > img {
+          height: 100px;
+          width: 100px;
+        }
+      }
+    }
+
     &__name {
       margin-top: 24px;
       color: charter.$primary800;
@@ -77,62 +92,6 @@ const image = icon ? (await icon[1]()).default : placeholder
       margin-top: 16px;
       color: charter.$primary600;
       @include text-styles.display3SemiBold;
-    }
-  }
-
-  @media (max-width: 600px) {
-    .peep {
-      display: grid;
-      grid-template-columns: 100px 1fr;
-      grid-template-rows: auto auto;
-      column-gap: 16px;
-      row-gap: 0;
-      align-items: center;
-
-      &:nth-child(2n) {
-        grid-template-columns: 1fr 100px;
-        > picture {
-          grid-column: 2;
-        }
-
-        .peep__name,
-        .peep__titles {
-          grid-column: 1;
-          align-self: flex-end;
-          text-align: right;
-        }
-      }
-
-      > picture {
-        grid-column: 1;
-        grid-row: 1 / 4;
-        width: 100px;
-        height: 100px;
-
-        > img {
-          width: 100px;
-          height: 100px;
-        }
-      }
-
-      &__name {
-        grid-row: 1;
-        margin-bottom: 16px;
-      }
-
-      &__titles {
-        grid-row: 2 / 3;
-      }
-
-      &__name,
-      &__titles {
-        align-self: flex-start;
-        grid-column: 2;
-        font-size: 14px;
-        gap: 4px;
-        margin-top: 0;
-        text-align: left;
-      }
     }
   }
 </style>

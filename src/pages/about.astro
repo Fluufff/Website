@@ -12,6 +12,20 @@ import peeps from '../data/hr/peeps.json'
 import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
+
+// prettier-ignore
+const patrons = [ // sorted by attendee number
+  { rank:  '1st', id:  16, name: 'treble'   },
+  { rank:  '2nd', id:  20, name: 'shiro'    },
+  { rank:  '3rd', id:  26, name: 'luca'     },
+  { rank:  '4th', id:  89, name: 'artorias' },
+  { rank:  '5th', id:  97, name: 'nimdo'    },
+  { rank:  '6th', id: 109, name: 'vladdy'   },
+  { rank:  '7th', id: 176, name: 'nicks'    },
+  { rank:  '8th', id: 190, name: 'kimura'   },
+  { rank:  '9th', id: 267, name: 'nyushki'  },
+  { rank: '10th', id: 299, name: 'slushy'   },
+]
 ---
 
 <Base>
@@ -83,6 +97,29 @@ import FaqItem from '../content/FaqItem.astro'
     </p>
     <p>Most furry conventions and several furry groups also raise funds and organize panels for various charities.</p>
   </Content>
+  <Content headline="Our Patrons" bg="primary-darker" id="our-patrons">
+    <table class="mt-8">
+      <thead>
+        <tr>
+          <th>rank</th>
+          <th>name</th>
+          <th>score</th>
+        </tr>
+      </thead>
+      <tbody>
+        {
+          patrons.map((patron) => (
+            <tr>
+              <td>{patron.rank}</td>
+              <td>{patron.name}</td>
+              <td>999,999,999</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+    <p class="pt-16">E P A N I C K</p>
+  </Content>
   <Content headline="Meet the Dream Team" bg="primary" id="meet-the-dream-team">
     <p>
       Flüüfff wouldn't happen without the amazing crew working behind the scenes.<br />
@@ -125,6 +162,8 @@ import FaqItem from '../content/FaqItem.astro'
 </Base>
 
 <style is:global lang="scss">
+  @use '../styles/charter';
+
   #dream_team_peeps {
     display: flex;
     flex-direction: row;
@@ -136,11 +175,37 @@ import FaqItem from '../content/FaqItem.astro'
     max-width: 1200px;
 
     gap: 64px;
+  }
 
-    @media (max-width: 600px) {
-      align-items: stretch;
-      flex-direction: column;
-      gap: 32px;
+  #our-patrons {
+    table,
+    p {
+      font-family: var(--font-video-game), monospace;
+    }
+
+    table {
+      font-size: 32px;
+      line-height: 40px;
+
+      th {
+        text-align: left;
+        color: charter.$primary300;
+      }
+
+      th:first-child,
+      td:first-child {
+        padding-right: 42px;
+        text-align: right;
+      }
+
+      td:nth-child(2) {
+        padding-right: 21px;
+      }
+    }
+
+    p {
+      font-size: 30px;
+      word-spacing: 20px;
     }
   }
 </style>
