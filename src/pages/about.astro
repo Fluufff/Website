@@ -12,18 +12,6 @@ import peeps from '../data/hr/peeps.json'
 import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
-
-const all_peep_images = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/peeps/*.{jpg,jpeg,png}')
-async function get_peep_icon(peep: { email: string; name: string; roles: string[]; }) {
-  const icon = Object.entries(all_peep_images).find(([key]) => {
-    const filename = key.split('/').at(-1)?.split('.')[0]
-    const username = peep.email!.split('@')[0]
-    return filename == username
-  })
-
-  return icon && (await icon[1]()).default;
-}
-
 ---
 
 <Base>
@@ -103,8 +91,8 @@ async function get_peep_icon(peep: { email: string; name: string; roles: string[
     </p>
     <p>They’re the ones making sure the con feels like home — year after year.</p>
     <div id="dream_team_peeps">
-      {peeps.map(async peep => (
-        <Peep name={peep.name} roles={peep.roles} icon={await get_peep_icon(peep)} />
+      {peeps.map(peep => (
+        <Peep email={peep.email} name={peep.name} roles={peep.roles} />
       ))}
     </div>
   </Content>
