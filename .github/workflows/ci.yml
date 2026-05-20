@@ -1,4 +1,4 @@
-v2.7.13name: Dev branch Checks
+name: Dev branch Checks
 
 on:
   push:
@@ -21,7 +21,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.5.3
+          deno-version: v2.7.13
 
       - name: Install dependencies
         run: deno install --allow-scripts
