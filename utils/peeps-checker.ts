@@ -81,6 +81,18 @@ function get_title(volunteer: Volunteer) {
   return `${volunteer.role} of ${get_department(volunteer.department)}`
 }
 
+// if a volunteer has a space in the name then pick the word matching their username
+function get_name(volunteer: Volunteer) {
+  if (volunteer.name.includes(' ')) {
+    const candidate = volunteer.name.split(' ').find((word) => word.toLowerCase() == volunteer.id)
+    if (candidate) {
+      return candidate
+    }
+  }
+
+  return volunteer.name
+}
+
 all_volunteers.forEach((volunteer) => {
   const peep = peeps.find((peep) => peep.id == volunteer.id)
   const title = get_title(volunteer)
@@ -88,7 +100,7 @@ all_volunteers.forEach((volunteer) => {
   if (!peep) {
     return peeps.push({
       id: volunteer.id,
-      name: volunteer.name,
+      name: get_name(volunteer),
       titles: [title]
     })
   }
