@@ -1,0 +1,159 @@
+[
+  {
+    "id": "jawbreaker",
+    "name": "Jawbreaker",
+    "titles": [
+      "Chairman",
+      "Head of HR",
+      "Head of Logistics"
+    ]
+  },
+  {
+    "id": "faelan",
+    "name": "Faelan",
+    "titles": [
+      "Head of Registration & Venue"
+    ]
+  },
+  {
+    "id": "vrydi",
+    "name": "Vrydi",
+    "titles": [
+      "Head of Accounting"
+    ]
+  },
+  {
+    "id": "jaffacake",
+    "name": "JaffaCake",
+    "titles": [
+      "Deputy of Accounting"
+    ]
+  },
+  {
+    "id": "dd",
+    "name": "DD",
+    "titles": [
+      "Head of Bar"
+    ]
+  },
+  {
+    "id": "amaroq",
+    "name": "Amaroq",
+    "titles": [
+      "Deputy of Bar"
+    ]
+  },
+  {
+    "id": "azana",
+    "name": "Azana",
+    "titles": [
+      "Head of Dealer's Den"
+    ]
+  },
+  {
+    "id": "alex-dax",
+    "name": "Alex Dax",
+    "titles": [
+      "Deputy of Dealer's Den"
+    ]
+  },
+  {
+    "id": "nimalen",
+    "name": "Nimalen",
+    "titles": [
+      "Head of Entertainment"
+    ]
+  },
+  {
+    "id": "dacia",
+    "name": "Dacia",
+    "titles": [
+      "Head of Entertainment"
+    ]
+  },
+  {
+    "id": "bleats",
+    "name": "Bleats",
+    "titles": [
+      "Head of Feedback",
+      "Deputy of Stewards & Safety"
+    ]
+  },
+  {
+    "id": "jenky",
+    "name": "Jenky",
+    "titles": [
+      "Head of Fursuit Affairs"
+    ]
+  },
+  {
+    "id": "lilyheart",
+    "name": "Lilyheart Panda",
+    "titles": [
+      "Deputy of HR"
+    ]
+  },
+  {
+    "id": "juravenator",
+    "name": "Juravenator",
+    "titles": [
+      "Head of IT"
+    ]
+  },
+  {
+    "id": "cyber",
+    "name": "Cyber",
+    "titles": [
+      "Head of PR"
+    ]
+  },
+  {
+    "id": "ress",
+    "name": "Ress",
+    "titles": [
+      "Deputy of PR"
+    ]
+  },
+  {
+    "id": "akylian",
+    "name": "Akylian",
+    "titles": [
+      "Deputy of Registration & Venue"
+    ]
+  },
+  {
+    "id": "kanso",
+    "name": "Kanso",
+    "titles": [
+      "Head of Stage"
+    ]
+  },
+  {
+    "id": "thinder",
+    "name": "Thinder",
+    "titles": [
+      "Deputy of Stage"
+    ]
+  },
+  {
+    "id": "narf",
+    "name": "Narf",
+    "titles": [
+      "Head of Stewards & Safety"
+    ]
+  },
+  {
+    "id": "milo",
+    "name": "Milo",
+    "titles": [
+      "Deputy of Stewards & Safety"
+    ]
+  },
+  {
+    "id": "goomuin",
+    "name": "Goomuin",
+    "titles": [
+      "Head of Theming"
+    ]
+  }
+]

@@ -8,6 +8,7 @@ import fandomImage from '../assets/images/fandom.jpg'
 
 import Content from '../components/sections/Content.astro'
 import Peep from '../components/Peep.astro'
+import peeps from '../data/hr/peeps.json'
 import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
@@ -127,28 +128,7 @@ const patrons = [ // sorted by attendee number
     </p>
     <p>They’re the ones making sure the con feels like home — year after year.</p>
     <div id="dream_team_peeps">
-      <Peep name="Jawbreaker" title={['Chairman', 'Head of HR', 'Head of Logistics']} icon="jawbreaker.png" />
-      <Peep name="Faelan" title={['Head of Registration & Venue']} icon="faelan.png" />
-      <Peep name="Vrydi" title="Head of Accounting" icon="vrydi.jpg" />
-      <Peep name="JaffaCake" title="Deputy of Accounting" icon="jaffa.jpg" />
-      <Peep name="DD" title="Head of Bar" />
-      <Peep name="Amaroq" title="Deputy of Bar" />
-      <Peep name="Azana" title="Head of Dealer's Den" icon="azana.png" />
-      <Peep name="Alex Dax" title="Deputy of Dealer's Den" />
-      <Peep name="Nimalen" title="Head of Entertainment" />
-      <Peep name="Dacia" title="Head of Entertainment" icon="dacia.png" />
-      <Peep name="Bleats" title={['Head of Feedback', 'Deputy of Stewards & Safety']} icon="bleats.png" />
-      <Peep name="Jenky" title="Head of Fursuit Affairs" />
-      <Peep name="Lilyheart Panda" title="Deputy of HR" icon="lilyheart.png" />
-      <Peep name="Juravenator" title="Head of IT" icon="juravenator.png" />
-      <Peep name="Cyber" title="Head of PR" icon="cyber.png" />
-      <Peep name="Ress" title="Deputy of PR" icon="ress.png" />
-      <Peep name="Akylian" title="Deputy of Registration & Venue" icon="akylian.png" />
-      <Peep name="Kanso" title="Head of Stage" />
-      <Peep name="Thinder" title="Deputy of Stage" icon="thinder.png" />
-      <Peep name="Narf" title="Head of Stewards & Safety" icon="narf.jpg" />
-      <Peep name="Milo" title="Deputy of Stewards & Safety" icon="milo.png" />
-      <Peep name="Goomuin" title="Head of Theming" icon="goomuin.jpg" />
+      {peeps.map((peep) => <Peep id={peep.id} name={peep.name} titles={peep.titles} />)}
     </div>
   </Content>
   <Socials />
