@@ -89,6 +89,23 @@ function get_name(volunteer: Volunteer) {
     return match[1]
   }
 
+  // check if the name without spaces matches the username
+  const glued_together = volunteer.name.replaceAll(' ', '')
+  if (glued_together.toLowerCase() == volunteer.id) {
+    return glued_together
+  }
+
+  // drop words deemed lesser
+  if (volunteer.name.includes(' ')) {
+    const words = volunteer.name.split(' ')
+    const words_filtered = words.filter(word => {
+      return ! (word.toLowerCase() == word || word.toUpperCase() == word || word.includes("'"))
+    }).join(' ')
+    if (volunteer.name != words_filtered) {
+      return words_filtered
+    }
+  }
+
   return volunteer.name
 }
 
