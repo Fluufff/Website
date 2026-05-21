@@ -165,5 +165,6 @@ hoist('faelan')
 hoist('jawbreaker')
 crown('jawbreaker', 'Chairman')
 
-console.log(peeps)
-Deno.writeTextFileSync('./src/data/hr/peeps.json', JSON.stringify(peeps, null, 2) + '\n')
+const json = JSON.stringify(peeps, null, 2)
+console.log(json)
+Deno.writeTextFileSync('./src/data/hr/peeps.json', `${json}\n`)
