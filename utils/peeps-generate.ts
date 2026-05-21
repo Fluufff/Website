@@ -73,7 +73,7 @@ let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) =>
     id: spreadsheet_row['values'][0]['chipRuns'][0]['chip']['personProperties']['email'].split('@')[0],
     name: spreadsheet_row['values'][0]['formattedValue'],
     department: spreadsheet_row['values'][1]['formattedValue'],
-    role: (spreadsheet_row['values'][2]?.['formattedValue'] ?? '').trim() // `Ress` is `Deputy ` of `HR`
+    role: spreadsheet_row['values'][2]?.['formattedValue'] ?? ''
   }
 })
 /* eslint-enable @typescript-eslint/no-explicit-any */
