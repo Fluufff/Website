@@ -1,8 +1,6 @@
 name: Peeps
 
 on:
-  push:
-    branches: ['utils/peeps-checker-ci']
   workflow_dispatch:
 
 jobs:
