@@ -1,6 +1,14 @@
-// checks the peeps against staff & volunteers speadsheet.
+// deno run --allow-env --env-file=.env.local --allow-net --allow-write utils/peeps-generate.ts
 
-// deno run --allow-env --env-file=.env.local --allow-net --allow-write utils/peeps-checker.ts
+// Writes a new peeps.json based on the contents of the "Staff & Volunteers" spreadsheet.
+
+// 1) make sure that the 3 oauth related environmental values are set properly
+// 2) grab the speadsheet id from the url (after `/d/`) and set that value too
+
+// some things to note:
+// - people appear in the order of the spreadsheet (based on their first eligible role)
+// (e.g. if someone is deputy of accounting and head of feedback then they might not show next to feedback deputies)
+// - at the bottom of the file people can be given extra titles and even be moved to the front
 
 import assert from 'node:assert'
 
@@ -18,6 +26,11 @@ interface Peep {
 }
 
 const { PEEPS_CLIENT_ID, PEEPS_CLIENT_SECRET, PEEPS_REFRESH_TOKEN, PEEPS_SPREADSHEET_ID } = Deno.env.toObject()
+
+assert(PEEPS_CLIENT_ID)
+assert(PEEPS_CLIENT_SECRET)
+assert(PEEPS_REFRESH_TOKEN)
+assert(PEEPS_SPREADSHEET_ID)
 
 // get access token from refresh token
 const access_token_response = await fetch('https://oauth2.googleapis.com/token', {
@@ -69,8 +82,6 @@ let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) =>
 all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role))
 // console.log(all_volunteers)
 
-const peeps: Peep[] = []
-
 function get_department(string: string) {
   string = string.replace('Reg', 'Registration')
   string = string.replace('IT & Web', 'IT')
@@ -109,6 +120,8 @@ function get_name(volunteer: Volunteer) {
 
   return volunteer.name
 }
+
+const peeps: Peep[] = []
 
 all_volunteers.forEach((volunteer) => {
   const peep = peeps.find((peep) => peep.id == volunteer.id)
