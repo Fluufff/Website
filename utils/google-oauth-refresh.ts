@@ -1,6 +1,6 @@
-// obtains an access token from your refresh token in case you want to call an api manually.
+// deno run --allow-env --env-file=.env.local --allow-net utils/google-oauth-refresh.ts
 
-// deno run --allow-env --env-file=.env.local --allow-net utils/refresh-token.ts
+// Uses the stored refresh token and obtains an access token from it for manual api use.
 
 const { PEEPS_CLIENT_ID, PEEPS_CLIENT_SECRET, PEEPS_REFRESH_TOKEN } = Deno.env.toObject()
 
@@ -16,4 +16,5 @@ const access_token_response = await fetch('https://oauth2.googleapis.com/token',
 const access_token_json = await access_token_response.json()
 const access_token = access_token_json['access_token']
 
-console.log(access_token)
+console.log(access_token_json)
+console.log(`\n${access_token}\n`)
