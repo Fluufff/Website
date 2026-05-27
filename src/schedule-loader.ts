@@ -108,7 +108,7 @@ export function scheduleEventLoader(strapi: Strapi): Loader {
       end_time: z.string(),
       description: z.string(),
       host_name: z.string().nullable(),
-      schedule_location: z.object({ id: z.number() }),
+      schedule_location: z.object({ id: z.number() }).nullable(),
       schedule_tags: z.array(z.object({ id: z.number() }))
     })
   }
