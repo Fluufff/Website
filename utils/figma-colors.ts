@@ -1,12 +1,17 @@
-// deno run --allow-net="api.figma.com" --allow-write="charter.scss" utils/figma-colors.ts
+// deno run --allow-env --env-file=.env.local --allow-net --allow-write utils/figma-colors.ts
+
+// requires a figma api token with the `file_content:read` scope in order to pull colors.
+// (can be obtained from your profile in the top right: settings -> security -> personal)
 
 // deno-lint-ignore-file no-explicit-any
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { assert } from 'node:console'
+import assert from 'node:assert'
 
-const FIGMA_TOKEN = 'figd_'
+const {FIGMA_TOKEN} = Deno.env.toObject()
 const FIGMA_FILE_ID = 'Dl4I0OJqlpDyBwtHWv8D43'
+
+assert(FIGMA_TOKEN)
 
 // stage 1, retrieve styles
 
@@ -69,11 +74,16 @@ const current_group_bits: any = []
 
 const output_lines = []
 
+// grandfathering in missing delimiter
+function get_delimiter(string: string) {
+  return ['neutrals', 'primary', 'secondary'].includes(string) ? '' : '-'
+}
+
 function flush_current_group_bits() {
   output_lines.push('')
   output_lines.push(`$${current_group}: (`)
   for (const bits of current_group_bits) {
-    output_lines.push(`  ${bits[2]}: $${bits[1]}-${bits[2]},`)
+    output_lines.push(`  ${bits[2]}: $${bits[1]}${get_delimiter(bits[1])}${bits[2]},`)
   }
   output_lines.push(');')
   current_group_bits.length = 0
@@ -84,6 +94,7 @@ for (const key of keys) {
   assert(bits.length == 3, `"${key}" does not have exactly two forward slashes.`)
 
   if (!bits[0].endsWith('26')) continue
+  if (bits[1] == 'functional') continue
 
   bits[2] = bits[2].replace(/^0+/, '') // remove leading zero used for sorting
 
@@ -96,11 +107,11 @@ for (const key of keys) {
   }
 
   current_group_bits.push(bits)
-  output_lines.push(`$${bits[1]}-${bits[2]}: ${style_id_to_hex.get(keys_to_id.get(key))};`)
+  output_lines.push(`$${bits[1]}${get_delimiter(bits[1])}${bits[2]}: ${style_id_to_hex.get(keys_to_id.get(key))};`)
 }
 
 flush_current_group_bits()
 
 const output_txt = output_lines.join('\n') + '\n'
 console.log(output_txt)
-Deno.writeTextFileSync('charter.scss', output_txt)
+Deno.writeTextFileSync('./src/styles/charter.scss', output_txt)
