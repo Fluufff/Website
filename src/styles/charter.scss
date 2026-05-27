@@ -1,3 +1,55 @@
+$accent1-50: #eaf6fa;
+$accent1-100: #d6eef5;
+$accent1-200: #acddec;
+$accent1-300: #83cce2;
+$accent1-400: #5abbd8;
+$accent1-500: #30aacf;
+$accent1-600: #2788a5;
+$accent1-700: #1d667c;
+$accent1-800: #134453;
+$accent1-900: #0a2229;
+$accent1-950: #07181d;
+
+$accent1: (
+  50: $accent1-50,
+  100: $accent1-100,
+  200: $accent1-200,
+  300: $accent1-300,
+  400: $accent1-400,
+  500: $accent1-500,
+  600: $accent1-600,
+  700: $accent1-700,
+  800: $accent1-800,
+  900: $accent1-900,
+  950: $accent1-950
+);
+
+$accent2-50: #f8ecf8;
+$accent2-100: #f1daf1;
+$accent2-200: #e4b4e2;
+$accent2-300: #d68fd4;
+$accent2-400: #c969c6;
+$accent2-500: #bb44b7;
+$accent2-600: #963693;
+$accent2-700: #70296e;
+$accent2-800: #4b1b49;
+$accent2-900: #250e25;
+$accent2-950: #1a091a;
+
+$accent2: (
+  50: $accent2-50,
+  100: $accent2-100,
+  200: $accent2-200,
+  300: $accent2-300,
+  400: $accent2-400,
+  500: $accent2-500,
+  600: $accent2-600,
+  700: $accent2-700,
+  800: $accent2-800,
+  900: $accent2-900,
+  950: $accent2-950
+);
+
 $neutrals50: #ffffff;
 $neutrals100: #f2e9fc;
 $neutrals200: #cdcbcb;
@@ -74,56 +126,4 @@ $secondary: (
   800: $secondary800,
   900: $secondary900,
   950: $secondary950
-);
-
-$accent1-50: #eaf6fa;
-$accent1-100: #d6eef5;
-$accent1-200: #acddec;
-$accent1-300: #83cce2;
-$accent1-400: #5abbd8;
-$accent1-500: #30aacf;
-$accent1-600: #2788a5;
-$accent1-700: #1d667c;
-$accent1-800: #134453;
-$accent1-900: #0a2229;
-$accent1-950: #07181d;
-
-$accent1: (
-  50: $accent1-50,
-  100: $accent1-100,
-  200: $accent1-200,
-  300: $accent1-300,
-  400: $accent1-400,
-  500: $accent1-500,
-  600: $accent1-600,
-  700: $accent1-700,
-  800: $accent1-800,
-  900: $accent1-900,
-  950: $accent1-950
-);
-
-$accent2-50: #f8ecf8;
-$accent2-100: #f1daf1;
-$accent2-200: #e4b4e2;
-$accent2-300: #d68fd4;
-$accent2-400: #c969c6;
-$accent2-500: #bb44b7;
-$accent2-600: #963693;
-$accent2-700: #70296e;
-$accent2-800: #4b1b49;
-$accent2-900: #250e25;
-$accent2-950: #1a091a;
-
-$accent2: (
-  50: $accent2-50,
-  100: $accent2-100,
-  200: $accent2-200,
-  300: $accent2-300,
-  400: $accent2-400,
-  500: $accent2-500,
-  600: $accent2-600,
-  700: $accent2-700,
-  800: $accent2-800,
-  900: $accent2-900,
-  950: $accent2-950
 );
