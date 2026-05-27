@@ -49,7 +49,7 @@ const all_events = raw_events.map((re) => {
     day: re.data.day,
     start: shortenTime(re.data.start_time),
     end: shortenTime(re.data.end_time),
-    location: raw_locations.find((l) => l.id == re.data.schedule_location.id.toString())?.data.name,
+    location: raw_locations.find((l) => l.id == re.data.schedule_location?.id.toString())?.data.name,
     tags: re.data.schedule_tags.map((t) => {
       const rt = raw_tags.find((rt) => rt.id == t.id.toString())
       if (!rt) {
