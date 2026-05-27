@@ -28,7 +28,10 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [Icons({ compiler: 'vue3', customCollections: { brix, brixFilled } }), tailwindcss()]
+    plugins: [Icons({ compiler: 'vue3', customCollections: { brix, brixFilled } }), tailwindcss()],
+    css: {
+      devSourcemap: true
+    }
   },
 
   experimental: {
