@@ -33,3 +33,10 @@ Note that when css is scoped those classes cannot be used as inner/outer class o
 
 The line numbers mentioned on that page might not point to the actual line of code,
 if you are unable to find it there then search around based on the error message itself.
+
+### Scss
+
+Some of the scss files have a names that are not as obvious:
+
+- `charter.scss`: typically refered to as the variables file
+- `tailwind-extras.scss`: generates global css color classes
