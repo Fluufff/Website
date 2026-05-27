@@ -22,16 +22,16 @@ const response = await fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_ID}`, 
     'Content-Type': 'application/json'
   }
 })
-
 const json = await response.json()
 
-const keys = []
-const keys_to_id = new Map()
+const keys = [] // [ "Fluufff 26/Accent 1/050" ]
+const keys_to_id = new Map() // { "Fluufff 26/Accent 1/050": "819:10320" }
 
 for (const [style_id, style] of Object.entries(json['styles']) as [string, any]) {
   if (style['styleType'] != 'FILL') continue
   if (!style['name'].startsWith('Fl')) continue // Fl uufff/üüfff
 
+  // replace "/50" with "/050" for sorting purposes
   const name = style['name'].replace(/\/50$/, '/050')
 
   keys.push(name)
@@ -39,25 +39,25 @@ for (const [style_id, style] of Object.entries(json['styles']) as [string, any])
 }
 
 keys.sort()
-// console.log(keys);
 
 // stage 2, resolve styles
 
-const params = new URLSearchParams({
-  ids: Array.from(keys_to_id.values()).join(',')
-})
-
-const response2 = await fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_ID}/nodes?${params}`, {
-  method: 'GET',
-  headers: {
-    'X-Figma-Token': FIGMA_TOKEN,
-    'Content-Type': 'application/json'
+const response2 = await fetch(
+  `https://api.figma.com/v1/files/${FIGMA_FILE_ID}/nodes?` +
+    new URLSearchParams({
+      ids: Array.from(keys_to_id.values()).join(',')
+    }),
+  {
+    method: 'GET',
+    headers: {
+      'X-Figma-Token': FIGMA_TOKEN,
+      'Content-Type': 'application/json'
+    }
   }
-})
-
+)
 const json2 = await response2.json()
 
-const style_id_to_hex = new Map()
+const style_id_to_hex = new Map() // { "819:10320": "#eaf6fa" }
 
 for (const [style_id, node] of Object.entries(json2['nodes']) as [string, any]) {
   const color = node.document.fills[0].color
@@ -90,16 +90,16 @@ function flush_current_group_bits() {
 }
 
 for (const key of keys) {
-  const bits = key.toLowerCase().replaceAll(' ', '').split('/')
-  assert(bits.length == 3, `"${key}" does not have exactly two forward slashes.`)
+  const bits = key.toLowerCase().replaceAll(' ', '').split('/') // "Fluufff 26/Accent 1/050" -> "fluufff26/accent1/050"
+  assert(bits.length == 3, key) // [ "fluufff26", "accent1", "050" ]
 
   if (!bits[0].endsWith('26')) continue
   if (bits[1] == 'functional') continue
 
-  bits[2] = bits[2].replace(/^0+/, '') // remove leading zero used for sorting
+  // undo leading zero used in sorting
+  bits[2] = bits[2].replace(/^0+/, '')
 
   if (current_group == '') current_group = bits[1]
-
   if (current_group != bits[1]) {
     flush_current_group_bits()
     current_group = bits[1]
