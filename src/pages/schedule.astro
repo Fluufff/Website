@@ -17,6 +17,7 @@ import LucideDoorOpen from '~icons/lucide/door-open'
 import { getCollection } from 'astro:content'
 import { DateTime } from 'luxon'
 import Section from '../components/Section.astro'
+import Button from '../components/Button.astro'
 
 const openLocations = await getCollection('scheduleOpenLocations')
 const order = ['Bar', 'Fursuit Lounge', 'Photoshoot', "Dealer's Den"]
@@ -216,6 +217,16 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
       }
     </div>
     <div data-id={eventsid} class="flex flex-col w-full gap-4">
+      <section class="flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md" style="padding: 64px;">
+        <h3 class="font-atari font-bold text-xl md:text-2xl text-center">Coming soon</h3>
+        <div style="margin-top: 32px; margin-bottom: 32px;">
+          <p class="text-center">There’s nothing to see here yet because we’re still waiting on you to organise a panel on this day!</p>
+          <p class="text-center">We’re looking forward to seeing what you come up with.</p>
+        </div>
+        <div class="flex justify-center">
+          <Button outline to="/events#want-to-be-part-of-the-action" label="Host your own event" go />
+        </div>
+      </section>
       {
         all_events.map((e) => (
           <section data-date={e.day} class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md">
@@ -295,7 +306,7 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
     events.forEach((e) => {
       if (e.dataset.date == d) {
         e.classList.remove('hidden')
-      } else {
+      } else if (e.dataset.date) {
         e.classList.add('hidden')
       }
     })
