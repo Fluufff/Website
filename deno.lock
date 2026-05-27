@@ -14,7 +14,7 @@
     "npm:@iconify/utils@^3.0.2": "3.0.2",
     "npm:@primevue/icons@^4.4.1": "4.4.1_vue@3.5.22__typescript@5.9.3_typescript@5.9.3",
     "npm:@tailwindcss/vite@^4.2.2": "4.2.2_vite@6.3.6__sass-embedded@1.93.2__picomatch@4.0.3",
-    "npm:@types/deno@^2.5.0": "2.5.0",
+    "npm:@types/deno@^2.7.0": "2.7.0",
     "npm:@types/luxon@^3.7.1": "3.7.1",
     "npm:@types/qs@^6.15.0": "6.15.0",
     "npm:@typescript-eslint/parser@^8.45.0": "8.46.0_eslint@9.37.0_typescript@5.9.3",
@@ -1444,8 +1444,8 @@
         "@types/ms"
       ]
     },
-    "@types/deno@2.5.0": {
-      "integrity": "sha512-g8JS38vmc0S87jKsFzre+0ZyMOUDHPVokEJymSCRlL57h6f/FdKPWBXgdFh3Z8Ees9sz11qt9VWELU9Y9ZkiVw=="
+    "@types/deno@2.7.0": {
+      "integrity": "sha512-Y6fWcV8KpYeO3Lik/RiYnUxtr/LWqoeACciU0CA+dr1U/45tGgaX3HWQQAPCNN53raN4Rr4Fht4y6qsUH57fDA=="
     },
     "@types/estree@1.0.8": {
       "integrity": "sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w=="
@@ -1612,7 +1612,8 @@
       ]
     },
     "@ungap/structured-clone@1.3.0": {
-      "integrity": "sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g=="
+      "integrity": "sha512-WmoN8qaIAo7WTYWbAZuG8PYEhn5fkz7dZrqTBZ7dtt//lL2Gwms1IcnQ5yHqjDfX8Ft5j4YzDM23f87zBfDe9g==",
+      "deprecated": true
     },
     "@vitejs/plugin-vue-jsx@4.2.0_vite@6.3.6__sass-embedded@1.93.2__picomatch@4.0.3_vue@3.5.22__typescript@5.9.3_@babel+core@7.28.4_sass-embedded@1.93.2_typescript@5.9.3": {
       "integrity": "sha512-DSTrmrdLp+0LDNF77fqrKfx7X0ErRbOcUAgJL/HbSesqQwoUvUQ4uYQqaex+rovqgGcoPqVk+AwUh3v9CuiYIw==",
@@ -5535,7 +5536,7 @@
       "npm:@astrojs/vue@^5.1.1",
       "npm:@eslint/js@^9.36.0",
       "npm:@iconify-json/mdi@^1.2.3",
-      "npm:@types/deno@^2.5.0",
+      "npm:@types/deno@^2.7.0",
       "npm:@typescript-eslint/parser@^8.45.0",
       "npm:@vue/tsconfig@~0.8.1",
       "npm:astro-icon@^1.1.5",

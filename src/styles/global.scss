@@ -31,7 +31,7 @@ a {
 
 .content {
   @include text-styles.paragraphMediumRegular;
-  color: charter.$neutrals700;
+  // color: charter.$neutrals700; // todo: fix conflict properly
 
   a:not(.button) {
     text-decoration: underline;

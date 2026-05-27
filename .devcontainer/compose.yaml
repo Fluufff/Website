@@ -1,0 +1,14 @@
+services:
+  builder:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - STRAPI_URI
+      - STRAPI_TOKEN
+    command: ['deno', 'task', 'devhost']
+    volumes:
+      - ../:/mnt
+    working_dir: /mnt
+    ports:
+      - 4321:4321
