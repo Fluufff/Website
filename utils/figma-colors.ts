@@ -8,7 +8,7 @@
 
 import assert from 'node:assert'
 
-const {FIGMA_TOKEN} = Deno.env.toObject()
+const { FIGMA_TOKEN } = Deno.env.toObject()
 const FIGMA_FILE_ID = 'Dl4I0OJqlpDyBwtHWv8D43'
 
 assert(FIGMA_TOKEN)
