@@ -42,7 +42,7 @@ function shortenTime(time: string) {
 
 const all_events = raw_events.map((re) => {
   const start_unix = DateTime.fromISO(`${re.data.day}T${re.data.start_time}`).toUnixInteger()
-  return {
+  const event = {
     title: re.data.title,
     description: re.data.description,
     host: re.data.host_name,
@@ -58,8 +58,11 @@ const all_events = raw_events.map((re) => {
       } else {
         return { emoji: rt.data.emoji, name: rt.data.name }
       }
-    })
+    }),
+    hidden: false
   }
+  event.hidden = event.tags.map(t => t?.name).includes('Placeholder')
+  return event
 })
 all_events.sort((a, b) => a.start_unix - b.start_unix)
 
@@ -217,20 +220,26 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
       }
     </div>
     <div data-id={eventsid} class="flex flex-col w-full gap-4">
-      <section class="flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md" style="padding: 64px;">
-        <h3 class="font-atari font-bold text-xl md:text-2xl text-center">Coming soon</h3>
-        <div style="margin-top: 32px; margin-bottom: 32px;">
-          <p class="text-center">
-            There’s nothing to see here yet because we’re still waiting on you to organise a panel on this day!
-          </p>
-          <p class="text-center">We’re looking forward to seeing what you come up with.</p>
-        </div>
-        <div class="flex justify-center">
-          <Button outline accent1 to="/events#want-to-be-part-of-the-action" label="Host your own event" go />
-        </div>
-      </section>
       {
-        all_events.map((e) => (
+        days.map(d => {
+          return all_events.filter(e => !e.hidden && e.day == d.date).length == 0 ? (
+            <section data-date={d.date} class="flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md" style="padding: 64px;">
+              <h3 class="font-atari font-bold text-xl md:text-2xl text-center">Coming soon</h3>
+              <div style="margin-top: 32px; margin-bottom: 32px;">
+                <p class="text-center">
+                  There’s nothing to see here yet because we’re still waiting on you to organise a panel on this day!
+                </p>
+                <p class="text-center">We’re looking forward to seeing what you come up with.</p>
+              </div>
+              <div class="flex justify-center">
+                <Button outline accent1 to="/events#want-to-be-part-of-the-action" label="Host your own event" go />
+              </div>
+            </section>
+          ) : ''
+        })
+      }
+      {
+        all_events.filter(e => !e.hidden).map((e) => (
           <section data-date={e.day} class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md">
             <div class="flex justify-between items-center">
               <p class="flex items-center gap-2">
@@ -308,7 +317,7 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
     events.forEach((e) => {
       if (e.dataset.date == d) {
         e.classList.remove('hidden')
-      } else if (e.dataset.date) {
+      } else {
         e.classList.add('hidden')
       }
     })
