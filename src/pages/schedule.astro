@@ -66,7 +66,7 @@ all_events.sort((a, b) => a.start_unix - b.start_unix)
 
 const days: { date: string; weekday: string; shortdate: string }[] = []
 function add_day(date: string) {
-  if (!days.find(day => day.date == date)) {
+  if (!days.find((day) => day.date == date)) {
     const parsed = DateTime.fromISO(date).setLocale('en-US')
     const weekday = parsed.toLocaleString({ weekday: 'long' })
     const shortdate = parsed.toLocaleString({ day: 'numeric', month: 'short' })
@@ -77,8 +77,8 @@ function add_day(date: string) {
   return false
 }
 
-all_events.forEach(event => add_day(event.day))
-const missing_dates = con_dates.filter(con_date => add_day(con_date))
+all_events.forEach((event) => add_day(event.day))
+const missing_dates = con_dates.filter((con_date) => add_day(con_date))
 days.sort((a, b) => a.date.localeCompare(b.date))
 
 const first_date = days[0]?.date
@@ -221,8 +221,12 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
     </div>
     <div data-id={eventsid} class="flex flex-col w-full gap-4">
       {
-        missing_dates.map(date => (
-          <section data-date={date} class="flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md" style="padding: 64px;">
+        missing_dates.map((date) => (
+          <section
+            data-date={date}
+            class="flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md"
+            style="padding: 64px;"
+          >
             <h3 class="font-atari font-bold text-xl md:text-2xl text-center">Coming soon</h3>
             <div style="margin-top: 32px; margin-bottom: 32px;">
               <p class="text-center">
