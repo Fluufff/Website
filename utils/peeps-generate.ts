@@ -8,7 +8,6 @@
 // some things to note:
 // - people appear in the order of the spreadsheet (based on their first eligible role)
 // (e.g. if someone is deputy of accounting and head of feedback then they might not show next to feedback deputies)
-// - at the bottom of the file people can be given extra titles and even be moved to the front
 
 import assert from 'node:assert'
 
@@ -78,8 +77,18 @@ let all_volunteers: Volunteer[] = spreadsheet_rows.map((spreadsheet_row: any) =>
 })
 /* eslint-enable @typescript-eslint/no-explicit-any */
 
+// pretend the chairman is set in the spreadsheet as well
+all_volunteers.unshift({
+  id: 'jawbreaker',
+  name: 'Jawbreaker',
+  department: 'Board',
+  role: 'Chairman'
+})
+
 // console.log(all_volunteers)
-all_volunteers = all_volunteers.filter((volunteer) => ['Head', 'Deputy'].includes(volunteer.role))
+all_volunteers = all_volunteers.filter((volunteer) => {
+  return ['Head', 'Deputy'].includes(volunteer.role) || volunteer.department == 'Board'
+})
 // console.log(all_volunteers)
 
 function get_department(string: string) {
@@ -89,6 +98,8 @@ function get_department(string: string) {
 }
 
 function get_title(volunteer: Volunteer) {
+  if (volunteer.department == 'Board') return volunteer.role
+
   return `${volunteer.role} of ${get_department(volunteer.department)}`
 }
 
@@ -139,31 +150,6 @@ all_volunteers.forEach((volunteer) => {
     peep.titles.push(title)
   }
 })
-
-// gives them an additional role
-function crown(id: string, title: string) {
-  const i = peeps.findIndex((peep) => peep.id == id)
-  if (i !== -1) {
-    const peep = peeps[i]
-
-    peep.titles.unshift(title)
-  }
-}
-
-// puts them at the front
-function hoist(id: string) {
-  const i = peeps.findIndex((peep) => peep.id == id)
-  if (i !== -1) {
-    const peep = peeps[i]
-
-    peeps.splice(i, 1)
-    peeps.unshift(peep)
-  }
-}
-
-hoist('faelan')
-hoist('jawbreaker')
-crown('jawbreaker', 'Chairman')
 
 const json = JSON.stringify(peeps, null, 2)
 console.log(json)

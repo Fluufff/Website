@@ -9,13 +9,6 @@
     ]
   },
   {
-    "id": "faelan",
-    "name": "Faelan",
-    "titles": [
-      "Head of Registration & Venue"
-    ]
-  },
-  {
     "id": "vrydi",
     "name": "Vrydi",
     "titles": [
@@ -112,6 +105,13 @@
     "name": "Hojo",
     "titles": [
       "Deputy of PR"
+    ]
+  },
+  {
+    "id": "faelan",
+    "name": "Faelan",
+    "titles": [
+      "Head of Registration & Venue"
     ]
   },
   {
