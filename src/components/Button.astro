@@ -6,16 +6,17 @@ interface Props {
   to?: string
   primary?: boolean
   outline?: boolean
+  accent1?: boolean
   go?: boolean
   newTab?: boolean
 }
 
-const { label, to, primary = false, outline = false, go = false, newTab = false } = Astro.props
+const { label, to, primary = false, outline = false, accent1 = false, go = false, newTab = false } = Astro.props
 
 const Element = to ? 'a' : 'button'
 ---
 
-<Element href={to} class="button" class:list={{ primary, outline }} target={newTab ? '_blank' : undefined}
+<Element href={to} class="button" class:list={{ primary, outline, accent1 }} target={newTab ? '_blank' : undefined}
   >{label}{!!go && <Icon name="mdi:arrow-right" />}</Element
 >
 
@@ -45,6 +46,11 @@ const Element = to ? 'a' : 'button'
     &.outline {
       color: charter.$secondary500;
       background: charter.$neutrals50;
+    }
+
+    &.accent1 {
+      color: charter.$accent1-500;
+      border-color: charter.$accent1-500;
     }
 
     &.primary {
