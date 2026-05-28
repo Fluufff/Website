@@ -200,6 +200,10 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
   .day-button {
     cursor: pointer;
   }
+
+  .schedule__entry {
+    border: 1px solid #bcdadc; // Flüüfff 25/Primary/200
+  }
 </style>
 
 <Base>
@@ -218,7 +222,10 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
     <div data-id={eventsid} class="flex flex-col w-full gap-4">
       {
         all_events.map((e) => (
-          <section data-date={e.day} class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md">
+          <section
+            data-date={e.day}
+            class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md schedule__entry"
+          >
             <div class="flex justify-between items-center">
               <p class="flex items-center gap-2">
                 <LucideClock />
