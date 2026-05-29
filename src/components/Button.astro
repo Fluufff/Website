@@ -64,6 +64,17 @@ const Element = to ? 'a' : 'button'
       }
     }
 
+    &.accent1 {
+      color: charter.$neutrals50;
+      background: charter.$accent1-500;
+      border-color: charter.$accent1-500;
+
+      &.outline {
+        background: charter.$neutrals50;
+        color: charter.$accent1-500;
+      }
+    }
+
     > [data-icon] {
       font-size: 16px;
       margin: -3px 0 -3px 3px;
