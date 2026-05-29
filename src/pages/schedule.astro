@@ -17,6 +17,8 @@ import LucideDoorOpen from '~icons/lucide/door-open'
 import { getCollection } from 'astro:content'
 import { DateTime } from 'luxon'
 import Section from '../components/Section.astro'
+import Button from '../components/Button.astro'
+import con_dates from '../data/con/dates.json'
 
 const openLocations = await getCollection('scheduleOpenLocations')
 const order = ['Bar', 'Fursuit Lounge', 'Photoshoot', "Dealer's Den"]
@@ -62,20 +64,22 @@ const all_events = raw_events.map((re) => {
 })
 all_events.sort((a, b) => a.start_unix - b.start_unix)
 
-const days = all_events.reduce(
-  (all, e) => {
-    if (!all.find((d) => d.date == e.day)) {
-      const parsed = DateTime.fromISO(e.day).setLocale('en-US')
-      const weekday = parsed.toLocaleString({ weekday: 'long' })
-      const shortdate = parsed.toLocaleString({ day: 'numeric', month: 'short' })
-      all.push({ date: e.day, weekday, shortdate })
-    }
-    return all
-  },
-  [] as { date: string; weekday: string; shortdate: string }[]
-)
-// eslint-disable-next-line  @typescript-eslint/no-explicit-any
-days.sort((a, b) => (a.date as any) - (b.date as any))
+const days: { date: string; weekday: string; shortdate: string }[] = []
+function add_day(date: string) {
+  if (!days.find((day) => day.date == date)) {
+    const parsed = DateTime.fromISO(date).setLocale('en-US')
+    const weekday = parsed.toLocaleString({ weekday: 'long' })
+    const shortdate = parsed.toLocaleString({ day: 'numeric', month: 'short' })
+    days.push({ date: date, weekday, shortdate })
+    return true
+  }
+
+  return false
+}
+
+all_events.forEach((event) => add_day(event.day))
+const missing_dates = con_dates.filter((con_date) => add_day(con_date))
+days.sort((a, b) => a.date.localeCompare(b.date))
 
 const first_date = days[0]?.date
 const buttonid = Math.random().toString(36).slice(2, 11)
@@ -216,6 +220,26 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
       }
     </div>
     <div data-id={eventsid} class="flex flex-col w-full gap-4">
+      {
+        missing_dates.map((date) => (
+          <section
+            data-date={date}
+            class="flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md"
+            style="padding: 64px;"
+          >
+            <h3 class="font-atari font-bold text-xl md:text-2xl text-center">Coming soon</h3>
+            <div style="margin-top: 32px; margin-bottom: 32px;">
+              <p class="text-center">
+                There’s nothing to see here yet because we’re still waiting on you to organise a panel on this day!
+              </p>
+              <p class="text-center">We’re looking forward to seeing what you come up with.</p>
+            </div>
+            <div class="flex justify-center">
+              <Button outline accent1 to="/events#want-to-be-part-of-the-action" label="Host your own event" go />
+            </div>
+          </section>
+        ))
+      }
       {
         all_events.map((e) => (
           <section data-date={e.day} class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutral-50 rounded-md">
