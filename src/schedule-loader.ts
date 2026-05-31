@@ -52,6 +52,7 @@ export function scheduleTagLoader(strapi: Strapi): Loader {
     schema: z.object({
       id: z.number(),
       name: z.string(),
+      description: z.string(),
       emoji: z.string()
     })
   }
