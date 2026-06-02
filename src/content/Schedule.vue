@@ -116,7 +116,7 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
     position: sticky;
     top: 0;
     z-index: 10;
-    background: charter.$neutrals300;
+    background: charter.$neutrals-300;
     margin: -16px !important;
     padding: 16px;
     scroll-behavior: smooth;
@@ -161,8 +161,8 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
 
       svg {
         height: 40px;
-        background: charter.$neutrals300;
-        color: charter.$secondary500;
+        background: charter.$neutrals-300;
+        color: charter.$secondary-500;
       }
 
       &:after {
@@ -178,7 +178,7 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
 
         &:after {
           left: 100%;
-          background: linear-gradient(to right, charter.$neutrals300, transparent);
+          background: linear-gradient(to right, charter.$neutrals-300, transparent);
         }
       }
 
@@ -187,7 +187,7 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
 
         &:after {
           right: 100%;
-          background: linear-gradient(to left, charter.$neutrals300, transparent);
+          background: linear-gradient(to left, charter.$neutrals-300, transparent);
         }
       }
     }
@@ -199,8 +199,8 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
       justify-content: center;
       border-radius: 3px;
       padding: 12px 10px;
-      background: charter.$secondary500;
-      color: charter.$neutrals50;
+      background: charter.$secondary-500;
+      color: charter.$neutrals-50;
       @include text-styles.display3SemiBold;
       text-align: center;
       align-self: center;
@@ -218,7 +218,7 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
       }
 
       &.active {
-        background: charter.$secondary700;
+        background: charter.$secondary-700;
       }
     }
   }
@@ -242,12 +242,12 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
 
     &:before {
       left: 0;
-      background: linear-gradient(to right, charter.$neutrals300, transparent);
+      background: linear-gradient(to right, charter.$neutrals-300, transparent);
     }
 
     &:after {
       right: 0;
-      background: linear-gradient(to left, charter.$neutrals300, transparent);
+      background: linear-gradient(to left, charter.$neutrals-300, transparent);
     }
 
     @media (max-width: 600px) {
@@ -267,7 +267,7 @@ const scrollToRight = () => scheduleNav.value?.scrollTo({ left: 1000, behavior: 
       transition:
         transform 0.5s ease-out,
         opacity 0.5s ease-in;
-      background-color: charter.$neutrals300;
+      background-color: charter.$neutrals-300;
       z-index: 2;
     }
 

@@ -74,7 +74,7 @@ function pad(num: number): string {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  color: charter.$primary700;
+  color: charter.$primary-700;
   @include text-styles.display2Regular;
 
   &__open_locations {
@@ -91,8 +91,8 @@ function pad(num: number): string {
   h2 {
     border-radius: 3px;
     padding: 12px 10px;
-    background: charter.$secondary700;
-    color: charter.$neutrals50;
+    background: charter.$secondary-700;
+    color: charter.$neutrals-50;
     @include text-styles.display3SemiBold;
     text-align: center;
     align-self: center;
@@ -110,13 +110,13 @@ function pad(num: number): string {
     flex-direction: row;
     align-items: center;
     border-radius: 8px;
-    border: solid 1px charter.$neutrals400;
+    border: solid 1px charter.$neutrals-400;
     padding: 24px;
     gap: 8px;
     box-shadow: 0 1px 4px 0 rgba(25, 33, 61, 0.08);
 
     &.closed {
-      color: charter.$neutrals400;
+      color: charter.$neutrals-400;
     }
 
     @media (max-width: 600px) {

@@ -131,12 +131,12 @@ function switchTestimonial(direction: number) {
 
     &:before {
       left: 0;
-      background: linear-gradient(to right, charter.$primary100, transparent);
+      background: linear-gradient(to right, charter.$primary-100, transparent);
     }
 
     &:after {
       right: 0;
-      background: linear-gradient(to left, charter.$primary100, transparent);
+      background: linear-gradient(to left, charter.$primary-100, transparent);
     }
   }
 
@@ -160,7 +160,7 @@ function switchTestimonial(direction: number) {
 
     &_role {
       @include text-styles.display3SemiBold;
-      color: charter.$primary700;
+      color: charter.$primary-700;
     }
   }
 
@@ -171,7 +171,7 @@ function switchTestimonial(direction: number) {
       transition:
         transform 0.5s ease-out,
         opacity 0.5s ease-in;
-      background-color: charter.$primary100;
+      background-color: charter.$primary-100;
       z-index: 2;
     }
 
