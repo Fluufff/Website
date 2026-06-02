@@ -178,6 +178,7 @@ const jsEnabled = useMounted()
   > table {
     margin-top: 32px;
     border-radius: 8px;
+    border-collapse: separate;
     overflow: hidden;
     border: solid 1px charter.$secondary-500;
     border-spacing: 0;
