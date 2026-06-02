@@ -74,16 +74,11 @@ const current_group_bits: any = []
 
 const output_lines = []
 
-// grandfathering in missing delimiter
-function get_delimiter(string: string) {
-  return ['neutrals', 'primary', 'secondary'].includes(string) ? '' : '-'
-}
-
 function flush_current_group_bits() {
   output_lines.push('')
   output_lines.push(`$${current_group}: (`)
   for (const bits of current_group_bits) {
-    output_lines.push(`  ${bits[2]}: $${bits[1]}${get_delimiter(bits[1])}${bits[2]},`)
+    output_lines.push(`  ${bits[2]}: $${bits[1]}-${bits[2]},`)
   }
   output_lines.push(');')
   current_group_bits.length = 0
@@ -107,7 +102,7 @@ for (const key of keys) {
   }
 
   current_group_bits.push(bits)
-  output_lines.push(`$${bits[1]}${get_delimiter(bits[1])}${bits[2]}: ${style_id_to_hex.get(keys_to_id.get(key))};`)
+  output_lines.push(`$${bits[1]}-${bits[2]}: ${style_id_to_hex.get(keys_to_id.get(key))};`)
 }
 
 flush_current_group_bits()
