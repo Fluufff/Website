@@ -108,8 +108,8 @@ function parseTimes(time: OpenTime): [DateTime, DateTime] {
   gap: 24px;
   padding: 32px 24px;
   border-radius: 8px;
-  border: solid 1px charter.$primary200;
-  background: charter.$neutrals50;
+  border: solid 1px charter.$primary-200;
+  background: charter.$neutrals-50;
   box-shadow: 0 1px 4px 0 rgba(25, 33, 61, 0.08);
 
   h3 {
@@ -143,7 +143,7 @@ function parseTimes(time: OpenTime): [DateTime, DateTime] {
     }
 
     &.ongoing {
-      background: charter.$primary100;
+      background: charter.$primary-100;
       color: charter.$accent1-700;
 
       &:before {
@@ -152,20 +152,20 @@ function parseTimes(time: OpenTime): [DateTime, DateTime] {
     }
 
     &.comingup {
-      background: charter.$secondary100;
-      color: charter.$secondary700;
+      background: charter.$secondary-100;
+      color: charter.$secondary-700;
 
       &:before {
-        background: charter.$secondary400;
+        background: charter.$secondary-400;
       }
     }
 
     &.past {
-      background: charter.$neutrals300;
-      color: charter.$neutrals700;
+      background: charter.$neutrals-300;
+      color: charter.$neutrals-700;
 
       &:before {
-        background: charter.$neutrals400;
+        background: charter.$neutrals-400;
       }
     }
   }
@@ -191,7 +191,7 @@ function parseTimes(time: OpenTime): [DateTime, DateTime] {
     flex-direction: row;
     flex-wrap: wrap;
     gap: 8px;
-    border-top: solid 1px charter.$primary200;
+    border-top: solid 1px charter.$primary-200;
     padding-top: 24px;
 
     a {
@@ -199,8 +199,8 @@ function parseTimes(time: OpenTime): [DateTime, DateTime] {
       flex-shrink: 0;
       align-items: center;
       border-radius: 3px;
-      border: solid 1px charter.$primary200;
-      background: charter.$primary100;
+      border: solid 1px charter.$primary-200;
+      background: charter.$primary-100;
       gap: 4px;
       padding: 10px;
       text-decoration: none !important;
@@ -218,7 +218,7 @@ function parseTimes(time: OpenTime): [DateTime, DateTime] {
     border: 0;
     background: 0;
     text-align: left;
-    color: charter.$secondary500;
+    color: charter.$secondary-500;
     margin-bottom: -32px;
     cursor: pointer;
     @include text-styles.display3Regular;
