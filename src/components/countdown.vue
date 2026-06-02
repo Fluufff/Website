@@ -1,5 +1,5 @@
 <template>
-  <div class="registration_banner_countdown">
+  <div class="registration_banner_countdown" :class="{ loading: !mounted }">
     <div>
       <span class="time">{{ padded(time.days) }}</span>
       <span class="label">Days</span>
@@ -29,6 +29,10 @@
   display: flex;
   flex-direction: row;
   gap: 2px;
+
+  &.loading .time {
+    visibility: hidden;
+  }
 
   & > div {
     display: flex;
@@ -64,6 +68,7 @@ const props = defineProps({
   }
 })
 
+const mounted = ref(false)
 const time = ref({
   days: 0,
   hours: 0,
@@ -96,6 +101,7 @@ function updateCountdown() {
 }
 
 onMounted(() => {
+  mounted.value = true
   updateCountdown()
   interval = setInterval(updateCountdown, 1000)
 })
