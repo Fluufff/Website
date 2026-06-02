@@ -73,65 +73,65 @@ const image = Astro.props.image
   .pricing-card {
     display: flex;
     flex-direction: column;
-    background: charter.$neutrals50;
+    background: charter.$neutrals-50;
     padding: 32px 24px;
     border-radius: 8px;
-    border: solid 1px charter.$primary300;
+    border: solid 1px charter.$primary-300;
     width: 274px;
     gap: 24px;
     box-shadow: 0 1px 4px 0 rgba(25, 33, 61, 0.08);
 
     &.primary {
       > h3 {
-        color: charter.$primary500;
+        color: charter.$primary-500;
       }
 
       > *,
       .vat,
       > .pricing-card__price .per {
-        color: charter.$primary800;
+        color: charter.$primary-800;
       }
     }
 
     &.dark {
-      background: charter.$primary800;
+      background: charter.$primary-800;
       border-color: transparent;
 
       .description {
-        color: charter.$primary50;
+        color: charter.$primary-50;
       }
 
       > *,
       .vat {
-        color: charter.$primary50;
+        color: charter.$primary-50;
       }
 
       > .pricing-card__price {
         .per {
-          color: charter.$primary50;
+          color: charter.$primary-50;
         }
       }
 
       hr {
-        border-top-color: charter.$primary200;
+        border-top-color: charter.$primary-200;
       }
 
       .checklist {
         svg path[fill='#fff'] {
-          fill: charter.$primary800;
+          fill: charter.$primary-800;
         }
       }
     }
 
     > h3 {
       @include text-styles.heading4;
-      color: charter.$primary800;
+      color: charter.$primary-800;
     }
 
     .vat {
       @include text-styles.display2SemiBold;
       line-height: 18px;
-      color: charter.$primary800;
+      color: charter.$primary-800;
     }
 
     > .pricing-card__price {
@@ -150,13 +150,13 @@ const image = Astro.props.image
 
       .per {
         @include text-styles.display1SemiBold;
-        color: charter.$primary500;
+        color: charter.$primary-500;
       }
     }
 
     > .pricing-card__extra {
       @include text-styles.display2SemiBold;
-      color: charter.$primary500;
+      color: charter.$primary-500;
 
       & + .pricing-card__extra {
         margin-top: -24px;
@@ -165,7 +165,7 @@ const image = Astro.props.image
 
     > .description {
       @include text-styles.paragraphDefaultRegular;
-      color: charter.$primary800;
+      color: charter.$primary-800;
     }
 
     > div.description {
@@ -176,7 +176,7 @@ const image = Astro.props.image
 
     hr {
       border: 0;
-      border-top: solid 1px charter.$primary100;
+      border-top: solid 1px charter.$primary-100;
     }
 
     picture img {

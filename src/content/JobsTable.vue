@@ -113,7 +113,7 @@ const jsEnabled = useMounted()
     display: flex;
     flex-direction: row;
     gap: 40px;
-    color: charter.$neutrals600;
+    color: charter.$neutrals-600;
     visibility: hidden;
     height: 60px;
     opacity: 0;
@@ -138,7 +138,7 @@ const jsEnabled = useMounted()
       display: flex;
       cursor: pointer;
       align-items: center;
-      border-bottom: solid 1px charter.$secondary400;
+      border-bottom: solid 1px charter.$secondary-400;
       user-select: none;
 
       [data-pc-section='labelcontainer'] {
@@ -162,7 +162,7 @@ const jsEnabled = useMounted()
         padding: 16px 32px 16px 0;
         outline: 0;
 
-        border-bottom: solid 1px charter.$secondary400;
+        border-bottom: solid 1px charter.$secondary-400;
       }
 
       svg {
@@ -179,17 +179,17 @@ const jsEnabled = useMounted()
     margin-top: 32px;
     border-radius: 8px;
     overflow: hidden;
-    border: solid 1px charter.$secondary500;
+    border: solid 1px charter.$secondary-500;
     border-spacing: 0;
     table-layout: fixed;
 
     thead {
-      background: charter.$secondary500;
+      background: charter.$secondary-500;
 
       th {
         padding: 24px 22px;
         text-align: left;
-        color: charter.$neutrals50;
+        color: charter.$neutrals-50;
 
         &:nth-child(2) {
           width: 250px;
@@ -209,15 +209,15 @@ const jsEnabled = useMounted()
       tr {
         position: relative;
 
-        background: charter.$neutrals50;
+        background: charter.$neutrals-50;
         transition: 0.2s ease-out background-color;
 
         &:hover {
-          background: charter.$secondary50;
+          background: charter.$secondary-50;
         }
 
         & + tr td {
-          border-top: solid 1px charter.$secondary500;
+          border-top: solid 1px charter.$secondary-500;
         }
 
         a::after {
@@ -236,8 +236,8 @@ const jsEnabled = useMounted()
 
         &.empty {
           text-align: center;
-          color: charter.$neutrals600;
-          background: charter.$neutrals50;
+          color: charter.$neutrals-600;
+          background: charter.$neutrals-50;
         }
       }
     }
@@ -254,7 +254,7 @@ const jsEnabled = useMounted()
         width: 182px;
         border-radius: 3px;
 
-        background: charter.$secondary100;
+        background: charter.$secondary-100;
         @include text-styles.display2SemiBold;
 
         &.open {
@@ -304,7 +304,7 @@ const jsEnabled = useMounted()
       display: flex;
       flex-direction: column;
       align-items: stretch;
-      border: solid 1px charter.$neutrals400;
+      border: solid 1px charter.$neutrals-400;
       border-radius: 8px;
       padding: 24px;
 
@@ -370,7 +370,7 @@ const jsEnabled = useMounted()
 
 [data-pc-section='list'] {
   list-style: none;
-  background: charter.$neutrals50;
+  background: charter.$neutrals-50;
   box-shadow:
     0 4px 8px 0 rgba(0, 0, 0, 0.14),
     0 0 2px 0 rgba(0, 0, 0, 0.12);
@@ -390,12 +390,12 @@ const jsEnabled = useMounted()
     @include text-styles.paragraphMediumRegular;
 
     &:hover {
-      background-color: charter.$secondary50;
+      background-color: charter.$secondary-50;
     }
 
     &[aria-selected='true'] {
-      background-color: charter.$secondary100;
-      color: charter.$secondary500;
+      background-color: charter.$secondary-100;
+      color: charter.$secondary-500;
     }
 
     [data-pc-name='pcoptioncheckbox'] {

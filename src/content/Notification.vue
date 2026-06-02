@@ -31,12 +31,12 @@ function close() {
   position: relative;
   padding: 24px 64px;
   @include text-styles.paragraphMediumRegular;
-  background-color: charter.$primary600;
-  color: charter.$neutrals50;
+  background-color: charter.$primary-600;
+  color: charter.$neutrals-50;
   display: none;
 
   a {
-    color: charter.$neutrals50;
+    color: charter.$neutrals-50;
     text-decoration: underline;
   }
 
