@@ -11,14 +11,14 @@ const FIGMA_FILE_ID = 'Dl4I0OJqlpDyBwtHWv8D43'
 // const cache_pathname = `tmp/figma.json`
 
 // async function fetch_json() {
-  const response = await fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_ID}`, {
-      method: 'GET',
-      headers: {
-        'X-Figma-Token': FIGMA_TOKEN,
-        'Content-Type': 'application/json'
-      }
-    })
-  const json = await response.json()
+const response = await fetch(`https://api.figma.com/v1/files/${FIGMA_FILE_ID}`, {
+  method: 'GET',
+  headers: {
+    'X-Figma-Token': FIGMA_TOKEN,
+    'Content-Type': 'application/json'
+  }
+})
+const json = await response.json()
 //   Deno.writeTextFileSync(cache_pathname, JSON.stringify(json, null, 2))
 // }
 
@@ -63,7 +63,7 @@ function check_children(path: string, node: any) {
   }
 }
 
-const canvas = json['document']['children'].filter((child: any) => child.name == "Designs - Fluufff 26")[0];
+const canvas = json['document']['children'].filter((child: any) => child.name == 'Designs - Fluufff 26')[0]
 check_children('', canvas)
 // const frames = canvas.children.filter((child: any) => child.children);
 // Deno.writeTextFileSync('tmp/figma-frames.json', JSON.stringify(frames, null, 2))
