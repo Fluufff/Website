@@ -1,5 +1,5 @@
 <template>
-  <div class="registration_banner_countdown" :class="{loading: !mounted}">
+  <div class="registration_banner_countdown" :class="{ loading: !mounted }">
     <div>
       <span class="time">{{ padded(time.days) }}</span>
       <span class="label">Days</span>
