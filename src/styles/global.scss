@@ -35,11 +35,11 @@ a {
 
 .content {
   @include text-styles.paragraphMediumRegular;
-  // color: charter.$neutrals700; // todo: fix conflict properly
+  // color: charter.$neutrals-700; // todo: fix conflict properly
 
   a:not(.button) {
     text-decoration: underline;
-    color: charter.$neutrals700;
+    color: charter.$neutrals-700;
   }
   ul {
     margin-left: 1em;

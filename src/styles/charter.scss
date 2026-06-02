@@ -28,7 +28,7 @@ $accent2-50: #f8ecf8;
 $accent2-100: #f1daf1;
 $accent2-200: #e4b4e2;
 $accent2-300: #d68fd4;
-$accent2-400: #c969c6;
+$accent2-400: hsl(302, 47%, 60%);
 $accent2-500: #bb44b7;
 $accent2-600: #963693;
 $accent2-700: #70296e;
@@ -50,80 +50,80 @@ $accent2: (
   950: $accent2-950
 );
 
-$neutrals50: #ffffff;
-$neutrals100: #f2e9fc;
-$neutrals200: #cdcbcb;
-$neutrals300: #b4b1b1;
-$neutrals400: #9b9797;
-$neutrals500: #827d7d;
-$neutrals600: #686464;
-$neutrals700: #4e4b4b;
-$neutrals800: #343232;
-$neutrals900: #1a1919;
-$neutrals950: #121111;
+$neutrals-50: #ffffff;
+$neutrals-100: #f2e9fc;
+$neutrals-200: #cdcbcb;
+$neutrals-300: #b4b1b1;
+$neutrals-400: #9b9797;
+$neutrals-500: #827d7d;
+$neutrals-600: #686464;
+$neutrals-700: #4e4b4b;
+$neutrals-800: #343232;
+$neutrals-900: #1a1919;
+$neutrals-950: #121111;
 
 $neutrals: (
-  50: $neutrals50,
-  100: $neutrals100,
-  200: $neutrals200,
-  300: $neutrals300,
-  400: $neutrals400,
-  500: $neutrals500,
-  600: $neutrals600,
-  700: $neutrals700,
-  800: $neutrals800,
-  900: $neutrals900,
-  950: $neutrals950
+  50: $neutrals-50,
+  100: $neutrals-100,
+  200: $neutrals-200,
+  300: $neutrals-300,
+  400: $neutrals-400,
+  500: $neutrals-500,
+  600: $neutrals-600,
+  700: $neutrals-700,
+  800: $neutrals-800,
+  900: $neutrals-900,
+  950: $neutrals-950
 );
 
-$primary50: #f2e9fc;
-$primary100: #e5d3f8;
-$primary200: #cba6f2;
-$primary300: #b17aeb;
-$primary400: #964ee4;
-$primary500: #7720d7;
-$primary600: #631bb1;
-$primary700: #4b1485;
-$primary800: #320d59;
-$primary900: #19072c;
-$primary950: #11051f;
+$primary-50: #f2e9fc;
+$primary-100: #e5d3f8;
+$primary-200: #cba6f2;
+$primary-300: #b17aeb;
+$primary-400: #964ee4;
+$primary-500: #7720d7;
+$primary-600: #631bb1;
+$primary-700: #4b1485;
+$primary-800: #320d59;
+$primary-900: #19072c;
+$primary-950: #11051f;
 
 $primary: (
-  50: $primary50,
-  100: $primary100,
-  200: $primary200,
-  300: $primary300,
-  400: $primary400,
-  500: $primary500,
-  600: $primary600,
-  700: $primary700,
-  800: $primary800,
-  900: $primary900,
-  950: $primary950
+  50: $primary-50,
+  100: $primary-100,
+  200: $primary-200,
+  300: $primary-300,
+  400: $primary-400,
+  500: $primary-500,
+  600: $primary-600,
+  700: $primary-700,
+  800: $primary-800,
+  900: $primary-900,
+  950: $primary-950
 );
 
-$secondary50: #e9effb;
-$secondary100: #d3dff8;
-$secondary200: #a7c0f1;
-$secondary300: #7ba0ea;
-$secondary400: #5081e2;
-$secondary500: #2461db;
-$secondary600: #1d4eaf;
-$secondary700: #153a84;
-$secondary800: #0e2758;
-$secondary900: #07132c;
-$secondary950: #050e1f;
+$secondary-50: #e9effb;
+$secondary-100: #d3dff8;
+$secondary-200: #a7c0f1;
+$secondary-300: #7ba0ea;
+$secondary-400: #5081e2;
+$secondary-500: #2461db;
+$secondary-600: #1d4eaf;
+$secondary-700: #153a84;
+$secondary-800: #0e2758;
+$secondary-900: #07132c;
+$secondary-950: #050e1f;
 
 $secondary: (
-  50: $secondary50,
-  100: $secondary100,
-  200: $secondary200,
-  300: $secondary300,
-  400: $secondary400,
-  500: $secondary500,
-  600: $secondary600,
-  700: $secondary700,
-  800: $secondary800,
-  900: $secondary900,
-  950: $secondary950
+  50: $secondary-50,
+  100: $secondary-100,
+  200: $secondary-200,
+  300: $secondary-300,
+  400: $secondary-400,
+  500: $secondary-500,
+  600: $secondary-600,
+  700: $secondary-700,
+  800: $secondary-800,
+  900: $secondary-900,
+  950: $secondary-950
 );
