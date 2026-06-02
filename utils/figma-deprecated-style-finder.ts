@@ -50,6 +50,8 @@ function check_children(path: string, node: any) {
     node.children.forEach((child: any) => check_children(`${path}[${child.name}]`, child))
   }
 
+  if (['~spacer'].includes(node.name)) return
+
   for (const [key, value] of Object.entries(node.styles ?? {})) {
     if (style_codes.has(value)) {
       let line = `${style_names.get(value).padEnd(24, ' ')} ${key.padEnd(7, ' ')} ${path}`
