@@ -72,16 +72,18 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
 <style lang="scss" scoped>
   @use '../styles/charter';
 
+  $breakpoint: 900px;
+
   .steps {
     & > :first-child {
       width: 66%;
 
-      @media (max-width: 900px) {
+      @media (max-width: $breakpoint) {
         width: auto;
       }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: $breakpoint) {
       text-align: center;
 
       picture {
@@ -98,7 +100,7 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
       align-self: end;
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: $breakpoint) {
       margin-top: 50px;
       width: auto;
     }
@@ -130,44 +132,25 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
     position: absolute;
     left: 50%;
 
+    $transform-base: translate(-50%, -50%);
+
     &--1 {
       top: 500px;
-      transform: translate(-50%, -50%) rotate(0deg);
+      transform: $transform-base rotate(0deg);
     }
 
     &--2 {
       top: 850px;
-      transform: translate(-50%, -50%) rotate(9.653deg);
+      transform: $transform-base rotate(9.653deg);
     }
 
     &--3 {
       top: 1125px;
-      transform: translate(-50%, -50%) rotate(20.894deg);
+      transform: $transform-base rotate(20.894deg);
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: $breakpoint) {
       display: none;
     }
-
-    // @media (max-width: 1300px) {
-
-    //   &--1 {
-    //     left: 25%;
-    //     top: 850px;
-    //     transform: translate(-50%, -50%) rotate(244deg);
-    //   }
-
-    //   &--2 {
-    //     left: 75%;
-    //     top: 1300px;
-    //     transform: translate(-50%, -50%) rotate(115.653deg) scale(1, -1);
-    //   }
-
-    //   &--3 {
-    //     left: 25%;
-    //     top: 1625px;
-    //     transform: translate(-50%, -50%) rotate(175.894deg) scale(1, -1);
-    //   }
-    // }
   }
 </style>
