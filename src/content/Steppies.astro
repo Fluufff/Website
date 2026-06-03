@@ -9,8 +9,8 @@ import step_02 from '../assets/images/staff-volunteering/step-02.png'
 import step_03 from '../assets/images/staff-volunteering/step-03.png'
 import step_04 from '../assets/images/staff-volunteering/step-04.png'
 ---
-<div>
-  <div class="flex flex-col gap-8 justify-center order-2 lg:order-1">
+<div class="flex flex-col">
+  <div class="flex flex-col gap-8 justify-center order-2 lg:order-1" style="width: 66%;">
     <h2>Joining Flüüfff</h2>
     <p>
       Somewhere between the first hello and the last dance, Flüüfff becomes that rare thing: a place that feels like coming home. And that only works when there are people behind the scenes dedicated to keeping the fire warm, the vibe friendly, and the whole thing running smoothly.
@@ -20,7 +20,7 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
     </p>
   </div>
 
-  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+  <div class="step flex flex-col gap-4 justify-center order-2 lg:order-1">
     <Picture src={step_01} alt="" width={300} style="margin-bottom: -30px;"/>
     <h4>STEP 01</h4>
     <h3>Tell us about you</h3>
@@ -29,7 +29,7 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
     </p>
   </div>
 
-  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+  <div class="step flex flex-col gap-4 justify-center order-2 lg:order-1">
     <Picture src={step_02} alt="" width={300} style="margin-bottom: -20px;"/>
     <h4>STEP 02</h4>
     <h3>Are we a match?</h3>
@@ -38,7 +38,7 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
     </p>
   </div>
 
-  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+  <div class="step flex flex-col gap-4 justify-center order-2 lg:order-1">
     <Picture src={step_03} alt="" width={300} style="margin-bottom: -25px;"/>
     <h4>STEP 03</h4>
     <h3>Follow-up</h3>
@@ -47,7 +47,7 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
     </p>
   </div>
 
-  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+  <div class="step flex flex-col gap-4 justify-center order-2 lg:order-1">
     <Picture src={step_04} alt="" width={300} style="margin-bottom: -20px;"/>
     <h4>STEP 04</h4>
     <h3>Welcome to the team!</h3>
@@ -63,6 +63,15 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
 
 <style lang="scss" scoped>
   @use '../styles/charter';
+
+  .step {
+    margin-top: -150px;
+
+    width: 35%;
+    &:nth-child(even) {
+      align-self: end;
+    }
+  }
 
   h2 {
     font-size: 30px;
@@ -85,18 +94,22 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
   }
 
   .arrow {
-    position: relative;
+    position: absolute;
+    left: 50%;
 
     &--1 {
-      transform: rotate(0deg);
+      top: 475px;
+      transform: translate(-50%, -50%) rotate(0deg);
     }
 
     &--2 {
-      transform: rotate(9.653deg);
+      top: 875px;
+      transform: translate(-50%, -50%) rotate(9.653deg);
     }
 
     &--3 {
-      transform: rotate(20.894deg);
+      top: 1225px;
+      transform: translate(-50%, -50%) rotate(20.894deg);
     }
   }
 </style>
