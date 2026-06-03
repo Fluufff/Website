@@ -17,6 +17,7 @@ import LucideDoorOpen from '~icons/lucide/door-open'
 import { getCollection } from 'astro:content'
 import { DateTime } from 'luxon'
 import Section from '../components/Section.astro'
+import Socials from '../content/socials.astro'
 
 const openLocations = await getCollection('scheduleOpenLocations')
 const order = ['Bar', 'Fursuit Lounge', 'Photoshoot', "Dealer's Den"]
@@ -278,6 +279,7 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
       }
     </div>
   </Section>
+  <Socials />
 </Base>
 
 <script is:inline define:vars={{ buttonid, eventsid, first_date }}>
