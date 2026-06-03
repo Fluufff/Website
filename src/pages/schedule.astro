@@ -209,7 +209,7 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
     <div data-id={buttonid} class="flex flex-wrap gap-2">
       {
         days.map((d) => (
-          <button data-date={d.date} class="p-2 text-neutral-50 bg-accent1-500 rounded day-button">
+          <button data-date={d.date} class="p-2 text-neutral-50 bg-accent1-500 rounded font-semibold day-button">
             <span class="hidden md:inline">{d.weekday}, </span>
             {d.shortdate}
           </button>
