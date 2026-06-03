@@ -1,0 +1,102 @@
+---
+import { Picture } from 'astro:assets'
+
+import Arrow_1 from '../assets/images/staff-volunteering/arrow-1.svg'
+import Arrow_2 from '../assets/images/staff-volunteering/arrow-2.svg'
+import Arrow_3 from '../assets/images/staff-volunteering/arrow-3.svg'
+import step_01 from '../assets/images/staff-volunteering/step-01.png'
+import step_02 from '../assets/images/staff-volunteering/step-02.png'
+import step_03 from '../assets/images/staff-volunteering/step-03.png'
+import step_04 from '../assets/images/staff-volunteering/step-04.png'
+---
+<div>
+  <div class="flex flex-col gap-8 justify-center order-2 lg:order-1">
+    <h2>Joining Flüüfff</h2>
+    <p>
+      Somewhere between the first hello and the last dance, Flüüfff becomes that rare thing: a place that feels like coming home. And that only works when there are people behind the scenes dedicated to keeping the fire warm, the vibe friendly, and the whole thing running smoothly.
+    </p>
+    <p>
+      If you would love to help build that kind of furry convention (as staff or as a volunteer), we would love to hear from you.
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+    <Picture src={step_01} alt="" width={300}/>
+    <h4>STEP 01</h4>
+    <h3>Tell us about you</h3>
+    <p>
+      Fill out the form and give us the quick version of you: who you are, what you would love to help with, and what kind of role fits your energy.
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+    <Picture src={step_02} alt="" width={300}/>
+    <h4>STEP 02</h4>
+    <h3>Are we a match?</h3>
+    <p>
+      We take a look, sanity-check the fit, and share it with the right team. We might reach out for a short video-call, just to meet you properly and make sure everyone’s aligned.
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+    <Picture src={step_03} alt="" width={300}/>
+    <h4>STEP 03</h4>
+    <h3>Follow-up</h3>
+    <p>
+      If it’s a match, we will set everything up to welcome you into the team. And if it’s not the right fit right now, we will still reach out to let you know.
+    </p>
+  </div>
+
+  <div class="flex flex-col gap-4 justify-center order-2 lg:order-1">
+    <Picture src={step_04} alt="" width={300}/>
+    <h4>STEP 04</h4>
+    <h3>Welcome to the team!</h3>
+    <p>
+      We will have an onboarding call or chat to show you the ropes, answer your questions, and properly welcome you to the Flüüfff team.
+    </p>
+  </div>
+
+  <Arrow_1 class="arrow arrow--1"/>
+  <Arrow_2 class="arrow arrow--2"/>
+  <Arrow_3 class="arrow arrow--3"/>
+</div>
+
+<style lang="scss" scoped>
+  @use '../styles/charter';
+
+  h2 {
+    font-size: 30px;
+    font-weight: 400;
+    font-family: var(--font-atari), sans-serif;
+  }
+
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
+    font-family: var(--font-atari), sans-serif;
+  }
+
+  h4 {
+    font-size: 16px;
+    font-weight: 700;
+    font-family: var(--font-inter), sans-serif;
+
+    color: charter.$secondary-500;
+  }
+
+  .arrow {
+    position: relative;
+
+    &--1 {
+      transform: rotate(0deg);
+    }
+
+    &--2 {
+      transform: rotate(9.653deg);
+    }
+
+    &--3 {
+      transform: rotate(20.894deg);
+    }
+  }
+</style>

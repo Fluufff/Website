@@ -12,6 +12,7 @@ import { Icon } from 'astro-icon/components'
 import volunteerFormImage from '../assets/images/volunteer-form.jpg'
 import Faq from '../content/Faq.astro'
 import FaqItem from '../content/FaqItem.astro'
+import Steppies from '../content/Steppies.astro'
 import { getCollection } from 'astro:content'
 
 const rolesData = await getCollection('staffRoles')
@@ -51,7 +52,10 @@ const rolesList = rolesData
     </p>
     <JobsTable client:visible staffRoles={rolesList}><Icon name="mdi:search" slot="searchIcon" /></JobsTable>
   </Content>
-  <Content headline="Volunteer at Flüüfff" sideImage={volunteerFormImage} id="volunteer_form">
+  <Content>
+    <Steppies />
+  </Content>
+  <Content bg="secondary" headline="Volunteer at Flüüfff" sideImage={volunteerFormImage} id="volunteer_form">
     <p>
       Want to lend a paw during the convention? Whether you’re helping set up the stage, taking a shift at the bar, or
       supporting attendees, volunteers are a vital part of the Flüüfff experience.
