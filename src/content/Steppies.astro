@@ -24,8 +24,8 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
     </p>
   </div>
 
-  <div class="step flex flex-col gap-4 justify-center">
-    <Picture src={step_01} alt="" width={300} style="margin-bottom: -20px;" />
+  <div class="step step--first flex flex-col gap-4 justify-center">
+    <Picture src={step_01} alt="" width={150} style="margin-bottom: -20px;" />
     <h4>STEP 01</h4>
     <h3>Tell us about you</h3>
     <p>
@@ -82,19 +82,15 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
         width: auto;
       }
     }
-
-    @media (max-width: $breakpoint) {
-      text-align: center;
-
-      picture {
-        align-self: center;
-      }
-    }
   }
 
   .step {
     margin-top: -150px;
     width: 35%;
+
+    &--first {
+      margin-top: -100px;
+    }
 
     &:nth-child(even) {
       align-self: end;
@@ -126,6 +122,10 @@ import step_04 from '../assets/images/staff-volunteering/step-04.png'
     font-family: var(--font-inter), sans-serif;
 
     color: charter.$secondary-500;
+  }
+
+  picture {
+    align-self: center;
   }
 
   .arrow {
