@@ -67,7 +67,14 @@ const { bg, id } = Astro.props
       <Picture class="active" src={dances} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
       <Picture class="active" src={panels} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
       <Picture class="active" src={dd} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
-      <Picture class="active" src={shownight} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
+      <Picture
+        class="active"
+        src={shownight}
+        formats={['avif', 'webp']}
+        fallbackFormat="jpg"
+        alt=""
+        widths={[400, 800]}
+      />
     </Fragment>
   </ProgramPreviewInner>
 </Content>
