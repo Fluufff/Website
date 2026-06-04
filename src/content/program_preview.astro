@@ -4,9 +4,9 @@ import { Picture } from 'astro:assets'
 import Content from '../components/sections/Content.astro'
 
 import dances from '../assets/images/dances.jpg'
-import dd from '../assets/images/dd.jpg'
-import finale from '../assets/images/finale.jpg'
 import panels from '../assets/images/panels.jpg'
+import dd from '../assets/images/dd.jpg'
+import shownight from '../assets/images/shownight.jpg'
 import AccordionItem from '../components/AccordionItem.astro'
 import ProgramPreviewInner from './ProgramPreviewInner.vue'
 
@@ -67,7 +67,7 @@ const { bg, id } = Astro.props
       <Picture class="active" src={dances} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
       <Picture class="active" src={panels} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
       <Picture class="active" src={dd} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
-      <Picture class="active" src={finale} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
+      <Picture class="active" src={shownight} formats={['avif', 'webp']} fallbackFormat="jpg" alt="" widths={[400, 800]} />
     </Fragment>
   </ProgramPreviewInner>
 </Content>
