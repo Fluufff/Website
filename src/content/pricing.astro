@@ -88,7 +88,7 @@ import AccordionItem from '../components/AccordionItem.astro'
     margin-top: 48px;
 
     .notes {
-      color: charter.$neutrals500;
+      color: charter.$neutrals-500;
       font-size: 14px;
       font-style: normal;
       font-weight: 400;
@@ -110,18 +110,18 @@ import AccordionItem from '../components/AccordionItem.astro'
         margin-top: 16px;
 
         .accordion-item__header {
-          background: charter.$neutrals300;
+          background: charter.$neutrals-300;
           @include text-styles.heading4;
-          color: charter.$secondary500;
+          color: charter.$secondary-500;
           padding: 16px;
         }
 
         .accordion-item__content {
           @include text-styles.paragraphMediumRegular;
 
-          background: charter.$neutrals300;
+          background: charter.$neutrals-300;
           padding: 0 16px 16px 16px;
-          color: charter.$neutrals700;
+          color: charter.$neutrals-700;
 
           &:not(.active) {
             @media (min-width: 900px) {
@@ -148,7 +148,7 @@ import AccordionItem from '../components/AccordionItem.astro'
         padding: 24px;
 
         & + .pricing__option {
-          border-left: solid 1px charter.$secondary200;
+          border-left: solid 1px charter.$secondary-200;
         }
 
         h3 {
@@ -158,7 +158,7 @@ import AccordionItem from '../components/AccordionItem.astro'
           justify-content: space-between;
 
           > .badge {
-            background: charter.$secondary100;
+            background: charter.$secondary-100;
             @include text-styles.display2SemiBold;
             padding: 5px 8px;
             border-radius: 3px;
@@ -167,12 +167,12 @@ import AccordionItem from '../components/AccordionItem.astro'
           > .price {
             @include text-styles.heading3;
             > b {
-              color: charter.$neutrals500;
+              color: charter.$neutrals-500;
             }
             > sub {
               display: block;
               @include text-styles.paragraphMediumRegular;
-              color: charter.$neutrals600;
+              color: charter.$neutrals-600;
             }
           }
         }
@@ -201,7 +201,7 @@ import AccordionItem from '../components/AccordionItem.astro'
           }
 
           & + .pricing__option {
-            border-top: solid 1px charter.$secondary200;
+            border-top: solid 1px charter.$secondary-200;
             border-left: 0;
           }
         }
