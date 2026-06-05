@@ -272,7 +272,7 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
               </p>
             </div>
             <p>{e.description}</p>
-            {e.tags.length != 0 ? <hr /> : ''}
+            {e.tags.length != 0 ? <hr class="border-accent1-200" /> : ''}
             <div class="flex flex-wrap gap-2">
               {e.tags
                 .filter((t) => t)
