@@ -18,266 +18,266 @@ function isCurrent(...routePattern: string[]) {
   <div class="flex w-full md:w-auto items-center justify-between md:justify-center">
     <a id="header_logo" href="/"><Logo height={48} class="fill-primary-700" /></a>
     <LucideMenu class="md:hidden text-4xl ml-5" />
-    <nav
-      class="hidden md:flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline items-center"
-    >
-      <a href="/" class:list={['my-4', isCurrent('/') && 'font-bold']}>Home</a>
-      <div>
-        <p class:list={['my-4 flex items-center gap-1', isCurrent('/schedule', '/venue', '/pricing') && 'font-bold']}>
-          Attend <LucideChevronDown />
-        </p>
-        <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
-          <li class="hover:bg-primary-50">
-            <a class="p-4" href="/schedule" class:list={[isCurrent('/schedule') && 'font-bold']}>Schedule</a>
-          </li>
-          <li class="hover:bg-primary-50">
-            <a class="p-4" href="/venue" class:list={[isCurrent('/venue') && 'font-bold']}>Venue & Location</a>
-          </li>
-          <li class="hover:bg-primary-50">
-            <a class="p-4" href="/pricing" class:list={[isCurrent('/pricing') && 'font-bold']}>Tickets & Pricing</a>
-          </li>
-        </ul>
-      </div>
-      <div>
-        <p
-          class:list={[
-            'my-4 flex items-center gap-1',
-            isCurrent('/events', '/staff-volunteering', '/dealers-den') && 'font-bold'
-          ]}
-        >
-          Get involved <LucideChevronDown />
-        </p>
-        <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
-          <li class="hover:bg-primary-50">
-            <a class="p-4" href="/events" class:list={[isCurrent('/events') && 'font-bold']}>Panels & Events</a>
-          </li>
-          <li class="hover:bg-primary-50">
-            <a class="p-4" href="/staff-volunteering" class:list={[isCurrent('/staff-volunteering') && 'font-bold']}
-              >Staff & Volunteering</a
-            >
-          </li>
-          <li class="hover:bg-primary-50">
-            <a class="p-4" href="/dealers-den" class:list={[isCurrent('/dealers-den') && 'font-bold']}
-              >Join the dealer's den</a
-            >
-          </li>
-        </ul>
-      </div>
-      <a href="/about" class:list={['my-4', isCurrent('/about') && 'font-bold']}>About</a>
-      <a href="/contact" class:list={['my-4', isCurrent('/contact') && 'font-bold']}>Contact</a>
-      <Timed start={start_registration}>
-        <Button label="Register" primary go to="https://registration.fluufff.org" />
-        <Button slot="else" label="Create an account" to="https://registration.fluufff.org" />
-      </Timed>
-    </nav>
   </div>
-  <Timed start={start_registration}>
-    <div slot="else" class="registration_banner">
-      <div class="registration_banner_text">Registration opens in…</div>
-      <Countdown targetDate={start_registration} client:load />
+  <nav
+    class="hidden md:flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline items-center"
+  >
+    <a href="/" class:list={['my-4', isCurrent('/') && 'font-bold']}>Home</a>
+    <div>
+      <p class:list={['my-4 flex items-center gap-1', isCurrent('/schedule', '/venue', '/pricing') && 'font-bold']}>
+        Attend <LucideChevronDown />
+      </p>
+      <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/schedule" class:list={[isCurrent('/schedule') && 'font-bold']}>Schedule</a>
+        </li>
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/venue" class:list={[isCurrent('/venue') && 'font-bold']}>Venue & Location</a>
+        </li>
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/pricing" class:list={[isCurrent('/pricing') && 'font-bold']}>Tickets & Pricing</a>
+        </li>
+      </ul>
     </div>
-    <div class="registration_banner">
-      <div class="registration_banner_text">Flüüfff starts in…</div>
-      <Countdown targetDate={start_con} client:load />
+    <div>
+      <p
+        class:list={[
+          'my-4 flex items-center gap-1',
+          isCurrent('/events', '/staff-volunteering', '/dealers-den') && 'font-bold'
+        ]}
+      >
+        Get involved <LucideChevronDown />
+      </p>
+      <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/events" class:list={[isCurrent('/events') && 'font-bold']}>Panels & Events</a>
+        </li>
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/staff-volunteering" class:list={[isCurrent('/staff-volunteering') && 'font-bold']}
+            >Staff & Volunteering</a
+          >
+        </li>
+        <li class="hover:bg-primary-50">
+          <a class="p-4" href="/dealers-den" class:list={[isCurrent('/dealers-den') && 'font-bold']}
+            >Join the dealer's den</a
+          >
+        </li>
+      </ul>
     </div>
-  </Timed>
-  <style lang="scss">
-    @use '../../styles/charter';
+    <a href="/about" class:list={['my-4', isCurrent('/about') && 'font-bold']}>About</a>
+    <a href="/contact" class:list={['my-4', isCurrent('/contact') && 'font-bold']}>Contact</a>
+    <Timed start={start_registration}>
+      <Button label="Register" primary go to="https://registration.fluufff.org" />
+      <Button slot="else" label="Create an account" to="https://registration.fluufff.org" />
+    </Timed>
+  </nav>
+</header>
+<Timed start={start_registration}>
+  <div slot="else" class="registration_banner">
+    <div class="registration_banner_text">Registration opens in…</div>
+    <Countdown targetDate={start_registration} client:load />
+  </div>
+  <div class="registration_banner">
+    <div class="registration_banner_text">Flüüfff starts in…</div>
+    <Countdown targetDate={start_con} client:load />
+  </div>
+</Timed>
+<style lang="scss">
+  @use '../../styles/charter';
 
-    header {
-      a {
-        text-decoration: none;
-      }
-      p {
-        cursor: pointer;
-      }
-      // @media (min-width: 900px) {
-      & > nav {
-        & > div {
-          position: relative;
-          & > ul {
-            position: absolute;
-            left: -9001px;
-          }
-          &:hover > ul {
-            left: 0;
-          }
+  header {
+    a {
+      text-decoration: none;
+    }
+    p {
+      cursor: pointer;
+    }
+    // @media (min-width: 900px) {
+    & > nav {
+      & > div {
+        position: relative;
+        & > ul {
+          position: absolute;
+          left: -9001px;
+        }
+        &:hover > ul {
+          left: 0;
+        }
 
-          & > ul > li {
-            border-bottom: 1px solid charter.$neutrals-100;
-            &:last-child {
-              border-bottom: none;
-            }
-            & > a {
-              display: block;
-            }
+        & > ul > li {
+          border-bottom: 1px solid charter.$neutrals-100;
+          &:last-child {
+            border-bottom: none;
+          }
+          & > a {
+            display: block;
           }
         }
       }
-      // }
     }
-  </style>
-  <style is:global lang="scss">
-    @use '../../styles/charter';
-    @use '../../styles/text-styles';
+    // }
+  }
+</style>
+<style is:global lang="scss">
+  @use '../../styles/charter';
+  @use '../../styles/text-styles';
+
+  .registration_banner {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 32px;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background: charter.$accent1-600;
+
+    &.dark {
+      padding: 20px;
+      background: charter.$primary-700;
+
+      .registration_banner_text {
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+
+    .registration_banner_text,
+    .registration_banner_countdown {
+      color: charter.$neutrals-50;
+      font-family: var(--font-atari), sans-serif;
+      font-size: 32px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 40px; /* 125% */
+      text-transform: uppercase;
+    }
+  }
+
+  #header {
+    display: flex;
+    padding: 24px 32px;
+    justify-content: space-between;
+    align-items: center;
+    background: charter.$primary-100;
+
+    #header_logo svg {
+      fill: charter.$primary-700;
+    }
+
+    &_links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin: -16px 0;
+
+      a {
+        color: charter.$primary-600;
+        @include text-styles.display3Regular;
+        text-align: center;
+
+        &:not(.button) {
+          padding: 18px 12px;
+        }
+
+        &:not(.button):hover {
+          text-decoration: underline;
+        }
+
+        &[aria-current='page'] {
+          font-weight: 700;
+        }
+
+        &.button {
+          background: charter.$primary-600;
+          border: 0;
+          color: charter.$primary-100 !important;
+          margin-left: 16px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    #header {
+      flex-direction: column;
+      padding: 12px 24px;
+
+      #header_links {
+        margin: -8px 0;
+      }
+    }
 
     .registration_banner {
-      display: flex;
-      flex-wrap: wrap;
-      padding: 32px;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 20px;
-      background: charter.$accent1-600;
+      padding: 16px 24px;
+    }
+  }
 
-      &.dark {
-        padding: 20px;
-        background: charter.$primary-700;
+  @media (max-width: 600px) {
+    #header {
+      padding: 12px 12px 6px;
 
-        .registration_banner_text {
+      position: relative;
+      #header_logo {
+        align-self: flex-start;
+        svg {
+          height: 36px;
+        }
+      }
+
+      #header_links {
+        margin: 8px 0 0;
+        border-top: solid 1px charter.$primary-200;
+        flex-wrap: wrap;
+        align-self: stretch;
+        align-items: center;
+        justify-content: center;
+        row-gap: 4px;
+        a:not(.button) {
+          padding: 12px;
+        }
+      }
+
+      .button {
+        position: absolute;
+        right: 24px;
+        top: 12px;
+        padding: 8px 12px;
+      }
+    }
+
+    .registration_banner {
+      flex-direction: column;
+      padding: 16px 12px;
+      gap: 8px;
+
+      .registration_banner_text,
+      .registration_banner_countdown,
+      .registration_banner_text .time {
+        font-size: 24px;
+        line-height: 28px;
+
+        @media (max-width: 432px) {
           font-size: 20px;
           line-height: 24px;
         }
+
+        @media (max-width: 364px) {
+          font-size: 18px;
+          line-height: 22px;
+        }
       }
 
-      .registration_banner_text,
+      .registration_banner_text {
+        text-align: center;
+      }
+
       .registration_banner_countdown {
-        color: charter.$neutrals-50;
-        font-family: var(--font-atari), sans-serif;
-        font-size: 32px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 40px; /* 125% */
-        text-transform: uppercase;
-      }
-    }
-
-    #header {
-      display: flex;
-      padding: 24px 32px;
-      justify-content: space-between;
-      align-items: center;
-      background: charter.$primary-100;
-
-      #header_logo svg {
-        fill: charter.$primary-700;
-      }
-
-      &_links {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-        margin: -16px 0;
-
-        a {
-          color: charter.$primary-600;
-          @include text-styles.display3Regular;
-          text-align: center;
-
-          &:not(.button) {
-            padding: 18px 12px;
-          }
-
-          &:not(.button):hover {
-            text-decoration: underline;
-          }
-
-          &[aria-current='page'] {
-            font-weight: 700;
-          }
-
-          &.button {
-            background: charter.$primary-600;
-            border: 0;
-            color: charter.$primary-100 !important;
-            margin-left: 16px;
-          }
+        .label {
+          font-size: 10px;
+          line-height: 10px;
         }
       }
     }
-
-    @media (max-width: 900px) {
-      #header {
-        flex-direction: column;
-        padding: 12px 24px;
-
-        #header_links {
-          margin: -8px 0;
-        }
-      }
-
-      .registration_banner {
-        padding: 16px 24px;
-      }
-    }
-
-    @media (max-width: 600px) {
-      #header {
-        padding: 12px 12px 6px;
-
-        position: relative;
-        #header_logo {
-          align-self: flex-start;
-          svg {
-            height: 36px;
-          }
-        }
-
-        #header_links {
-          margin: 8px 0 0;
-          border-top: solid 1px charter.$primary-200;
-          flex-wrap: wrap;
-          align-self: stretch;
-          align-items: center;
-          justify-content: center;
-          row-gap: 4px;
-          a:not(.button) {
-            padding: 12px;
-          }
-        }
-
-        .button {
-          position: absolute;
-          right: 24px;
-          top: 12px;
-          padding: 8px 12px;
-        }
-      }
-
-      .registration_banner {
-        flex-direction: column;
-        padding: 16px 12px;
-        gap: 8px;
-
-        .registration_banner_text,
-        .registration_banner_countdown,
-        .registration_banner_text .time {
-          font-size: 24px;
-          line-height: 28px;
-
-          @media (max-width: 432px) {
-            font-size: 20px;
-            line-height: 24px;
-          }
-
-          @media (max-width: 364px) {
-            font-size: 18px;
-            line-height: 22px;
-          }
-        }
-
-        .registration_banner_text {
-          text-align: center;
-        }
-
-        .registration_banner_countdown {
-          .label {
-            font-size: 10px;
-            line-height: 10px;
-          }
-        }
-      }
-    }
-  </style>
-</header>
+  }
+</style>
