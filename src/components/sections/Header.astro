@@ -4,6 +4,7 @@ import Countdown from '../countdown.vue'
 import { start_registration, start_con } from '../../data/reg/dates.json'
 import Timed from '../Timed.astro'
 import Button from '../Button.astro'
+import LucideMenu from '~icons/lucide/menu'
 import LucideChevronDown from '~icons/lucide/chevron-down'
 
 function isCurrent(...routePattern: string[]) {
@@ -12,10 +13,13 @@ function isCurrent(...routePattern: string[]) {
 ---
 
 <header
-  class="z-10 flex flex-col md:flex-row flex-wrap px-8 py-6 text-primary-600 bg-primary-100 gap-4 justify-center items-center"
+  class="z-10 flex flex-col md:flex-row flex-wrap px-8 py-6 text-primary-600 bg-primary-100 md:gap-4 justify-center items-center"
 >
-  <a id="header_logo" href="/"><Logo height={48} class="fill-primary-700" /></a>
-  <nav class="flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline items-center">
+  <div class="flex w-full md:w-auto items-center justify-between md:justify-center">
+    <a id="header_logo" href="/"><Logo height={48} class="fill-primary-700" /></a>
+    <LucideMenu class="md:hidden text-4xl ml-5">
+  </div>
+  <nav class="hidden md:flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline items-center">
     <a href="/" class:list={['my-4', isCurrent('/') && 'font-bold']}>Home</a>
     <div>
       <p class:list={['my-4 flex items-center gap-1', isCurrent('/schedule', '/venue', '/pricing') && 'font-bold']}>
