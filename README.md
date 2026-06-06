@@ -40,3 +40,13 @@ Some of the scss files have a names that are not as obvious:
 
 - `charter.scss`: typically refered to as the variables file
 - `tailwind-extras.scss`: generates global css color classes
+
+### Icons
+
+Cheat sheet for adding icons matching the design:
+
+- check in `package.json` which icon sets are loaded
+- go to https://icon-sets.iconify.design/
+- use the "filter icon sets" search bar (not the main one) to filter on one of those
+- rinse and repeat, if none of the existing sets have what you need then find a new set
+- import them like `import LucideMenu from '~icons/lucide/menu'` for use as html elements
