@@ -14,9 +14,7 @@ function isCurrent(...routePattern: string[]) {
 }
 ---
 
-<header
-  class="z-10 flex flex-row flex-wrap text-primary-600 bg-primary-50 justify-center items-center"
->
+<header class="z-10 flex flex-row flex-wrap text-primary-600 bg-primary-50 justify-center items-center">
   <div class="flex w-full md:w-auto items-center justify-between md:justify-center mx-8 my-6">
     <a id="header_logo" href="/"><Logo height={48} class="fill-primary-700" /></a>
     <LucideMenu id="open-mobile-nav" class="md:hidden text-4xl ml-5 cursor-pointer" />
@@ -24,7 +22,7 @@ function isCurrent(...routePattern: string[]) {
   </div>
   <nav
     id="nav--desktop"
-    class="hidden md:flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline items-center  md:pe-8 md:py-6"
+    class="hidden md:flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline items-center md:pe-8 md:py-6"
   >
     <a href="/" class:list={['my-4', isCurrent('/') && 'font-bold']}>Home</a>
     <div>
@@ -81,27 +79,37 @@ function isCurrent(...routePattern: string[]) {
         <a href="/" class:list={[isCurrent('/') && 'font-bold']}>Home</a>
       </li>
       <li>
-        <p>Attend<LucideChevronDown class:list={{hidden: isCurrent('/schedule', '/venue', '/pricing')}} /><LucideChevronUp class:list={{hidden: !isCurrent('/schedule', '/venue', '/pricing')}} /></p>
+        <p>
+          Attend<LucideChevronDown
+            class:list={{ hidden: isCurrent('/schedule', '/venue', '/pricing') }}
+          /><LucideChevronUp class:list={{ hidden: !isCurrent('/schedule', '/venue', '/pricing') }} />
+        </p>
       </li>
-      <li class="bg-neutral-100" class:list={{hidden: !isCurrent('/schedule', '/venue', '/pricing')}}>
+      <li class="bg-neutral-100" class:list={{ hidden: !isCurrent('/schedule', '/venue', '/pricing') }}>
         <a href="/schedule" class:list={[isCurrent('/schedule') && 'font-bold']}>Schedule</a>
       </li>
-      <li class="bg-neutral-100" class:list={{hidden: !isCurrent('/schedule', '/venue', '/pricing')}}>
+      <li class="bg-neutral-100" class:list={{ hidden: !isCurrent('/schedule', '/venue', '/pricing') }}>
         <a href="/venue" class:list={[isCurrent('/venue') && 'font-bold']}>Venue & Location</a>
       </li>
-      <li class="bg-neutral-100" class:list={{hidden: !isCurrent('/schedule', '/venue', '/pricing')}}>
+      <li class="bg-neutral-100" class:list={{ hidden: !isCurrent('/schedule', '/venue', '/pricing') }}>
         <a href="/pricing" class:list={[isCurrent('/pricing') && 'font-bold']}>Tickets & Pricing</a>
       </li>
       <li>
-        <p>Get involved<LucideChevronDown class:list={{hidden: isCurrent('/events', '/staff-volunteering', '/dealers-den')}} /><LucideChevronUp class:list={{hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den')}} /></p>
+        <p>
+          Get involved<LucideChevronDown
+            class:list={{ hidden: isCurrent('/events', '/staff-volunteering', '/dealers-den') }}
+          /><LucideChevronUp class:list={{ hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den') }} />
+        </p>
       </li>
-      <li class="bg-neutral-100" class:list={{hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den')}}>
+      <li class="bg-neutral-100" class:list={{ hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den') }}>
         <a href="/events" class:list={[isCurrent('/events') && 'font-bold']}>Panels & Events</a>
       </li>
-      <li class="bg-neutral-100" class:list={{hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den')}}>
-        <a href="/staff-volunteering" class:list={[isCurrent('/staff-volunteering') && 'font-bold']}>Staff & Volunteering</a>
+      <li class="bg-neutral-100" class:list={{ hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den') }}>
+        <a href="/staff-volunteering" class:list={[isCurrent('/staff-volunteering') && 'font-bold']}
+          >Staff & Volunteering</a
+        >
       </li>
-      <li class="bg-neutral-100" class:list={{hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den')}}>
+      <li class="bg-neutral-100" class:list={{ hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den') }}>
         <a href="/dealers-den" class:list={[isCurrent('/dealers-den') && 'font-bold']}>Join the dealer's den</a>
       </li>
       <li>
@@ -112,8 +120,8 @@ function isCurrent(...routePattern: string[]) {
       </li>
     </ul>
     <div class="flex flex-col p-6 gap-4 w-full">
-      <Button primary label="Get in touch" outline to="/contact"></Button>
-      <Button primary label="Register" go to="https://registration.fluufff.org"></Button>
+      <Button primary label="Get in touch" outline to="/contact" />
+      <Button primary label="Register" go to="https://registration.fluufff.org" />
     </div>
   </nav>
 </header>
@@ -360,14 +368,14 @@ function isCurrent(...routePattern: string[]) {
     mobile.classList.add('hidden')
   })
 
-  document.querySelectorAll('#nav--mobile p').forEach(p => {
-    const li = p.parentNode;
+  document.querySelectorAll('#nav--mobile p').forEach((p) => {
+    const li = p.parentNode
     li.addEventListener('click', () => {
       p.children[0].classList.toggle('hidden')
       p.children[1].classList.toggle('hidden')
-      
+
       let sibling = li.nextSibling.nextSibling
-      while(sibling.classList.contains('bg-neutral-100')) {
+      while (sibling.classList.contains('bg-neutral-100')) {
         sibling.classList.toggle('hidden')
         sibling = sibling.nextSibling.nextSibling
       }
