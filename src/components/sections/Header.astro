@@ -4,6 +4,7 @@ import Countdown from '../countdown.vue'
 import { start_registration, start_con } from '../../data/reg/dates.json'
 import Timed from '../Timed.astro'
 import Button from '../Button.astro'
+import LucideX from '~icons/lucide/x'
 import LucideMenu from '~icons/lucide/menu'
 import LucideChevronDown from '~icons/lucide/chevron-down'
 
@@ -17,9 +18,11 @@ function isCurrent(...routePattern: string[]) {
 >
   <div class="flex w-full md:w-auto items-center justify-between md:justify-center">
     <a id="header_logo" href="/"><Logo height={48} class="fill-primary-700" /></a>
-    <LucideMenu class="md:hidden text-4xl ml-5" />
+    <LucideMenu id="open-mobile-nav" class="md:hidden text-4xl ml-5 cursor-pointer" />
+    <LucideX id="close-mobile-nav" class="hidden md:hidden text-4xl ml-5 cursor-pointer" />
   </div>
   <nav
+    id="nav--desktop"
     class="hidden md:flex flex-1 flex-wrap md:flex-nowrap gap-8 justify-center lg:justify-end no-underline items-center"
   >
     <a href="/" class:list={['my-4', isCurrent('/') && 'font-bold']}>Home</a>
@@ -70,6 +73,9 @@ function isCurrent(...routePattern: string[]) {
       <Button label="Register" primary go to="https://registration.fluufff.org" />
       <Button slot="else" label="Create an account" to="https://registration.fluufff.org" />
     </Timed>
+  </nav>
+  <nav id="nav--mobile" class="flex md:hidden">
+    <p>Hello world!</p>
   </nav>
 </header>
 <Timed start={start_registration}>
@@ -281,3 +287,23 @@ function isCurrent(...routePattern: string[]) {
     }
   }
 </style>
+
+<script is:inline>
+  const open = document.getElementById('open-mobile-nav')
+  const close = document.getElementById('close-mobile-nav')
+  const mobile = document.getElementById('nav--mobile')
+
+  open.addEventListener('click', () => {
+    open.classList.add('hidden')
+    close.classList.remove('hidden')
+
+    mobile.classList.remove('hidden')
+  })
+
+  close.addEventListener('click', () => {
+    close.classList.add('hidden')
+    open.classList.remove('hidden')
+
+    mobile.classList.add('hidden')
+  })
+</script>
