@@ -85,13 +85,15 @@ export const GET: APIRoute = () => {
         id: id(raw_event.id),
         displayName: en_US(raw_event.data.title),
         description: en_US(raw_event.data.description),
-        timeSlots: [{
-          startTime: `${raw_event.data.day}T${raw_event.data.start_time}`,
-          endTime: `${raw_event.data.day}T${raw_event.data.end_time}`,
-          roomIds: raw_event.data.schedule_location ? [id(raw_event.data.schedule_location.id)] : [],
-          hostIds: raw_event.data.host_name ? [get_host_id_from_host_name(raw_event.data.host_name)] : [],
-          labelIds: raw_event.data.schedule_tags.map((schedule_tag: any) => id(schedule_tag.id))
-        }]
+        timeSlots: [
+          {
+            startTime: `${raw_event.data.day}T${raw_event.data.start_time}`,
+            endTime: `${raw_event.data.day}T${raw_event.data.end_time}`,
+            roomIds: raw_event.data.schedule_location ? [id(raw_event.data.schedule_location.id)] : [],
+            hostIds: raw_event.data.host_name ? [get_host_id_from_host_name(raw_event.data.host_name)] : [],
+            labelIds: raw_event.data.schedule_tags.map((schedule_tag: any) => id(schedule_tag.id))
+          }
+        ]
       }
     })
   }
