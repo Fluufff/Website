@@ -5,10 +5,14 @@
 
 import type { APIRoute } from 'astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
+import { start_con } from '../../../data/reg/dates.json'
 
 const raw_tags = await getCollection('scheduleTags')
 const raw_locations = await getCollection('scheduleLocations')
 const raw_events = await getCollection('scheduleEvents')
+
+const timezone = 'Europe/Brussels'
+const offset = start_con.split('+')[1] // assumes the con happens entirely in the same offset
 
 function get_host_id_from_host_name(host_name: string) {
   return host_name.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '')
@@ -47,9 +51,9 @@ export const GET: APIRoute = () => {
     event: {
       id: 'fluufff',
       displayName: en_US('Flüüfff'),
-      startTime: '2026-11-11T08:00:00.000',
-      endTime: '2026-11-15T23:59:59.999', // todo: find out actual time
-      timezone: 'Europe/Brussels' // todo: timezone is defined here, does that mean omitting the Z and/or skipping +1/2?
+      startTime: `2026-11-11T08:00:00.000+${offset}`,
+      endTime: `2026-11-15T23:59:59.999+${offset}`, // todo: find out actual end time
+      timezone: timezone
     },
     membershipLevels: [],
     tracks: [],
@@ -87,8 +91,8 @@ export const GET: APIRoute = () => {
         description: en_US(raw_event.data.description),
         timeSlots: [
           {
-            startTime: `${raw_event.data.day}T${raw_event.data.start_time}`,
-            endTime: `${raw_event.data.day}T${raw_event.data.end_time}`,
+            startTime: `${raw_event.data.day}T${raw_event.data.start_time}+${offset}`,
+            endTime: `${raw_event.data.day}T${raw_event.data.end_time}+${offset}`,
             roomIds: raw_event.data.schedule_location ? [id(raw_event.data.schedule_location.id)] : [],
             hostIds: raw_event.data.host_name ? [get_host_id_from_host_name(raw_event.data.host_name)] : [],
             labelIds: raw_event.data.schedule_tags.map((schedule_tag: any) => id(schedule_tag.id))
