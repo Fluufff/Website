@@ -15,6 +15,12 @@ const raw_open_locations = await getCollection('scheduleOpenLocations')
 const timezone = 'Europe/Brussels'
 const offset = start_con.split('+')[1] // assumes the con happens entirely in the same offset
 
+const con_slug = 'fluufff'
+const con_name = 'Flüüfff'
+
+const venue_slug = 'mercure'
+const venue_name = 'Mercure Antwerp City South Hotel'
+
 function get_host_id_from_host_name(host_name: string) {
   return host_name.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '')
 }
@@ -50,10 +56,10 @@ export const GET: APIRoute = () => {
     schemaVersion: '1.0.0',
     updatedAt: new Date().toISOString(),
     event: {
-      id: 'fluufff',
-      displayName: en_US('Flüüfff'),
-      startTime: `2026-11-11T08:00:00.000+${offset}`,
-      endTime: `2026-11-15T23:59:59.999+${offset}`, // todo: find out actual end time
+      id: con_slug,
+      displayName: en_US(con_name),
+      startTime: `2026-11-11T00:00:00.000+${offset}`,
+      endTime: `2026-11-15T23:59:59.999+${offset}`,
       timezone: timezone
     },
     membershipLevels: [],
@@ -68,15 +74,15 @@ export const GET: APIRoute = () => {
     }),
     venues: [
       {
-        id: 'mercure',
-        displayName: en_US('Mercure Antwerp City South Hotel')
+        id: venue_slug,
+        displayName: en_US(venue_name)
       }
     ],
     rooms: raw_locations.map((raw_location: any) => {
       return {
         id: id(raw_location.id),
         displayName: en_US(raw_location.data.name),
-        venueId: 'mercure'
+        venueId: venue_slug
       }
     }),
     hosts: raw_hosts.map((raw_host: any) => {
@@ -107,13 +113,13 @@ export const GET: APIRoute = () => {
     data.sessions.push({
       id: raw_open_location.id, // conveniently already not numeric so it will not collide with event ids
       displayName: en_US(raw_open_location.data.name),
-      description: en_US(`Flüüfff placeholder text for the ${raw_open_location.data.name.toLowerCase()}.`),
+      description: en_US(`${con_name} placeholder text for the ${raw_open_location.data.name.toLowerCase()}.`),
       timeSlots: raw_open_location.data.opening_times.map((opening_time: any) => {
         return {
           startTime: `${opening_time.day}T${opening_time.start_time}+${offset}`,
           endTime: `${opening_time.day}T${opening_time.end_time}+${offset}`,
           roomIds: [],
-          hostIds: [get_host_id_from_host_name('Flüüfff')],
+          hostIds: [get_host_id_from_host_name(con_name)],
           labelIds: []
         }
       })
@@ -132,7 +138,7 @@ export const GET: APIRoute = () => {
         data.rooms.push({
           id: room_id,
           displayName: en_US(`${start_hour_and_minute} - ${end_hour_and_minute}`),
-          venueId: 'mercure'
+          venueId: venue_slug
         })
         timeslot.roomIds[0] = room_id
       } else {
@@ -141,7 +147,7 @@ export const GET: APIRoute = () => {
         data.rooms.push({
           id: room_id,
           displayName: en_US(`${start_hour_and_minute} - ${end_hour_and_minute} @ ${first_room.displayName['en-US']}`),
-          venueId: 'mercure'
+          venueId: venue_slug
         })
         timeslot.roomIds[1] = room_id
       }
