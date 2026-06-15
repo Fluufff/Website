@@ -120,6 +120,34 @@ export const GET: APIRoute = () => {
     })
   })
 
+  // hijacks the format to show the start & end times under the session name in front of the location within the barq app
+  data.sessions.forEach((session: any) => {
+    session.timeSlots.forEach((timeslot: any) => {
+      const start_hour_and_minute = /T(\d\d:\d\d)/.exec(timeslot.startTime)![1]
+      const end_hour_and_minute = /T(\d\d:\d\d)/.exec(timeslot.endTime)![1]
+      const room_id = `${session.id} (${timeslot.startTime} - ${timeslot.endTime})` // unique id
+
+      if (timeslot.roomIds.length == 0) {
+        // if there are no rooms, just show the start and end time
+        data.rooms.push({
+          id: room_id,
+          displayName: en_US(`${start_hour_and_minute} - ${end_hour_and_minute}`),
+          venueId: 'mercure'
+        })
+        timeslot.roomIds[0] = room_id
+      } else {
+        // if there are rooms, show the start and end time in front of just the first one
+        const first_room = data.rooms.find((room: any) => room.id == timeslot.roomIds[0])
+        data.rooms.push({
+          id: room_id,
+          displayName: en_US(`${start_hour_and_minute} - ${end_hour_and_minute} @ ${first_room.displayName['en-US']}`),
+          venueId: 'mercure'
+        })
+        timeslot.roomIds[1] = room_id
+      }
+    })
+  })
+
   return new Response(JSON.stringify(data), {
     headers: {
       'content-type': 'application/json'
