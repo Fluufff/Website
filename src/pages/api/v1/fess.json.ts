@@ -149,7 +149,7 @@ export const GET: APIRoute = () => {
           displayName: en_US(`${start_hour_and_minute} - ${end_hour_and_minute} @ ${first_room.displayName['en-US']}`),
           venueId: venue_slug
         })
-        timeslot.roomIds[1] = room_id
+        timeslot.roomIds[0] = room_id
       }
     })
   })
