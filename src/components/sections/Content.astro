@@ -11,15 +11,16 @@ interface Props {
   bg?: 'primary' | 'secondary' | 'primary-dark' | 'primary-darker' | undefined
   class?: string | undefined
   pictureclass?: string | undefined
-  alignContent?: 'start' | 'end' | undefined
+  alignContent?: 'start' | 'end' // note: 'end' does not seem to be implemented
 }
 
-const { headline, markdown, bg, sideImage, right, id, wider, alignContent, pictureclass = '' } = Astro.props
+const { headline, markdown, bg, sideImage, right, id, wider, alignContent = 'start', pictureclass = '' } = Astro.props
+const alignContentClass = alignContent ? `content__align--${alignContent}` : undefined
 ---
 
 <section
   class="content"
-  class:list={[bg, { withSide: !!sideImage, right, wider, markdown }, alignContent, Astro.props.class]}
+  class:list={[bg, { withSide: !!sideImage, right, wider, markdown }, alignContentClass, Astro.props.class]}
   id={id}
 >
   {
@@ -131,7 +132,7 @@ const { headline, markdown, bg, sideImage, right, id, wider, alignContent, pictu
       }
     }
 
-    &.start,
+    &.content__align--start,
     &.withSide {
       &:not(.withSide),
       & > .content__side_container {
