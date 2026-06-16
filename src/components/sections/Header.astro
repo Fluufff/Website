@@ -79,7 +79,7 @@ function isCurrent(...routePattern: string[]) {
         <a href="/" class:list={[isCurrent('/') && 'font-bold']}>Home</a>
       </li>
       <li>
-        <p>
+        <p data-open={isCurrent('/schedule', '/venue', '/pricing')}>
           Attend<LucideChevronDown
             class:list={{ hidden: isCurrent('/schedule', '/venue', '/pricing') }}
           /><LucideChevronUp class:list={{ hidden: !isCurrent('/schedule', '/venue', '/pricing') }} />
@@ -95,7 +95,7 @@ function isCurrent(...routePattern: string[]) {
         <a href="/pricing" class:list={[isCurrent('/pricing') && 'font-bold']}>Tickets & Pricing</a>
       </li>
       <li>
-        <p>
+        <p data-open={isCurrent('/events', '/staff-volunteering', '/dealers-den')}>
           Get involved<LucideChevronDown
             class:list={{ hidden: isCurrent('/events', '/staff-volunteering', '/dealers-den') }}
           /><LucideChevronUp class:list={{ hidden: !isCurrent('/events', '/staff-volunteering', '/dealers-den') }} />
@@ -368,17 +368,26 @@ function isCurrent(...routePattern: string[]) {
     mobile.classList.add('hidden')
   })
 
+  function toggle_paragraph(p) {
+    p.toggleAttribute('data-open')
+    p.children[0].classList.toggle('hidden')
+    p.children[1].classList.toggle('hidden')
+
+    const li = p.parentNode
+    let sibling = li.nextSibling.nextSibling
+    while (sibling.classList.contains('bg-neutral-100')) {
+      sibling.classList.toggle('hidden')
+      sibling = sibling.nextSibling.nextSibling
+    }
+  }
+
   document.querySelectorAll('#nav--mobile p').forEach((p) => {
     const li = p.parentNode
     li.addEventListener('click', () => {
-      p.children[0].classList.toggle('hidden')
-      p.children[1].classList.toggle('hidden')
-
-      let sibling = li.nextSibling.nextSibling
-      while (sibling.classList.contains('bg-neutral-100')) {
-        sibling.classList.toggle('hidden')
-        sibling = sibling.nextSibling.nextSibling
-      }
+      document.querySelectorAll('#nav--mobile p[data-open]').forEach((element) => {
+        if (element != p) toggle_paragraph(element)
+      })
+      toggle_paragraph(p)
     })
   })
 </script>
