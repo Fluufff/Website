@@ -9,10 +9,10 @@ interface Props {
   alignImage?: 'left' | 'right'
   id?: string
   pictureclass?: string
-  alignContent?: 'start' | 'end'
+  alignContent?: 'start' | 'end' | undefined
 }
 
-const { headline, image, alignImage, id, pictureclass = '', alignContent = 'start' } = Astro.props
+const { headline, image, alignImage, id, pictureclass = '', alignContent } = Astro.props
 ---
 
 {
