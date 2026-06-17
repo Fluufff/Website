@@ -2,7 +2,9 @@
 
 // a little wrapper for `deno run dev` but it automatically restarts upon file errors. (like swapping branches or moving files around)
 
-import { delay } from 'jsr:@std/async/delay'
+function sleep(ms: number): Promise<void> {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
 
 const decoder = new TextDecoder()
 
@@ -21,7 +23,7 @@ async function start() {
       await Deno.stdout.write(chunk)
       if (decoder.decode(chunk).includes('Please make sure the file exists')) {
         console.log('ohno!')
-        await delay(1000)
+        await sleep(1000)
         child.kill()
         await child.status
         start()
