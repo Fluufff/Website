@@ -1,6 +1,7 @@
 {
   "version": "5",
   "specifiers": {
+    "jsr:@std/async@*": "1.4.0",
     "npm:@astrojs/check@~0.9.4": "0.9.4_typescript@5.9.3_prettier@3.6.2_prettier-plugin-astro@0.14.1",
     "npm:@astrojs/vue@^5.1.1": "5.1.1_astro@5.14.4__typescript@5.9.3__sass-embedded@1.93.2__vite@6.3.6___sass-embedded@1.93.2___picomatch@4.0.3__zod@3.25.76_vue@3.5.22__typescript@5.9.3_vite@6.3.6__sass-embedded@1.93.2__picomatch@4.0.3_sass-embedded@1.93.2_typescript@5.9.3",
     "npm:@eslint/js@^9.36.0": "9.37.0",
@@ -43,6 +44,11 @@
     "npm:unplugin-icons@^22.5.0": "22.5.0",
     "npm:vite@*": "6.3.6_sass-embedded@1.93.2_picomatch@4.0.3",
     "npm:vue@^3.5.22": "3.5.22_typescript@5.9.3"
+  },
+  "jsr": {
+    "@std/async@1.4.0": {
+      "integrity": "4d70b008634f571cff9b554090d628c76141c32613aae0ff283fd5fa23d0c379"
+    }
   },
   "npm": {
     "@antfu/install-pkg@1.1.0": {
