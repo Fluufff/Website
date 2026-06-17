@@ -21,7 +21,8 @@ async function start() {
   async function handle(stream: ReadableStream<Uint8Array>) {
     for await (const chunk of stream) {
       await Deno.stdout.write(chunk)
-      if (decoder.decode(chunk).includes('Please make sure the file exists')) {
+      const decoded = decoder.decode(chunk)
+      if (decoded.includes('Please make sure the file exists') || decoded.includes('no such file or directory')) {
         console.log('ohno!')
         await sleep(1000)
         child.kill()
