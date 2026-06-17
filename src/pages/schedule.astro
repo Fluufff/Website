@@ -22,7 +22,7 @@ import con_dates from '../data/con/dates.json'
 import Socials from '../content/socials.astro'
 
 const openLocations = await getCollection('scheduleOpenLocations')
-const order = ['Bar', 'Fursuit Lounge', 'Photoshoot', "Dealer's Den"]
+const order = ['Bar', 'Fursuit Lounge', 'Photoshoot', "Dealers' Den"]
 openLocations.sort((a, b) => order.indexOf(a.data.name) - order.indexOf(b.data.name))
 
 const raw_tags = await getCollection('scheduleTags')
