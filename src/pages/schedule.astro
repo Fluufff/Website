@@ -317,15 +317,25 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
   const buttons = document.querySelectorAll(`[data-id="${buttonid}"] > button`)
   const events = document.querySelectorAll(`[data-id="${eventsid}"] > section`)
 
-  let active_date = first_date
+  let active_date = sessionStorage.getItem('schedule:active_date') ?? first_date
 
   const setActiveDate = (d) => {
     active_date = d
+    sessionStorage.setItem('schedule:active_date', active_date)
+
+    // toggle active buttons
     buttons.forEach((b) => {
       b.classList.remove('bg-accent1-500')
       b.classList.remove('bg-accent1-800')
       b.classList.add(b.dataset.date == d ? 'bg-accent1-800' : 'bg-accent1-500')
     })
+
+    // if none of the buttons are active (outdated/edited sessionstorage) use first
+    if (!Array.from(buttons).some((b) => b.classList.contains('bg-accent1-800'))) {
+      return setActiveDate(first_date)
+    }
+
+    // toggle visible events
     events.forEach((e) => {
       if (e.dataset.date == d) {
         e.classList.remove('hidden')
