@@ -3,7 +3,7 @@
 // a little wrapper for `deno run dev` but it automatically restarts upon file errors. (like swapping branches or moving files around)
 
 function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+  return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
 const decoder = new TextDecoder()
