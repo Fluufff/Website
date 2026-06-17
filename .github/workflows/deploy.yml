@@ -59,7 +59,7 @@ jobs:
         run: deno task build
 
       - name: Save cache
-        uses: actions/cache/save@v4
+        uses: actions/cache/save@v5
         with:
           path: ./node_modules/.astro
           key: astro-build-cache
@@ -78,4 +78,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
