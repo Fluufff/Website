@@ -1,6 +1,7 @@
 {
   "tasks": {
     "dev": "astro dev",
+    "watch": "deno run --allow-run ./utils/deno-watch.ts",
     "devhost": "astro dev --host 0.0.0.0",
     "build": "astro build",
     "preview": "astro preview",

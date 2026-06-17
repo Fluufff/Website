@@ -37,7 +37,7 @@ jobs:
         run: deno task format:diff
 
       - name: Restore cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ./node_modules/.astro
           key: astro-build-cache
