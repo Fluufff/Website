@@ -231,16 +231,17 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
         missing_dates.map((date) => (
           <section
             data-date={date}
-            class="flex flex-col gap-4 p-4 md:p-16 shadow-md bg-neutrals-50 rounded-md schedule__entry"
+            class="flex flex-col gap-4 px-6 py-8 md:p-16 shadow-md bg-neutrals-50 rounded-md schedule__entry"
           >
             <h3 class="font-atari font-bold text-xl md:text-2xl text-center">Coming soon</h3>
-            <div class="md:my-8">
+            <div class="my-2 md:my-8">
               <p class="text-center">
                 There’s nothing to see here yet because we’re still waiting on you to organise a panel on this day!
               </p>
+              <br class="md:hidden" />
               <p class="text-center">We’re looking forward to seeing what you come up with.</p>
             </div>
-            <div class="flex justify-center">
+            <div class="block md:flex justify-center">
               <Button outline accent1 to="/events#want-to-be-part-of-the-action" label="Host your own event" go />
             </div>
           </section>
