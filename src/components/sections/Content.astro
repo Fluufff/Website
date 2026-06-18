@@ -15,7 +15,7 @@ interface Props {
 }
 
 const { headline, markdown, bg, sideImage, right, id, wider, alignContent = 'start', pictureclass = '' } = Astro.props
-const alignContentClass = alignContent ? `content__align--${alignContent}` : undefined
+const alignContentClass = Astro.props.alignContent ? `content__align--${alignContent}` : undefined
 ---
 
 <section
