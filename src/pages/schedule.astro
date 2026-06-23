@@ -1,4 +1,8 @@
 ---
+import { marked } from 'marked'
+import { DateTime } from 'luxon'
+import { getCollection } from 'astro:content'
+
 import Base from '../layouts/Base.astro'
 import LucideClock from '~icons/lucide/clock'
 import LucideMapPin from '~icons/lucide/map-pin'
@@ -14,8 +18,6 @@ import LucideDumbbell from '~icons/lucide/dumbbell'
 import LucideHeartHandshake from '~icons/lucide/heart-handshake'
 import LucideDoorOpen from '~icons/lucide/door-open'
 
-import { getCollection } from 'astro:content'
-import { DateTime } from 'luxon'
 import Section from '../components/Section.astro'
 import Button from '../components/Button.astro'
 import con_dates from '../data/con/dates.json'
@@ -273,7 +275,7 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
                 {e.host || 'Unknown'}
               </p>
             </div>
-            <p>{e.description}</p>
+            <p set:html={marked(e.description)}></p>
             {e.tags.length != 0 ? <hr class="border-accent1-200" /> : ''}
             <div class="flex flex-wrap gap-2">
               {e.tags
