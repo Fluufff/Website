@@ -3,7 +3,7 @@ import qs from 'qs'
 import process from 'node:process'
 
 export interface Strapi {
-  warnings: string[][],
+  warnings: string[][]
   // deno-lint-ignore no-explicit-any
   fetchItems(itemName: string, options?: object): Promise<any[]> // eslint-disable-line @typescript-eslint/no-explicit-any
 }
