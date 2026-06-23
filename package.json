@@ -21,6 +21,7 @@
     "luxon": "^3.7.2",
     "tailwindcss": "^4.2.2",
     "unplugin-icons": "^22.5.0",
+    "marked": "^18.0.5",
     "primevue": "^4.4.1",
     "qs": "^6.15.0",
     "@types/qs": "^6.15.0"
