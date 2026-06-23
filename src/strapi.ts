@@ -29,6 +29,7 @@ export function loadStrapi(): Strapi {
     fetchItems: async (itemName: string, options?: object) => {
       try {
         const data = await fetchFromStrapi(STRAPI_URI!, STRAPI_TOKEN!, itemName, options)
+        // console.log(data)
         return data
       } catch (e) {
         const msg = e instanceof Error ? e.message : e
