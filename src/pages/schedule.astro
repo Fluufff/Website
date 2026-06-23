@@ -58,7 +58,7 @@ const all_events = raw_events.map((re) => {
       if (!rt) {
         return undefined
       } else {
-        return { emoji: rt.data.emoji, name: rt.data.name }
+        return { name: rt.data.name }
       }
     })
   }
