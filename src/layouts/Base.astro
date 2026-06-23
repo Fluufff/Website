@@ -5,6 +5,7 @@ import '../styles/tailwind.css'
 import Fonts from '../assets/fonts.astro'
 import Header from '../components/sections/Header.astro'
 import Footer from '../components/sections/Footer.astro'
+import {collections} from '../content.config.ts'
 
 let banner_imports = import.meta.glob('./../data/banners/*', {
   query: '?raw',
@@ -36,6 +37,9 @@ const build_info = {
     // deno: Deno.version.deno,
     // typescript: Deno.version.typescript,
     // v8: Deno.version.v8,
+  },
+  strapi: {
+    warnings: collections.strapi.warnings
   }
 }
 ---
@@ -140,6 +144,9 @@ const build_info = {
   }
   console.log('commit: %c%s %c%s', logBold, build_info.git.commit, '', commit_info.map((s) => `(${s})`).join(' '))
   console.log('built using %c%s %c(%s)', logBold, build_info.build.astro, '', ago(build_info.build.date))
+
+  console.log(build_info.strapi)
+  build_info.strapi.warnings.forEach(warning => console.log(...warning))
 
   const magicword = [
     'ArrowUp',
