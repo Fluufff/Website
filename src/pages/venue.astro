@@ -5,7 +5,6 @@ import Base from '../layouts/Base.astro'
 import Section from '../components/Section.astro'
 import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
-import FaqItem from '../content/FaqItem.astro'
 import Button from '../components/Button.astro'
 import Accordion from '../components/Accordion.astro'
 
@@ -531,54 +530,5 @@ const nearby = [
   </Section>
 
   <Socials />
-  <Faq>
-    <FaqItem question="Do I need to stay at the hotel to attend Flüüfff?">
-      No, staying at the hotel is optional. You can attend the convention with a convention ticket without booking
-      accommodation at the venue.
-    </FaqItem>
-    <FaqItem question="Are there places to eat near the venue?">
-      Yes. There are many restaurants and cafés within walking distance of the hotel, ranging from quick bites to full
-      dining options.
-    </FaqItem>
-    <FaqItem question="Is the venue accessible?">
-      Yes. The hotel is wheelchair accessible and equipped to accommodate guests with accessibility needs.
-    </FaqItem>
-    <FaqItem question="Can I arrive before check-in or stay after check-out?">
-      Yes, but your room may not be available yet or no longer accessible. The hotel can usually store your luggage so
-      you can still enjoy the convention.
-    </FaqItem>
-    <FaqItem question="Do I need to book accommodation through Flüüfff to stay at the hotel?">
-      <p>No. You are free to arrange your own accommodation.</p>
-      <p>
-        You can book a room at the venue independently, as long as you have a valid convention ticket, or choose to stay
-        at a different hotel entirely.
-      </p>
-      <p>
-        However, rooms booked through Flüüfff are part of a negotiated group rate and are therefore more advantageous.
-        Booking separately will likely result in higher prices and does not guarantee availability within the convention
-        block.
-      </p>
-    </FaqItem>
-    <FaqItem question="Can I choose who I share a room with?">
-      Yes. Rooms are booked by one person, who is responsible for the booking and can choose who to share it with.
-    </FaqItem>
-    <FaqItem question="Is the hotel exclusively for Flüüfff attendees?">
-      During the convention, most of the hotel will be occupied by attendees, creating a shared and immersive
-      atmosphere. There is, however, a limited amount of external visitors present at the hotel.
-    </FaqItem>
-    <FaqItem question="Are food and drinks available at the venue?">
-      Yes. The hotel has a restaurant and bar, and there are many additional options nearby within walking distance.
-    </FaqItem>
-    <FaqItem question="How do I get around Antwerp during the convention?">
-      Antwerp has an extensive network of trams and buses. The nearest tram stop (DeSingel) connects you easily to the
-      city centre and other areas.
-    </FaqItem>
-    <FaqItem question="Is parking available at the venue?">
-      <p>
-        Yes, the hotel offers limited on-site indoor parking. Parking costs €22 per day and is subject to availability.
-        Electric vehicle charging stations are also available.
-      </p>
-      <p>We also recommended parking at any of the nearby public parkings that are close to the venue.</p>
-    </FaqItem>
-  </Faq>
+  <Faq page="venue" />
 </Base>
