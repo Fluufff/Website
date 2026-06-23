@@ -1,6 +1,14 @@
 ---
+import { marked } from 'marked'
 import Accordion from '../components/Accordion.vue'
 import Content from '../components/sections/Content.astro'
+
+import { getCollection } from 'astro:content'
+import FaqItem from '../content/FaqItem.astro'
+const faqPages = await getCollection('faqPages')
+
+const { page } = Astro.props
+const faqPage = faqPages.find((faqPage) => faqPage.data.name == page)
 ---
 
 <Content headline="Frequently asked questions" bg="primary">
@@ -9,8 +17,16 @@ import Content from '../components/sections/Content.astro'
     and badges to what you can expect once you spawn in. Still stuck? Just reach out, our support team is always happy
     to help you find the right cheat code.
   </p>
-  <Accordion class="faq_questions" faq client:load>
-    <slot />
+  <Accordion class="faq_questions w-full" faq client:load>
+    {
+      faqPage ? (
+        faqPage.data.faq_entries.map((faqEntry) => (
+          <FaqItem question={faqEntry.question} set:html={marked(faqEntry.answer)} />
+        ))
+      ) : (
+        <FaqItem question="Where are the questions?">Well not here it seems, report this please.</FaqItem>
+      )
+    }
   </Accordion>
 </Content>
 

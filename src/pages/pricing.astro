@@ -6,7 +6,6 @@ import ChecklistItem from '../components/ChecklistItem.astro'
 import PricingCard from '../components/PricingCard.astro'
 import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
-import FaqItem from '../content/FaqItem.astro'
 import Timed from '../components/Timed.astro'
 import Button from '../components/Button.astro'
 import { start_registration } from '../data/reg/dates.json'
@@ -181,48 +180,7 @@ import Section from '../components/Section.astro'
     </div>
   </Content>
   <Socials />
-  <Faq>
-    <FaqItem question="Do I need a ticket to attend Flüüfff?">
-      Yes. All attendees need a valid ticket to access the convention. You can choose between day tickets, a weekend
-      ticket, an all-days pass.
-    </FaqItem>
-    <FaqItem question="What is the difference between Accommodation and Convention tickets?">
-      <p>Convention tickets (day, weekend, or all-days) give you access to the event.</p>
-      <p>
-        Accommodation covers your stay at the hotel from Wednesday to Sunday and does not include access to the
-        convention.
-      </p>
-      <p>
-        If you would like to both attend the event and stay at the venue, you will need to book both a convention ticket
-        and accommodation.
-      </p>
-    </FaqItem>
-    <FaqItem question="How do residential room bookings work?">
-      Residential rooms are booked per room, not per person. One attendee books and pays for the room, and roommates can
-      arrange payment among themselves. This allows groups of friends to easily share a room together during the
-      convention.
-    </FaqItem>
-    <FaqItem question="Can I share a room with friends?">
-      Yes! Residential rooms are meant to be shared depending on the room type you choose. The person who books the room
-      can decide who stays in the room with them.
-    </FaqItem>
-    <FaqItem question="Can I upgrade or change my ticket later?">
-      In many cases upgrades may be possible depending on availability. If you would like to upgrade your ticket or
-      sponsorship level, please contact our support team and we’ll be happy to assist you.
-    </FaqItem>
-    <FaqItem question="Can I get a refund if I can’t attend?">
-      Registration fees are non-refundable. If you can no longer attend, please contact our support team and we will try
-      to help you find the best possible solution.
-    </FaqItem>
-    <FaqItem question="Do I need to be a gamer or have a fursuit to join?">
-      Not at all! Flüüfff welcomes everyone who enjoys creativity, community, and the furry fandom. Whether you come in
-      full fursuit, casual cosplay, or just as yourself, you are welcome.
-    </FaqItem>
-    <FaqItem question="How do I stay updated about Flüüfff?">
-      The best way to stay up to date is by following our social media channels and joining our Telegram community.
-      Important announcements will also always be posted on the website.
-    </FaqItem>
-  </Faq>
+  <Faq page="pricing" />
 </Base>
 
 <style lang="scss" is:global>

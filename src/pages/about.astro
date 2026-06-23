@@ -12,7 +12,6 @@ import peeps from '../data/hr/peeps.json'
 import patrons from '../data/reg/patrons.json'
 import Socials from '../content/socials.astro'
 import Faq from '../content/Faq.astro'
-import FaqItem from '../content/FaqItem.astro'
 ---
 
 <Base>
@@ -119,33 +118,7 @@ import FaqItem from '../content/FaqItem.astro'
     </div>
   </Content>
   <Socials />
-  <Faq>
-    <FaqItem question="Can I help with Flüüfff?">
-      <p>Of course! You can contact us through the contact form and we’ll look into it.</p>
-      <p>But the best way to support Flüüfff is simply by attending and spreading the word.</p>
-    </FaqItem>
-    <FaqItem question="What are the rules during the convention?">
-      You can find the full Code of Conduct and Convention Rules <a href="/terms">here</a>.
-    </FaqItem>
-    <FaqItem question="Do I need to be 18 or older to attend?">
-      <p>Yes. Flüüfff is an <strong>18+ event</strong>, even if some parts are family-friendly in nature.</p>
-      <p>This is for legal, insurance, and community safety reasons.</p>
-      <p>All attendees must be 18 or older at the start of the convention — no exceptions.</p>
-    </FaqItem>
-    <FaqItem question="How do I find out what's happening during the convention?">
-      <p>
-        You'll receive a conbook which includes a printed schedule. You'll also be able to find this schedule on our
-        website when it is published!
-      </p>
-      <p>Our team will also post updates on site and via our Telegram channels.</p>
-    </FaqItem>
-    <FaqItem question="What if I don't know anyone?">
-      <p>
-        That’s completely okay. Flüüfff is full of friendly faces, quiet corners, and fun things to do. Many people come
-        solo and leave with new connections.
-      </p>
-    </FaqItem>
-  </Faq>
+  <Faq page="about" />
 </Base>
 
 <style is:global lang="scss">

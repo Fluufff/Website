@@ -11,7 +11,6 @@ import { Icon } from 'astro-icon/components'
 
 import volunteerFormImage from '../assets/images/staff-volunteering/volunteer-form.jpg'
 import Faq from '../content/Faq.astro'
-import FaqItem from '../content/FaqItem.astro'
 import Steppies from '../content/Steppies.astro'
 import { getCollection } from 'astro:content'
 
@@ -73,45 +72,5 @@ const rolesList = rolesData
     />
   </Content>
   <Socials />
-  <Faq>
-    <FaqItem question="Do I need experience to apply?">
-      <p>
-        Not necessarily! While some positions may ask for specific skills or experience, many of our roles (especially
-        volunteer ones) are open to anyone who's motivated and a good fit for our values. We’ll guide and support you
-        through the onboarding process.
-      </p>
-    </FaqItem>
-    <FaqItem question="Can I apply for more than one position?">
-      <p>
-        Yes, you’re welcome to apply for multiple roles if they interest you. Just be mindful of the time commitment
-        listed for each position (especially around the event dates) so you don’t overextend yourself.
-      </p>
-    </FaqItem>
-    <FaqItem question="I'm not sure what role suits me best. Can I still apply?">
-      <p>
-        Absolutely. You can submit a spontaneous application or apply as a general volunteer by sending an email to
-        <a href="mailto:hr@fluufff.org">hr@fluufff.org</a>. We’ll get in touch to explore what might be a good fit based
-        on your interests, skills, and availability.
-      </p>
-    </FaqItem>
-    <FaqItem question="Are these positions paid?">
-      <p>
-        Flüüüfff is run entirely by volunteers. All roles (whether behind the scenes or during the event) are unpaid,
-        but offer a chance to be part of something creative, collaborative, and community-driven.
-      </p>
-    </FaqItem>
-    <FaqItem question="Do I need to live in Belgium / attend the event?">
-      <p>
-        Some roles require on-site presence during the convention, but others (especially in the lead-up) can be done
-        remotely. Each job post clearly states whether the role is remote, on-site, or hybrid.
-      </p>
-    </FaqItem>
-    <FaqItem question="What happens after I apply?">
-      <p>
-        You’ll receive a confirmation email, and your application will be reviewed by the department or HR team. If
-        there’s a good fit, we’ll contact you for an informal interview or chat. After that, we’ll let you know if we
-        can move forward and begin onboarding.
-      </p>
-    </FaqItem>
-  </Faq>
+  <Faq page="staff-volunteering" />
 </Base>
