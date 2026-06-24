@@ -17,6 +17,7 @@ import { loadStrapi } from './strapi.ts'
 const strapi = loadStrapi()
 
 export const collections = {
+  strapi: strapi,
   staffRoles: defineCollection({ loader: rolesLoader(strapi) }),
   scheduleOpenLocations: defineCollection({ loader: scheduleOpenLocationLoader(strapi) }),
   scheduleLocations: defineCollection({ loader: scheduleLocationLoader(strapi) }),
