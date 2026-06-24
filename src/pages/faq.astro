@@ -1,0 +1,8 @@
+---
+import { getCollection } from 'astro:content'
+
+const faq_pages = await getCollection('faqPages')
+const faq_page = faq_pages.filter(faq_page => faq_page.data.slug.startsWith('faq/'))[0]
+
+return Astro.rewrite(`/${faq_page?.data.slug}`);
+---
