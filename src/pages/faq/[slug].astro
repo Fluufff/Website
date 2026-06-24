@@ -7,7 +7,9 @@ import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
 
 export async function getStaticPaths() {
   const faq_pages = await getCollection('faqPages')
-  return faq_pages.filter(faq_page => faq_page.data.slug.startsWith('faq/')).map((faq_page) => ({ params: { slug: faq_page.data.slug.split('faq/')[1] }, props: { faq_page: faq_page } }))
+  return faq_pages
+    .filter((faq_page) => faq_page.data.slug.startsWith('faq/'))
+    .map((faq_page) => ({ params: { slug: faq_page.data.slug.split('faq/')[1] }, props: { faq_page: faq_page } }))
 }
 
 const faq_page = Astro.props.faq_page.data
