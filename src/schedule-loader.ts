@@ -55,8 +55,8 @@ export function scheduleTagLoader(strapi: Strapi): Loader {
     schema: z.object({
       id: z.number(),
       name: z.string(),
-      icon: z.string().optional(),
-      color: z.string().optional(),
+      icon: z.string().nullish(),
+      color: z.string().nullish(),
       description: z.string()
     })
   }
@@ -146,8 +146,8 @@ export function eventLabelsExplainedLoader(strapi: Strapi): Loader {
         z.object({
           name: z.string(),
           description: z.string(),
-          icon: z.string().nullable(),
-          color: z.string().nullable()
+          icon: z.string().nullish(),
+          color: z.string().nullish()
         })
       )
     })
