@@ -46,7 +46,8 @@ export function faqPageLoader(strapi: Strapi): Loader {
     },
     schema: z.object({
       id: z.string(),
-      name: z.string(),
+      slug: z.string(),
+      name: z.string().nullish(),
       faq_entries: z.array(
         z.object({
           id: z.string(),

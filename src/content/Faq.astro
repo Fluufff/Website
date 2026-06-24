@@ -7,8 +7,8 @@ import { getCollection } from 'astro:content'
 import FaqItem from '../content/FaqItem.astro'
 const faqPages = await getCollection('faqPages')
 
-const { page } = Astro.props
-const faqPage = faqPages.find((faqPage) => faqPage.data.name == page)
+const { slug } = Astro.props
+const faqPage = faqPages.find((faqPage) => faqPage.data.slug == slug)
 ---
 
 <Content headline="Frequently asked questions" bg="primary">
