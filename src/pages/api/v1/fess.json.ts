@@ -47,10 +47,6 @@ function en_US(string: string) {
   }
 }
 
-function id(number: number) {
-  return `${number}`
-}
-
 export const GET: APIRoute = () => {
   const data = {
     schemaVersion: '1.0.0',
@@ -67,7 +63,7 @@ export const GET: APIRoute = () => {
     sessionTypes: [],
     labels: raw_tags.map((raw_tag: any) => {
       return {
-        id: id(raw_tag.id),
+        id: raw_tag.id,
         displayName: en_US(raw_tag.data.name),
         description: en_US(raw_tag.data.description)
       }
@@ -80,29 +76,29 @@ export const GET: APIRoute = () => {
     ],
     rooms: raw_locations.map((raw_location: any) => {
       return {
-        id: id(raw_location.id),
+        id: raw_location.id,
         displayName: en_US(raw_location.data.name),
         venueId: venue_slug
       }
     }),
     hosts: raw_hosts.map((raw_host: any) => {
       return {
-        id: id(raw_host.id),
+        id: raw_host.id,
         displayName: raw_host.data.name
       }
     }),
     sessions: raw_events.map((raw_event: any) => {
       return {
-        id: id(raw_event.id),
+        id: raw_event.id,
         displayName: en_US(raw_event.data.title),
         description: en_US(raw_event.data.description),
         timeSlots: [
           {
             startTime: `${raw_event.data.day}T${raw_event.data.start_time}+${offset}`,
             endTime: `${raw_event.data.day}T${raw_event.data.end_time}+${offset}`,
-            roomIds: raw_event.data.schedule_location ? [id(raw_event.data.schedule_location.id)] : [],
+            roomIds: raw_event.data.schedule_location ? [raw_event.data.schedule_location.id] : [],
             hostIds: raw_event.data.host_name ? [get_host_id_from_host_name(raw_event.data.host_name)] : [],
-            labelIds: raw_event.data.schedule_tags.map((schedule_tag: any) => id(schedule_tag.id))
+            labelIds: raw_event.data.schedule_tags.map((schedule_tag: any) => schedule_tag.id)
           }
         ]
       }
@@ -111,7 +107,7 @@ export const GET: APIRoute = () => {
 
   raw_open_locations.forEach((raw_open_location: any) => {
     data.sessions.push({
-      id: raw_open_location.id, // conveniently already not numeric so it will not collide with event ids
+      id: raw_open_location.id,
       displayName: en_US(raw_open_location.data.name),
       description: en_US(`${con_name} placeholder text for the ${raw_open_location.data.name.toLowerCase()}.`),
       timeSlots: raw_open_location.data.opening_times.map((opening_time: any) => {

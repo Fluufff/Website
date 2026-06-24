@@ -7,6 +7,22 @@ export interface Strapi {
   fetchItems(itemName: string, options?: object): Promise<any[]> // eslint-disable-line @typescript-eslint/no-explicit-any
 }
 
+// strapi v5 uses string ids, numeric is deprecated
+function use_documentid_as_id(object: { id?: string; documentId?: string }) {
+  if (Array.isArray(object)) {
+    object.forEach(use_documentid_as_id)
+  } else if (object !== null && typeof object == 'object') {
+    for (const [key, value] of Object.entries(object)) {
+      if (key == 'documentId') {
+        object.id = object.documentId
+        delete object.documentId
+      } else {
+        use_documentid_as_id(value as { id?: string; documentId?: string }) // i lied
+      }
+    }
+  }
+}
+
 export function loadStrapi(): Strapi {
   const env = process.env.NODE_ENV || 'development'
   const isDevelopment = env === 'development' || process.env.MODE === 'typecheck'
@@ -29,7 +45,7 @@ export function loadStrapi(): Strapi {
     fetchItems: async (itemName: string, options?: object) => {
       try {
         const data = await fetchFromStrapi(STRAPI_URI!, STRAPI_TOKEN!, itemName, options)
-        // console.log(data)
+        use_documentid_as_id(data)
         return data
       } catch (e) {
         const msg = e instanceof Error ? e.message : e

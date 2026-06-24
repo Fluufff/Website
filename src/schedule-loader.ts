@@ -15,11 +15,11 @@ export function scheduleOpenLocationLoader(strapi: Strapi): Loader {
 
       for (const item of items) {
         const data = await ctx.parseData({
-          id: item.documentId,
+          id: item.id,
           data: { ...item }
         })
 
-        ctx.store.set({ id: item.documentId, data })
+        ctx.store.set({ id: item.id, data })
       }
     },
     schema: z.object({
@@ -45,15 +45,15 @@ export function scheduleTagLoader(strapi: Strapi): Loader {
 
       for (const item of items) {
         const data = await ctx.parseData({
-          id: item.id.toString(),
+          id: item.id,
           data: { ...item }
         })
 
-        ctx.store.set({ id: item.id.toString(), data })
+        ctx.store.set({ id: item.id, data })
       }
     },
     schema: z.object({
-      id: z.number(),
+      id: z.string(),
       name: z.string(),
       icon: z.string().nullish(),
       color: z.string().nullish(),
@@ -72,15 +72,15 @@ export function scheduleLocationLoader(strapi: Strapi): Loader {
 
       for (const item of items) {
         const data = await ctx.parseData({
-          id: item.id.toString(),
+          id: item.id,
           data: { ...item }
         })
 
-        ctx.store.set({ id: item.id.toString(), data })
+        ctx.store.set({ id: item.id, data })
       }
     },
     schema: z.object({
-      id: z.number(),
+      id: z.string(),
       name: z.string()
     })
   }
@@ -101,11 +101,11 @@ export function scheduleEventLoader(strapi: Strapi): Loader {
         if (branch == 'main' && item['hidden_on_main_branch']) continue
 
         const data = await ctx.parseData({
-          id: item.id.toString(),
+          id: item.id,
           data: { ...item }
         })
 
-        ctx.store.set({ id: item.id.toString(), data, rendered: await ctx.renderMarkdown(data.description) })
+        ctx.store.set({ id: item.id, data, rendered: await ctx.renderMarkdown(data.description) })
       }
     },
     schema: z.object({
@@ -115,8 +115,8 @@ export function scheduleEventLoader(strapi: Strapi): Loader {
       end_time: z.string(),
       description: z.string(),
       host_name: z.string().nullable(),
-      schedule_location: z.object({ id: z.number() }).nullable(),
-      schedule_tags: z.array(z.object({ id: z.number() }))
+      schedule_location: z.object({ id: z.string() }).nullable(),
+      schedule_tags: z.array(z.object({ id: z.string() }))
     })
   }
 }
@@ -132,15 +132,15 @@ export function eventLabelsExplainedLoader(strapi: Strapi): Loader {
 
       for (const item of items) {
         const data = await ctx.parseData({
-          id: item.id.toString(),
+          id: item.id,
           data: { ...item }
         })
 
-        ctx.store.set({ id: item.id.toString(), data })
+        ctx.store.set({ id: item.id, data })
       }
     },
     schema: z.object({
-      id: z.number(),
+      id: z.string(),
       description: z.string(),
       schedule_tags: z.array(
         z.object({

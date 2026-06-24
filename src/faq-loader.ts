@@ -12,15 +12,15 @@ import type { Strapi } from './strapi.ts'
 
 //       for (const item of items) {
 //         const data = await ctx.parseData({
-//           id: item.id.toString(),
+//           id: item.id,
 //           data: { ...item }
 //         })
 
-//         ctx.store.set({ id: item.id.toString(), data })
+//         ctx.store.set({ id: item.id, data })
 //       }
 //     },
 //     schema: z.object({
-//       id: z.number(),
+//       id: z.string(),
 //       question: z.string(),
 //       answer: z.string()
 //     })
@@ -37,19 +37,19 @@ export function faqPageLoader(strapi: Strapi): Loader {
 
       for (const item of items) {
         const data = await ctx.parseData({
-          id: item.id.toString(),
+          id: item.id,
           data: { ...item }
         })
 
-        ctx.store.set({ id: item.id.toString(), data })
+        ctx.store.set({ id: item.id, data })
       }
     },
     schema: z.object({
-      id: z.number(),
+      id: z.string(),
       name: z.string(),
       faq_entries: z.array(
         z.object({
-          id: z.number(),
+          id: z.string(),
           question: z.string(),
           answer: z.string()
         })
