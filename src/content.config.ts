@@ -10,7 +10,7 @@ import {
 import {
   // faqEntryLoader,
   faqPageLoader,
-  dedicatedFaqPageLoader,
+  dedicatedFaqPageLoader
 } from './faq-loader.ts'
 import { loadStrapi } from './strapi.ts'
 

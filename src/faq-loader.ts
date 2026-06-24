@@ -53,7 +53,7 @@ export function faqPageLoader(strapi: Strapi): Loader {
         z.object({
           id: z.string(),
           question: z.string(),
-          answer: z.string(),
+          answer: z.string()
           // updatedAt: z.string()
         })
       )
@@ -67,7 +67,7 @@ export function dedicatedFaqPageLoader(strapi: Strapi): Loader {
     async load(ctx: LoaderContext) {
       ctx.store.clear()
 
-      let items = await strapi.fetchItems('dedicated-faq-page', { populate: 'faq_pages.faq_entries'})
+      let items = await strapi.fetchItems('dedicated-faq-page', { populate: 'faq_pages.faq_entries' })
       items = [items]
 
       for (const item of items) {
