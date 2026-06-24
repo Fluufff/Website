@@ -21,7 +21,7 @@ const faqPage = faqPages.find((faqPage) => faqPage.data.name == page)
     {
       faqPage ? (
         faqPage.data.faq_entries.map((faqEntry) => (
-          <FaqItem question={faqEntry.question} set:html={marked(faqEntry.answer)} />
+          <FaqItem question={faqEntry.question} set:html={marked.parse(faqEntry.answer, { breaks: true })} />
         ))
       ) : (
         <FaqItem question="Where are the questions?">Well not here it seems, report this please.</FaqItem>
