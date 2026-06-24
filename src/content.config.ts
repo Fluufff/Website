@@ -9,7 +9,8 @@ import {
 } from './schedule-loader.ts'
 import {
   // faqEntryLoader,
-  faqPageLoader
+  faqPageLoader,
+  dedicatedFaqPageLoader,
 } from './faq-loader.ts'
 import { loadStrapi } from './strapi.ts'
 
@@ -24,5 +25,6 @@ export const collections = {
   // faqEntries: defineCollection({ loader: faqEntryLoader(strapi) }),
   faqPages: defineCollection({ loader: faqPageLoader(strapi) }),
 
-  eventLabelsExplained: defineCollection({ loader: eventLabelsExplainedLoader(strapi) })
+  eventLabelsExplained: defineCollection({ loader: eventLabelsExplainedLoader(strapi) }),
+  dedicatedFaqPage: defineCollection({ loader: dedicatedFaqPageLoader(strapi) })
 }
