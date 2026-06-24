@@ -20,9 +20,13 @@ const faqPage = faqPages.find((faqPage) => faqPage.data.slug == slug)
   <Accordion class="faq_questions w-full" faq client:load>
     {
       faqPage ? (
-        faqPage.data.faq_entries.map((faqEntry) => (
-          <FaqItem question={faqEntry.question} set:html={marked.parse(faqEntry.answer, { breaks: true })} />
-        ))
+        faqPage.data.faq_entries.length > 0 ? (
+          faqPage.data.faq_entries.map((faqEntry) => (
+            <FaqItem question={faqEntry.question} set:html={marked.parse(faqEntry.answer, { breaks: true })} />
+          ))
+        ) : (
+          <FaqItem question="Where are the questions?">Well none here it seems, report this please.</FaqItem>
+        )
       ) : (
         <FaqItem question="Where are the questions?">Well not here it seems, report this please.</FaqItem>
       )
