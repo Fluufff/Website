@@ -16,7 +16,9 @@ export async function getStaticPaths() {
     .map((faq_page) => ({ params: { slug: faq_page.data.slug.split('faq/')[1] }, props: { faq_page: faq_page } }))
 }
 
-const faqLinks: SidebarLink[] = raw_dedicated_faq_page[0]!.data.faq_pages.map((faq_page) => {
+const faq_pages = raw_dedicated_faq_page[0]!.data.faq_pages
+
+const faqLinks: SidebarLink[] = faq_pages.map((faq_page) => {
   return { icon: faq_page.icon, label: (faq_page.name ?? '').toUpperCase(), href: `/${faq_page.slug}` }
 })
 
@@ -24,7 +26,7 @@ const faq_page = Astro.props.faq_page.data
 
 const all_updated_ats: string[] = []
 all_updated_ats.push(raw_dedicated_faq_page[0]!.data.updatedAt)
-raw_dedicated_faq_page[0]!.data.faq_pages.forEach((faq_page) => {
+faq_pages.forEach((faq_page) => {
   faq_page.faq_entries.map((faq_entry) => {
     all_updated_ats.push(faq_entry.updatedAt)
   })
@@ -33,6 +35,10 @@ raw_dedicated_faq_page[0]!.data.faq_pages.forEach((faq_page) => {
 // warning: it shows the timestamp of the most recently updated faq entry that is currently showing on this page,
 // so it does not update for newly added faq entries to this page, or when faq entries are removed from the page.
 const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse()[0] ?? '1970-01-01T00:00:00.000Z'
+
+const faq_page_index = faq_pages.findIndex((fp => fp.id == faq_page.id))
+const next = faq_pages[(faq_page_index + 1) % faq_pages.length]
+const prev = faq_pages[(faq_page_index - 1 + faq_pages.length) % faq_pages.length]
 ---
 
 <Base>
@@ -53,10 +59,10 @@ const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse(
         <Faq slug={faq_page.slug} />
       </div>
       <MobileBottomNavbar
-        backHref="/terms"
-        backLabel="Terms and Conditions"
-        nextHref="/privacy"
-        nextLabel="Privacy Policy"
+        backHref={`/${prev!.slug}`}
+        backLabel={prev!.name ?? ''}
+        nextHref={`/${next!.slug}`}
+        nextLabel={next!.name ?? ''}
       />
     </section>
   </Sidebar>

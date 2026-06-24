@@ -84,6 +84,7 @@ export function dedicatedFaqPageLoader(strapi: Strapi): Loader {
       description: z.string(),
       faq_pages: z.array(
         z.object({
+          id: z.string(),
           slug: z.string(),
           name: z.string().nullish(),
           icon: z.string().nullish(),
