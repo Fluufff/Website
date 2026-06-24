@@ -4,7 +4,8 @@ import {
   scheduleOpenLocationLoader,
   scheduleTagLoader,
   scheduleLocationLoader,
-  scheduleEventLoader
+  scheduleEventLoader,
+  eventLabelsExplainedLoader
 } from './schedule-loader.ts'
 import {
   // faqEntryLoader,
@@ -21,5 +22,7 @@ export const collections = {
   scheduleEvents: defineCollection({ loader: scheduleEventLoader(strapi) }),
   scheduleTags: defineCollection({ loader: scheduleTagLoader(strapi) }),
   // faqEntries: defineCollection({ loader: faqEntryLoader(strapi) }),
-  faqPages: defineCollection({ loader: faqPageLoader(strapi) })
+  faqPages: defineCollection({ loader: faqPageLoader(strapi) }),
+
+  eventLabelsExplained: defineCollection({ loader: eventLabelsExplainedLoader(strapi) })
 }

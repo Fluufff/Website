@@ -13,6 +13,7 @@ import Button from '../components/Button.astro'
 import IconWithFallback from '../components/IconWithFallback.astro'
 import con_dates from '../data/con/dates.json'
 import Socials from '../content/socials.astro'
+import { termsLinks } from '../layouts/Sidebar.astro'
 
 const openLocations = await getCollection('scheduleOpenLocations')
 const order = ['Bar', 'Fursuit Lounge', 'Photoshoot', "Dealers' Den"]
@@ -21,6 +22,7 @@ openLocations.sort((a, b) => order.indexOf(a.data.name) - order.indexOf(b.data.n
 const raw_tags = await getCollection('scheduleTags')
 const raw_locations = await getCollection('scheduleLocations')
 const raw_events = await getCollection('scheduleEvents')
+const raw_event_labels_explained = await getCollection('eventLabelsExplained')
 
 function shortenTime(time: string) {
   const date = DateTime.fromISO(time)
@@ -48,10 +50,11 @@ const all_events = raw_events.map((re) => {
     location: raw_locations.find((l) => l.id == re.data.schedule_location?.id.toString())?.data.name,
     tags: re.data.schedule_tags.map((t) => {
       const rt = raw_tags.find((rt) => rt.id == t.id.toString())
+      // console.log(rt)
       if (!rt) {
         return undefined
       } else {
-        return { name: rt.data.name }
+        return { name: rt.data.name, icon: rt.data.icon, color: rt.data.color }
       }
     })
   }
@@ -78,72 +81,6 @@ days.sort((a, b) => a.date.localeCompare(b.date))
 const first_date = days[0]?.date
 const buttonid = Math.random().toString(36).slice(2, 11)
 const eventsid = Math.random().toString(36).slice(2, 11)
-
-export type EventLabel = {
-  name: string
-  // can't seem to import FunctionalComponent<> as type
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  icon: any
-  color: string
-  description: string
-  hidden?: boolean
-}
-
-export const event_labels: EventLabel[] = [
-  // note: alphabetical
-  {
-    name: 'Charity',
-    icon: 'lucide:heart-handshake',
-    color: '#C969C6', // Fluufff 26/Accent 2/400
-    description: 'Event is organized in cooperation with our chosen charity.',
-    hidden: true
-  },
-  {
-    name: 'Educational',
-    icon: 'lucide:brain',
-    color: '#1D4EAF', // Fluufff 26/Secondary/600
-    description: 'Hosted by a (semi-)professional or the result of deep research. Focused on informing and teaching.'
-  },
-  {
-    name: 'Flashing lights',
-    icon: 'lucide:siren',
-    color: '#E6C255', // Fluufff 26/Functional/Warning
-    description: 'This event will feature flashing lights.'
-  },
-  {
-    name: 'Fursuit-Friendly',
-    icon: 'lucide:paw-print',
-    color: '#631BB1', // Fluufff 26/Primary/600
-    description: 'Includes amenities for fursuiters (fans, water stations) or adjusted pacing/materials.'
-  },
-  {
-    name: 'NSFW',
-    icon: 'lucide:octagon-minus',
-    color: '#D6455D', // Fluufff 26/Functional/Error
-    description:
-      'Elements or themes related to fetishes or related topics. However, this event is strictly non-sexual so no nudity is shown.'
-  },
-  {
-    name: 'Open door event',
-    icon: 'lucide:door-open',
-    color: '#2FBF9F', // Fluufff 26/Functional/Success
-    description: 'Can be joined and left at any point during its duration.'
-  },
-  {
-    name: 'Sporty',
-    icon: 'lucide:dumbbell',
-    color: '#963693', // Fluufff 26/Accent 2/600
-    description: 'Requires a certain level of movement. Bring comfy clothes, water, and a towel.'
-  },
-  {
-    name: 'Workshop',
-    icon: 'lucide:tool-case',
-    color: '#5ABBD8', // Fluufff 26/Accent 1/400
-    description: 'Requires active participation.'
-  }
-]
-
-export const event_labels_map = new Map(event_labels.map((event_label) => [event_label.name, event_label]))
 ---
 
 <style lang="scss">
@@ -276,18 +213,13 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
               {e.tags
                 .filter((t) => t)
                 .map((t) => {
-                  var event_label = event_labels_map.get(t!.name)
                   return (
                     <p class="p-2 flex gap-2 items-center uppercase bg-accent1-50 border rounded-sm border-accent1-200 font-bold">
-                      {event_label ? (
-                        <IconWithFallback
-                          name={event_label.icon}
-                          class="schedule__tag--icon"
-                          style={`color: ${event_label.color}`}
-                        />
-                      ) : (
-                        ''
-                      )}
+                      <IconWithFallback
+                        name={t!.icon}
+                        class="schedule__tag--icon"
+                        style={`color: ${t!.color}`}
+                      />
                       {t!.name}
                     </p>
                   )
@@ -301,23 +233,22 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
   <Section grid="grid-col-1 justify-items-center" gap="gap-6">
     <h2 class="font-atari text-2xl md:text-3xl text-center">Event labels explained</h2>
     <p class="text-center">
-      Look out for these icons during the convention. They help you find events that match your vibe.
+      {raw_event_labels_explained[0]!.data.description}
     </p>
     <div class="grid items-center mt-4 event__labels">
       {
-        event_labels
-          .filter((event_label) => !event_label.hidden)
-          .map((event_label) => (
+        raw_event_labels_explained[0]!.data.schedule_tags
+          .map((t) => (
             <div class="p-4 event__labels--label">
               <span class="flex items-center gap-2 mb-2 uppercase font-bold">
                 <IconWithFallback
-                  name={event_label.icon}
+                  name={t.icon}
                   class="schedule__tag--icon"
-                  style={`color: ${event_label.color}`}
+                  style={`color: ${t.color}`}
                 />
-                {event_label.name}
+                {t.name}
               </span>
-              <span class="flex">{event_label.description}</span>
+              <span class="flex">{t.description}</span>
             </div>
           ))
       }
