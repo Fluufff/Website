@@ -1,12 +1,6 @@
 ---
 import loadBrixIcon from '../../utils/brix-icon-loader'
-import LucideBookMarked from '~icons/lucide/book-marked'
-import LucideCalendarRange from '~icons/lucide/calendar-range'
-import LucideTicket from '~icons/lucide/ticket'
-import LucidePalette from '~icons/lucide/palette'
-import LucideInfo from '~icons/lucide/info'
-import LucideScale from '~icons/lucide/scale'
-import LucideHatGlasses from '~icons/lucide/hat-glasses'
+import IconWithFallback from '../components/IconWithFallback.astro'
 
 type Props = {
   iconClass: string
@@ -26,9 +20,9 @@ export type SidebarLink = {
   hashes?: { hash: string; label: string }[]
 }
 export const dealersDenLinks: SidebarLink[] = [
-  { icon: LucideBookMarked, label: 'Overview', href: '/dealers-den' },
+  { icon: 'lucide:book-marked', label: 'Overview', href: '/dealers-den' },
   {
-    icon: LucideCalendarRange,
+    icon: 'lucide:calendar-range',
     label: 'TIMELINE & SETUP',
     href: '/dealers-den/timeline',
     hashes: [
@@ -40,7 +34,7 @@ export const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: LucideTicket,
+    icon: 'lucide:ticket',
     label: 'OBTAINING A DEALERSHIP',
     href: '/dealers-den/dealership',
     hashes: [
@@ -53,7 +47,7 @@ export const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: LucideBookMarked,
+    icon: 'lucide:book-marked',
     label: 'RULES & GUIDELINES',
     href: '/dealers-den/rules',
     hashes: [
@@ -65,7 +59,7 @@ export const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: LucidePalette,
+    icon: 'lucide:palette',
     label: 'ARTIST ALLEY & ARTSHOW',
     href: '/dealers-den/alley-artshow',
     hashes: [
@@ -74,7 +68,7 @@ export const dealersDenLinks: SidebarLink[] = [
     ]
   },
   {
-    icon: LucideInfo,
+    icon: 'Lucide:info',
     label: 'GLOSSARY & INFO',
     href: '/dealers-den/glossary',
     hashes: [
@@ -84,9 +78,9 @@ export const dealersDenLinks: SidebarLink[] = [
   }
 ]
 export const termsLinks: SidebarLink[] = [
-  { icon: LucideBookMarked, label: 'TERMS & CONDITIONS', href: '/terms' },
-  { icon: LucideScale, label: 'CODE OF CONDUCT', href: '/conduct' },
-  { icon: LucideHatGlasses, label: 'PRIVACY POLICY', href: '/privacy' }
+  { icon: 'lucide:bookmarked', label: 'TERMS & CONDITIONS', href: '/terms' },
+  { icon: 'lucide:scale', label: 'CODE OF CONDUCT', href: '/conduct' },
+  { icon: 'lucide:hat-glasses', label: 'PRIVACY POLICY', href: '/privacy' }
 ]
 
 function getIconSvg(name: string) {
@@ -120,10 +114,10 @@ function hashIsActive(hash: string) {
     {
       !Astro.slots.has('header') && (
         <div class="sidebar-bottom sidebar-sticky fill-primary-500">
-          {links.map(({ icon: Icon, label, href, hashes }) => (
+          {links.map(({ icon, label, href, hashes }) => (
             <div class="sidebar-item ">
               <a {href} class={`sidebar-trigger ${isActive(href) ? 'active' : iconClass}`}>
-                <Icon />
+                <IconWithFallback name={icon} />
                 <span class="sidebar-link">{label}</span>
                 {hashes && (
                   <>
@@ -166,10 +160,10 @@ function hashIsActive(hash: string) {
     <div class="sidebar-container">
       <aside class="sidebar" class:list={['sidebar', sidebarClass]}>
         <div class="sidebar-bottom sidebar-sticky">
-          {links.map(({ icon: Icon, label, href, hashes }) => (
+          {links.map(({ icon, label, href, hashes }) => (
             <div class="sidebar-item">
               <a href={href} class={`sidebar-trigger ${isActive(href) ? 'active' : iconClass}`}>
-                <Icon />
+                <IconWithFallback name={icon} />
                 <span class="sidebar-link">{label}</span>
                 {hashes && (
                   <>
@@ -332,6 +326,10 @@ function hashIsActive(hash: string) {
     .sidebar-item {
       display: flex;
       flex-direction: column;
+
+      svg {
+        font-size: 20px;
+      }
 
       .sidebar-toggle-icon-minus {
         display: none;

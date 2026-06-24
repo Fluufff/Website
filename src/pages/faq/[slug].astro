@@ -1,0 +1,136 @@
+---
+import { marked } from 'marked'
+import { getCollection } from 'astro:content'
+import Base from '../../layouts/Base.astro'
+import Sidebar, { type SidebarLink } from '../../layouts/Sidebar.astro'
+import Socials from '../../content/socials.astro'
+import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Faq from '../../content/Faq.astro'
+
+const raw_dedicated_faq_page = await getCollection('dedicatedFaqPage')
+
+export async function getStaticPaths() {
+  const faq_pages = await getCollection('faqPages')
+  return faq_pages
+    .filter((faq_page) => faq_page.data.slug.startsWith('faq/'))
+    .map((faq_page) => ({ params: { slug: faq_page.data.slug.split('faq/')[1] }, props: { faq_page: faq_page } }))
+}
+
+const faq_pages = raw_dedicated_faq_page[0]!.data.faq_pages
+
+const faqLinks: SidebarLink[] = faq_pages.map((faq_page) => {
+  return { icon: faq_page.icon, label: (faq_page.name ?? '').toUpperCase(), href: `/${faq_page.slug}` }
+})
+
+const faq_page = Astro.props.faq_page.data
+
+const all_updated_ats: string[] = []
+all_updated_ats.push(raw_dedicated_faq_page[0]!.data.updatedAt)
+faq_pages.forEach((faq_page) => {
+  faq_page.faq_entries.map((faq_entry) => {
+    all_updated_ats.push(faq_entry.updatedAt)
+  })
+})
+
+// warning: it shows the timestamp of the most recently updated faq entry that is currently showing on this page,
+// so it does not update for newly added faq entries to this page, or when faq entries are removed from the page.
+const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse()[0] ?? '1970-01-01T00:00:00.000Z'
+
+const faq_page_index = faq_pages.findIndex((fp) => fp.id == faq_page.id)
+const next = faq_pages[(faq_page_index + 1) % faq_pages.length]
+const prev = faq_pages[(faq_page_index - 1 + faq_pages.length) % faq_pages.length]
+---
+
+<Base>
+  <Sidebar links={faqLinks} iconClass="text-secondary-500" sidebarClass="bg-secondary-50" title="" description="">
+    <section>
+      <div class="content">
+        <h1>{raw_dedicated_faq_page[0]!.data.title}</h1>
+        <p>Last updated: {last_updated.split('T')[0]!.split('-').reverse().join('/')}</p>
+        <p set:html={marked.parse(raw_dedicated_faq_page[0]!.data.description, { breaks: true })} />
+      </div>
+      <div class="content">
+        <Faq slug={faq_page.slug} />
+      </div>
+      <MobileBottomNavbar
+        backHref={`/${prev!.slug}`}
+        backLabel={prev!.name ?? ''}
+        nextHref={`/${next!.slug}`}
+        nextLabel={next!.name ?? ''}
+      />
+    </section>
+  </Sidebar>
+  <Socials />
+</Base>
+
+<style scoped lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1200px;
+    width: calc(100vw - 360px);
+    margin: 0 auto;
+
+    @media (max-width: 900px) {
+      width: 100vw;
+    }
+  }
+
+  .content {
+    padding: 20px 60px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    color: charter.$primary-800;
+
+    &:first-child {
+      padding-top: 80px;
+    }
+
+    &:not(:has(~ .content)) {
+      padding-bottom: 80px;
+    }
+
+    @media (max-width: 600px) {
+      padding: 20px;
+
+      &:first-child {
+        padding-top: 40px;
+      }
+
+      &:not(:has(~ .content)) {
+        padding-bottom: 40px;
+      }
+    }
+
+    h1 {
+      @include text-styles.heading1;
+      margin-bottom: 16px;
+
+      @media (max-width: 600px) {
+        @include text-styles.heading3;
+      }
+    }
+
+    h2 {
+      @include text-styles.heading4;
+      margin-bottom: 16px;
+    }
+
+    p:not(:last-child) {
+      margin-bottom: 16px;
+    }
+
+    a {
+      color: charter.$primary-500;
+    }
+
+    ul > li {
+      list-style-type: disc;
+    }
+  }
+</style>
