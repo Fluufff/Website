@@ -1,0 +1,17 @@
+---
+import icons from 'virtual:astro-icon'
+import { Icon } from 'astro-icon/components'
+
+const { name, fallback = 'lucide:file-question-mark', ...props } = Astro.props
+
+// https://github.com/natemoo-re/astro-icon/blob/main/packages/core/components/Icon.astro
+let [setName, iconName] = (name as string).split(':')
+const found = icons[setName]?.icons[iconName]
+const icon = found ? name : fallback
+---
+
+<Icon name={icon} {...props} />
+
+<script is:inline define:vars={{ name, fallback, found }}>
+  if (!found) console.warn(`<IconWithFallback> is showing ${fallback} instead of ${name}!`)
+</script>

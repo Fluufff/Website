@@ -8,18 +8,9 @@ import LucideClock from '~icons/lucide/clock'
 import LucideMapPin from '~icons/lucide/map-pin'
 import LucideUserRound from '~icons/lucide/user-round'
 
-// event label icons
-import LucideBrain from '~icons/lucide/brain'
-import LucidePawPrint from '~icons/lucide/paw-print'
-import LucideToolCase from '~icons/lucide/tool-case'
-import LucideOctagonMinus from '~icons/lucide/octagon-minus'
-import LucideSiren from '~icons/lucide/siren'
-import LucideDumbbell from '~icons/lucide/dumbbell'
-import LucideHeartHandshake from '~icons/lucide/heart-handshake'
-import LucideDoorOpen from '~icons/lucide/door-open'
-
 import Section from '../components/Section.astro'
 import Button from '../components/Button.astro'
+import IconWithFallback from '../components/IconWithFallback.astro'
 import con_dates from '../data/con/dates.json'
 import Socials from '../content/socials.astro'
 
@@ -102,51 +93,51 @@ export const event_labels: EventLabel[] = [
   // note: alphabetical
   {
     name: 'Charity',
-    icon: LucideHeartHandshake,
+    icon: 'lucide:heart-handshake',
     color: '#C969C6', // Fluufff 26/Accent 2/400
     description: 'Event is organized in cooperation with our chosen charity.',
     hidden: true
   },
   {
     name: 'Educational',
-    icon: LucideBrain,
+    icon: 'lucide:brain',
     color: '#1D4EAF', // Fluufff 26/Secondary/600
     description: 'Hosted by a (semi-)professional or the result of deep research. Focused on informing and teaching.'
   },
   {
     name: 'Flashing lights',
-    icon: LucideSiren,
+    icon: 'lucide:siren',
     color: '#E6C255', // Fluufff 26/Functional/Warning
     description: 'This event will feature flashing lights.'
   },
   {
     name: 'Fursuit-Friendly',
-    icon: LucidePawPrint,
+    icon: 'lucide:paw-print',
     color: '#631BB1', // Fluufff 26/Primary/600
     description: 'Includes amenities for fursuiters (fans, water stations) or adjusted pacing/materials.'
   },
   {
     name: 'NSFW',
-    icon: LucideOctagonMinus,
+    icon: 'lucide:octagon-minus',
     color: '#D6455D', // Fluufff 26/Functional/Error
     description:
       'Elements or themes related to fetishes or related topics. However, this event is strictly non-sexual so no nudity is shown.'
   },
   {
     name: 'Open door event',
-    icon: LucideDoorOpen,
+    icon: 'lucide:door-open',
     color: '#2FBF9F', // Fluufff 26/Functional/Success
     description: 'Can be joined and left at any point during its duration.'
   },
   {
     name: 'Sporty',
-    icon: LucideDumbbell,
+    icon: 'lucide:dumbbell',
     color: '#963693', // Fluufff 26/Accent 2/600
     description: 'Requires a certain level of movement. Bring comfy clothes, water, and a towel.'
   },
   {
     name: 'Workshop',
-    icon: LucideToolCase,
+    icon: 'lucide:tool-case',
     color: '#5ABBD8', // Fluufff 26/Accent 1/400
     description: 'Requires active participation.'
   }
@@ -211,6 +202,10 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
   .schedule__entry {
     border: 1px solid charter.$accent1-200;
     box-shadow: 0 1px 4px 0 rgba(25, 33, 61, 0.08);
+  }
+
+  svg.schedule__tag--icon {
+    font-size: 20px;
   }
 </style>
 
@@ -284,7 +279,15 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
                   var event_label = event_labels_map.get(t!.name)
                   return (
                     <p class="p-2 flex gap-2 items-center uppercase bg-accent1-50 border rounded-sm border-accent1-200 font-bold">
-                      {event_label ? <event_label.icon style={`color: ${event_label.color}`} /> : ''}
+                      {event_label ? (
+                        <IconWithFallback
+                          name={event_label.icon}
+                          class="schedule__tag--icon"
+                          style={`color: ${event_label.color}`}
+                        />
+                      ) : (
+                        ''
+                      )}
                       {t!.name}
                     </p>
                   )
@@ -307,7 +310,12 @@ export const event_labels_map = new Map(event_labels.map((event_label) => [event
           .map((event_label) => (
             <div class="p-4 event__labels--label">
               <span class="flex items-center gap-2 mb-2 uppercase font-bold">
-                <event_label.icon style={`color: ${event_label.color}`} /> {event_label.name}
+                <IconWithFallback
+                  name={event_label.icon}
+                  class="schedule__tag--icon"
+                  style={`color: ${event_label.color}`}
+                />
+                {event_label.name}
               </span>
               <span class="flex">{event_label.description}</span>
             </div>
