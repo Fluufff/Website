@@ -2,6 +2,9 @@ import type { Loader, LoaderContext } from 'astro/loaders'
 import { z } from 'astro:content'
 import type { Strapi } from './strapi.ts'
 
+import childProcess from 'node:child_process'
+const branch = childProcess.execSync('git branch --show-current').toString().trim()
+
 export function scheduleOpenLocationLoader(strapi: Strapi): Loader {
   return {
     name: 'schedule-open-locations-loader',
@@ -93,6 +96,8 @@ export function scheduleEventLoader(strapi: Strapi): Loader {
       })
 
       for (const item of items) {
+        if (branch == 'main' && item['hidden_on_main_branch']) continue
+
         const data = await ctx.parseData({
           id: item.id.toString(),
           data: { ...item }
