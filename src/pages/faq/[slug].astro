@@ -35,10 +35,6 @@ faq_pages.forEach((faq_page) => {
 // warning: it shows the timestamp of the most recently updated faq entry that is currently showing on this page,
 // so it does not update for newly added faq entries to this page, or when faq entries are removed from the page.
 const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse()[0] ?? '1970-01-01T00:00:00.000Z'
-
-const faq_page_index = faq_pages.findIndex((fp) => fp.id == faq_page.id)
-const next = faq_pages[(faq_page_index + 1) % faq_pages.length]
-const prev = faq_pages[(faq_page_index - 1 + faq_pages.length) % faq_pages.length]
 ---
 
 <Base>
@@ -52,12 +48,6 @@ const prev = faq_pages[(faq_page_index - 1 + faq_pages.length) % faq_pages.lengt
       <div class="content">
         <Faq slug={faq_page.slug} />
       </div>
-      <MobileBottomNavbar
-        backHref={`/${prev!.slug}`}
-        backLabel={prev!.name ?? ''}
-        nextHref={`/${next!.slug}`}
-        nextLabel={next!.name ?? ''}
-      />
     </section>
   </Sidebar>
   <Socials />
