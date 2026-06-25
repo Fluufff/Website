@@ -4,8 +4,10 @@ import { getCollection } from 'astro:content'
 import Base from '../../layouts/Base.astro'
 import Sidebar, { type SidebarLink } from '../../layouts/Sidebar.astro'
 import Socials from '../../content/socials.astro'
-import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Accordion from '../../components/Accordion.vue'
+import AccordionItem from '../../components/AccordionItem.astro'
 import Faq from '../../content/Faq.astro'
+import IconWithFallback from '../../components/IconWithFallback.astro'
 
 const raw_dedicated_faq_page = await getCollection('dedicatedFaqPage')
 
@@ -45,13 +47,50 @@ const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse(
         <p>Last updated: {last_updated.split('T')[0]!.split('-').reverse().join('/')}</p>
         <p set:html={marked.parse(raw_dedicated_faq_page[0]!.data.description, { breaks: true })} />
       </div>
-      <div class="content">
+      <div class="content desktop-only">
         <Faq slug={faq_page.slug} />
+      </div>
+      <div class="content mobile-only">
+        <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
+          {faq_pages.map((fp) => (
+            <AccordionItem showClose>
+              <Fragment slot="header">
+                <IconWithFallback name={fp.icon} class="text-2xl mr-2 inline" /><span>{fp.name}</span>
+              </Fragment>
+              {fp.faq_entries.map((fe) => (
+                <strong>{fe.question}</strong>
+                <div set:html={marked.parse(fe.answer, { breaks: true })}></div>
+                <hr class="border-accent2-100 my-6">
+              ))}
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </section>
   </Sidebar>
   <Socials />
 </Base>
+
+<style is:global lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  .dedicated-faq-page-accordion {
+
+    .accordion-item__content + .accordion-item__header {
+      border-top: solid 1px charter.$accent2-300;
+    }
+
+    .accordion-item__header {
+      @include text-styles.heading4;
+      color: charter.$accent2-500;
+    }
+
+    hr:last-child {
+      display: none;
+    }
+  }
+</style>
 
 <style scoped lang="scss">
   @use '../../styles/text-styles';
@@ -121,6 +160,18 @@ const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse(
 
     ul > li {
       list-style-type: disc;
+    }
+
+    &.mobile-only {
+      display: none;
+    }
+    @media (max-width: 900px) {
+      &.desktop-only {
+        display: none;
+      }
+      &.mobile-only {
+        display: flex;
+      }
     }
   }
 </style>

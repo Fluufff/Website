@@ -90,6 +90,8 @@ export function dedicatedFaqPageLoader(strapi: Strapi): Loader {
           icon: z.string().nullish(),
           faq_entries: z.array(
             z.object({
+              question: z.string(),
+              answer: z.string(),
               updatedAt: z.string()
             })
           )
