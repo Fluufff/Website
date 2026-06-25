@@ -4,8 +4,11 @@ import { getCollection } from 'astro:content'
 import Base from '../../layouts/Base.astro'
 import Sidebar, { type SidebarLink } from '../../layouts/Sidebar.astro'
 import Socials from '../../content/socials.astro'
-import MobileBottomNavbar from '../../components/MobileBottomNavbar.astro'
+import Accordion from '../../components/Accordion.vue'
+import AccordionItem from '../../components/AccordionItem.astro'
 import Faq from '../../content/Faq.astro'
+import FaqItem from '../../content/FaqItem.astro'
+import IconWithFallback from '../../components/IconWithFallback.astro'
 
 const raw_dedicated_faq_page = await getCollection('dedicatedFaqPage')
 
@@ -27,18 +30,13 @@ const faq_page = Astro.props.faq_page.data
 const all_updated_ats: string[] = []
 all_updated_ats.push(raw_dedicated_faq_page[0]!.data.updatedAt)
 faq_pages.forEach((faq_page) => {
+  all_updated_ats.push(faq_page.updatedAt)
   faq_page.faq_entries.map((faq_entry) => {
     all_updated_ats.push(faq_entry.updatedAt)
   })
 })
 
-// warning: it shows the timestamp of the most recently updated faq entry that is currently showing on this page,
-// so it does not update for newly added faq entries to this page, or when faq entries are removed from the page.
 const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse()[0] ?? '1970-01-01T00:00:00.000Z'
-
-const faq_page_index = faq_pages.findIndex((fp) => fp.id == faq_page.id)
-const next = faq_pages[(faq_page_index + 1) % faq_pages.length]
-const prev = faq_pages[(faq_page_index - 1 + faq_pages.length) % faq_pages.length]
 ---
 
 <Base>
@@ -49,19 +47,65 @@ const prev = faq_pages[(faq_page_index - 1 + faq_pages.length) % faq_pages.lengt
         <p>Last updated: {last_updated.split('T')[0]!.split('-').reverse().join('/')}</p>
         <p set:html={marked.parse(raw_dedicated_faq_page[0]!.data.description, { breaks: true })} />
       </div>
-      <div class="content">
-        <Faq slug={faq_page.slug} />
+      <div class="content desktop-only">
+        <h2 style="font-size: 24px; text-transform: none; font-family: var(--font-atari), sans-serif;">
+          {faq_page.name}
+        </h2>
+        <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
+          {
+            faq_page.faq_entries.map((fe) => (
+              <FaqItem question={fe.question} set:html={marked.parse(fe.answer, { breaks: true })} />
+            ))
+          }
+        </Accordion>
       </div>
-      <MobileBottomNavbar
-        backHref={`/${prev!.slug}`}
-        backLabel={prev!.name ?? ''}
-        nextHref={`/${next!.slug}`}
-        nextLabel={next!.name ?? ''}
-      />
+      <div class="content mobile-only">
+        <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
+          {
+            faq_pages.map((fp) => (
+              <AccordionItem showClose>
+                <Fragment slot="header">
+                  <>
+                    <IconWithFallback name={fp.icon} class="text-2xl mr-2 inline" />
+                    <span>{fp.name}</span>
+                  </>
+                </Fragment>
+                {fp.faq_entries.map((fe) => (
+                  <div>
+                    <strong>{fe.question}</strong>
+                    <div set:html={marked.parse(fe.answer, { breaks: true })} />
+                    <hr class="border-accent2-100 my-6" />
+                  </div>
+                ))}
+              </AccordionItem>
+            ))
+          }
+        </Accordion>
+      </div>
     </section>
   </Sidebar>
   <Socials />
 </Base>
+
+<style is:global lang="scss">
+  @use '../../styles/text-styles';
+  @use '../../styles/charter';
+
+  .dedicated-faq-page-accordion {
+    .accordion-item__content + .accordion-item__header {
+      border-top: solid 1px charter.$accent2-300;
+    }
+
+    .accordion-item__header {
+      @include text-styles.heading4;
+      color: charter.$accent2-500;
+    }
+
+    hr:last-child {
+      display: none;
+    }
+  }
+</style>
 
 <style scoped lang="scss">
   @use '../../styles/text-styles';
@@ -131,6 +175,18 @@ const prev = faq_pages[(faq_page_index - 1 + faq_pages.length) % faq_pages.lengt
 
     ul > li {
       list-style-type: disc;
+    }
+
+    &.mobile-only {
+      display: none;
+    }
+    @media (max-width: 900px) {
+      &.desktop-only {
+        display: none;
+      }
+      &.mobile-only {
+        display: flex;
+      }
     }
   }
 </style>

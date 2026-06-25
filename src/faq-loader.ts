@@ -88,8 +88,11 @@ export function dedicatedFaqPageLoader(strapi: Strapi): Loader {
           slug: z.string(),
           name: z.string().nullish(),
           icon: z.string().nullish(),
+          updatedAt: z.string(),
           faq_entries: z.array(
             z.object({
+              question: z.string(),
+              answer: z.string(),
               updatedAt: z.string()
             })
           )
