@@ -29,13 +29,12 @@ const faq_page = Astro.props.faq_page.data
 const all_updated_ats: string[] = []
 all_updated_ats.push(raw_dedicated_faq_page[0]!.data.updatedAt)
 faq_pages.forEach((faq_page) => {
+  all_updated_ats.push(faq_page.updatedAt)
   faq_page.faq_entries.map((faq_entry) => {
     all_updated_ats.push(faq_entry.updatedAt)
   })
 })
 
-// warning: it shows the timestamp of the most recently updated faq entry that is currently showing on this page,
-// so it does not update for newly added faq entries to this page, or when faq entries are removed from the page.
 const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse()[0] ?? '1970-01-01T00:00:00.000Z'
 ---
 
