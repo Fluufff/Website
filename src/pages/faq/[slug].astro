@@ -7,6 +7,7 @@ import Socials from '../../content/socials.astro'
 import Accordion from '../../components/Accordion.vue'
 import AccordionItem from '../../components/AccordionItem.astro'
 import Faq from '../../content/Faq.astro'
+import FaqItem from '../../content/FaqItem.astro'
 import IconWithFallback from '../../components/IconWithFallback.astro'
 
 const raw_dedicated_faq_page = await getCollection('dedicatedFaqPage')
@@ -47,7 +48,14 @@ const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse(
         <p set:html={marked.parse(raw_dedicated_faq_page[0]!.data.description, { breaks: true })} />
       </div>
       <div class="content desktop-only">
-        <Faq slug={faq_page.slug} />
+        <h2 style="font-size: 24px; text-transform: none; font-family: var(--font-atari), sans-serif;">{faq_page.name}</h2>
+        <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
+          {
+            faq_page.faq_entries.map((fe) => (
+              <FaqItem question={fe.question} set:html={marked.parse(fe.answer, { breaks: true })} />
+            ))
+          }
+        </Accordion>
       </div>
       <div class="content mobile-only">
         <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
