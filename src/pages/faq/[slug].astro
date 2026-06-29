@@ -81,7 +81,7 @@ const description_html = await marked.parse(
                   </>
                 </Fragment>
                 {fp.faq_entries.map((fe) => (
-                  <div>
+                  <div class="faq-entry">
                     <strong>{fe.question}</strong>
                     <div set:html={marked.parse(fe.answer, { breaks: true })} />
                     <hr class="border-accent2-100 my-6" />
@@ -111,7 +111,7 @@ const description_html = await marked.parse(
       color: charter.$secondary-500;
     }
 
-    hr:last-child {
+    .faq-entry:last-child hr {
       display: none;
     }
   }
