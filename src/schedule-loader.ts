@@ -128,7 +128,7 @@ export function eventLabelsExplainedLoader(strapi: Strapi): Loader {
       ctx.store.clear()
 
       let items = await strapi.fetchItems('event-labels-explained', { populate: 'schedule_tags' })
-      items = [items]
+      items = Array.isArray(items) ? items : [items]
 
       for (const item of items) {
         const data = await ctx.parseData({

@@ -68,7 +68,7 @@ export function dedicatedFaqPageLoader(strapi: Strapi): Loader {
       ctx.store.clear()
 
       let items = await strapi.fetchItems('dedicated-faq-page', { populate: 'faq_pages.faq_entries' })
-      items = [items]
+      items = Array.isArray(items) ? items : [items]
 
       for (const item of items) {
         const data = await ctx.parseData({
