@@ -68,12 +68,7 @@ function isCurrent(...routePattern: string[]) {
     </div>
     <a href="/about" class:list={['my-4', isCurrent('/about') && 'font-bold']}>About</a>
     <div>
-      <p
-        class:list={[
-          'my-4 flex items-center gap-1',
-          isCurrent('/contact', '/faq/[slug]') && 'font-bold'
-        ]}
-      >
+      <p class:list={['my-4 flex items-center gap-1', isCurrent('/contact', '/faq/[slug]') && 'font-bold']}>
         Contact <LucideChevronDown />
       </p>
       <ul class="p-2 bg-neutrals-50 shadow-md text-nowrap">
@@ -81,9 +76,7 @@ function isCurrent(...routePattern: string[]) {
           <a class="p-4" href="/contact" class:list={[isCurrent('/contact') && 'font-bold']}>Get in touch</a>
         </li>
         <li class="hover:bg-primary-50">
-          <a class="p-4" href="/faq" class:list={[isCurrent('/faq/[slug]') && 'font-bold']}
-            >FAQ</a
-          >
+          <a class="p-4" href="/faq" class:list={[isCurrent('/faq/[slug]') && 'font-bold']}>FAQ</a>
         </li>
       </ul>
     </div>
@@ -136,9 +129,9 @@ function isCurrent(...routePattern: string[]) {
       </li>
       <li>
         <p data-open={isCurrent('/contact', '/faq/[slug]')}>
-          Contact<LucideChevronDown
-            class:list={{ hidden: isCurrent('/contact', '/faq/[slug]') }}
-          /><LucideChevronUp class:list={{ hidden: !isCurrent('/contact', '/faq/[slug]') }} />
+          Contact<LucideChevronDown class:list={{ hidden: isCurrent('/contact', '/faq/[slug]') }} /><LucideChevronUp
+            class:list={{ hidden: !isCurrent('/contact', '/faq/[slug]') }}
+          />
         </p>
       </li>
       <li class="bg-neutral-100" class:list={{ hidden: !isCurrent('/contact', '/faq/[slug]') }}>
