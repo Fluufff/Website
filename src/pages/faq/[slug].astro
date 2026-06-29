@@ -36,15 +36,15 @@ faq_pages.forEach((faq_page) => {
 })
 
 const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse()[0] ?? '1970-01-01T00:00:00.000Z'
+
+const description_html = await marked.parse(`Last updated: ${last_updated.split('T')[0]!.split('-').reverse().join('/')}\n\n` + raw_dedicated_faq_page[0]!.data.description, { breaks: true })
 ---
 
 <Base>
-  <Sidebar links={faqLinks} iconClass="text-secondary-500" sidebarClass="bg-secondary-50" title="" description="">
+  <Sidebar links={faqLinks} iconClass="text-secondary-500" sidebarClass="bg-secondary-50" title="" description={description_html}>
     <section>
       <div class="content">
         <h1>{raw_dedicated_faq_page[0]!.data.title}</h1>
-        <p>Last updated: {last_updated.split('T')[0]!.split('-').reverse().join('/')}</p>
-        <p set:html={marked.parse(raw_dedicated_faq_page[0]!.data.description, { breaks: true })} />
       </div>
       <div class="content desktop-only">
         <h2 style="font-size: 24px; text-transform: none; font-family: var(--font-atari), sans-serif;">
@@ -59,6 +59,7 @@ const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse(
         </Accordion>
       </div>
       <div class="content mobile-only">
+        <div class="mobile-only-faq-description" set:html={description_html} />
         <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
           {
             faq_pages.map((fp) => (
@@ -103,6 +104,12 @@ const last_updated = all_updated_ats.sort((a, b) => a.localeCompare(b)).reverse(
     hr:last-child {
       display: none;
     }
+  }
+
+  .sidebar-top, .mobile-only-faq-description {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
   }
 </style>
 
