@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
-const props = defineProps<{ alwaysOpen?: boolean; class?: string; faq?: boolean }>()
+const props = defineProps<{ alwaysOpen?: boolean; class?: string; faq?: boolean; multipleCanBeOpen?: boolean }>()
 
 const collapsible = ref(false)
 const parent = ref<HTMLElement | null>(null)
@@ -48,14 +48,19 @@ function clicked(q: Element, a: Element) {
 
   if (isActive && props.alwaysOpen) return
 
-  qaElements.forEach(([q, a]) => {
-    q.classList.remove('active')
-    a.classList.remove('active')
-  })
+  if (!props.multipleCanBeOpen) {
+    qaElements.forEach(([q, a]) => {
+      q.classList.remove('active')
+      a.classList.remove('active')
+    })
+  }
 
   if (!isActive) {
     q.classList.add('active')
     a.classList.add('active')
+  } else if (props.multipleCanBeOpen) {
+    q.classList.remove('active')
+    a.classList.remove('active')
   }
 }
 </script>

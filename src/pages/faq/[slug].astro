@@ -70,7 +70,7 @@ const description_html = await marked.parse(
       </div>
       <div class="content mobile-only">
         <div class="mobile-only-faq-description" set:html={description_html} />
-        <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
+        <Accordion class="dedicated-faq-page-accordion w-full" faq client:load multipleCanBeOpen>
           {
             faq_pages.map((fp) => (
               <AccordionItem showClose>
