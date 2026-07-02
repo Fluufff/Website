@@ -45,12 +45,12 @@ const { headline, image, alignImage, id, pictureclass = '', alignContent } = Ast
   @use '../../styles/charter';
   @use 'sass:color';
 
-  .hero .content__actions {
+  .hero .section__content__actions {
     margin-top: 64px;
   }
 
-  .hero > .content,
-  .hero.content {
+  .hero > .section__content,
+  .hero.section__content {
     @media (min-width: 900px) {
       padding: 80px 104px;
 
@@ -60,7 +60,7 @@ const { headline, image, alignImage, id, pictureclass = '', alignContent } = Ast
     }
   }
 
-  .hero:not(.content) {
+  .hero:not(.section__content) {
     display: flex;
     flex-direction: row;
     position: relative;
@@ -84,7 +84,7 @@ const { headline, image, alignImage, id, pictureclass = '', alignContent } = Ast
       }
     }
     > picture,
-    > .content {
+    > .section__content {
       width: 50%;
       box-sizing: border-box;
       overflow: hidden;
@@ -92,7 +92,7 @@ const { headline, image, alignImage, id, pictureclass = '', alignContent } = Ast
   }
 
   @media (max-width: 900px) {
-    .hero:not(.content) {
+    .hero:not(.section__content) {
       position: relative;
       flex-direction: column;
       width: 100%;
@@ -105,7 +105,7 @@ const { headline, image, alignImage, id, pictureclass = '', alignContent } = Ast
         top: 0;
       }
 
-      > .content {
+      > .section__content {
         position: relative;
         margin-top: -20vh;
         width: 100%;
@@ -115,15 +115,15 @@ const { headline, image, alignImage, id, pictureclass = '', alignContent } = Ast
   }
 
   @media (max-width: 600px) {
-    .hero .content {
+    .hero .section__content {
       align-items: stretch;
       padding: 20px 16px;
     }
 
-    .hero .content__container {
+    .hero .section__content__container {
       align-items: stretch;
     }
-    .hero .content > h2 {
+    .hero .section__content > h2 {
       font-size: 40px;
       line-height: 52px;
       text-align: center;
