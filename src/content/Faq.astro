@@ -55,7 +55,7 @@ const faqPage = faqPages.find((faqPage) => faqPage.data.slug == slug)
 
       @include text-styles.heading4;
       color: charter.$primary-800;
-      align-items: center;
+      align-items: start;
 
       svg {
         color: charter.$accent2-600;
@@ -64,7 +64,7 @@ const faqPage = faqPages.find((faqPage) => faqPage.data.slug == slug)
       &:before {
         counter-increment: question_number;
         content: counter(question_number, decimal-leading-zero);
-        margin-top: -2px;
+        margin-top: 2px;
 
         @include text-styles.display4SemiBold;
       }
