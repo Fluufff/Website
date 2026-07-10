@@ -232,16 +232,18 @@ const eventsid = Math.random().toString(36).slice(2, 11)
     </p>
     <div class="grid items-center mt-4 event__labels">
       {
-        raw_event_labels_explained[0] ? raw_event_labels_explained[0]!.data.schedule_tags.map((t) => (
-          <div class="p-4 event__labels--label">
-            <span class="flex items-center gap-2 mb-2 uppercase font-bold">
-              <IconWithFallback name={t.icon} class="schedule__tag--icon" style={`color: ${t.color}`} />
-              {t.name}
-            </span>
-            <span class="flex">{t.description}</span>
-          </div>
-        ))
-      : ''}
+        raw_event_labels_explained[0]
+          ? raw_event_labels_explained[0]!.data.schedule_tags.map((t) => (
+              <div class="p-4 event__labels--label">
+                <span class="flex items-center gap-2 mb-2 uppercase font-bold">
+                  <IconWithFallback name={t.icon} class="schedule__tag--icon" style={`color: ${t.color}`} />
+                  {t.name}
+                </span>
+                <span class="flex">{t.description}</span>
+              </div>
+            ))
+          : ''
+      }
     </div>
   </Section>
   <Socials />
