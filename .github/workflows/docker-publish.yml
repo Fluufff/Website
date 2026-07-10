@@ -75,7 +75,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            CI=true
             STRAPI_URI=https://cms.fluufff.org/api/
             SITE_BASE_URL/
           secrets: |
