@@ -48,6 +48,9 @@ export function loadStrapi(): Strapi {
         use_documentid_as_id(data)
         return data
       } catch (e) {
+        if (process.env.CI) {
+          throw [itemName, e];
+        }
         const msg = e instanceof Error ? e.message : e
         console.warn(`Error while trying to fetch ${itemName}:`, msg)
         return []
