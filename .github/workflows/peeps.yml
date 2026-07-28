@@ -20,7 +20,7 @@ jobs:
           PEEPS_CLIENT_SECRET: ${{ secrets.PEEPS_CLIENT_SECRET }}
           PEEPS_REFRESH_TOKEN: ${{ secrets.PEEPS_REFRESH_TOKEN }}
           PEEPS_SPREADSHEET_ID: ${{ secrets.PEEPS_SPREADSHEET_ID }}
-        run: deno run --allow-env --allow-net --allow-write utils/peeps-generate.ts
+        run: deno run --allow-env --allow-read --allow-net --allow-write utils/peeps-generate.ts
 
       - name: Run git push
         run: |

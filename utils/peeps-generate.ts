@@ -1,4 +1,4 @@
-// deno run --allow-env --env-file=.env.local --allow-net --allow-write utils/peeps-generate.ts
+// deno run --allow-env --env-file=.env.local --allow-read --allow-net --allow-write utils/peeps-generate.ts
 
 // Writes a new peeps.json based on the contents of the "Staff & Volunteers" spreadsheet.
 
@@ -30,6 +30,11 @@ assert(PEEPS_CLIENT_ID)
 assert(PEEPS_CLIENT_SECRET)
 assert(PEEPS_REFRESH_TOKEN)
 assert(PEEPS_SPREADSHEET_ID)
+
+const pathname = './src/data/hr/peeps.json'
+
+const orphaned_peeps = new Set()
+JSON.parse(Deno.readTextFileSync(pathname)).forEach((peep: Peep) => orphaned_peeps.add(peep.id))
 
 // get access token from refresh token
 const access_token_response = await fetch('https://oauth2.googleapis.com/token', {
@@ -153,4 +158,13 @@ all_volunteers.forEach((volunteer) => {
 
 const json = JSON.stringify(peeps, null, 2)
 console.log(json)
-Deno.writeTextFileSync('./src/data/hr/peeps.json', `${json}\n`)
+Deno.writeTextFileSync(pathname, `${json}\n`)
+
+// if a peep was removed we remove their image as well,
+// files not (yet) belonging to a peep do not get deleted.
+peeps.forEach((peep: Peep) => orphaned_peeps.delete(peep.id))
+for (const file of Deno.readDirSync('./src/assets/images/peeps')) {
+  if (orphaned_peeps.has(file.name.split('.')[0])) {
+    Deno.removeSync(`./src/assets/images/peeps/${file.name}`)
+  }
+}
