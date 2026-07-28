@@ -164,6 +164,7 @@ Deno.writeTextFileSync(pathname, `${json}\n`)
 // files not (yet) belonging to a peep do not get deleted.
 peeps.forEach((peep: Peep) => orphaned_peeps.delete(peep.id))
 for (const file of Deno.readDirSync('./src/assets/images/peeps')) {
+  // if (!peeps.find(peep => peep.id == file.name.split('.')[0])) {
   if (orphaned_peeps.has(file.name.split('.')[0])) {
     Deno.removeSync(`./src/assets/images/peeps/${file.name}`)
   }
