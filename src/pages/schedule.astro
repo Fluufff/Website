@@ -143,6 +143,11 @@ const eventsid = Math.random().toString(36).slice(2, 11)
   svg.schedule__tag--icon {
     font-size: 20px;
   }
+
+  .open_location--closed {
+    // opacity: 0.5;
+    display: none;
+  }
 </style>
 
 <Base>
@@ -162,6 +167,53 @@ const eventsid = Math.random().toString(36).slice(2, 11)
       }
     </div>
     <div data-id={eventsid} class="flex flex-col w-full gap-4">
+      {
+        days.map((day) =>
+          openLocations.map((openLocation) => {
+            const opening_times_today = openLocation.data.opening_times.filter(
+              (opening_time) => opening_time.day == day.date
+            )
+            const any_opening_times_today = opening_times_today.length > 0
+            return (
+              <section
+                data-date={day.date}
+                class:list={[
+                  'hidden flex flex-col gap-4 p-4 shadow-md rounded-md schedule__entry',
+                  { 'open_location--closed': !any_opening_times_today }
+                ]}
+              >
+                <div
+                  class:list={[
+                    'flex justify-between items-center',
+                    { 'open_location--closed': !any_opening_times_today }
+                  ]}
+                >
+                  <div class="flex gap-2 items-center">
+                    <LucideClock />
+                    <div class="flex flex-col">
+                      {any_opening_times_today ? (
+                        opening_times_today.map((opening_time) => (
+                          <span>
+                            {opening_time.start_time.replace(':00.000', '')} -{' '}
+                            {opening_time.end_time.replace(':00.000', '')}
+                          </span>
+                        ))
+                      ) : (
+                        <span>Closed</span>
+                      )}
+                    </div>
+                  </div>
+                  <div class="flex gap-2">
+                    <LucideMapPin />
+                    {openLocation.data.name}
+                  </div>
+                </div>
+                <div set:html={marked.parse(openLocation.data.description, { breaks: true })} />
+              </section>
+            )
+          })
+        )
+      }
       {
         missing_dates.map((date) => (
           <section
