@@ -24,6 +24,7 @@ export function scheduleOpenLocationLoader(strapi: Strapi): Loader {
     },
     schema: z.object({
       name: z.string(),
+      description: z.string(),
       opening_times: z.array(
         z.object({
           day: z.string(),

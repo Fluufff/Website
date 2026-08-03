@@ -109,7 +109,7 @@ export const GET: APIRoute = () => {
     data.sessions.push({
       id: raw_open_location.id,
       displayName: en_US(raw_open_location.data.name),
-      description: en_US(`${con_name} placeholder text for the ${raw_open_location.data.name.toLowerCase()}.`),
+      description: en_US(raw_open_location.data.description),
       timeSlots: raw_open_location.data.opening_times.map((opening_time: any) => {
         return {
           startTime: `${opening_time.day}T${opening_time.start_time}+${offset}`,
