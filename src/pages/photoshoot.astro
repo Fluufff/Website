@@ -5,6 +5,7 @@ import Section from '../components/Section.astro'
 import Socials from '../content/socials.astro'
 import Timed from '../components/Timed.astro'
 
+import { timezone_identifier } from '../data/con/timezone.json'
 import { registration_secret, registration_start, registration_link } from '../data/con/photobooth.json'
 
 const registration_start_weekday = new Date(registration_start)
@@ -14,7 +15,8 @@ const registration_start_weekday = new Date(registration_start)
 const registration_start_time = new Date(registration_start).toLocaleTimeString('en', {
   hour: '2-digit',
   minute: '2-digit',
-  hour12: false
+  hour12: false,
+  timeZone: timezone_identifier,
 })
 ---
 

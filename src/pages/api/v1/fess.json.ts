@@ -6,13 +6,13 @@
 import type { APIRoute } from 'astro'
 import { type CollectionEntry, getCollection } from 'astro:content'
 import { start_con } from '../../../data/reg/dates.json'
+import { timezone_identifier } from '../../../data/con/timezone.json'
 
 const raw_tags = await getCollection('scheduleTags')
 const raw_locations = await getCollection('scheduleLocations')
 const raw_events = await getCollection('scheduleEvents')
 const raw_open_locations = await getCollection('scheduleOpenLocations')
 
-const timezone = 'Europe/Brussels'
 const offset = start_con.split('+')[1] // assumes the con happens entirely in the same offset
 
 const con_slug = 'fluufff'
@@ -56,7 +56,7 @@ export const GET: APIRoute = () => {
       displayName: en_US(con_name),
       startTime: `2026-11-11T00:00:00.000+${offset}`,
       endTime: `2026-11-15T23:59:59.999+${offset}`,
-      timezone: timezone
+      timezone: timezone_identifier
     },
     membershipLevels: [],
     tracks: [],
