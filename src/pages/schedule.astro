@@ -188,8 +188,8 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     { 'open_location--closed': !any_opening_times_today }
                   ]}
                 >
-                  <div class="flex gap-2 items-center">
-                    <LucideClock />
+                  <div class="flex gap-2 items-start">
+                    <LucideClock style="margin-top: 2px;" />
                     <div class="flex flex-col">
                       {any_opening_times_today ? (
                         opening_times_today.map((opening_time) => (
