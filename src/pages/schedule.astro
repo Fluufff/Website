@@ -309,7 +309,11 @@ const eventsid = Math.random().toString(36).slice(2, 11)
   const buttons = document.querySelectorAll(`[data-id="${buttonid}"] > button`)
   const events = document.querySelectorAll(`[data-id="${eventsid}"] > section`)
 
-  let active_date = sessionStorage.getItem('schedule:active_date') ?? first_date
+  // javascript web has no cleaner way to format the browser time YYYY-MM-DD
+  const now = new Date()
+  const today = new Date(now.getTime() - now.getTimezoneOffset() * 60 * 1000)
+
+  let active_date = sessionStorage.getItem('schedule:active_date') ?? today.toISOString().split('T')[0]
 
   const setActiveDate = (d) => {
     active_date = d
