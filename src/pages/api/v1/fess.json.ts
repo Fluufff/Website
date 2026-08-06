@@ -88,10 +88,14 @@ export const GET: APIRoute = () => {
       }
     }),
     sessions: raw_events.map((raw_event: any) => {
+      const tags_string =
+        raw_event.data.schedule_tags.length > 0
+          ? `\n---\n` + raw_event.data.schedule_tags.map((schedule_tag: any) => `- ${schedule_tag.name}`)
+          : ''
       return {
         id: raw_event.id,
         displayName: en_US(raw_event.data.title),
-        description: en_US(raw_event.data.description),
+        description: en_US(raw_event.data.description + tags_string),
         timeSlots: [
           {
             startTime: `${raw_event.data.day}T${raw_event.data.start_time}+${offset}`,

@@ -94,7 +94,7 @@ export function scheduleEventLoader(strapi: Strapi): Loader {
       ctx.store.clear()
 
       const items = await strapi.fetchItems('schedule-events', {
-        populate: { schedule_location: { fields: ['id'] }, schedule_tags: { fields: ['id'] } },
+        populate: { schedule_location: { fields: ['id'] }, schedule_tags: { fields: ['id', 'name'] } },
         pagination: { pageSize: 50 }
       })
 
@@ -117,7 +117,7 @@ export function scheduleEventLoader(strapi: Strapi): Loader {
       description: z.string(),
       host_name: z.string().nullable(),
       schedule_location: z.object({ id: z.string() }).nullable(),
-      schedule_tags: z.array(z.object({ id: z.string() }))
+      schedule_tags: z.array(z.object({ id: z.string(), name: z.string() }))
     })
   }
 }
