@@ -90,7 +90,7 @@ export const GET: APIRoute = () => {
     sessions: raw_events.map((raw_event: any) => {
       const tags_string =
         raw_event.data.schedule_tags.length > 0
-          ? `\n---\n` + raw_event.data.schedule_tags.map((schedule_tag: any) => `- ${schedule_tag.name}`)
+          ? `\n---\n` + raw_event.data.schedule_tags.map((schedule_tag: any) => `- ${schedule_tag.name}`).join('\n')
           : ''
       return {
         id: raw_event.id,
