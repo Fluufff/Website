@@ -43,29 +43,15 @@
   }
 }
 
-// The othercolor palettes (todo: clean this shit up)
-@each $size in ('error', 'success', 'warning') {
-  @each $name, $swatch in ('functional': charter.$functional) {
-    .bg-#{$name}-#{$size} {
-      background-color: map.get($swatch, $size);
-    }
-    .bg-#{$name}-#{$size}-10 {
-      background-color: rgba(map.get($swatch, $size), 10%);
-    }
-    .hover\:bg-#{$name}-#{$size}:hover {
-      background-color: map.get($swatch, $size);
-    }
-    .fill-#{$name}-#{$size} {
-      fill: map.get($swatch, $size);
-    }
-    svg .bg-#{$name}-#{$size} {
-      fill: map.get($swatch, $size);
-    }
-    .text-#{$name}-#{$size} {
-      color: map.get($swatch, $size);
-    }
-    .border-#{$name}-#{$size} {
-      border-color: map.get($swatch, $size);
-    }
+// The functional colors
+@each $color, $hex in charter.$functional {
+  .bg-functional-#{$color} {
+    background-color: $hex;
+  }
+  .bg-functional-#{$color}-10 {
+    background-color: rgba($hex, 10%);
+  }
+  .text-functional-#{$color} {
+    color: $hex;
   }
 }
