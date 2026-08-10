@@ -31,47 +31,24 @@ const available_rooms = raw_reg_bookings.filter(
     <p class="pricing_details">Choose where you’ll respawn: stay at the convention venue from Wednesday to Sunday.</p>
     <p>
       {
-        available_rooms.length >= 2 ? (
+        available_rooms.length >= 2 && (
           <strong>The room prices listed below are for the full room and do not include the Convention Ticket.</strong>
-        ) : (
-          ''
         )
       }
       {
-        available_rooms.length == 1 ? (
+        available_rooms.length == 1 && (
           <strong>
-            Wow, nearly all accommodation slots have been filled! Only a few{' '}
-            {available_rooms[0]!.data.name == 'Classic Twin/Double' ? (
-              <span>
-                Classic <br /> Double rooms
-              </span>
-            ) : (
-              <span>
-                <br />
-                rooms
-              </span>
-            )}{' '}
-            are still available. All{' '}
-            {available_rooms[0]!.data.name == 'Classic Twin/Double' ? (
-              <span>other room types</span>
-            ) : (
-              <span>the other rooms</span>
-            )}{' '}
-            have been fully reserved.
+            Wow, nearly all accommodation slots have been filled! Only one <br />
+            room type is still available. All the others have been fully reserved.
           </strong>
-        ) : (
-          ''
         )
       }
       {
-        available_rooms.length == 0 ? (
+        available_rooms.length == 0 && (
           <strong>
-            No rooms left in this inventory!
-            <br />
+            No rooms left in this inventory! <br />
             All room types at the convention have been fully reserved.
           </strong>
-        ) : (
-          ''
         )
       }
     </p>
