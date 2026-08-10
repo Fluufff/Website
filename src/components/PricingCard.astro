@@ -64,12 +64,12 @@ const image = Astro.props.image
   {
     Astro.slots.has('default') && (
       <div class="description">
-        {raw_reg_booking && raw_reg_booking.data.type == 'goodie' && raw_reg_booking.data.available > 0 ? (
-          <slot />
-        ) : (
+        {raw_reg_booking && raw_reg_booking.data.type == 'goodie' && raw_reg_booking.data.available == 0 ? (
           <p>
             <strong>Sold out!</strong>
           </p>
+        ) : (
+          <slot />
         )}
       </div>
     )
