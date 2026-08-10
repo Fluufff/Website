@@ -1,7 +1,12 @@
 // deno run --allow-env --env-file=.env.local --allow-net utils/strapi-registration-sync.ts
 
+// Extracts the availability of the goodies, rooms & tickets from the registration system and uploads those into strapi.
+
+// note: must not run in github actions or on an unsecured server since you are logging into the highly sensitive reg db.
+
 import assert from 'node:assert'
-import { DOMParser } from 'deno-dom';
+// deno-lint-ignore no-import-prefix
+import { DOMParser } from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts';
 
 const { PLATYPLUS_ADMIN_USERNAME, PLATYPLUS_ADMIN_PASSWORD, STRAPI_URI, PLATYPLUS_STRAPI_TOKEN } = Deno.env.toObject()
 
@@ -10,63 +15,39 @@ assert(PLATYPLUS_ADMIN_PASSWORD)
 assert(STRAPI_URI)
 assert(PLATYPLUS_STRAPI_TOKEN)
 
-// const cookies = new Map()
 let cookies = ''
 let csrf = ''
 
 function cookiejar(response: Response) {
-  // response.headers.getSetCookie().forEach((cookie: string) => {
-  //   const key_and_value = cookie.split(';')[0]
-  //   cookies.set(key_and_value.split('=')[0], key_and_value.split('=')[1])
-  // })
   cookies = response.headers.getSetCookie().map((cookie: string) => cookie.split(';')[0]).join('; ')
   csrf = /fluufff_registration_csrf_fluufff_registration_=(\w+)/.exec(cookies)![1]
 }
 
-const response1 = await fetch('https://registration.fluufff.org/profile/login')
-cookiejar(response1)
-// console.log(cookies)
-// const body1 = await response1.text()
-// const csrf = /<input type="hidden" name="csrf_fluufff_registration_" value="(.*)" \/>/.exec(body1)![1]
+// grab the csrf token from the login page
+cookiejar(await fetch('https://registration.fluufff.org/profile/login'))
 
-// console.log(Array.from(cookies).join(' '))
-// console.log(cookies.get('fluufff_registration_csrf_fluufff_registration_'))
-
+// authenticate session cookie with credentials
 await fetch(
-  "https://registration.fluufff.org/profile/login?from=register",
+  "https://registration.fluufff.org/profile/login",
   {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      // "Cookie": `fluufff_registration_csrf_fluufff_registration_=${csrf}`
-      // "Cookie": Array.from(cookies).join(' '),
       "Cookie": cookies,
     },
     body: new URLSearchParams({
-      // csrf_fluufff_registration_: cookies.get('fluufff_registration_csrf_fluufff_registration_'),
       csrf_fluufff_registration_: csrf,
       email: PLATYPLUS_ADMIN_USERNAME,
       password: PLATYPLUS_ADMIN_PASSWORD,
       keep: 'N',
       send: '',
     }),
-    // redirect: 'manual',
   },
 );
 
-// console.log(response2.headers.getSetCookie())
-// console.log(await response2.text())
-// cookiejar(e)
-
-// console.log(cookies)
-// console.log(csrf)
-
-// const response3 = await fetch(
-//   https://registration.fluufff.org/admin/bookings/
-// )
-
-const response3 = await fetch(
-  "https://registration.fluufff.org/admin/bookings/",
+// retrieve the bookings page
+const response = await fetch(
+  "https://registration.fluufff.org/admin/bookings",
   {
     method: "GET",
     headers: {
@@ -75,13 +56,11 @@ const response3 = await fetch(
   },
 );
 
-
-const document = new DOMParser().parseFromString(await response3.text(), 'text/html');
+const document = new DOMParser().parseFromString(await response.text(), 'text/html');
 const table: HTMLTableElement = document.querySelector('table')!;
 const rows: HTMLCollection = table!.children[1].children;
-// console.log(document.querySelector());
 
-let category = '' // "goodie"|"room"|"ticket"
+let type = '' // "goodie"|"room"|"ticket"
 
 function get_min_max(string: string) { // "100/200" -> {min: 100, max: 200}
   const cur_max = string.split('/')
@@ -92,37 +71,23 @@ function get_min_max(string: string) { // "100/200" -> {min: 100, max: 200}
 }
 
 const output = Array.from(rows).map(row => {
-  const title = row.children[0].textContent.trim()
+  const name = row.children[0].textContent.trim()
+
+  // detect headers throughout the table
   if (row.children.length == 1) {
-    category = title.toLowerCase()
+    type = name.toLowerCase()
     return
   }
 
-  switch(category) {
-    case 'goodie': {
-      const min_max = get_min_max(row.children[2].textContent)
-      return {type: category, name: title, left: min_max.max - min_max.min}
-    }
-    case 'room': {
-      const places = parseInt(row.children[1].textContent)
-      const min_max = get_min_max(row.children[4].textContent)
-      return {type: category, name: title, left: (min_max.max - min_max.min) / places}
-    }
-    case 'ticket': {
-      const min_max = get_min_max(row.children[2].textContent)
-      return {type: category, name: title, left: min_max.max - min_max.min}
-    }
-  }
+  const places = parseInt(row.children[1].textContent)
+  const usage_column = type == 'room' ? 4 : 2 // use the "open" column for rooms, "total" for the others
+  const min_max = get_min_max(row.children[usage_column].textContent)
+  const available = (min_max.max - min_max.min) / places
 
-  // return Array.from(row.children).map((cell) => cell.textContent)
+  return {type, name, available}
+})
 
-  // console.log(Array.from(row.children).map((cell) => {
-  //   switch(category) {
-  //     case 'Goodie':
-  //       return cell.textContent.trim()
-  //   }
-  // }))
-}).filter(row => {
+const filtered = output.filter(row => {
   if (!row) return false;
 
   if (row.name.includes('Staff')) return false;
@@ -136,9 +101,10 @@ const output = Array.from(rows).map(row => {
   return true;
 })
 
-console.log(output)
+// console.log(output)
+console.log(filtered)
 
-const response4 = await fetch(
+const reg_bookings = await fetch(
   `${STRAPI_URI}reg-bookings`,
   {
     method: "GET",
@@ -149,8 +115,7 @@ const response4 = await fetch(
   },
 );
 
-const reg_bookings = await response4.json()
-reg_bookings.data.forEach(async (reg_booking: {documentId: string}) => {
+(await reg_bookings.json()).data.forEach(async (reg_booking: {documentId: string}) => {
   await fetch(
     `${STRAPI_URI}reg-bookings/${reg_booking.documentId}`,
     {
@@ -163,7 +128,7 @@ reg_bookings.data.forEach(async (reg_booking: {documentId: string}) => {
   );
 })
 
-for (const reg_booking of output) {
+for (const reg_booking of filtered) {
   const response5 = await fetch(
     `${STRAPI_URI}reg-bookings`,
     {
@@ -173,15 +138,9 @@ for (const reg_booking of output) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-      data: {
-        type: reg_booking!.type,
-        name: reg_booking!.name,
-        available: reg_booking!.left
-      },
+      data: reg_booking,
     }),
     },
   );
   console.log(await response5.text())
 }
-
-// console.log(await response.json())
