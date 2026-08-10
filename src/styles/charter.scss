@@ -50,6 +50,16 @@ $accent2: (
   950: $accent2-950
 );
 
+$functional-error: #d6455d;
+$functional-success: #2fbf9f;
+$functional-warning: #e6c255;
+
+$functional: (
+  error: $functional-error,
+  success: $functional-success,
+  warning: $functional-warning,
+);
+
 $neutrals-50: #ffffff;
 $neutrals-100: #f2e9fc;
 $neutrals-200: #cdcbcb;

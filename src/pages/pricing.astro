@@ -10,6 +10,11 @@ import Timed from '../components/Timed.astro'
 import Button from '../components/Button.astro'
 import { start_registration } from '../data/reg/dates.json'
 import Section from '../components/Section.astro'
+
+import { getCollection } from 'astro:content'
+import { Avatar } from 'primevue'
+const raw_reg_bookings = await getCollection('regBookings')
+const available_rooms = raw_reg_bookings.filter((reg_booking) => reg_booking.data.type == 'room' && reg_booking.data.available > 0)
 ---
 
 <Base>
@@ -23,7 +28,9 @@ import Section from '../components/Section.astro'
   <Content headline="Accommodation" bg="primary" wider class="pricing_content">
     <p class="pricing_details">Choose where you’ll respawn: stay at the convention venue from Wednesday to Sunday.</p>
     <p>
-      <strong>The room prices listed below are for the full room and do not include the Convention Ticket.</strong>
+      {available_rooms.length >= 2 ? <strong>The room prices listed below are for the full room and do not include the Convention Ticket.</strong> : ''}
+      {available_rooms.length == 1 ? <strong>Wow, nearly all accommodation slots have been filled! Only a few {available_rooms[0]!.data.name == "Classic Twin/Double" ? <span>Classic <br /> Double rooms</span> : <span><br />rooms</span>} are still available. All {available_rooms[0]!.data.name == "Classic Twin/Double" ? <span>other room types</span> : <span>the other rooms</span>} have been fully reserved.</strong> : ''}
+      {available_rooms.length == 0 ? <strong>No rooms left in this inventory!<br />All room types at the convention have been fully reserved.</strong> : ''}
     </p>
     <Checklist row primary>
       <ChecklistItem>Personal badge with lanyard</ChecklistItem>
@@ -38,6 +45,7 @@ import Section from '../components/Section.astro'
         price="575"
         pricePer="per room"
         extra={['Early Arrival: + €144 incl. VAT', 'Late Departure: + €144 incl. VAT']}
+        regBooking="Classic Twin/Double"
       >
         <p>2 pers. max - 28 m² / 308 sq ft</p>
         <p>Shared classic room for two people, with either a double bed, or separate beds.</p>
@@ -48,6 +56,7 @@ import Section from '../components/Section.astro'
         price="615"
         pricePer="per room"
         extra={['Early Arrival: + €154 incl. VAT', 'Late Departure: + €154 incl. VAT']}
+        regBooking="Superior"
       >
         <p>2 pers. max - 28 m² / 308 sq ft</p>
         <p>Shared room with a double bed.</p>
@@ -58,6 +67,7 @@ import Section from '../components/Section.astro'
         price="825"
         pricePer="per room"
         extra={['Early Arrival: + €206 incl. VAT', 'Late Departure: + €206 incl. VAT']}
+        regBooking="Privilege with View"
       >
         <p>3 pers. max - 36 m² / 387 sq ft</p>
         <p>Spacious shared room with a kingsize bed and a pull-out sofa with Parkview.</p>
@@ -68,6 +78,7 @@ import Section from '../components/Section.astro'
         price="915"
         pricePer="per room"
         extra={['Early Arrival: + €229 incl. VAT', 'Late Departure: + €229 incl. VAT']}
+        regBooking="Superior 3P Studio"
       >
         <p>3 pers. max - 36 m² / 387 sq ft'</p>
         <p>Spacious, comfortable studio with kingsize bed, sofa bed, lounge and kitchen.</p>

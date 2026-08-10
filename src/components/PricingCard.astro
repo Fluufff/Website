@@ -3,6 +3,11 @@ import { Picture } from 'astro:assets'
 import Checklist from './Checklist.astro'
 import ChecklistItem from './ChecklistItem.astro'
 
+import { Icon } from 'astro-icon/components'
+import { getCollection } from 'astro:content'
+const raw_reg_bookings = await getCollection('regBookings')
+const raw_reg_booking = raw_reg_bookings.find((reg_booking) => reg_booking.data.name == Astro.props.regBooking)
+
 interface Props {
   image?: ImageMetadata | Promise<{ default: ImageMetadata }>
   imageContain?: boolean
@@ -13,12 +18,21 @@ interface Props {
   checklist?: string[]
   extra?: string | string[]
   color?: 'primary' | 'dark'
+  regBooking?: string
 }
 
 const image = Astro.props.image
 ---
 
 <div class="pricing-card" class:list={[Astro.props.color]}>
+  {
+    raw_reg_booking &&
+      (raw_reg_booking.data.available > 0 ? (
+        <div class="uppercase font-bold flex flex-row items-center gap-1 p-2 rounded-md text-sm size-fit bg-functional-warning-10"><Icon class="text-2xl text-functional-warning" name="lucide:triangle-alert" />limited availability</div>
+      ) : (
+        <div class="uppercase font-bold flex flex-row items-center gap-1 p-2 rounded-md text-sm size-fit bg-functional-error-10"><Icon class="text-2xl text-functional-error" name="lucide:x" />fully reserved</div>
+      ))
+  }
   {
     image && (
       <Picture

@@ -12,6 +12,7 @@ import {
   faqPageLoader,
   dedicatedFaqPageLoader
 } from './faq-loader.ts'
+import { regBookingLoader } from './reg-loader.ts'
 import { loadStrapi } from './strapi.ts'
 
 const strapi = loadStrapi()
@@ -26,5 +27,7 @@ export const collections = {
   faqPages: defineCollection({ loader: faqPageLoader(strapi) }),
 
   eventLabelsExplained: defineCollection({ loader: eventLabelsExplainedLoader(strapi) }),
-  dedicatedFaqPage: defineCollection({ loader: dedicatedFaqPageLoader(strapi) })
+  dedicatedFaqPage: defineCollection({ loader: dedicatedFaqPageLoader(strapi) }),
+
+  regBookings: defineCollection({ loader: regBookingLoader(strapi) })
 }
