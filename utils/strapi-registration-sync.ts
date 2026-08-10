@@ -1,7 +1,7 @@
 // deno run --allow-env --env-file=.env.local --allow-net utils/strapi-registration-sync.ts
 
 import assert from 'node:assert'
-import { DOMParser } from 'https://deno.land/x/deno_dom/deno-dom-wasm.ts';
+import { DOMParser } from 'deno-dom';
 
 const { PLATYPLUS_ADMIN_USERNAME, PLATYPLUS_ADMIN_PASSWORD } = Deno.env.toObject()
 
@@ -30,7 +30,7 @@ cookiejar(response1)
 // console.log(Array.from(cookies).join(' '))
 // console.log(cookies.get('fluufff_registration_csrf_fluufff_registration_'))
 
-const response2 = await fetch(
+await fetch(
   "https://registration.fluufff.org/profile/login?from=register",
   {
     method: "POST",
@@ -74,9 +74,9 @@ const response3 = await fetch(
 );
 
 
-const document: any = new DOMParser().parseFromString(await response3.text(), 'text/html');
-const table = document.querySelector('table');
-const rows: HTMLTableRowElement[] = table.children[1].children;
+const document = new DOMParser().parseFromString(await response3.text(), 'text/html');
+const table: HTMLTableElement = document.querySelector('table')!;
+const rows: HTMLCollection = table!.children[1].children;
 // console.log(document.querySelector());
 
 let category = '' // "goodie"|"room"|"ticket"
