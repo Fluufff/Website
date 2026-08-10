@@ -48,8 +48,8 @@
   .bg-functional-#{$color} {
     background-color: $hex;
   }
-  .bg-functional-#{$color}-10 {
-    background-color: rgba($hex, 10%);
+  .bg-functional-#{$color}-15 {
+    background-color: rgba($hex, 15%);
   }
   .text-functional-#{$color} {
     color: $hex;

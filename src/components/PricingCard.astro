@@ -28,12 +28,12 @@ const image = Astro.props.image
   {
     raw_reg_booking &&
       (raw_reg_booking.data.available > 0 ? (
-        <div class="uppercase font-bold flex flex-row items-center gap-1 p-2 rounded-md text-sm size-fit bg-functional-warning-10">
+        <div class="uppercase font-bold flex flex-row items-center gap-1 p-2 rounded-md text-sm size-fit bg-functional-warning-15">
           <Icon class="text-2xl text-functional-warning" name="lucide:triangle-alert" />
           limited availability
         </div>
       ) : (
-        <div class="uppercase font-bold flex flex-row items-center gap-1 p-2 rounded-md text-sm size-fit bg-functional-error-10">
+        <div class="uppercase font-bold flex flex-row items-center gap-1 p-2 rounded-md text-sm size-fit bg-functional-error-15">
           <Icon class="text-2xl text-functional-error" name="lucide:x" />
           fully reserved
         </div>
