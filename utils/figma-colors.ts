@@ -89,7 +89,6 @@ for (const key of keys) {
   assert(bits.length == 3, key) // [ "fluufff26", "accent1", "050" ]
 
   if (!bits[0].endsWith('26')) continue
-  if (bits[1] == 'functional') continue
 
   // undo leading zero used in sorting
   bits[2] = bits[2].replace(/^0+/, '')
