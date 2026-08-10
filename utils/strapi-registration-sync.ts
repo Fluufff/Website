@@ -3,10 +3,12 @@
 import assert from 'node:assert'
 import { DOMParser } from 'deno-dom';
 
-const { PLATYPLUS_ADMIN_USERNAME, PLATYPLUS_ADMIN_PASSWORD } = Deno.env.toObject()
+const { PLATYPLUS_ADMIN_USERNAME, PLATYPLUS_ADMIN_PASSWORD, STRAPI_URI, PLATYPLUS_STRAPI_TOKEN } = Deno.env.toObject()
 
 assert(PLATYPLUS_ADMIN_USERNAME)
 assert(PLATYPLUS_ADMIN_PASSWORD)
+assert(STRAPI_URI)
+assert(PLATYPLUS_STRAPI_TOKEN)
 
 // const cookies = new Map()
 let cookies = ''
@@ -133,3 +135,51 @@ const output = Array.from(rows).map(row => {
 })
 
 console.log(output)
+
+const response4 = await fetch(
+  `${STRAPI_URI}reg-bookings`,
+  {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${PLATYPLUS_STRAPI_TOKEN}`,
+      "Content-Type": "application/json",
+    },
+  },
+);
+
+const reg_bookings = await response4.json()
+reg_bookings.data.forEach(async (reg_booking: {documentId: string}) => {
+  await fetch(
+    `${STRAPI_URI}reg-bookings/${reg_booking.documentId}`,
+    {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${PLATYPLUS_STRAPI_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+    },
+  );
+})
+
+for (const reg_booking of output) {
+  const response5 = await fetch(
+    `${STRAPI_URI}reg-bookings`,
+    {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${PLATYPLUS_STRAPI_TOKEN}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+      data: {
+        type: reg_booking!.type,
+        name: reg_booking!.name,
+        available: reg_booking!.left
+      },
+    }),
+    },
+  );
+  console.log(await response5.text())
+}
+
+// console.log(await response.json())
