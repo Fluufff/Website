@@ -19,7 +19,7 @@
         'accent2': charter.$accent2,
         'neutrals': charter.$neutrals,
         'primary': charter.$primary,
-        'secondary': charter.$secondary,
+        'secondary': charter.$secondary
       )
   {
     .bg-#{$name}-#{$size} {
@@ -44,13 +44,8 @@
 }
 
 // The othercolor palettes (todo: clean this shit up)
-@each $size in ("error", "success", "warning") {
-  @each $name,
-    $swatch
-      in (
-        'functional': charter.$functional,
-      )
-  {
+@each $size in ('error', 'success', 'warning') {
+  @each $name, $swatch in ('functional': charter.$functional) {
     .bg-#{$name}-#{$size} {
       background-color: map.get($swatch, $size);
     }
