@@ -131,6 +131,8 @@ const output = Array.from(rows).map(row => {
   if (row.name.endsWith('Early Arrival')) return false;
   if (row.name.endsWith('Late Departure')) return false;
 
+  if (row.type == 'ticket') return false;
+
   return true;
 })
 
