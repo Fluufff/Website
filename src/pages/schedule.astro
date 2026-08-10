@@ -218,7 +218,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     {openLocation.data.name}
                   </div>
                 </div>
-                <div set:html={marked.parse(openLocation.data.description, { breaks: true })} />
+                <div set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })} />
               </section>
             )
           })
@@ -268,7 +268,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                 {e.host || 'Unknown'}
               </p>
             </div>
-            <div set:html={marked.parse(e.description, { breaks: true })} />
+            <div set:html={marked.parse(e.description.replaceAll('\n', '<br />'), { breaks: true })} />
             {e.tags.length != 0 ? <hr class="border-accent1-200" /> : ''}
             {e.tags.length != 0 ? (
               <div class="flex flex-wrap gap-2">
