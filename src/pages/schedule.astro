@@ -218,7 +218,9 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     {openLocation.data.name}
                   </div>
                 </div>
-                <div set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })} />
+                <div
+                  set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })}
+                />
               </section>
             )
           })

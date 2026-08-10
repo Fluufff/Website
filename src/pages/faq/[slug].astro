@@ -63,7 +63,10 @@ const description_html = await marked.parse(
         <Accordion class="dedicated-faq-page-accordion w-full" faq client:load>
           {
             faq_page.faq_entries.map((fe) => (
-              <FaqItem question={fe.question} set:html={marked.parse(fe.answer.replaceAll('\n', '<br />'), { breaks: true })} />
+              <FaqItem
+                question={fe.question}
+                set:html={marked.parse(fe.answer.replaceAll('\n', '<br />'), { breaks: true })}
+              />
             ))
           }
         </Accordion>
