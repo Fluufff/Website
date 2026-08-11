@@ -13,7 +13,7 @@
       />
       <MultiSelect
         v-model="selectedWorkmodels"
-        :options="['Pre-Con', 'On-site', 'Hybrid']"
+        :options="['Pre-Con', 'On-Site', 'Hybrid']"
         placeholder="All work models"
         :show-toggle-all="false"
       />
