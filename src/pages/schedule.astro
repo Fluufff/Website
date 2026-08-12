@@ -1,12 +1,10 @@
 ---
 import { marked } from 'marked'
 import { DateTime } from 'luxon'
+import { Icon } from 'astro-icon/components'
 import { getCollection } from 'astro:content'
 
 import Base from '../layouts/Base.astro'
-import LucideClock from '~icons/lucide/clock'
-import LucideMapPin from '~icons/lucide/map-pin'
-import LucideUserRound from '~icons/lucide/user-round'
 
 import Section from '../components/Section.astro'
 import Button from '../components/Button.astro'
@@ -198,7 +196,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                   ]}
                 >
                   <div class="flex gap-2 items-start">
-                    <LucideClock style="margin-top: 2px;" />
+                    <Icon class="text-xl" style="margin-top: 2px;" name="lucide:clock" />
                     <div class="flex flex-col">
                       {any_opening_times_today ? (
                         opening_times_today.map((opening_time) => (
@@ -254,7 +252,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
           >
             <div class="flex justify-between items-center">
               <p class="flex items-center gap-2">
-                <LucideClock />
+                <Icon class="text-xl" name="lucide:clock" />
                 {e.start} - {e.end}
               </p>
               <p class="bg-orange-200 rounded-sm p-1 event__status upcoming">upcoming</p>
@@ -262,11 +260,11 @@ const eventsid = Math.random().toString(36).slice(2, 11)
             <h3 class="font-atari font-bold text-xl md:text-2xl">{e.title}</h3>
             <div class="flex justify-between items-center">
               <p class="flex items-center gap-2">
-                <LucideMapPin />
+                <Icon class="text-xl" name="lucide:map-pin" />
                 {e.location || 'Unknown'}
               </p>
               <p class="flex items-center gap-2">
-                <LucideUserRound />
+                <Icon class="text-xl" name="lucide:user-round" />
                 {e.host || 'Unknown'}
               </p>
             </div>
