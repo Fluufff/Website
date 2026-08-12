@@ -154,7 +154,11 @@ const eventsid = Math.random().toString(36).slice(2, 11)
     <p class="text-center">
       Your guide to five days of Flüüfff, from the first day's warm-up to the last day's closing hugs.
     </p>
-    <div data-id={buttonid} class="flex flex-wrap gap-2 justify-center">
+    <div
+      data-id={buttonid}
+      class="flex flex-wrap gap-2 justify-center"
+      style="margin-left: -40px; margin-right: -40px;"
+    >
       {
         days.map((d) => (
           <button
