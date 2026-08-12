@@ -212,11 +212,18 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     </div>
                   </div>
                   <div class="flex gap-2">
-                    <LucideMapPin />
                     {openLocation.data.name}
+                    <Icon
+                      class="text-xl cursor-pointer"
+                      style="margin-top: 2px;"
+                      name="lucide:info"
+                      onclick={`toggleOpenLocationDescription('${openLocation.id}')`}
+                    />
                   </div>
                 </div>
                 <div
+                  data-description-of-open-location={openLocation.id}
+                  class="hidden"
                   set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })}
                 />
               </section>
@@ -355,4 +362,9 @@ const eventsid = Math.random().toString(36).slice(2, 11)
   buttons.forEach((b) => {
     b.addEventListener('click', () => setActiveDate(b.dataset.date))
   })
+
+  window.toggleOpenLocationDescription = function (open_location_id) {
+    const days = document.querySelectorAll(`div[data-description-of-open-location="${open_location_id}"]`)
+    days.forEach((day) => day.classList.toggle('hidden'))
+  }
 </script>
