@@ -12,7 +12,6 @@ import { start_registration } from '../data/reg/dates.json'
 import Section from '../components/Section.astro'
 
 import { getCollection } from 'astro:content'
-import { Avatar } from 'primevue'
 const raw_reg_bookings = await getCollection('regBookings')
 const available_rooms = raw_reg_bookings.filter(
   (reg_booking) => reg_booking.data.type == 'room' && reg_booking.data.available > 0
