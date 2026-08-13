@@ -56,6 +56,7 @@ export function scheduleTagLoader(strapi: Strapi): Loader {
     schema: z.object({
       id: z.string(),
       name: z.string(),
+      explain: z.boolean(),
       icon: z.string().nullish(),
       color: z.string().nullish(),
       description: z.string()
@@ -118,39 +119,6 @@ export function scheduleEventLoader(strapi: Strapi): Loader {
       host_name: z.string().nullable(),
       schedule_location: z.object({ id: z.string() }).nullable(),
       schedule_tags: z.array(z.object({ id: z.string(), name: z.string() }))
-    })
-  }
-}
-
-export function eventLabelsExplainedLoader(strapi: Strapi): Loader {
-  return {
-    name: 'event-labels-explained-loader',
-    async load(ctx: LoaderContext) {
-      ctx.store.clear()
-
-      let items = await strapi.fetchItems('event-labels-explained', { populate: 'schedule_tags' })
-      items = Array.isArray(items) ? items : [items]
-
-      for (const item of items) {
-        const data = await ctx.parseData({
-          id: item.id,
-          data: { ...item }
-        })
-
-        ctx.store.set({ id: item.id, data })
-      }
-    },
-    schema: z.object({
-      id: z.string(),
-      description: z.string(),
-      schedule_tags: z.array(
-        z.object({
-          name: z.string(),
-          description: z.string(),
-          icon: z.string().nullish(),
-          color: z.string().nullish()
-        })
-      )
     })
   }
 }

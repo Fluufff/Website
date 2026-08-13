@@ -19,7 +19,6 @@ openLocations.sort((a, b) => order.indexOf(a.data.name) - order.indexOf(b.data.n
 const raw_tags = await getCollection('scheduleTags')
 const raw_locations = await getCollection('scheduleLocations')
 const raw_events = await getCollection('scheduleEvents')
-const raw_event_labels_explained = await getCollection('eventLabelsExplained')
 
 function shortenTime(time: string) {
   const date = DateTime.fromISO(time)
@@ -316,21 +315,22 @@ const eventsid = Math.random().toString(36).slice(2, 11)
   <Section grid="grid-col-1 justify-items-center" gap="gap-6">
     <h2 class="font-atari text-2xl md:text-3xl text-center">Event labels explained</h2>
     <p class="text-center">
-      {raw_event_labels_explained[0] ? raw_event_labels_explained[0]!.data.description : ''}
+      Look out for these icons during the convention. They help you find events that match your vibe.
     </p>
     <div class="grid items-center mt-4 event__labels">
       {
-        raw_event_labels_explained[0]
-          ? raw_event_labels_explained[0]!.data.schedule_tags.map((t) => (
-              <div class="p-4 event__labels--label">
-                <span class="flex items-center gap-2 mb-2 uppercase font-bold">
-                  <IconWithFallback name={t.icon} class="schedule__tag--icon" style={`color: ${t.color}`} />
-                  {t.name}
-                </span>
-                <span class="flex">{t.description}</span>
-              </div>
-            ))
-          : ''
+        raw_tags
+          .sort((a, b) => a.data.name.localeCompare(b.data.name))
+          .filter((raw_tag) => raw_tag.data.explain)
+          .map((t) => (
+            <div class="p-4 event__labels--label">
+              <span class="flex items-center gap-2 mb-2 uppercase font-bold">
+                <IconWithFallback name={t.data.icon} class="schedule__tag--icon" style={`color: ${t.data.color}`} />
+                {t.data.name}
+              </span>
+              <span class="flex">{t.data.description}</span>
+            </div>
+          ))
       }
     </div>
   </Section>
