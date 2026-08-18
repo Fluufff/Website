@@ -189,7 +189,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
               <section
                 data-date={day.date}
                 class:list={[
-                  'hidden flex flex-col gap-4 p-4 shadow-md rounded-md schedule__entry basis-[calc(50%-0.5rem)]',
+                  'hidden flex flex-col gap-4 p-4 shadow-md rounded-md schedule__entry basis-full md:basis-[calc(50%-0.5rem)]',
                   { 'open_location--closed': !any_opening_times_today }
                 ]}
               >
@@ -239,7 +239,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
         missing_dates.map((date) => (
           <section
             data-date={date}
-            class="flex flex-col gap-4 px-6 py-8 md:p-16 shadow-md bg-neutrals-50 rounded-md schedule__entry"
+            class="flex flex-col gap-4 px-6 py-8 md:p-16 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full"
           >
             <h3 class="font-atari font-bold text-xl md:text-2xl text-center">Coming soon</h3>
             <div class="my-2 md:my-8">
@@ -259,7 +259,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
         all_events.map((e) => (
           <section
             data-date={e.day}
-            class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry"
+            class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full"
           >
             <div class="flex justify-between items-center">
               <p class="flex items-center gap-2">
