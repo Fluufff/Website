@@ -212,11 +212,13 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     {openLocation.data.name}
                     <Icon
                       class="text-xl cursor-pointer text-accent1-500"
+                      style="margin-top: 2px;"
                       name="lucide:arrow-down"
                       onclick={`toggleOpenLocationDescription(this, '${openLocation.id}')`}
                     />
                     <Icon
                       class="text-xl cursor-pointer text-accent1-500 hidden"
+                      style="margin-top: 2px;"
                       name="lucide:arrow-up"
                       onclick={`toggleOpenLocationDescription(this, '${openLocation.id}')`}
                     />
