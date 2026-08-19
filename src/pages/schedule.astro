@@ -189,18 +189,12 @@ const eventsid = Math.random().toString(36).slice(2, 11)
               <section
                 data-date={day.date}
                 style="min-height: 82px;"
-                class:list={[
-                  'hidden flex flex-col gap-4 p-4 shadow-md rounded-md schedule__entry basis-full md:basis-[calc(50%-0.5rem)]',
-                  { 'open_location--closed': !any_opening_times_today }
-                ]}
-              >
-                <div
-                  class:list={[
-                    'flex justify-between items-center h-full',
-                    { 'open_location--closed': !any_opening_times_today }
-                  ]}
-                >
-                  <div class="flex gap-2 items-center">
+                class="hidden flex flex-col gap-4 p-4 shadow-md rounded-md schedule__entry basis-full md:basis-[calc(50%-0.5rem)]">
+                <div class="flex justify-between items-center h-full">
+                  <div class:list={[
+                    'flex gap-2 items-center',
+                    { 'text-functional-error': !any_opening_times_today }
+                  ]}>
                     <Icon class="text-xl" name="lucide:clock" />
                     <div class="flex flex-col">
                       {any_opening_times_today ? (
