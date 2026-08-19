@@ -189,12 +189,10 @@ const eventsid = Math.random().toString(36).slice(2, 11)
               <section
                 data-date={day.date}
                 style="min-height: 82px;"
-                class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full md:basis-[calc(50%-0.5rem)]">
+                class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full md:basis-[calc(50%-0.5rem)]"
+              >
                 <div class="flex justify-between items-center h-full font-bold">
-                  <div class:list={[
-                    'flex gap-2 items-center',
-                    { 'text-functional-error': !any_opening_times_today }
-                  ]}>
+                  <div class:list={['flex gap-2 items-center', { 'text-functional-error': !any_opening_times_today }]}>
                     <Icon class="text-xl" name="lucide:clock" />
                     <div class="flex flex-col">
                       {any_opening_times_today ? (
@@ -229,13 +227,15 @@ const eventsid = Math.random().toString(36).slice(2, 11)
           })
         )
       }
-      {openLocations.map(openLocation => (
-        <section
-          data-description-of-open-location={openLocation.id}
-          class="hidden lex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full"
-          set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })}
-        />
-      ))}
+      {
+        openLocations.map((openLocation) => (
+          <section
+            data-description-of-open-location={openLocation.id}
+            class="hidden lex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full"
+            set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })}
+          />
+        ))
+      }
       {
         missing_dates.map((date) => (
           <section
@@ -385,16 +385,19 @@ const eventsid = Math.random().toString(36).slice(2, 11)
     const description = document.querySelector(`section[data-description-of-open-location="${open_location_id}"]`)
     description.classList.toggle('hidden')
     const descriptions = document.querySelectorAll(`section[data-description-of-open-location]`)
-    descriptions.forEach(desc => {
+    descriptions.forEach((desc) => {
       if (desc != description) {
         desc.classList.add('hidden')
       }
     })
 
     const arrows = document.querySelectorAll(`div[data-arrow-of-open-location]`)
-    arrows.forEach(arrow => {
-      arrow.querySelectorAll('svg').forEach(svg => {
-        const icon_to_hide = (arrow.dataset.arrowOfOpenLocation == open_location_id && !description.classList.contains('hidden')) ? 'lucide:arrow-down' : 'lucide:arrow-up'
+    arrows.forEach((arrow) => {
+      arrow.querySelectorAll('svg').forEach((svg) => {
+        const icon_to_hide =
+          arrow.dataset.arrowOfOpenLocation == open_location_id && !description.classList.contains('hidden')
+            ? 'lucide:arrow-down'
+            : 'lucide:arrow-up'
         if (svg.dataset.icon == icon_to_hide) {
           svg.classList.add('hidden')
         } else {
