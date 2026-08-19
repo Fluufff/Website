@@ -188,6 +188,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
             return (
               <section
                 data-date={day.date}
+                style="min-height: 82px;"
                 class:list={[
                   'hidden flex flex-col gap-4 p-4 shadow-md rounded-md schedule__entry basis-full md:basis-[calc(50%-0.5rem)]',
                   { 'open_location--closed': !any_opening_times_today }
@@ -195,12 +196,12 @@ const eventsid = Math.random().toString(36).slice(2, 11)
               >
                 <div
                   class:list={[
-                    'flex justify-between items-start',
+                    'flex justify-between items-center h-full',
                     { 'open_location--closed': !any_opening_times_today }
                   ]}
                 >
-                  <div class="flex gap-2 items-start">
-                    <Icon class="text-xl" style="margin-top: 2px;" name="lucide:clock" />
+                  <div class="flex gap-2 items-center">
+                    <Icon class="text-xl" name="lucide:clock" />
                     <div class="flex flex-col">
                       {any_opening_times_today ? (
                         opening_times_today.map((opening_time) => (
@@ -219,7 +220,6 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     {openLocation.data.name}
                     <Icon
                       class="text-xl cursor-pointer text-accent1-500"
-                      style="margin-top: 2px;"
                       name="lucide:info"
                       onclick={`toggleOpenLocationDescription('${openLocation.id}')`}
                     />
