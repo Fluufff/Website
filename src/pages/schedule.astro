@@ -214,8 +214,13 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     {openLocation.data.name}
                     <Icon
                       class="text-xl cursor-pointer text-accent1-500"
-                      name="lucide:info"
-                      onclick={`toggleOpenLocationDescription('${openLocation.id}')`}
+                      name="lucide:arrow-down"
+                      onclick={`toggleOpenLocationDescription(this, '${openLocation.id}')`}
+                    />
+                    <Icon
+                      class="text-xl cursor-pointer text-accent1-500 hidden"
+                      name="lucide:arrow-up"
+                      onclick={`toggleOpenLocationDescription(this, '${openLocation.id}')`}
                     />
                   </div>
                 </div>
@@ -372,16 +377,21 @@ const eventsid = Math.random().toString(36).slice(2, 11)
     b.addEventListener('click', () => setActiveDate(b.dataset.date))
   })
 
-  window.toggleOpenLocationDescription = function (open_location_id) {
+  window.toggleOpenLocationDescription = function (element, open_location_id) {
+    Array.from(element.parentNode.children).forEach((child) => {
+      if (child.tagName == 'svg') child.classList.toggle('hidden')
+    })
+
     const days = document.querySelectorAll(`div[data-description-of-open-location="${open_location_id}"]`)
     days.forEach((day) => day.classList.toggle('hidden'))
   }
 
   window.toggleEventDescriptionAndTags = function (element, event_id) {
-    const event = document.querySelector(`section[data-description-and-tags-of-event="${event_id}"]`)
-    event.classList.toggle('hidden')
     Array.from(element.children).forEach((child) => {
       if (child.tagName == 'svg') child.classList.toggle('hidden')
     })
+
+    const event = document.querySelector(`section[data-description-and-tags-of-event="${event_id}"]`)
+    event.classList.toggle('hidden')
   }
 </script>
