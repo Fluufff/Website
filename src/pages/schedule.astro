@@ -210,7 +210,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                       )}
                     </div>
                   </div>
-                  <div class="flex gap-2">
+                  <div class="flex gap-2" data-arrow-of-open-location={openLocation.id}>
                     {openLocation.data.name}
                     <Icon
                       class="text-xl cursor-pointer text-accent1-500"
@@ -224,16 +224,18 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     />
                   </div>
                 </div>
-                <div
-                  data-description-of-open-location={openLocation.id}
-                  class="hidden"
-                  set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })}
-                />
               </section>
             )
           })
         )
       }
+      {openLocations.map(openLocation => (
+        <section
+          data-description-of-open-location={openLocation.id}
+          class="hidden lex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full"
+          set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })}
+        />
+      ))}
       {
         missing_dates.map((date) => (
           <section
@@ -364,10 +366,12 @@ const eventsid = Math.random().toString(36).slice(2, 11)
 
     // toggle visible events
     events.forEach((e) => {
-      if (e.dataset.date == d) {
-        e.classList.remove('hidden')
-      } else {
-        e.classList.add('hidden')
+      if (e.dataset.date) {
+        if (e.dataset.date == d) {
+          e.classList.remove('hidden')
+        } else {
+          e.classList.add('hidden')
+        }
       }
     })
   }
@@ -378,12 +382,26 @@ const eventsid = Math.random().toString(36).slice(2, 11)
   })
 
   window.toggleOpenLocationDescription = function (element, open_location_id) {
-    Array.from(element.parentNode.children).forEach((child) => {
-      if (child.tagName == 'svg') child.classList.toggle('hidden')
+    const description = document.querySelector(`section[data-description-of-open-location="${open_location_id}"]`)
+    description.classList.toggle('hidden')
+    const descriptions = document.querySelectorAll(`section[data-description-of-open-location]`)
+    descriptions.forEach(desc => {
+      if (desc != description) {
+        desc.classList.add('hidden')
+      }
     })
 
-    const days = document.querySelectorAll(`div[data-description-of-open-location="${open_location_id}"]`)
-    days.forEach((day) => day.classList.toggle('hidden'))
+    const arrows = document.querySelectorAll(`div[data-arrow-of-open-location]`)
+    arrows.forEach(arrow => {
+      arrow.querySelectorAll('svg').forEach(svg => {
+        const icon_to_hide = (arrow.dataset.arrowOfOpenLocation == open_location_id && !description.classList.contains('hidden')) ? 'lucide:arrow-down' : 'lucide:arrow-up'
+        if (svg.dataset.icon == icon_to_hide) {
+          svg.classList.add('hidden')
+        } else {
+          svg.classList.remove('hidden')
+        }
+      })
+    })
   }
 
   window.toggleEventDescriptionAndTags = function (element, event_id) {
