@@ -13,7 +13,7 @@ import con_dates from '../data/con/dates.json'
 import Socials from '../content/socials.astro'
 
 const openLocations = await getCollection('scheduleOpenLocations')
-const order = ['Bar', 'Fursuit Lounge', 'Photoshoot', "Dealers' Den"]
+const order = ['Bar', 'Fursuit Lounge', "Dealers' Den"]
 openLocations.sort((a, b) => order.indexOf(a.data.name) - order.indexOf(b.data.name))
 
 const raw_tags = await getCollection('scheduleTags')
@@ -78,6 +78,19 @@ days.sort((a, b) => a.date.localeCompare(b.date))
 const first_date = days[0]?.date
 const buttonid = Math.random().toString(36).slice(2, 11)
 const eventsid = Math.random().toString(36).slice(2, 11)
+
+function get_open_location_width_class(columns: number) {
+  switch (columns) {
+    case 2:
+      return 'lg:basis-[calc((100%-1rem)/2)]'
+    case 3:
+      return 'xl:basis-[calc((100%-2rem)/3)]'
+    case 4:
+      return '2xl:basis-[calc((100%-3rem)/4)]'
+    default:
+      return 'basis-full'
+  }
+}
 ---
 
 <style lang="scss">
@@ -189,7 +202,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
               <section
                 data-date={day.date}
                 style="min-height: 82px;"
-                class="hidden flex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full md:basis-[calc(50%-0.5rem)]"
+                class={`hidden flex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry relative basis-full ${get_open_location_width_class(openLocations.length)}`}
               >
                 <div class="flex justify-between items-center h-full font-bold">
                   <div class:list={['flex gap-2 items-center', { 'text-functional-error': !any_opening_times_today }]}>
@@ -224,6 +237,11 @@ const eventsid = Math.random().toString(36).slice(2, 11)
                     />
                   </div>
                 </div>
+                <div
+                  data-bridge-of-open-location={openLocation.id}
+                  class="max-xl:hidden hidden absolute bg-neutrals-50 schedule__entry"
+                  style="height: 22px; left: -1px; right: -1px; bottom: -18px; border-top: 0; border-bottom: 0; box-shadow: none;"
+                />
               </section>
             )
           })
@@ -233,7 +251,7 @@ const eventsid = Math.random().toString(36).slice(2, 11)
         openLocations.map((openLocation) => (
           <section
             data-description-of-open-location={openLocation.id}
-            class="hidden lex flex-col gap-4 p-4 shadow-md bg-neutrals-50 rounded-md schedule__entry basis-full"
+            class="hidden lex flex-col gap-4 p-4 shadow-md bg-neutrals-50 schedule__entry basis-full"
             set:html={marked.parse(openLocation.data.description.replaceAll('\n', '<br />'), { breaks: true })}
           />
         ))
@@ -406,6 +424,15 @@ const eventsid = Math.random().toString(36).slice(2, 11)
           svg.classList.remove('hidden')
         }
       })
+    })
+
+    const bridges = document.querySelectorAll(`div[data-bridge-of-open-location]`)
+    bridges.forEach((bridge) => {
+      if (bridge.dataset.bridgeOfOpenLocation == open_location_id && !description.classList.contains('hidden')) {
+        bridge.classList.remove('hidden')
+      } else {
+        bridge.classList.add('hidden')
+      }
     })
   }
 
